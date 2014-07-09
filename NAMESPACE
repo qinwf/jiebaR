@@ -1,0 +1,3 @@
+useDynLib(rjieba)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
