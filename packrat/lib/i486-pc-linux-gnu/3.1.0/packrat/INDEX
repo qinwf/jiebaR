@@ -1,0 +1,20 @@
+bundle                  Bundle a Packrat Project
+clean                   Remove Packages from the Library
+disable                 Disable the use of Packrat in a Project
+init                    Initialize Packrat on a new or existing R
+                        project
+install_github          Install a package from GitHub
+migrate                 Migrate to Packrat Mode
+packify                 Automatically Enter Packrat Mode on Startup
+packrat                 Packrat: Reproducible dependency management
+packrat-external        Managing External Libraries
+packrat-mode            Packrat Mode
+packrat-options         Get/set packrat project options
+restore                 Apply the most recent snapshot to the library
+search_path             Get Packages on the Search Path
+snapshot                Capture and store the packages and versions in
+                        use
+status                  Show differences between the last snapshot and
+                        the library
+unbundle                Unbundle a Packrat Project
+unused_packages         Find Unused Packages in a Project
