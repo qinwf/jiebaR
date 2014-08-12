@@ -2,3 +2,4 @@
 
 export(cpp_str_sort)
 export(rcpp_hello_world)
+export(timesTwo)

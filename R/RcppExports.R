@@ -11,3 +11,8 @@ rcpp_hello_world <- function() {
     .Call('rjieba_rcpp_hello_world', PACKAGE = 'rjieba')
 }
 
+#' @export
+timesTwo <- function(x) {
+    .Call('rjieba_timesTwo', PACKAGE = 'rjieba', x)
+}
+
