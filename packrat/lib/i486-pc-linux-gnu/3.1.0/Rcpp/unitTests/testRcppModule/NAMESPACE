@@ -1,4 +1,0 @@
-useDynLib(testRcppModule)
-exportPattern("^[[:alpha:]]+")
-import(Rcpp)
-
