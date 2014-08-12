@@ -5,6 +5,21 @@
 
 using namespace Rcpp;
 
+// cpp_str_sort
+std::vector< std::string > cpp_str_sort(std::vector< std::string > strings);
+RcppExport SEXP rjieba_cpp_str_sort(SEXP stringsSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< std::vector< std::string > >::type strings(stringsSEXP );
+        std::vector< std::string > __result = cpp_str_sort(strings);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // rcpp_hello_world
 List rcpp_hello_world();
 RcppExport SEXP rjieba_rcpp_hello_world() {

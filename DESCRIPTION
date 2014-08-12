@@ -7,5 +7,6 @@ Author: Who wrote it
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)
 License: What Licence is it under ?
-Imports: Rcpp (>= 0.11.2)
+Imports:
+    Rcpp (>= 0.11.2)
 LinkingTo: Rcpp
