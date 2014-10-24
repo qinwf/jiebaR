@@ -6,6 +6,11 @@ cpp_str_sort <- function(strings) {
     .Call('rjieba_cpp_str_sort', PACKAGE = 'rjieba', strings)
 }
 
+#'@export
+jieba <- function(ccc) {
+    .Call('rjieba_jieba', PACKAGE = 'rjieba', ccc)
+}
+
 #' @export
 rcpp_hello_world <- function() {
     .Call('rjieba_rcpp_hello_world', PACKAGE = 'rjieba')

@@ -20,6 +20,21 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// jieba
+std::vector< std::string > jieba(std::vector< std::string > ccc);
+RcppExport SEXP rjieba_jieba(SEXP cccSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< std::vector< std::string > >::type ccc(cccSEXP );
+        std::vector< std::string > __result = jieba(ccc);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // rcpp_hello_world
 List rcpp_hello_world();
 RcppExport SEXP rjieba_rcpp_hello_world() {
