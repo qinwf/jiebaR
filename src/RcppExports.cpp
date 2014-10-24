@@ -5,30 +5,14 @@
 
 using namespace Rcpp;
 
-// cpp_str_sort
-std::vector< std::string > cpp_str_sort(std::vector< std::string > strings);
-RcppExport SEXP rjieba_cpp_str_sort(SEXP stringsSEXP) {
+// cutw
+CharacterVector cutw();
+RcppExport SEXP rjieba_cutw() {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< std::vector< std::string > >::type strings(stringsSEXP );
-        std::vector< std::string > __result = cpp_str_sort(strings);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
-// jieba
-std::vector< std::string > jieba(std::vector< std::string > ccc);
-RcppExport SEXP rjieba_jieba(SEXP cccSEXP) {
-BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< std::vector< std::string > >::type ccc(cccSEXP );
-        std::vector< std::string > __result = jieba(ccc);
+        CharacterVector __result = cutw();
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

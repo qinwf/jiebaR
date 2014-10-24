@@ -2,13 +2,8 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @export
-cpp_str_sort <- function(strings) {
-    .Call('rjieba_cpp_str_sort', PACKAGE = 'rjieba', strings)
-}
-
-#'@export
-jieba <- function(ccc) {
-    .Call('rjieba_jieba', PACKAGE = 'rjieba', ccc)
+cutw <- function() {
+    .Call('rjieba_cutw', PACKAGE = 'rjieba')
 }
 
 #' @export
