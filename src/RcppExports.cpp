@@ -5,43 +5,107 @@
 
 using namespace Rcpp;
 
-// cutw
-CharacterVector cutw();
-RcppExport SEXP rjieba_cutw() {
+// mixcut
+CharacterVector mixcut(CharacterVector x);
+RcppExport SEXP rjieba_mixcut(SEXP xSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        CharacterVector __result = cutw();
+        Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
+        CharacterVector __result = mixcut(x);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
     return __sexp_result;
 END_RCPP
 }
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP rjieba_rcpp_hello_world() {
+// hmmcut
+CharacterVector hmmcut(CharacterVector x);
+RcppExport SEXP rjieba_hmmcut(SEXP xSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        List __result = rcpp_hello_world();
+        Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
+        CharacterVector __result = hmmcut(x);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
     return __sexp_result;
 END_RCPP
 }
-// timesTwo
-int timesTwo(int x);
-RcppExport SEXP rjieba_timesTwo(SEXP xSEXP) {
+// mpcut
+CharacterVector mpcut(CharacterVector x);
+RcppExport SEXP rjieba_mpcut(SEXP xSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< int >::type x(xSEXP );
-        int __result = timesTwo(x);
+        Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
+        CharacterVector __result = mpcut(x);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// tagger
+CharacterVector tagger(CharacterVector x);
+RcppExport SEXP rjieba_tagger(SEXP xSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
+        CharacterVector __result = tagger(x);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// keywords
+CharacterVector keywords(CharacterVector x, unsigned int n);
+RcppExport SEXP rjieba_keywords(SEXP xSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
+        Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP );
+        CharacterVector __result = keywords(x, n);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// keywordsweight
+CharacterVector keywordsweight(CharacterVector x, unsigned int n);
+RcppExport SEXP rjieba_keywordsweight(SEXP xSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
+        Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP );
+        CharacterVector __result = keywordsweight(x, n);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// fullcut
+CharacterVector fullcut(CharacterVector x);
+RcppExport SEXP rjieba_fullcut(SEXP xSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
+        CharacterVector __result = fullcut(x);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

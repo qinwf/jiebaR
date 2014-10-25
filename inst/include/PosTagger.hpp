@@ -13,24 +13,33 @@ namespace CppJieba
     {
         private:
             MixSegment _segment;
-            DictTrie _dictTrie;
+            const DictTrie * _dictTrie;
 
         public:
-            PosTagger(){};
-            PosTagger(const string& dictPath, const string& hmmFilePath, const string& charStatus, const string& startProb, const string& emitProb, const string& endProb, const string& transProb)
+            PosTagger()
+            {}
+            PosTagger(
+                const string& dictPath, 
+                const string& hmmFilePath,
+                const string& userDictPath = ""
+            )
             {
-                LIMONP_CHECK(init(dictPath, hmmFilePath, charStatus, startProb, emitProb, endProb, transProb));
+                init(dictPath, hmmFilePath, userDictPath);
             };
             ~PosTagger(){};
         public:
-            bool init(const string& dictPath, const string& hmmFilePath, const string& charStatus, const string& startProb, const string& emitProb, const string& endProb, const string& transProb)
+            void init(
+                const string& dictPath, 
+                const string& hmmFilePath,
+                const string& userDictPath = ""
+            )
             {
-                LIMONP_CHECK(_dictTrie.init(dictPath));
-                LIMONP_CHECK(_segment.init(dictPath, hmmFilePath));
-                return true;
+                LIMONP_CHECK(_segment.init(dictPath, hmmFilePath, userDictPath));
+                _dictTrie = _segment.getDictTrie();
+                LIMONP_CHECK(_dictTrie);
             };
 
-            bool tag(const string& src, vector<pair<string, string> >& res)
+            bool tag(const string& src, vector<pair<string, string> >& res) const
             {
                 vector<string> cutRes;
                 if (!_segment.cut(src, cutRes))
@@ -48,7 +57,7 @@ namespace CppJieba
                         LogError("decode failed.");
                         return false;
                     }
-                    tmp = _dictTrie.find(unico.begin(), unico.end());
+                    tmp = _dictTrie->find(unico.begin(), unico.end());
                     res.push_back(make_pair(*itr, tmp == NULL ? "x" : tmp->tag));
                 }
                 tmp = NULL;

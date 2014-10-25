@@ -2,17 +2,37 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @export
-cutw <- function() {
-    .Call('rjieba_cutw', PACKAGE = 'rjieba')
+mixcut <- function(x) {
+    .Call('rjieba_mixcut', PACKAGE = 'rjieba', x)
 }
 
 #' @export
-rcpp_hello_world <- function() {
-    .Call('rjieba_rcpp_hello_world', PACKAGE = 'rjieba')
+hmmcut <- function(x) {
+    .Call('rjieba_hmmcut', PACKAGE = 'rjieba', x)
 }
 
 #' @export
-timesTwo <- function(x) {
-    .Call('rjieba_timesTwo', PACKAGE = 'rjieba', x)
+mpcut <- function(x) {
+    .Call('rjieba_mpcut', PACKAGE = 'rjieba', x)
+}
+
+#' @export
+tagger <- function(x) {
+    .Call('rjieba_tagger', PACKAGE = 'rjieba', x)
+}
+
+#' @export
+keywords <- function(x, n) {
+    .Call('rjieba_keywords', PACKAGE = 'rjieba', x, n)
+}
+
+#' @export
+keywordsweight <- function(x, n) {
+    .Call('rjieba_keywordsweight', PACKAGE = 'rjieba', x, n)
+}
+
+#' @export
+fullcut <- function(x) {
+    .Call('rjieba_fullcut', PACKAGE = 'rjieba', x)
 }
 
