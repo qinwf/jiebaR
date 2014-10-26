@@ -10,3 +10,5 @@ License: What Licence is it under ?
 Imports:
     Rcpp
 LinkingTo: Rcpp
+Suggests:
+    testthat

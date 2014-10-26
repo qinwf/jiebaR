@@ -23,9 +23,9 @@ MPSegment  mpseg(dict_path);
 FullSegment fullseg(dict_path);
 PosTagger  taggersep(dict_path,model_path);
 KeywordExtractor extractor(dict_path, model_path, "inst/dict/idf.utf8", "inst/dict/stop_words.utf8");
-//' @export
+
 // [[Rcpp::export]]
-CharacterVector mixcut(CharacterVector x)  {
+CharacterVector mixcutc(CharacterVector x)  {
   
   const char * const test_lines = x[0];
   vector<string> words;
@@ -33,9 +33,9 @@ CharacterVector mixcut(CharacterVector x)  {
   return wrap(words);
 }
 
-//' @export
+
 // [[Rcpp::export]]
-CharacterVector hmmcut(CharacterVector x)  {
+CharacterVector hmmcutc(CharacterVector x)  {
   
   const char * const test_lines = x[0];
   vector<string> words;
@@ -43,9 +43,9 @@ CharacterVector hmmcut(CharacterVector x)  {
   return wrap(words);
 }
 
-//' @export
+
 // [[Rcpp::export]]
-CharacterVector mpcut(CharacterVector x)  {
+CharacterVector mpcutc(CharacterVector x)  {
   
   const char * const test_lines = x[0];
   vector<string> words;
@@ -53,9 +53,9 @@ CharacterVector mpcut(CharacterVector x)  {
   return wrap(words);
 }
 
-//' @export
+
 // [[Rcpp::export]]
-CharacterVector tagger(CharacterVector x)  {
+CharacterVector taggerc(CharacterVector x)  {
   multimap<string,string> m;
   const char * const test_lines = x[0];
   vector<pair<string, string> > res;
@@ -67,9 +67,9 @@ CharacterVector tagger(CharacterVector x)  {
     return wrap(m);
 }
 
-//' @export
+
 // [[Rcpp::export]]
-CharacterVector keywords(CharacterVector x,unsigned int n)  {
+CharacterVector keywordsc(CharacterVector x,unsigned int n)  {
   size_t topN = n;
   const char * const test_lines = x[0];
   vector<string> words;
@@ -84,9 +84,9 @@ string itos(double i)  // convert int to string
 		return s.str();
 	}
 
-//' @export
+
 // [[Rcpp::export]]
-CharacterVector keywordsweight(CharacterVector x,unsigned int n)  {
+CharacterVector keywordsweightc(CharacterVector x,unsigned int n)  {
   size_t topN = n;
   const char * const test_lines = x[0];
   vector<pair<string, double> > res;
@@ -99,9 +99,9 @@ CharacterVector keywordsweight(CharacterVector x,unsigned int n)  {
     return wrap(m);
 }
 
-//' @export
+
 // [[Rcpp::export]]
-CharacterVector fullcut(CharacterVector x)  {
+CharacterVector fullcutc(CharacterVector x)  {
   
   const char * const test_lines = x[0];
   vector<string> words;
