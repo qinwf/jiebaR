@@ -1,3 +1,8 @@
+.onLoad <- function(libname, pkgname) {
+  if(.Platform$OS.type=="windows"){
+  Sys.setlocale(locale="English")}
+}
+
 #' @export
 mixcut<-function(code,file=NULL,output=paste0("rjieba",Sys.time(),".dat")
                  ,dict=NULL,hmm=NULL,user=NULL,symbol=F){
@@ -5,10 +10,11 @@ mixcut<-function(code,file=NULL,output=paste0("rjieba",Sys.time(),".dat")
     stop("Argument 'code' must be an string.")
   result<-mixcutc(code)
   if(symbol==F){
-    result<-grep("[^[:punct:][:space:]，。、]", result,value = T)
+    result<-grep("[^[:punct:][:space:]，。、《》：；“”‘’【】｛｝？！（）]", result,value = T)
   }
   if(.Platform$OS.type=="windows"){
-    return (iconv(result,"UTF-8","GBK"))
+    result<-iconv(result,"UTF-8","GBK")
+    return (result[!is.na(result)])
   }
   return(result)
 }
