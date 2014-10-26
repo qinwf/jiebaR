@@ -6,7 +6,7 @@ Date: 2014-07-09
 Author: Who wrote it
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)
-License: What Licence is it under ?
+License: MIT
 Imports:
     Rcpp
 LinkingTo: Rcpp
