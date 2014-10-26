@@ -20,8 +20,8 @@ before_install:
 install:
   - ./travis-tool.sh install_aptget r-cran-runit
   - ./travis-tool.sh install_r Rcpp
-  - ./travis-tool.sh install_r RcppArmadillo 
-  - ./travis-tool.sh install_github eddelbuettel/bh
+#  - ./travis-tool.sh install_r RcppArmadillo 
+#  - ./travis-tool.sh install_github eddelbuettel/bh
 
 script: 
   - ./travis-tool.sh run_tests
