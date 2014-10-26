@@ -7,4 +7,5 @@ mixcut<-function(code,file=NULL,output=paste0("rjieba",Sys.time(),".dat")
   if(.Platform$OS.type=="windows"){
     return (iconv(result,"UTF-8","GBK"))
   }
+  return(result)
 }
