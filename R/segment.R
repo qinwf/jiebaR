@@ -24,7 +24,11 @@ mixcutline<-function(code,dict=NULL,hmm=NULL,user=NULL,symbol=F,
                      lines=1000,output=paste0("rjieba", as.numeric(Sys.time()),".dat"),encoding="UTF-8",FILESMODE){
     nlines <- lines
     input.r <- file(code, open = "r")
+    if(.Platform$OS.type=="windows"){
     output.w <- file(output, open = "ab", encoding = "UTF-8")
+    } else{
+      output.w <- file(output, open = "a", encoding = "UTF-8")
+    }
     OUT <- FALSE
     tryCatch({
       while(nlines == lines) {
@@ -34,7 +38,11 @@ mixcutline<-function(code,dict=NULL,hmm=NULL,user=NULL,symbol=F,
           if(encoding!="UTF-8"){
             tmp.lines <- iconv(tmp.lines, tmp.enc, "UTF-8")}
           out.lines <- mixcutword(tmp.lines,dict=dict,hmm=hmm,user=user,symbol=symbol,FILESMODE=FILESMODE)
+          if(.Platform$OS.type=="windows"){
           writeBin(charToRaw(paste(out.lines,collapse = " ")), output.w)
+          } else{
+            writeLines(paste(out.lines,collapse = " "),output.w)
+          }
         }
       }
       OUT <- TRUE
