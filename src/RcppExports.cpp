@@ -5,45 +5,51 @@
 
 using namespace Rcpp;
 
-// mixcutc
-CharacterVector mixcutc(CharacterVector x);
-RcppExport SEXP rjieba_mixcutc(SEXP xSEXP) {
+// mix
+CharacterVector mix(CharacterVector x, CharacterVector dict, CharacterVector model, CharacterVector user);
+RcppExport SEXP jiebaR_mix(SEXP xSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
-        CharacterVector __result = mixcutc(x);
+        Rcpp::traits::input_parameter< CharacterVector >::type dict(dictSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type model(modelSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type user(userSEXP );
+        CharacterVector __result = mix(x, dict, model, user);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
     return __sexp_result;
 END_RCPP
 }
-// hmmcutc
-CharacterVector hmmcutc(CharacterVector x);
-RcppExport SEXP rjieba_hmmcutc(SEXP xSEXP) {
+// hmm
+CharacterVector hmm(CharacterVector x, CharacterVector model);
+RcppExport SEXP jiebaR_hmm(SEXP xSEXP, SEXP modelSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
-        CharacterVector __result = hmmcutc(x);
+        Rcpp::traits::input_parameter< CharacterVector >::type model(modelSEXP );
+        CharacterVector __result = hmm(x, model);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
     return __sexp_result;
 END_RCPP
 }
-// mpcutc
-CharacterVector mpcutc(CharacterVector x);
-RcppExport SEXP rjieba_mpcutc(SEXP xSEXP) {
+// mp
+CharacterVector mp(CharacterVector x, CharacterVector dict, CharacterVector user);
+RcppExport SEXP jiebaR_mp(SEXP xSEXP, SEXP dictSEXP, SEXP userSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
-        CharacterVector __result = mpcutc(x);
+        Rcpp::traits::input_parameter< CharacterVector >::type dict(dictSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type user(userSEXP );
+        CharacterVector __result = mp(x, dict, user);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -51,14 +57,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // taggerc
-CharacterVector taggerc(CharacterVector x);
-RcppExport SEXP rjieba_taggerc(SEXP xSEXP) {
+CharacterVector taggerc(CharacterVector x, CharacterVector dict, CharacterVector model, CharacterVector user);
+RcppExport SEXP jiebaR_taggerc(SEXP xSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
-        CharacterVector __result = taggerc(x);
+        Rcpp::traits::input_parameter< CharacterVector >::type dict(dictSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type model(modelSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type user(userSEXP );
+        CharacterVector __result = taggerc(x, dict, model, user);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -66,15 +75,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // keywordsc
-CharacterVector keywordsc(CharacterVector x, unsigned int n);
-RcppExport SEXP rjieba_keywordsc(SEXP xSEXP, SEXP nSEXP) {
+CharacterVector keywordsc(CharacterVector x, CharacterVector dict, CharacterVector model, unsigned int n);
+RcppExport SEXP jiebaR_keywordsc(SEXP xSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type dict(dictSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type model(modelSEXP );
         Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP );
-        CharacterVector __result = keywordsc(x, n);
+        CharacterVector __result = keywordsc(x, dict, model, n);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -82,30 +93,35 @@ BEGIN_RCPP
 END_RCPP
 }
 // keywordsweightc
-CharacterVector keywordsweightc(CharacterVector x, unsigned int n);
-RcppExport SEXP rjieba_keywordsweightc(SEXP xSEXP, SEXP nSEXP) {
+CharacterVector keywordsweightc(CharacterVector x, CharacterVector dict, CharacterVector model, unsigned int n);
+RcppExport SEXP jiebaR_keywordsweightc(SEXP xSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type dict(dictSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type model(modelSEXP );
         Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP );
-        CharacterVector __result = keywordsweightc(x, n);
+        CharacterVector __result = keywordsweightc(x, dict, model, n);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
     return __sexp_result;
 END_RCPP
 }
-// fullcutc
-CharacterVector fullcutc(CharacterVector x);
-RcppExport SEXP rjieba_fullcutc(SEXP xSEXP) {
+// query
+CharacterVector query(CharacterVector x, CharacterVector dict, CharacterVector model, int n);
+RcppExport SEXP jiebaR_query(SEXP xSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP );
-        CharacterVector __result = fullcutc(x);
+        Rcpp::traits::input_parameter< CharacterVector >::type dict(dictSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type model(modelSEXP );
+        Rcpp::traits::input_parameter< int >::type n(nSEXP );
+        CharacterVector __result = query(x, dict, model, n);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

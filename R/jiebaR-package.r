@@ -1,5 +1,5 @@
-#' rjieba.
+#' jiebaR.
 #'
-#' @name rjieba
+#' @name jiebaR
 #' @docType package
 NULL

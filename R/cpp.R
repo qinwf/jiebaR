@@ -1,3 +1,4 @@
-##' @useDynLib rjieba
-##' @importFrom Rcpp sourceCpp
+##' @useDynLib jiebaR
+##' @import Rcpp
+##' @import methods
 NULL

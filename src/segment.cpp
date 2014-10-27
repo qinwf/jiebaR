@@ -6,7 +6,6 @@
 #include "MixSegment.hpp"
 #include "MPSegment.hpp"
 #include "HMMSegment.hpp"
-#include "FullSegment.hpp"
 #include "QuerySegment.hpp"
 #include "PosTagger.hpp"
 #include "KeywordExtractor.hpp"
@@ -15,18 +14,12 @@ using namespace Rcpp;
 
 using namespace CppJieba;
 
-const char * const dict_path =  "inst/dict/jieba.dict.utf8";
-const char * const model_path = "inst/dict/hmm_model.utf8";
-MixSegment mixseg(dict_path, model_path);
-HMMSegment hmmseg(model_path);
-MPSegment  mpseg(dict_path);
-FullSegment fullseg(dict_path);
-PosTagger  taggersep(dict_path,model_path);
-KeywordExtractor extractor(dict_path, model_path, "inst/dict/idf.utf8", "inst/dict/stop_words.utf8");
-
 // [[Rcpp::export]]
-CharacterVector mixcutc(CharacterVector x)  {
-  
+CharacterVector mix(CharacterVector x,CharacterVector dict,CharacterVector model,CharacterVector user)  {
+  const char * const dict_path =  dict[0];
+  const char * const model_path = model[0];
+  const char * const user_path = user[0];
+  MixSegment mixseg(dict_path, model_path,user_path);
   const char * const test_lines = x[0];
   vector<string> words;
   mixseg.cut(test_lines, words);
@@ -35,9 +28,10 @@ CharacterVector mixcutc(CharacterVector x)  {
 
 
 // [[Rcpp::export]]
-CharacterVector hmmcutc(CharacterVector x)  {
-  
+CharacterVector hmm(CharacterVector x,CharacterVector model)  {
   const char * const test_lines = x[0];
+  const char * const model_path = model[0];
+  HMMSegment hmmseg(model_path);
   vector<string> words;
   hmmseg.cut(test_lines, words);
   return wrap(words);
@@ -45,9 +39,11 @@ CharacterVector hmmcutc(CharacterVector x)  {
 
 
 // [[Rcpp::export]]
-CharacterVector mpcutc(CharacterVector x)  {
-  
+CharacterVector mp(CharacterVector x,CharacterVector dict,CharacterVector user)  {
+  const char * const dict_path =  dict[0];
+  const char * const user_path = user[0];
   const char * const test_lines = x[0];
+  MPSegment mpseg(dict_path,user_path);
   vector<string> words;
   mpseg.cut(test_lines, words);
   return wrap(words);
@@ -55,9 +51,13 @@ CharacterVector mpcutc(CharacterVector x)  {
 
 
 // [[Rcpp::export]]
-CharacterVector taggerc(CharacterVector x)  {
-  multimap<string,string> m;
+CharacterVector taggerc(CharacterVector x,CharacterVector dict,CharacterVector model,CharacterVector user)  {
   const char * const test_lines = x[0];
+  const char * const dict_path =  dict[0];
+  const char * const model_path = model[0];
+  const char * const user_path = user[0];
+  PosTagger  taggersep(dict_path,model_path,user_path);
+  multimap<string,string> m;
   vector<pair<string, string> > res;
   taggersep.tag(test_lines, res);
   vector<pair<string, string> >::iterator it;
@@ -69,7 +69,10 @@ CharacterVector taggerc(CharacterVector x)  {
 
 
 // [[Rcpp::export]]
-CharacterVector keywordsc(CharacterVector x,unsigned int n)  {
+CharacterVector keywordsc(CharacterVector x,CharacterVector dict,CharacterVector model,unsigned int n)  {
+  const char * const dict_path =  dict[0];
+  const char * const model_path = model[0];
+  KeywordExtractor extractor(dict_path, model_path, "inst/dict/idf.utf8", "inst/dict/stop_words.utf8");
   size_t topN = n;
   const char * const test_lines = x[0];
   vector<string> words;
@@ -86,7 +89,10 @@ string itos(double i)  // convert int to string
 
 
 // [[Rcpp::export]]
-CharacterVector keywordsweightc(CharacterVector x,unsigned int n)  {
+CharacterVector keywordsweightc(CharacterVector x,CharacterVector dict,CharacterVector model,unsigned int n)  {
+  const char * const dict_path =  dict[0];
+  const char * const model_path = model[0];
+  KeywordExtractor extractor(dict_path, model_path, "inst/dict/idf.utf8", "inst/dict/stop_words.utf8");
   size_t topN = n;
   const char * const test_lines = x[0];
   vector<pair<string, double> > res;
@@ -100,11 +106,15 @@ CharacterVector keywordsweightc(CharacterVector x,unsigned int n)  {
 }
 
 
+
 // [[Rcpp::export]]
-CharacterVector fullcutc(CharacterVector x)  {
-  
+CharacterVector query(CharacterVector x,CharacterVector dict,CharacterVector model,int n)  {
+  const char * const dict_path =  dict[0];
+  const char * const model_path = model[0];
   const char * const test_lines = x[0];
+  QuerySegment queryseg(dict_path,model_path, n);
   vector<string> words;
-  fullseg.cut(test_lines, words);
+  queryseg.cut(test_lines, words);
   return wrap(words);
 }
+
