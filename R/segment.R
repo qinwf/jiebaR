@@ -1,8 +1,14 @@
 #' @export
-jiebar<-function(type="mix",dict="inst/dict/jieba.dict.utf8",hmm="inst/dict/hmm_model.utf8",user="inst/dict/user.dict.utf8",qmax=20){
+jiebar<-function(type="mix",dict="inst/dict/jieba.dict.utf8",hmm="inst/dict/hmm_model.utf8",user="inst/dict/user.dict.utf8",idf="inst/dict/idf.utf8",
+                 stop_word="inst/dict/stop_words.utf8",qmax=20,topn=5){
   switch(type,
-         mp = new(mpseg,dict,user),
-        mix = new(mixseg,dict,hmm,user)
+        mp     = new(mpseg,dict,user),
+        mix    = new(mixseg,dict,hmm,user),
+        query  = new(queryseg,dict,hmm,qmax),
+        hmm    = new(hmmseg,hmm),
+        tag    = new(tagger,dict,hmm,user),
+        keyword= new(keyword,topn,dict,hmm,idf,stop_word),
+        simhash= new(sim,dict,hmm,idf,stop_word)
 )
 }
 
