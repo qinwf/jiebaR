@@ -14,6 +14,7 @@
 using namespace Rcpp;
 using namespace CppJieba;
 
+
 string itos(double i)  // convert int to string
 {
   stringstream s;
@@ -21,6 +22,12 @@ string itos(double i)  // convert int to string
   return s.str();
 }
 
+string int64tos(uint64_t i)  // convert int to string
+{
+  stringstream s;
+  s << i;
+  return s.str();
+}
 //////////segment
 class mpseg{
   public:    
@@ -228,7 +235,9 @@ class sim{
       lhsatb[it] = itos(lhsword[it].second);
     }
     lhsm.attr("names") = lhsatb;
-    return List::create( Named("simhash") = (unsigned int) hashres,
+    CharacterVector hashvec;
+    hashvec.push_back(int64tos(hashres));
+    return List::create( Named("simhash") = hashvec,
                          Named("keyword") = lhsm);
   }
   
@@ -259,8 +268,9 @@ class sim{
       rhsatb[it] = itos(rhsword[it].second);
     }
     rhsm.attr("names") = rhsatb;
-    
-    return List::create( Named("distance")= hash.distances(lhsres,rhsres),
+    CharacterVector hashvec;
+    hashvec.push_back(int64tos(hash.distances(lhsres,rhsres)));
+    return List::create( Named("distance")= hashvec,
                          Named("lhs") = lhsm,
                          Named("rhs") = rhsm
                          );

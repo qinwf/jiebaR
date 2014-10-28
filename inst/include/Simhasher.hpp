@@ -108,9 +108,9 @@ namespace Simhash
                 }
                 return res;
             }
-            static unsigned int distances(uint64_t lhs, uint64_t rhs)
+            static uint64_t distances(uint64_t lhs, uint64_t rhs)
             {
-                unsigned int cnt = 0;
+                uint64_t cnt = 0;
                 lhs ^= rhs;
                 while(lhs != 0)
                 {
