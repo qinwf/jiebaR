@@ -221,7 +221,7 @@ class sim{
   idf_path(idf[0]), hash(dict_path,model_path,idf_path,stop_path) {}
   ~sim(){};
   
-  List simhash(CharacterVector code,unsigned int topn){
+  List simhash(CharacterVector code,int topn){
     const char * const code_path = code[0];
     vector<pair<string, double> > lhsword;
     uint64_t hashres;
@@ -241,7 +241,7 @@ class sim{
                          Named("keyword") = lhsm);
   }
   
-  List distance(CharacterVector lhs,CharacterVector rhs,unsigned int topn){
+  List distance(CharacterVector lhs,CharacterVector rhs,int topn){
     uint64_t lhsres;
     uint64_t rhsres;
     vector<pair<string, double> > lhsword;
