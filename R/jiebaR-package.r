@@ -2,4 +2,4 @@
 #'
 #' @name jiebaR
 #' @docType package
-NULL
+NULL 

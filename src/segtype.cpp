@@ -14,7 +14,6 @@
 using namespace Rcpp;
 using namespace CppJieba;
 
-
 string itos(double i)  // convert int to string
 {
   stringstream s;
@@ -29,97 +28,117 @@ string int64tos(uint64_t i)  // convert int to string
   return s.str();
 }
 //////////segment
-class mpseg{
-  public:    
-  const char * const dict_path;
-  const char * const user_path;
-  MPSegment mpsegment;        
-  mpseg(CharacterVector dict,CharacterVector user) : 
-  dict_path(dict[0]),user_path(user[0]),mpsegment(dict_path,user_path){
+class mpseg
+{
+  public:
+  const char *const dict_path;
+  const char *const user_path;
+  MPSegment mpsegment;
+  mpseg(CharacterVector dict, CharacterVector user) :
+  dict_path(dict[0]), user_path(user[0]), mpsegment(dict_path, user_path)
+  {
   }
-  ~mpseg(){};
+  ~mpseg() {};
   
-  CharacterVector cut(CharacterVector x)  {
-    const char * const test_lines = x[0];
+  CharacterVector cut(CharacterVector x)
+  {
+    const char *const test_lines = x[0];
     vector<string> words;
     mpsegment.cut(test_lines, words);
-    return wrap(words);}
+    return wrap(words);
+  }
 };
 
 
-RCPP_MODULE(mod_mpseg){
+RCPP_MODULE(mod_mpseg)
+{
   class_<mpseg>( "mpseg")
-  .constructor<CharacterVector,CharacterVector>()
+  .constructor<CharacterVector, CharacterVector>()
   .method( "cut", &mpseg::cut)
   ;
 }
 
-class mixseg{
-  public:    
-  const char * const dict_path;
-  const char * const user_path;
-  const char * const model_path;
-  MixSegment mixsegment;        
-  mixseg(CharacterVector dict,CharacterVector model,CharacterVector user) : 
-  dict_path(dict[0]),model_path(model[0]),user_path(user[0]),mixsegment(dict_path,model_path,user_path){
+class mixseg
+{
+  public:
+  const char *const dict_path;
+  const char *const user_path;
+  const char *const model_path;
+  MixSegment mixsegment;
+  mixseg(CharacterVector dict, CharacterVector model, CharacterVector user) :
+  dict_path(dict[0]), model_path(model[0]), user_path(user[0]), mixsegment(dict_path, model_path, user_path)
+  {
   }
-  ~mixseg(){};
+  ~mixseg() {};
   
-  CharacterVector cut(CharacterVector x)  {
-    const char * const test_lines = x[0];
+  CharacterVector cut(CharacterVector x)
+  {
+    const char *const test_lines = x[0];
     vector<string> words;
     mixsegment.cut(test_lines, words);
-    return wrap(words);}
+    return wrap(words);
+  }
 };
 
-RCPP_MODULE(mod_mixseg){
+RCPP_MODULE(mod_mixseg)
+{
   class_<mixseg>( "mixseg")
-  .constructor<CharacterVector,CharacterVector,CharacterVector>()
+  .constructor<CharacterVector, CharacterVector, CharacterVector>()
   .method( "cut", &mixseg::cut)
   ;
 }
 
-class queryseg{
-  public:    
-  const char * const dict_path;
-  const char * const model_path;
-  QuerySegment querysegment;        
-  queryseg(CharacterVector dict,CharacterVector model,int n) : 
-  dict_path(dict[0]),model_path(model[0]),querysegment(dict_path,model_path,n){
+class queryseg
+{
+  public:
+  const char *const dict_path;
+  const char *const model_path;
+  QuerySegment querysegment;
+  queryseg(CharacterVector dict, CharacterVector model, int n) :
+  dict_path(dict[0]), model_path(model[0]), querysegment(dict_path, model_path, n)
+  {
   }
-  ~queryseg(){};
+  ~queryseg() {};
   
-  CharacterVector cut(CharacterVector x)  {
-    const char * const test_lines = x[0];
+  CharacterVector cut(CharacterVector x)
+  {
+    const char *const test_lines = x[0];
     vector<string> words;
     querysegment.cut(test_lines, words);
-    return wrap(words);}
+    return wrap(words);
+  }
 };
 
-RCPP_MODULE(mod_query){
+RCPP_MODULE(mod_query)
+{
   class_<queryseg>( "queryseg")
-  .constructor<CharacterVector,CharacterVector,int>()
+  .constructor<CharacterVector, CharacterVector, int>()
   .method( "cut", &queryseg::cut)
   ;
 }
 
-class hmmseg{
-  public:    
-  const char * const model_path;
-  HMMSegment hmmsegment;        
-  hmmseg(CharacterVector model) : 
-  model_path(model[0]),hmmsegment(model_path){
+class hmmseg
+{
+  public:
+  const char *const model_path;
+  HMMSegment hmmsegment;
+  hmmseg(CharacterVector model) :
+  model_path(model[0]), hmmsegment(model_path)
+  {
   }
-  ~hmmseg(){};
+  ~hmmseg() {};
   
-  CharacterVector cut(CharacterVector x)  {
-    const char * const test_lines = x[0];
+  CharacterVector cut(CharacterVector x)
+  {
+    const char *const test_lines = x[0];
     vector<string> words;
     hmmsegment.cut(test_lines, words);
-    return wrap(words);}
+    return wrap(words);
+  }
 };
 
-RCPP_MODULE(mod_hmmseg){
+RCPP_MODULE(mod_hmmseg)
+{
   class_<hmmseg>( "hmmseg")
   .constructor<CharacterVector>()
   .method( "cut", &hmmseg::cut)
@@ -127,27 +146,30 @@ RCPP_MODULE(mod_hmmseg){
 }
 
 //////////keyword
-class tagger{
-  public:    
-  const char * const dict_path;
-  const char * const user_path;
-  const char * const model_path;
-  PosTagger  taggerseg;        
-  tagger(CharacterVector dict,CharacterVector model,CharacterVector user) : 
-  dict_path(dict[0]),model_path(model[0]),user_path(user[0]),taggerseg(dict_path,model_path,user_path){
+class tagger
+{
+  public:
+  const char *const dict_path;
+  const char *const user_path;
+  const char *const model_path;
+  PosTagger  taggerseg;
+  tagger(CharacterVector dict, CharacterVector model, CharacterVector user) :
+  dict_path(dict[0]), model_path(model[0]), user_path(user[0]), taggerseg(dict_path, model_path, user_path)
+  {
   }
-  ~tagger(){};
+  ~tagger() {};
   
-  CharacterVector tag(CharacterVector x)  {
-    const char * const test_lines = x[0];
+  CharacterVector tag(CharacterVector x)
+  {
+    const char *const test_lines = x[0];
     vector<pair<string, string> > res;
     taggerseg.tag(test_lines, res);
     unsigned int it;
     CharacterVector m(res.size());
     CharacterVector atb(res.size());
-    for(it = 0;it!=res.size();it++)
+    for (it = 0; it != res.size(); it++)
     {
-      m[it]=res[it].first;
+      m[it] = res[it].first;
       atb[it] = res[it].second;
     }
     m.attr("names") = atb;
@@ -155,54 +177,60 @@ class tagger{
   }
 };
 
-RCPP_MODULE(mod_tag){
+RCPP_MODULE(mod_tag)
+{
   class_<tagger>( "tagger")
-  .constructor<CharacterVector,CharacterVector,CharacterVector>()
+  .constructor<CharacterVector, CharacterVector, CharacterVector>()
   .method( "tag", &tagger::tag)
   ;
 }
 
-class keyword{
-  public:    
-  const char * const dict_path;
-  const char * const stop_path;
-  const char * const idf_path;
-  const char * const model_path;
+class keyword
+{
+  public:
+  const char *const dict_path;
+  const char *const stop_path;
+  const char *const idf_path;
+  const char *const model_path;
   size_t topN;
-  KeywordExtractor extractor;       
-  keyword(unsigned int n,CharacterVector dict,CharacterVector model,CharacterVector idf,CharacterVector stop) : 
-  topN(n),dict_path(dict[0]),model_path(model[0]),stop_path(stop[0]),
-  idf_path(idf[0]),extractor(dict_path,model_path,idf_path,stop_path){
+  KeywordExtractor extractor;
+  keyword(unsigned int n, CharacterVector dict, CharacterVector model, CharacterVector idf, CharacterVector stop) :
+  topN(n), dict_path(dict[0]), model_path(model[0]), stop_path(stop[0]),
+  idf_path(idf[0]), extractor(dict_path, model_path, idf_path, stop_path)
+  {
   }
-  ~keyword(){};
+  ~keyword() {};
   
-  CharacterVector tag(CharacterVector x)  {
-    const char * const test_lines = x[0];
+  CharacterVector tag(CharacterVector x)
+  {
+    const char *const test_lines = x[0];
     vector<pair<string, double> > res;
     extractor.extract(test_lines, res, topN);
     unsigned int it;
     CharacterVector m(res.size());
     CharacterVector atb(res.size());
-    for(it = 0;it!=res.size();it++)
+    for (it = 0; it != res.size(); it++)
     {
-      m[it]=res[it].first;
+      m[it] = res[it].first;
       atb[it] = itos(res[it].second);
     }
     m.attr("names") = atb;
     return wrap(m);
   }
   
-  CharacterVector cut(CharacterVector x)  {
-    const char * const test_lines = x[0];
+  CharacterVector cut(CharacterVector x)
+  {
+    const char *const test_lines = x[0];
     vector<string> words;
     extractor.extract(test_lines, words, topN);
     return wrap(words);
   }
 };
 
-RCPP_MODULE(mod_key){
+RCPP_MODULE(mod_key)
+{
   class_<keyword>( "keyword")
-  .constructor<unsigned int,CharacterVector,CharacterVector,CharacterVector,CharacterVector>()
+  .constructor<unsigned int, CharacterVector, CharacterVector, CharacterVector, CharacterVector>()
   .method( "tag", &keyword::tag)
   .method( "cut", &keyword::cut)
   ;
@@ -210,79 +238,83 @@ RCPP_MODULE(mod_key){
 
 //////////simhash
 
-class sim{
+class sim
+{
   public:
-  const char * const dict_path;
-  const char * const stop_path;
-  const char * const idf_path;
-  const char * const model_path;
+  const char *const dict_path;
+  const char *const stop_path;
+  const char *const idf_path;
+  const char *const model_path;
   Simhash::Simhasher hash;
-  sim(CharacterVector dict,CharacterVector model,CharacterVector idf,CharacterVector stop) : dict_path(dict[0]),model_path(model[0]),stop_path(stop[0]),
-  idf_path(idf[0]), hash(dict_path,model_path,idf_path,stop_path) {}
-  ~sim(){};
+  sim(CharacterVector dict, CharacterVector model, CharacterVector idf, CharacterVector stop) : dict_path(dict[0]), model_path(model[0]), stop_path(stop[0]),
+  idf_path(idf[0]), hash(dict_path, model_path, idf_path, stop_path) {}
+  ~sim() {};
   
-  List simhash(CharacterVector code,int topn){
-    const char * const code_path = code[0];
+  List simhash(CharacterVector code, int topn)
+  {
+    const char *const code_path = code[0];
     vector<pair<string, double> > lhsword;
     uint64_t hashres;
-    hash.make(code_path, topn, hashres,lhsword);
+    hash.make(code_path, topn, hashres, lhsword);
     CharacterVector lhsm(lhsword.size());
     CharacterVector lhsatb(lhsword.size());
     unsigned int it;
-    for(it = 0;it!=lhsword.size();it++)
+    for (it = 0; it != lhsword.size(); it++)
     {
-      lhsm[it]=lhsword[it].first;
+      lhsm[it] = lhsword[it].first;
       lhsatb[it] = itos(lhsword[it].second);
     }
     lhsm.attr("names") = lhsatb;
     CharacterVector hashvec;
     hashvec.push_back(int64tos(hashres));
     return List::create( Named("simhash") = hashvec,
-                         Named("keyword") = lhsm);
+    Named("keyword") = lhsm);
   }
   
-  List distance(CharacterVector lhs,CharacterVector rhs,int topn){
+  List distance(CharacterVector lhs, CharacterVector rhs, int topn)
+  {
     uint64_t lhsres;
     uint64_t rhsres;
     vector<pair<string, double> > lhsword;
     vector<pair<string, double> > rhsword;
-    const char * const lhs_path = lhs[0];
-    const char * const rhs_path = rhs[0];
-    hash.make(lhs_path, topn, lhsres,lhsword);
-    hash.make(rhs_path, topn, rhsres,rhsword);
+    const char *const lhs_path = lhs[0];
+    const char *const rhs_path = rhs[0];
+    hash.make(lhs_path, topn, lhsres, lhsword);
+    hash.make(rhs_path, topn, rhsres, rhsword);
     CharacterVector lhsm(lhsword.size());
     CharacterVector lhsatb(lhsword.size());
     unsigned int it;
-    for(it = 0;it!=lhsword.size();it++)
+    for (it = 0; it != lhsword.size(); it++)
     {
-      lhsm[it]=lhsword[it].first;
+      lhsm[it] = lhsword[it].first;
       lhsatb[it] = itos(lhsword[it].second);
     }
     lhsm.attr("names") = lhsatb;
     
     CharacterVector rhsm(rhsword.size());
     CharacterVector rhsatb(rhsword.size());
-    for(it = 0;it!=rhsword.size();it++)
+    for (it = 0; it != rhsword.size(); it++)
     {
-      rhsm[it]=rhsword[it].first;
+      rhsm[it] = rhsword[it].first;
       rhsatb[it] = itos(rhsword[it].second);
     }
     rhsm.attr("names") = rhsatb;
     CharacterVector hashvec;
-    hashvec.push_back(int64tos(hash.distances(lhsres,rhsres)));
-    return List::create( Named("distance")= hashvec,
-                         Named("lhs") = lhsm,
-                         Named("rhs") = rhsm
-                         );
-                         
+    hashvec.push_back(int64tos(hash.distances(lhsres, rhsres)));
+    return List::create( Named("distance") = hashvec,
+    Named("lhs") = lhsm,
+    Named("rhs") = rhsm
+    );
+    
   }
   
-
+  
 };
 
-RCPP_MODULE(mod_sim){
+RCPP_MODULE(mod_sim)
+{
   class_<sim>( "sim")
-  .constructor<CharacterVector,CharacterVector,CharacterVector,CharacterVector>()
+  .constructor<CharacterVector, CharacterVector, CharacterVector, CharacterVector>()
   .method( "simhash", &sim::simhash)
   .method( "distance", &sim::distance)
   ;
