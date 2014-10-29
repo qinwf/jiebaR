@@ -547,7 +547,7 @@ using namespace Rcpp;
    else if (is_valid_utf8)
    {
      // Only valid UTF-8 sequences
-     return "utf-8";
+     return "UTF-8";
    }
    else if (const char *enc = check_freq_dbytes(dbyte_char_cnt))
    {

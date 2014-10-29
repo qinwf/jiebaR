@@ -7,6 +7,7 @@ NULL
 
 .onLoad <- function(libname, pkgname) {
     if (.Platform$OS.type == "windows") {
-      Sys.setlocale(category = "LC_CTYPE", locale = "chs")
+      Sys.setlocale( locale = "English")
     }
+
 }

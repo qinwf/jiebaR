@@ -311,6 +311,7 @@ class sim
   
 };
 
+
 RCPP_MODULE(mod_sim)
 {
   class_<sim>( "sim")
