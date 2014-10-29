@@ -5,3 +5,18 @@
 
 using namespace Rcpp;
 
+// filecoding
+CharacterVector filecoding(CharacterVector files);
+RcppExport SEXP jiebaR_filecoding(SEXP filesSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type files(filesSEXP );
+        CharacterVector __result = filecoding(files);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}

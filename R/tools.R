@@ -1,5 +1,5 @@
 #' @export
-ShowDict<-function(){
+ShowDictPath<-function(){
   print(file.path(path.package("jiebaR"),"dict"))
 }
 
@@ -7,3 +7,4 @@ ShowDict<-function(){
 EditDict<-function(){
   file.show(file.path(path.package("jiebaR"),"dict","user.dict.utf8"))
 }
+
