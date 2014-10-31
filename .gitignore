@@ -7,3 +7,5 @@ src/*.so
 src/*.dll
 packrat/lib*/
 .Rprofile
+*src-i386/
+*src-x64/
