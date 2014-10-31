@@ -46,6 +46,7 @@ jiebar <- function(type = "mix", dict=DICTPATH, hmm=HMMPATH,
            worker  =  new(queryseg, dict,hmm,qmax)
            private = list(dict=dict,hmm=hmm,max_word_lenght=qmax)
            assignjieba(worker,detect,encoding,symbol,lines,output,write_file,private,result)
+           
            class(result)<-c("jiebar","segment","queryseg")
          },
          simhash = {
@@ -53,6 +54,7 @@ jiebar <- function(type = "mix", dict=DICTPATH, hmm=HMMPATH,
            private = list(dict=dict,hmm=hmm,idf=idf,stop_word=stop_word)
            assignjieba(worker,detect,encoding,symbol,lines,output,write_file,private,result)
            class(result)<-c("jiebar","simhash")
+           result$Top_N_Words = topn
          },
          keywords = {
            worker  =  new(keyword,topn, dict,hmm,idf,stop_word)

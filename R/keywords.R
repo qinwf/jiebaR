@@ -1,19 +1,20 @@
 #' @export
-keywords <- function(code, jiebar, encoding ="UTF-8", weight = F,detect=T,symbol = F) {
+keywords <- function(code, jiebar) {
   
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   if (file.exists(code)) {
-    if(detect==T)  encoding<-filecoding(code)
-    keyl(code = code, jiebar = jiebar, symbol = symbol, 
-         encoding = encoding,weight=weight)
+    encoding<-jiebar$Encoding
+    if(jiebar$DetectEncoding==T)  encoding<-filecoding(code)
+    keyl(code = code, jiebar = jiebar,
+         encoding = encoding)
   } else {
-    keyw(code = code, jiebar = jiebar,symbol = symbol
-    )
+    keyw(code = code, jiebar = jiebar)
+    
   }
 }
 
-keyl <- function(code, jiebar, symbol, encoding,weight) {
+keyl <- function(code, jiebar, encoding) {
   
   input.r <- file(code, open = "r")
   OUT <- FALSE
@@ -26,8 +27,8 @@ keyl <- function(code, jiebar, symbol, encoding,weight) {
       if (encoding != "UTF-8") {
         tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
       } 
-      out.lines <- keyw(code = tmp.lines, jiebar = jiebar, 
-                        symbol = symbol,weight=weight)
+      out.lines <- keyw(code = tmp.lines, jiebar = jiebar)
+                      
     }
     return(out.lines)
   }, finally = {
@@ -36,17 +37,15 @@ keyl <- function(code, jiebar, symbol, encoding,weight) {
 }
 
 
-keyw <- function(code, jiebar, symbol,weight) {
+keyw <- function(code, jiebar) {
   
-  if (symbol == F) {
+  if (jiebar$Symbol == F) {
     code <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", code)
   } 
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
-  if(weight==T) {
-    result <- jiebar$tag(code)
-  } else{
-    result <- jiebar$cut(code)
-  }
+
+    result <- jiebar$Worker$tag(code)
+  
   if (.Platform$OS.type == "windows") {
     
     return(iconv(result, "UTF-8", "GBK"))

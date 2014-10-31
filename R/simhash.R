@@ -1,19 +1,21 @@
 #' @export
-simhash <- function(code, jiebar, topn =5, encoding ="UTF-8",detect=T,symbol = F) {
+simhash <- function(code, jiebar) {
   
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   if (file.exists(code)) {
+    encoding<-jiebar$Encoding
     if(detect==T)  encoding<-filecoding(code)
-    simhashl(code = code, jiebar = jiebar, symbol = symbol, 
-         encoding = encoding, topn = topn )
+    simhashl(code = code, jiebar = jiebar,
+         encoding = encoding)
   } else {
-    simhashw(code = code, jiebar = jiebar, topn = topn , symbol = symbol
-    )
+    simhashw(code = code, jiebar = jiebar)
+             
+    
   }
 }
 
-simhashl <- function(code, jiebar, symbol, topn, encoding) {
+simhashl <- function(code, jiebar, encoding) {
   
   input.r <- file(code, open = "r")
   OUT <- FALSE
@@ -26,8 +28,7 @@ simhashl <- function(code, jiebar, symbol, topn, encoding) {
       if (encoding != "UTF-8") {
         tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
       } 
-      out.lines <- simhashw(code = tmp.lines, jiebar = jiebar, 
-                        symbol = symbol,topn=topn)
+      out.lines <- simhashw(code = tmp.lines, jiebar = jiebar)
     }
     return(out.lines)
   }, finally = {
@@ -36,17 +37,18 @@ simhashl <- function(code, jiebar, symbol, topn, encoding) {
 }
 
 
-simhashw <- function(code, jiebar, topn,symbol,weight) {
+simhashw <- function(code, jiebar) {
   
-  if (symbol == F) {
+  if (jiebar$Symbol == F) {
     code <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", code)
   } 
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
 
-    result <- jiebar$simhash(code,topn)
+    result <- jiebar$Worker$simhash(code,jiebar$Top_N_Words)
 
   if (.Platform$OS.type == "windows") {
     result$keyword<-iconv(result$keyword, "UTF-8", "GBK")
+    
     return(result)
   }
   return(result)

@@ -6,7 +6,7 @@ print.hmmseg<-function(jiebar){
   cat("Keep Symbols    :  ");cat(jiebar$Symbol);cat("\n")
   cat("Write File      :  ");cat(jiebar$WriteFile);cat("\n")
   cat("Max Read Lines  :  ");cat(jiebar$ReadLines);cat("\n");cat("\n")
-  cat("Model Components:  ");cat("\n");cat("\n")
+  cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(jiebar$PrivateVarible)
 }
 
@@ -18,7 +18,7 @@ print.queryseg<-function(jiebar){
   cat("Keep Symbols    :  ");cat(jiebar$Symbol);cat("\n")
   cat("Write File      :  ");cat(jiebar$WriteFile);cat("\n")
   cat("Max Read Lines  :  ");cat(jiebar$ReadLines);cat("\n");cat("\n")
-  cat("Model Components:  ");cat("\n");cat("\n")
+  cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(jiebar$PrivateVarible)
 }
 
@@ -28,7 +28,8 @@ print.simhash<-function(jiebar){
   cat("Detect Encoding :  "); cat(jiebar$DetectEncoding);cat("\n")
   cat("Default Encoding:  "); cat(jiebar$Encoding);cat("\n")
   cat("Keep Symbols    :  ");cat(jiebar$Symbol);cat("\n")
-  cat("Model Components:  ");cat("\n");cat("\n")
+  cat("Keywords Numbers:  ");cat(jiebar$Top_N_Words);cat("\n");cat("\n")
+  cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(jiebar$PrivateVarible)
 }
 
@@ -37,8 +38,8 @@ print.keywords<-function(jiebar){
   cat("Worker Type:  Keyword Extraction\n"); cat("\n")
   cat("Detect Encoding :  "); cat(jiebar$DetectEncoding);cat("\n")
   cat("Default Encoding:  "); cat(jiebar$Encoding);cat("\n")
-  cat("Keep Symbols    :  ");cat(jiebar$Symbol);cat("\n")
-  cat("Model Components:  ");cat("\n");cat("\n")
+  cat("Keep Symbols    :  ");cat(jiebar$Symbol);cat("\n");cat("\n")
+  cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(jiebar$PrivateVarible)
 }
 
@@ -50,7 +51,7 @@ print.tagger<-function(jiebar){
   cat("Keep Symbols    :  ");cat(jiebar$Symbol);cat("\n")
   cat("Write File      :  ");cat(jiebar$WriteFile);cat("\n")
   cat("Max Read Lines  :  ");cat(jiebar$ReadLines);cat("\n");cat("\n")
-  cat("Model Components:  ");cat("\n");cat("\n")
+  cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(jiebar$PrivateVarible)
 }
 
@@ -62,7 +63,7 @@ print.mixseg<-function(jiebar){
   cat("Keep Symbols    :  ");cat(jiebar$Symbol);cat("\n")
   cat("Write File      :  ");cat(jiebar$WriteFile);cat("\n")
   cat("Max Read Lines  :  ");cat(jiebar$ReadLines);cat("\n");cat("\n")
-  cat("Model Components:  ");cat("\n");cat("\n")
+  cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(jiebar$PrivateVarible)
 }
 
@@ -74,6 +75,6 @@ print.mpseg<-function(jiebar){
   cat("Keep Symbols    :  ");cat(jiebar$Symbol);cat("\n")
   cat("Write File      :  ");cat(jiebar$WriteFile);cat("\n")
   cat("Max Read Lines  :  ");cat(jiebar$ReadLines);cat("\n");cat("\n")
-  cat("Model Components:  ");cat("\n");cat("\n")
+  cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(jiebar$PrivateVarible)
 }

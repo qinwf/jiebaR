@@ -185,7 +185,7 @@ class tagger
     unsigned int it;
     vector<string> m;
     m.reserve(res.size()*2);
-    for (it = 0; it != m.size(); it=it+2)
+    for (it = 0; it != res.size()*2; it=it+2)
     {
       m.push_back(res[it/2].first);
       m.push_back(res[it/2].second);
@@ -201,7 +201,7 @@ RCPP_MODULE(mod_tag)
   class_<tagger>( "tagger")
   .constructor<CharacterVector, CharacterVector, CharacterVector>()
   .method( "tag", &tagger::tag)
-  .method( "tag", &tagger::file)
+  .method( "file", &tagger::file)
   ;
 }
 

@@ -1,6 +1,6 @@
 
 #' @export
-segment <- function(code, jiebar) {
+tag<- function(code, jiebar) {
   
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
@@ -8,16 +8,16 @@ segment <- function(code, jiebar) {
     encoding<-jiebar$Encoding
     if(jiebar$DetectEncoding==T)  encoding<-filecoding(code)
     FILESMODE <- T
-    cutl(code = code, jiebar=jiebar,symbol = jiebar$Symbol, lines = jiebar$ReadLines, 
+    tagl(code = code, jiebar=jiebar,symbol = jiebar$Symbol, lines = jiebar$ReadLines, 
          output = jiebar$OutputPath, encoding = encoding, write_file= jiebar$WriteFile,FILESMODE = FILESMODE)
   } else {
     FILESMODE <- F
-    cutw(code = code, jiebar=jiebar,symbol=jiebar$Symbol, 
+    tagw(code = code, jiebar=jiebar,symbol=jiebar$Symbol, 
          FILESMODE = FILESMODE)
   }
 }
 
-cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE) {
+tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE) {
   nlines <- lines
   input.r <- file(code, open = "r")
   if(write_file==T){
@@ -37,7 +37,7 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
           if (encoding != "UTF-8") {
             tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
           }
-          out.lines <- cutw(code = tmp.lines, jiebar = jiebar, 
+          out.lines <- tagw(code = tmp.lines, jiebar = jiebar, 
                             symbol = symbol, FILESMODE = FILESMODE)
           
           if (.Platform$OS.type == "windows") {
@@ -68,10 +68,10 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
           if (encoding != "UTF-8") {
             tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
           }
-          out.lines <- cutw(code = tmp.lines, jiebar = jiebar, 
+          out.lines <- tagw(code = tmp.lines, jiebar = jiebar, 
                             symbol = symbol, FILESMODE = FILESMODE)
           
-            result<-c(result,out.lines)
+          result<-c(result,out.lines)
           
           
         } 
@@ -80,22 +80,26 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
     , finally = {
       try(close(input.r), silent = TRUE)
     })
-    if(.Platform$OS.type == "windows")
-    return(iconv(result, "UTF-8", "GBK"))
+
     return(result)
   }
   
 }
 
 
-cutw <- function(code, jiebar,  symbol, FILESMODE) {
+tagw <- function(code, jiebar,  symbol, FILESMODE) {
   
   if (symbol == F) {
     code <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", code)
   } 
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
-  result <- jiebar$Worker$cut(code)
-  if (symbol == F) {
+  if(FILESMODE==T ){
+  result <- jiebar$Worker$file(code)
+  } else{
+    result <- jiebar$Worker$tag(code)
+  }
+  
+  if (symbol == F && FILESMODE  ==F) {
     result <- grep("[^[:space:]]", result, value = T)
   }
   if (.Platform$OS.type == "windows" && FILESMODE == F) {
@@ -104,4 +108,3 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
   }
   return(result)
 } 
-
