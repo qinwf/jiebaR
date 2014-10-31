@@ -19,7 +19,7 @@
 ## 安装
 
 目前该包还没有发布到CRAN，可以通过Github进行安装。Windows系统需要安装 [Rtools]，或者可以下载
-二进制包(64位)，进行安装：
+[二进制包]，进行安装：
 
 ```r
 library(devtools)
@@ -55,7 +55,7 @@ segment( "江州市长江大桥参加了长江大桥的通车仪式" , mixseg )
 支持对文件进行分词：
 
 ```r
-segment( "./temp.dat" , mixseg，detect = T )   ### 自动判断输入文件编码模式，默认文件输出在同目录下。
+segment( "./temp.dat" , mixseg )   ### 自动判断输入文件编码模式，默认文件输出在同目录下。
 ```
 
 在加载分词引擎时，可以自定义词库路径，同时可以启动不同的引擎：
@@ -93,3 +93,4 @@ EditDict()      ### 打开默认用户词库
 [Cppjieba]:https://github.com/aszxqw/cppjieba
 [Rtools]:http://mirrors.xmu.edu.cn/CRAN/bin/windows/Rtools
 [深蓝词库转换]:https://github.com/studyzy/imewlconverter
+[二进制包]:https://github.com/qinwf/jiebaR/releases
