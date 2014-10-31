@@ -62,8 +62,8 @@ class mixseg
 {
   public:
   const char *const dict_path;
-  const char *const user_path;
   const char *const model_path;
+  const char *const user_path;
   MixSegment mixsegment;
   mixseg(CharacterVector dict, CharacterVector model, CharacterVector user) :
   dict_path(dict[0]), model_path(model[0]), user_path(user[0]), mixsegment(dict_path, model_path, user_path)
@@ -109,6 +109,7 @@ class queryseg
   }
 };
 
+
 RCPP_MODULE(mod_query)
 {
   class_<queryseg>( "queryseg")
@@ -150,8 +151,8 @@ class tagger
 {
   public:
   const char *const dict_path;
-  const char *const user_path;
   const char *const model_path;
+  const char *const user_path;
   PosTagger  taggerseg;
   tagger(CharacterVector dict, CharacterVector model, CharacterVector user) :
   dict_path(dict[0]), model_path(model[0]), user_path(user[0]), taggerseg(dict_path, model_path, user_path)
@@ -175,6 +176,24 @@ class tagger
     m.attr("names") = atb;
     return wrap(m);
   }
+  
+  CharacterVector file(CharacterVector x)
+  {
+    const char *const test_lines = x[0];
+    vector<pair<string, string> > res;
+    taggerseg.tag(test_lines, res);
+    unsigned int it;
+    vector<string> m;
+    m.reserve(res.size()*2);
+    for (it = 0; it != m.size(); it=it+2)
+    {
+      m.push_back(res[it/2].first);
+      m.push_back(res[it/2].second);
+    }
+    
+    return wrap(m);
+  }
+  
 };
 
 RCPP_MODULE(mod_tag)
@@ -182,17 +201,21 @@ RCPP_MODULE(mod_tag)
   class_<tagger>( "tagger")
   .constructor<CharacterVector, CharacterVector, CharacterVector>()
   .method( "tag", &tagger::tag)
+  .method( "tag", &tagger::file)
   ;
 }
 
 class keyword
 {
   public:
+  size_t topN;
   const char *const dict_path;
+  const char *const model_path;
   const char *const stop_path;
   const char *const idf_path;
-  const char *const model_path;
-  size_t topN;
+
+
+  
   KeywordExtractor extractor;
   keyword(unsigned int n, CharacterVector dict, CharacterVector model, CharacterVector idf, CharacterVector stop) :
   topN(n), dict_path(dict[0]), model_path(model[0]), stop_path(stop[0]),
@@ -242,9 +265,10 @@ class sim
 {
   public:
   const char *const dict_path;
+  const char *const model_path;
   const char *const stop_path;
   const char *const idf_path;
-  const char *const model_path;
+
   Simhash::Simhasher hash;
   sim(CharacterVector dict, CharacterVector model, CharacterVector idf, CharacterVector stop) : dict_path(dict[0]), model_path(model[0]), stop_path(stop[0]),
   idf_path(idf[0]), hash(dict_path, model_path, idf_path, stop_path) {}
