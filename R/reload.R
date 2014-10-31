@@ -17,3 +17,8 @@
 `<=.tagger`<-function(jiebar,code){
   tag(code,jiebar)
 }
+
+#' @export
+`==.simhash`<-function(jiebar,formula){
+  distance(formula[[2]],formula[[3]],jiebar)
+}

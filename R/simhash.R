@@ -53,3 +53,52 @@ simhashw <- function(code, jiebar) {
   }
   return(result)
 } 
+
+#' @export
+distance<-function(codel,coder,jiebar){
+  if (!is.character(codel) || length(codel) != 1 ||
+        !is.character(coder) || length(coder) != 1) 
+    stop("Argument 'code' must be an string.")
+  encoding<-jiebar$Encoding
+
+  if (file.exists(codel)) {
+    if(jiebar$DetectEncoding==T)  encoding<-filecoding(codel)
+    codel<-distancel(codel,jiebar,encoding)
+  }
+  if (file.exists(coder)) {
+    if(jiebar$DetectEncoding==T)  encoding<-filecoding(coder)
+    coder<-distancel(coder,jiebar,encoding)
+  }
+  result<-jiebar$Worker$distance(codel,coder,jiebar$Top_N_Words)
+  if (.Platform$OS.type == "windows") {
+    result$lhs<-iconv(result$lhs, "UTF-8", "GBK")
+    result$rhs<-iconv(result$rhs, "UTF-8", "GBK")
+  }
+  result  
+}
+
+
+distancel <- function(code, jiebar, encoding) {
+  
+  input.r <- file(code, open = "r")
+  OUT <- FALSE
+  tryCatch({
+    
+    tmp.lines <- readLines(input.r,  encoding = encoding)
+    nlines <- length(tmp.lines)
+    tmp.lines <- paste(tmp.lines, collapse = " ")
+    if (nlines > 0) {
+      if (encoding != "UTF-8") {
+        tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
+      } 
+      if (jiebar$Symbol == F) {
+        tmp.lines <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", tmp.lines)
+      } 
+      tmp.lines <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", tmp.lines))
+      
+    }
+    return(tmp.lines)
+  }, finally = {
+    try(close(input.r), silent = TRUE)
+  })
+}
