@@ -12,7 +12,7 @@
 #include "Limonp/Logger.hpp"
 #include "TransCode.hpp"
 #include "Trie.hpp"
-
+#include "Rcpp.h"
 
 
 namespace CppJieba
