@@ -105,10 +105,11 @@
 #' 
 #' @examples 
 #' ### Note: Can not display Chinese character on Windows here.
+#' \donttest{
 #' words = "hello world"
 #' test1 = worker()
 #' test1
-#' test1 <= words
+#' test1 <= words}
 #' 
 #' \dontrun{
 #' test <= "./temp.txt"
@@ -123,11 +124,11 @@
 #' engine3 = worker(type = "mix", dict = "dict_path",symbol = T)
 #' engine3 <= "./temp.txt"
 #'  }
-#'  
+#'  \donttest{
 #' keys = worker("keywords", topn = 1)
 #' keys <= words
 #' tagger = worker("tag")
-#' tagger <= words
+#' tagger <= words}
 #' 
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @export

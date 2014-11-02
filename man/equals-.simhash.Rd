@@ -14,8 +14,9 @@
 Distance symbol to compute distance.
 }
 \examples{
+\donttest{
 test1 = worker("simhash",topn=1)
-test1 == ( "hello world" ~ "hello world")
+test1 == ( "hello world" ~ "hello world")}
 }
 \author{
 Qin Wenfeng <\url{http://qinwenfeng.com}>

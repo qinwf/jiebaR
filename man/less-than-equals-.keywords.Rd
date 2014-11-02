@@ -14,9 +14,10 @@
 Keywords symbol to find keywords.
 }
 \examples{
+\donttest{
 words = "hello world"
 test1 = worker("keywords",topn=1)
-test1 <= words
+test1 <= words}
 }
 \author{
 Qin Wenfeng <\url{http://qinwenfeng.com}>

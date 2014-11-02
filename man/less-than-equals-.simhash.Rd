@@ -14,9 +14,10 @@
 Simhash symbol to compute simhash.
 }
 \examples{
+\donttest{
 words = "hello world"
 test1 = worker("simhash",topn=1)
-test1 <= words
+test1 <= words}
 }
 \author{
 Qin Wenfeng <\url{http://qinwenfeng.com}>

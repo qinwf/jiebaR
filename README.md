@@ -6,7 +6,7 @@
 
 ## 特性
 
-+ 支持 Windows , Linux , Mac 操作系统。
++ 支持 Windows , Linux操作系统（Mac 暂未测试）。
 + 通过Rcpp Modules实现同时加载多个分词系统,可以分别使用不同的分词模式和词库。
 + 支持多种分词模式、中文姓名识别、关键词提取、词性标注以及文本Simhash相似度比较等功能。
 + 支持加载自定义用户词库，设置词频、词性。
@@ -91,6 +91,10 @@ mpseg =  worker(type  = "mp" ,dict = "inst/dict/jieba.dict.utf8",
 ShowDictPath()  ### 显示默认词库目录
 EditDict()      ### 打开默认用户词库
 ```
+## 计划支持
+
++ 支持 Windows , Linux , Mac 操作系统并行分词。
++ 简单的自然语言统计分析功能。
 
 ["结巴"中文分词]:https://github.com/fxsjy/jieba
 [jieba分词]:https://github.com/fxsjy/jieba

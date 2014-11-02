@@ -14,9 +14,10 @@
 Tagger symbol to tag words.
 }
 \examples{
+\donttest{
 words = "hello world"
 test1 = worker("tag")
-test1 <= words
+test1 <= words}
 }
 \author{
 Qin Wenfeng <\url{http://qinwenfeng.com}>

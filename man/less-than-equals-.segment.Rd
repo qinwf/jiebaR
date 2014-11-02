@@ -14,9 +14,10 @@
 Word segmentation symbol to cut words.
 }
 \examples{
+\donttest{
 words = "hello world"
 test1 = worker()
-test1 <= words
+test1 <= words}
 }
 \author{
 Qin Wenfeng <\url{http://qinwenfeng.com}>

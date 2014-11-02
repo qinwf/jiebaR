@@ -9,7 +9,18 @@ NULL
     if (.Platform$OS.type == "windows") {
       Sys.setlocale( locale = "English")
     }
+    DICTPATH<<-file.path(find.package("jiebaR"),"dict","jieba.dict.utf8")
+    HMMPATH<<-file.path(find.package("jiebaR"),"dict","hmm_model.utf8")
+    USERPATH<<-file.path(find.package("jiebaR"),"dict","user.dict.utf8")
+    STOPPATH<<-file.path(find.package("jiebaR"),"dict","stop_words.utf8")
+    IDFPATH<<-file.path(find.package("jiebaR"),"dict","idf.utf8")
+    
 
+    
+}
+
+setLoadAction(
+  function(ns){ 
     loadModule("mod_mpseg", TRUE)
     loadModule("mod_mixseg", TRUE)
     loadModule("mod_query", TRUE)
@@ -17,15 +28,4 @@ NULL
     loadModule("mod_tag", TRUE)
     loadModule("mod_key", TRUE)
     loadModule("mod_sim", TRUE)
-    
-}
-
-setLoadAction(
-  function(ns){ 
-    assign("DICTPATH", file.path(find.package("jiebaR",lib.loc=.libPaths()),"dict","jieba.dict.utf8"), envir = ns)
-    assign("HMMPATH", file.path(find.package("jiebaR",lib.loc=.libPaths()),"dict","hmm_model.utf8"), envir = ns)
-    assign("USERPATH", file.path(find.package("jiebaR",lib.loc=.libPaths()),"dict","user.dict.utf8"), envir = ns)
-    assign("STOPPATH", file.path(find.package("jiebaR",lib.loc=.libPaths()),"dict","stop_words.utf8"), envir = ns)
-    assign("IDFPATH", file.path(find.package("jiebaR",lib.loc=.libPaths()),"dict","idf.utf8"), envir = ns)
-    
     })
