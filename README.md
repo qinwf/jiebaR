@@ -44,8 +44,8 @@ mixseg = worker()
 ##               user = "inst/dict/user.dict.utf8") ### 用户自定义词库
 
 mixseg <= "江州市长江大桥参加了长江大桥的通车仪式"  ### <= 分词运算符
-## 相当于 segment( "江州市长江大桥参加了长江大桥的通车仪式" ,    
-                    mixseg )
+
+## 相当于 segment( "江州市长江大桥参加了长江大桥的通车仪式" , mixseg )
 
 ```
 
