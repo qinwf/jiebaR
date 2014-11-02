@@ -74,14 +74,14 @@ mixseg <= "./temp.dat"  ### 自动判断输入文件编码模式，默认文件�
 
 
 ```r
-mixseg2 = jiebar(type = "mix", dict = "inst/dict/jieba.dict.utf8",
+mixseg2 = worker(type = "mix", dict = "inst/dict/jieba.dict.utf8",
                  hmm  = "inst/dict/hmm_model.utf8",  
                  user = "inst/dict/test.dict.utf8"  ### 自定义用户词库路径
                  )   
 
-hmmseg = jiebar(type  = "hmm")  ### 隐式马尔科夫模型分词引擎
+hmmseg = worker(type  = "hmm")  ### 隐式马尔科夫模型分词引擎
 
-mpseg =  jiebar(type  = "mp" ,dict = "inst/dict/jieba.dict.utf8",
+mpseg =  worker(type  = "mp" ,dict = "inst/dict/jieba.dict.utf8",
                 user = "inst/dict/test.dict.utf8" ) ### 最大概率法分词引擎
 ```
 
