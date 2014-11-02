@@ -5,14 +5,19 @@ tag<- function(code, jiebar) {
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   if (file.exists(code)) {
-    encoding<-jiebar$Encoding
-    if(jiebar$DetectEncoding==T)  encoding<-filecoding(code)
+    encoding<-jiebar$encoding
+    if(is.null(jiebar$output)){
+      output<-paste0("rjieba", as.numeric(Sys.time()), ".dat")
+    } else {
+      output<-jiebar$output
+    }
+    if(jiebar$detect==T)  encoding<-filecoding(code)
     FILESMODE <- T
-    tagl(code = code, jiebar=jiebar,symbol = jiebar$Symbol, lines = jiebar$ReadLines, 
-         output = jiebar$OutputPath, encoding = encoding, write_file= jiebar$WriteFile,FILESMODE = FILESMODE)
+    tagl(code = code, jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
+         output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE)
   } else {
     FILESMODE <- F
-    tagw(code = code, jiebar=jiebar,symbol=jiebar$Symbol, 
+    tagw(code = code, jiebar=jiebar,symbol=jiebar$symbol, 
          FILESMODE = FILESMODE)
   }
 }
@@ -94,9 +99,9 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
   } 
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
   if(FILESMODE==T ){
-  result <- jiebar$Worker$file(code)
+  result <- jiebar$worker$file(code)
   } else{
-    result <- jiebar$Worker$tag(code)
+    result <- jiebar$worker$tag(code)
   }
   
   if (symbol == F && FILESMODE  ==F) {

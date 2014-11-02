@@ -4,7 +4,7 @@ simhash <- function(code, jiebar) {
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   if (file.exists(code)) {
-    encoding<-jiebar$Encoding
+    encoding<-jiebar$encoding
     if(detect==T)  encoding<-filecoding(code)
     simhashl(code = code, jiebar = jiebar,
          encoding = encoding)
@@ -39,12 +39,12 @@ simhashl <- function(code, jiebar, encoding) {
 
 simhashw <- function(code, jiebar) {
   
-  if (jiebar$Symbol == F) {
+  if (jiebar$symbol == F) {
     code <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", code)
   } 
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
 
-    result <- jiebar$Worker$simhash(code,jiebar$Top_N_Words)
+    result <- jiebar$worker$simhash(code,jiebar$topn)
 
   if (.Platform$OS.type == "windows") {
     result$keyword<-iconv(result$keyword, "UTF-8", "GBK")
@@ -59,17 +59,17 @@ distance<-function(codel,coder,jiebar){
   if (!is.character(codel) || length(codel) != 1 ||
         !is.character(coder) || length(coder) != 1) 
     stop("Argument 'code' must be an string.")
-  encoding<-jiebar$Encoding
+  encoding<-jiebar$encoding
 
   if (file.exists(codel)) {
-    if(jiebar$DetectEncoding==T)  encoding<-filecoding(codel)
+    if(jiebar$detect==T)  encoding<-filecoding(codel)
     codel<-distancel(codel,jiebar,encoding)
   }
   if (file.exists(coder)) {
-    if(jiebar$DetectEncoding==T)  encoding<-filecoding(coder)
+    if(jiebar$detect==T)  encoding<-filecoding(coder)
     coder<-distancel(coder,jiebar,encoding)
   }
-  result<-jiebar$Worker$distance(codel,coder,jiebar$Top_N_Words)
+  result<-jiebar$worker$distance(codel,coder,jiebar$topn)
   if (.Platform$OS.type == "windows") {
     result$lhs<-iconv(result$lhs, "UTF-8", "GBK")
     result$rhs<-iconv(result$rhs, "UTF-8", "GBK")
@@ -91,7 +91,7 @@ distancel <- function(code, jiebar, encoding) {
       if (encoding != "UTF-8") {
         tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
       } 
-      if (jiebar$Symbol == F) {
+      if (jiebar$symbol == F) {
         tmp.lines <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", tmp.lines)
       } 
       tmp.lines <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", tmp.lines))

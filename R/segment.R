@@ -5,16 +5,22 @@ segment <- function(code, jiebar) {
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   if (file.exists(code)) {
-    encoding<-jiebar$Encoding
-    if(jiebar$DetectEncoding==T)  encoding<-filecoding(code)
+    if(is.null(jiebar$output)){
+      output<-paste0("rjieba", as.numeric(Sys.time()), ".dat")
+    } else {
+      output<-jiebar$output
+    }
+    encoding<-jiebar$encoding
+    if(jiebar$detect==T)  encoding<-filecoding(code)
     FILESMODE <- T
-    cutl(code = code, jiebar=jiebar,symbol = jiebar$Symbol, lines = jiebar$ReadLines, 
-         output = jiebar$OutputPath, encoding = encoding, write_file= jiebar$WriteFile,FILESMODE = FILESMODE)
+    cutl(code = code, jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
+         output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE)
   } else {
     FILESMODE <- F
-    cutw(code = code, jiebar=jiebar,symbol=jiebar$Symbol, 
+    cutw(code = code, jiebar=jiebar,symbol=jiebar$symbol, 
          FILESMODE = FILESMODE)
   }
+  
 }
 
 cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE) {
@@ -84,7 +90,7 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
     return(iconv(result, "UTF-8", "GBK"))
     return(result)
   }
-  
+
 }
 
 
@@ -94,7 +100,7 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
     code <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", code)
   } 
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
-  result <- jiebar$Worker$cut(code)
+  result <- jiebar$worker$cut(code)
   if (symbol == F) {
     result <- grep("[^[:space:]]", result, value = T)
   }

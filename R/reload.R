@@ -1,6 +1,17 @@
+print.inv<-function(x){
+  invisible()
+}
 #' @export
 `<=.segment`<-function(jiebar,code){
-  segment(code,jiebar)
+  if(file.exists(code) && jiebar$write==T) {
+    segment(code,jiebar)
+    xx<-NA
+    class(xx) = "inv"
+    return(xx)
+  }
+  else return(segment(code,jiebar))
+
+
 }
 
 #' @export
@@ -15,7 +26,13 @@
 
 #' @export
 `<=.tagger`<-function(jiebar,code){
-  tag(code,jiebar)
+  if(file.exists(code) && jiebar$write==T) {
+    tag(code,jiebar)
+    xx<-NA
+    class(xx) = "inv"
+    return(xx)
+  }
+  else return(tag(code,jiebar))
 }
 
 #' @export

@@ -4,8 +4,8 @@ keywords <- function(code, jiebar) {
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   if (file.exists(code)) {
-    encoding<-jiebar$Encoding
-    if(jiebar$DetectEncoding==T)  encoding<-filecoding(code)
+    encoding<-jiebar$encoding
+    if(jiebar$detect ==T)  encoding<-filecoding(code)
     keyl(code = code, jiebar = jiebar,
          encoding = encoding)
   } else {
@@ -39,12 +39,12 @@ keyl <- function(code, jiebar, encoding) {
 
 keyw <- function(code, jiebar) {
   
-  if (jiebar$Symbol == F) {
+  if (jiebar$symbol == F) {
     code <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", code)
   } 
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
 
-    result <- jiebar$Worker$tag(code)
+    result <- jiebar$worker$tag(code)
   
   if (.Platform$OS.type == "windows") {
     
