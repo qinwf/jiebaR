@@ -47,7 +47,7 @@ using namespace Rcpp;
  #include <vector>           // vector
  #include <ctype.h>          // isprint
  #include <errno.h>          // errno
- #include <stdio.h>          // fopen/fclose/fprintf/printf/puts
+ //#include <stdio.h>          // fopen/fclose/fprintf/printf/puts
  #include <stdlib.h>         // exit
  #include <string.h>         // memcmp/strcmp/strerror
  

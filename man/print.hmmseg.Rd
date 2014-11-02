@@ -9,19 +9,19 @@
 \alias{print.tagger}
 \title{Print worker settings}
 \usage{
-\method{print}{hmmseg}(jiebar)
+\method{print}{hmmseg}(jiebar, ...)
 
-\method{print}{queryseg}(jiebar)
+\method{print}{queryseg}(jiebar, ...)
 
-\method{print}{simhash}(jiebar)
+\method{print}{simhash}(jiebar, ...)
 
-\method{print}{keywords}(jiebar)
+\method{print}{keywords}(jiebar, ...)
 
-\method{print}{tagger}(jiebar)
+\method{print}{tagger}(jiebar, ...)
 
-\method{print}{mixseg}(jiebar)
+\method{print}{mixseg}(jiebar, ...)
 
-\method{print}{mpseg}(jiebar)
+\method{print}{mpseg}(jiebar, ...)
 }
 \arguments{
 \item{jiebar}{The jiebaR Worker.}

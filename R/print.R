@@ -5,7 +5,7 @@
 #' @param jiebar The jiebaR Worker.
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @export
-print.hmmseg<-function(jiebar){
+print.hmmseg<-function(jiebar,...){
   cat("Worker Type:  Hidden Markov Model Segment\n"); cat("\n")
   cat("Detect Encoding :  "); cat(jiebar$detect);cat("\n")
   cat("Default Encoding:  "); cat(jiebar$encoding);cat("\n")
@@ -19,7 +19,7 @@ print.hmmseg<-function(jiebar){
 
 #' @rdname print.hmmseg
 #' @export
-print.queryseg<-function(jiebar){
+print.queryseg<-function(jiebar,...){
   cat("Worker Type:  Query Segment\n"); cat("\n")
   cat("Detect Encoding :  "); cat(jiebar$detect);cat("\n")
   cat("Default Encoding:  "); cat(jiebar$encoding);cat("\n")
@@ -33,7 +33,7 @@ print.queryseg<-function(jiebar){
 
 #' @rdname print.hmmseg
 #' @export
-print.simhash<-function(jiebar){
+print.simhash<-function(jiebar,...){
   cat("Worker Type:  Simhash\n"); cat("\n")
   cat("Detect Encoding :  "); cat(jiebar$detect);cat("\n")
   cat("Default Encoding:  "); cat(jiebar$encoding);cat("\n")
@@ -45,7 +45,7 @@ print.simhash<-function(jiebar){
 
 #' @rdname print.hmmseg
 #' @export
-print.keywords<-function(jiebar){
+print.keywords<-function(jiebar,...){
   cat("Worker Type:  Keyword Extraction\n"); cat("\n")
   cat("Detect Encoding :  "); cat(jiebar$detect);cat("\n")
   cat("Default Encoding:  "); cat(jiebar$encoding);cat("\n")
@@ -56,7 +56,7 @@ print.keywords<-function(jiebar){
 
 #' @rdname print.hmmseg
 #' @export
-print.tagger<-function(jiebar){
+print.tagger<-function(jiebar,...){
   cat("Worker Type:  Speech Tagging\n"); cat("\n")
   cat("Detect Encoding :  "); cat(jiebar$detect);cat("\n")
   cat("Default Encoding:  "); cat(jiebar$encoding);cat("\n")
@@ -70,7 +70,7 @@ print.tagger<-function(jiebar){
 
 #' @rdname print.hmmseg
 #' @export
-print.mixseg<-function(jiebar){
+print.mixseg<-function(jiebar,...){
   cat("Worker Type:  Mix Segment\n"); cat("\n")
   cat("Detect Encoding :  "); cat(jiebar$detect);cat("\n")
   cat("Default Encoding:  "); cat(jiebar$encoding);cat("\n")
@@ -84,7 +84,7 @@ print.mixseg<-function(jiebar){
 
 #' @rdname print.hmmseg
 #' @export
-print.mpseg<-function(jiebar){
+print.mpseg<-function(jiebar,...){
   cat("Worker Type:  Maximum Probability Segment\n"); cat("\n")
   cat("Detect Encoding :  "); cat(jiebar$detect);cat("\n")
   cat("Default Encoding:  "); cat(jiebar$encoding);cat("\n")
