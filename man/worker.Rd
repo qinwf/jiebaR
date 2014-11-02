@@ -115,26 +115,24 @@ and using simhash algorithm to compute simhash.  \code{dict}
 jiebaR worker.
 }
 \examples{
-### Note: Can not display Chinese character here.
-words = "hello world!"
+### Note: Can not display Chinese character on Windows here.
+words = "hello world"
 test1 = worker()
 test1
 test1 <= words
 
 \dontrun{
 test <= "./temp.txt"
- }
 
 engine2 = worker("mix",symbol = T)
-engine2 <= words
+engine2 <= "./temp.txt"
 engine2
 engine2$symbol = T
 engine2
 engine2 <= words
 
-\dontrun{
 engine3 = worker(type = "mix", dict = "dict_path",symbol = T)
-engine3 <= words
+engine3 <= "./temp.txt"
  }
 
 keys = worker("keywords", topn = 1)

@@ -1,6 +1,17 @@
 print.inv<-function(x){
   invisible()
 }
+
+#' Word segmentation symbol
+#' 
+#' Word segmentation symbol to cut words.
+#' @param jiebar jiebaR Worker.
+#' @param code   A Chinese sentence or the path of a text file. 
+#' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
+#' @examples 
+#' words = "hello world"
+#' test1 = worker()
+#' test1 <= words
 #' @export
 `<=.segment`<-function(jiebar,code){
   if(file.exists(code) && jiebar$write==T) {
@@ -14,16 +25,46 @@ print.inv<-function(x){
 
 }
 
+#' Keywords symbol
+#' 
+#' Keywords symbol to find keywords.
+#' @param jiebar jiebaR Worker.
+#' @param code   A Chinese sentence or the path of a text file. 
+#' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
+#' @examples 
+#' words = "hello world"
+#' test1 = worker("keywords",topn=1)
+#' test1 <= words
 #' @export
 `<=.keywords`<-function(jiebar,code){
   keywords(code,jiebar)
 }
 
+#' Simhash symbol
+#' 
+#' Simhash symbol to compute simhash.
+#' @param jiebar jiebaR Worker.
+#' @param code   A Chinese sentence or the path of a text file. 
+#' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
+#' @examples 
+#' words = "hello world"
+#' test1 = worker("simhash",topn=1)
+#' test1 <= words
 #' @export
 `<=.simhash`<-function(jiebar,code){
   simhash(code,jiebar)
 }
 
+#' Tagger symbol
+#' 
+#' Tagger symbol to tag words.
+#' @param jiebar jiebaR Worker.
+#' @param code   A Chinese sentence or the path of a text file. 
+#' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
+#' @examples 
+#' words = "hello world"
+#' test1 = worker("tag")
+#' test1 <= words
 #' @export
 `<=.tagger`<-function(jiebar,code){
   if(file.exists(code) && jiebar$write==T) {
@@ -35,6 +76,15 @@ print.inv<-function(x){
   else return(tag(code,jiebar))
 }
 
+#' Distance symbol
+#' 
+#' Distance symbol to compute distance.
+#' @param jiebar jiebaR Worker.
+#' @param formula  Two Chinese sentence or the path of text file. 
+#' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
+#' @examples 
+#' test1 = worker("simhash",topn=1)
+#' test1 == ( "hello world" ~ "hello world")
 #' @export
 `==.simhash`<-function(jiebar,formula){
   distance(formula[[2]],formula[[3]],jiebar)

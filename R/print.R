@@ -1,3 +1,9 @@
+#' Print worker settings
+#' 
+#' The functoin print the worker settings.
+#' 
+#' @param jiebar The jiebaR Worker.
+#' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @export
 print.hmmseg<-function(jiebar){
   cat("Worker Type:  Hidden Markov Model Segment\n"); cat("\n")
@@ -11,6 +17,7 @@ print.hmmseg<-function(jiebar){
   print(jiebar$PrivateVarible)
 }
 
+#' @rdname print.hmmseg
 #' @export
 print.queryseg<-function(jiebar){
   cat("Worker Type:  Query Segment\n"); cat("\n")
@@ -24,6 +31,7 @@ print.queryseg<-function(jiebar){
   print(jiebar$PrivateVarible)
 }
 
+#' @rdname print.hmmseg
 #' @export
 print.simhash<-function(jiebar){
   cat("Worker Type:  Simhash\n"); cat("\n")
@@ -35,6 +43,7 @@ print.simhash<-function(jiebar){
   print(jiebar$PrivateVarible)
 }
 
+#' @rdname print.hmmseg
 #' @export
 print.keywords<-function(jiebar){
   cat("Worker Type:  Keyword Extraction\n"); cat("\n")
@@ -45,6 +54,7 @@ print.keywords<-function(jiebar){
   print(jiebar$PrivateVarible)
 }
 
+#' @rdname print.hmmseg
 #' @export
 print.tagger<-function(jiebar){
   cat("Worker Type:  Speech Tagging\n"); cat("\n")
@@ -58,6 +68,7 @@ print.tagger<-function(jiebar){
   print(jiebar$PrivateVarible)
 }
 
+#' @rdname print.hmmseg
 #' @export
 print.mixseg<-function(jiebar){
   cat("Worker Type:  Mix Segment\n"); cat("\n")
@@ -71,6 +82,7 @@ print.mixseg<-function(jiebar){
   print(jiebar$PrivateVarible)
 }
 
+#' @rdname print.hmmseg
 #' @export
 print.mpseg<-function(jiebar){
   cat("Worker Type:  Maximum Probability Segment\n"); cat("\n")
