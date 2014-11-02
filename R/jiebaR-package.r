@@ -14,22 +14,18 @@
 #' @seealso JiebaR \url{https://github.com/qinwf/jiebaR};
 #' @examples 
 #' ### Note: Can not display Chinese character here.
-#' words = "hello world, and hello world."
+#' words = "hello world"
 #' test1 = worker()
 #' test1 <= words
 #' 
 #' \dontrun{
 #' test <= "./temp.txt"
-#'  }
-#'  
-#' engine2 = worker("mix",symbol = T)
-#' engine2 <= words
-#' engine2$symbol = T
-#' engine2 <= words
-#' 
-#' \dontrun{
+#' engine2 = worker("hmm")
+#' engine2 <= "./temp.txt"
+#' engine2$write = T
+#' engine2 <= "./temp.txt"
 #' engine3 = worker(type = "mix", dict = "dict_path",symbol = T)
-#' engine3 <= words
+#' engine3 <= "./temp.txt"
 #'  }
 #'  
 #' keys = worker("keywords", topn = 1)

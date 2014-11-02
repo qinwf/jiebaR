@@ -141,7 +141,7 @@ worker <- function(type = "mix", dict=DICTPATH, hmm=HMMPATH,
   if(!any(type==c("mix","mp","hmm","query","simhash","keywords","tag"))){
     stop("Unkowned worker type")
   }
-  result<-new.env(parent = emptyenv())
+  result = new.env(parent = emptyenv())
   
   switch(type, 
          mp = {
@@ -160,7 +160,7 @@ worker <- function(type = "mix", dict=DICTPATH, hmm=HMMPATH,
          hmm = {
            worker  =  new(hmmseg, hmm)
            private = list(hmm=hmm)
-           assignjieba(worker,detect,encoding,symbol,lines,output,writeprivate,result)
+           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
            class(result)<-c("jiebar","segment","hmmseg")
          },
          query = {
