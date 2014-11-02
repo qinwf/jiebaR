@@ -10,7 +10,8 @@
 #include "DictTrie.hpp"
 #include "ISegment.hpp"
 #include "SegmentBase.hpp"
-
+#include "Rcpp.h"
+using namespace Rcpp;
 namespace CppJieba
 {
 
@@ -69,7 +70,7 @@ public:
         {
             if (!TransCode::encode(words[i], res[i + offset]))
             {
-                LogError("encode failed.");
+                Rcout<<"encode failed."<<std::endl;
                 res[i + offset].clear();
             }
         }
@@ -97,7 +98,7 @@ public:
 
         if (!_cut(segmentChars, res))
         {
-            LogError("_cut failed.");
+          Rcout<<"_cut failed."<<std::endl;
             return false;
         }
 

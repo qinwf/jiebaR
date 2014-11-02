@@ -4,7 +4,8 @@
 #include "MixSegment.hpp"
 #include "Limonp/StringUtil.hpp"
 #include "DictTrie.hpp"
-
+#include "Rcpp.h"
+using namespace Rcpp;
 namespace CppJieba
 {
     using namespace Limonp;
@@ -44,7 +45,8 @@ namespace CppJieba
                 vector<string> cutRes;
                 if (!_segment.cut(src, cutRes))
                 {
-                    LogError("_mixSegment cut failed");
+                  Rcout<<"_mixSegment cut failed"<<std::endl;
+      
                     return false;
                 }
 
@@ -54,7 +56,8 @@ namespace CppJieba
                 {
                     if (!TransCode::decode(*itr, unico))
                     {
-                        LogError("decode failed.");
+                      Rcout<<"decode failed."<<std::endl;
+        
                         return false;
                     }
                     tmp = _dictTrie->find(unico.begin(), unico.end());

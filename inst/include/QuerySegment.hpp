@@ -53,7 +53,8 @@ public:
     {
         if (begin >= end)
         {
-            LogError("begin >= end");
+          Rcout<<"begin >= end"<<std::endl;
+          
             return false;
         }
 
@@ -61,7 +62,8 @@ public:
         vector<Unicode> mixRes;
         if (!_mixSeg.cut(begin, end, mixRes))
         {
-            LogError("_mixSeg cut failed.");
+          Rcout<<"_mixSeg cut failed."<<std::endl;
+           
             return false;
         }
 
@@ -97,14 +99,15 @@ public:
     {
         if (begin >= end)
         {
-            LogError("begin >= end");
+          Rcout<<"begin >= end"<<std::endl;
             return false;
         }
 
         vector<Unicode> uRes;
         if (!cut(begin, end, uRes))
         {
-            LogError("get unicode cut result error.");
+          Rcout<<"get unicode cut result error."<<std::endl;
+   
             return false;
         }
 
@@ -117,7 +120,8 @@ public:
             }
             else
             {
-                LogError("encode failed.");
+              Rcout<<"encode failed."<<std::endl;
+           
             }
         }
 

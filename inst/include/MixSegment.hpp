@@ -5,7 +5,8 @@
 #include "MPSegment.hpp"
 #include "HMMSegment.hpp"
 #include "Limonp/StringUtil.hpp"
-
+#include "Rcpp.h"
+using namespace Rcpp;
 namespace CppJieba
 {
     class MixSegment: public SegmentBase
@@ -37,7 +38,8 @@ namespace CppJieba
                 words.reserve(end - begin);
                 if(!_mpSeg.cut(begin, end, words))
                 {
-                    LogError("mpSeg cutDAG failed.");
+                  Rcout<<"mpSeg cutDAG failed."<<std::endl;
+                
                     return false;
                 }
 
@@ -65,7 +67,8 @@ namespace CppJieba
                     // cut the sequence with hmm
                     if (!_hmmSeg.cut(piece.begin(), piece.end(), hmmRes))
                     {
-                        LogError("_hmmSeg cut failed.");
+                      Rcout<<"_hmmSeg cut failed."<<std::endl;
+            
                         return false;
                     }
 
@@ -105,7 +108,8 @@ namespace CppJieba
                 {
                     if(!TransCode::encode(uRes[i], res[offset]))
                     {
-                        LogError("encode failed.");
+                      Rcout<<"encode failed."<<std::endl;
+                  
                     }
                 }
                 return true;

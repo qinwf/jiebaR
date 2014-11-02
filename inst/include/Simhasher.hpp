@@ -3,7 +3,8 @@
 
 #include "KeywordExtractor.hpp"
 #include "hashes/jenkins.h"
-
+#include "Rcpp.h"
+using namespace Rcpp;
 namespace Simhash
 {
     using namespace CppJieba;
@@ -27,7 +28,8 @@ namespace Simhash
                 
                 if(!extract(text, wordweights, topN))
                 {
-                    LogError("extract failed.");
+                  Rcout<<"extract failed."<<std::endl;
+
                     return false;
                 }
                 res.resize(wordweights.size());

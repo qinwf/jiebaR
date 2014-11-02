@@ -83,7 +83,8 @@ public:
 
         if (begin >= end)
         {
-            LogError("begin >= end");
+          Rcout<<"begin >= end"<<std::endl;
+        
             return false;
         }
 
@@ -141,14 +142,15 @@ public:
 
         if (begin >= end)
         {
-            LogError("begin >= end");
+          Rcout<<"begin >= end"<<std::endl;
             return false;
         }
 
         vector<Unicode> uRes;
         if (!cut(begin, end, uRes))
         {
-            LogError("get unicode cut result error.");
+          Rcout<<"get unicode cut result error."<<std::endl;
+         
             return false;
         }
 
@@ -161,7 +163,8 @@ public:
             }
             else
             {
-                LogError("encode failed.");
+              Rcout<<"encode failed."<<std::endl;
+            
             }
         }
 

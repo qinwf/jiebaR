@@ -11,7 +11,8 @@
 #include "ISegment.hpp"
 #include "SegmentBase.hpp"
 #include "DictTrie.hpp"
-
+#include "Rcpp.h"
+using namespace Rcpp;
 namespace CppJieba
 {
     using namespace Limonp;
@@ -98,7 +99,7 @@ namespace CppJieba
                 vector<size_t> status; 
                 if(!_viterbi(begin, end, status))
                 {
-                    LogError("_viterbi failed.");
+                  Rcout<<"_viterbi failed."<<std::endl;
                     return false;
                 }
 
@@ -134,7 +135,7 @@ namespace CppJieba
                 {
                     if(!TransCode::encode(words[i], res[offset + i]))
                     {
-                        LogError("encode failed.");
+                      Rcout<<"encode failed."<<std::endl;
                     }
                 }
                 return true;
@@ -225,7 +226,8 @@ namespace CppJieba
                 split(line, tmp, " ");
                 if(tmp.size() != STATUS_SUM)
                 {
-                    LogError("start_p illegal");
+
+                  Rcout<<"start_p illegal"<<std::endl;
                     return false;
                 }
                 for(size_t j = 0; j< tmp.size(); j++)
@@ -244,7 +246,7 @@ namespace CppJieba
                     split(line, tmp, " ");
                     if(tmp.size() != STATUS_SUM)
                     {
-                        LogError("trans_p illegal");
+                      Rcout<<"trans_p illegal"<<std::endl;
                         return false;
                     }
                     for(size_t j =0; j < STATUS_SUM; j++)
@@ -313,12 +315,12 @@ namespace CppJieba
                     split(tmp[i], tmp2, ":");
                     if(2 != tmp2.size())
                     {
-                        LogError("_emitProb illegal.");
+                      Rcout<<"_emitProb illegal."<<std::endl;
                         return false;
                     }
                     if(!TransCode::decode(tmp2[0], unicode) || unicode.size() != 1)
                     {
-                        LogError("TransCode failed.");
+                      Rcout<<"TransCode failed."<<std::endl;
                         return false;
                     }
                     mp[unicode[0]] = atof(tmp2[1].c_str());
