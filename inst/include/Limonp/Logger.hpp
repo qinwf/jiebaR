@@ -42,7 +42,7 @@ namespace Limonp
                 time_t timeNow;
                 time(&timeNow);
                 strftime(buf, sizeof(buf), LOG_TIME_FORMAT, localtime(&timeNow));
-                fprintf(stderr, LOG_FORMAT, buf, fileName, lineno,LOG_LEVEL_ARRAY[level], msg.c_str());
+//                 fprintf(stderr, LOG_FORMAT, buf, fileName, lineno,LOG_LEVEL_ARRAY[level], msg.c_str());
             }
             static void LoggingF(size_t level, const char* fileName, int lineno, const char* const fmt, ...)
             {
