@@ -9,22 +9,24 @@
 \alias{print.tagger}
 \title{Print worker settings}
 \usage{
-\method{print}{hmmseg}(jiebar, ...)
+\method{print}{hmmseg}(x, ...)
 
-\method{print}{queryseg}(jiebar, ...)
+\method{print}{queryseg}(x, ...)
 
-\method{print}{simhash}(jiebar, ...)
+\method{print}{simhash}(x, ...)
 
-\method{print}{keywords}(jiebar, ...)
+\method{print}{keywords}(x, ...)
 
-\method{print}{tagger}(jiebar, ...)
+\method{print}{tagger}(x, ...)
 
-\method{print}{mixseg}(jiebar, ...)
+\method{print}{mixseg}(x, ...)
 
-\method{print}{mpseg}(jiebar, ...)
+\method{print}{mpseg}(x, ...)
 }
 \arguments{
-\item{jiebar}{The jiebaR Worker.}
+\item{x}{The jiebaR Worker.}
+
+\item{...}{Other arguments.}
 }
 \description{
 The functoin print the worker settings.
