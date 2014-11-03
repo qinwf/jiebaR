@@ -5,7 +5,7 @@ simhash <- function(code, jiebar) {
     stop("Argument 'code' must be an string.")
   if (file.exists(code)) {
     encoding<-jiebar$encoding
-    if(detect==T)  encoding<-filecoding(code)
+    if(jiebar$detect==T)  encoding<-filecoding(code)
     simhashl(code = code, jiebar = jiebar,
          encoding = encoding)
   } else {
