@@ -1,3 +1,23 @@
+#' Simhash computatioin
+#' 
+#' Simhash worker use the keyword extraction worker to find the keywords
+#' and using simhash algorithm to compute simhash.  \code{dict} 
+#' \code{hmm}, \code{idf} and \code{stop_word} should be provided when initializing 
+#' jiebaR worker.
+#' There is a symbol \code{<=} for this function.
+#' @seealso \code{\link{<=.simhash}} \code{\link{worker}} 
+#' @param code A Chinese sentence or the path of a text file. 
+#' @param jiebar jiebaR Worker.
+#' @references MS Charikar - Similarity Estimation Techniques from Rounding Algorithms
+#' @author Qin Wenfeng
+#' @examples 
+#' \donttest{
+#' ### Simhash
+#' words = "hello world"
+#' simhasher = worker("simhash",topn=1)
+#' simhasher <= words
+#' simhasher == ("hello world" ~ "hello world!")
+#' }
 #' @export
 simhash <- function(code, jiebar) {
   
@@ -53,7 +73,27 @@ simhashw <- function(code, jiebar) {
   }
   return(result)
 } 
-
+#' Hamming distance of words
+#' 
+#' The function uses Simhash worker to do keyword extraction worker and find 
+#' the keywords, then computes Hamming distance of them.
+#' 
+#' There is a symbol \code{==} for this function.
+#' 
+#' @param codel A Chinese sentence or the path of a text file. 
+#' @param coder A Chinese sentence or the path of a text file. 
+#' @param jiebar jiebaR Worker.
+#' @author Qin Wenfeng
+#' @seealso \code{\link{==.simhash}} \code{\link{worker}} 
+#' @references \url{http://en.wikipedia.org/wiki/Hamming_distance}
+#' @examples 
+#' \donttest{
+#' ### Simhash
+#' words = "hello world"
+#' simhasher = worker("simhash",topn=1)
+#' simhasher <= words
+#' simhasher == ("hello world" ~ "hello world!")
+#' }
 #' @export
 distance<-function(codel,coder,jiebar){
   if (!is.character(codel) || length(codel) != 1 ||

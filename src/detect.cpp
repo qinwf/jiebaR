@@ -579,11 +579,16 @@ const char *tellenc(const char *const buffer, const size_t len)
     return enc;
   }
 }
-
+//' @title Files encoding detection
+//' @description The function detect the encoding of input files encoding.
+//' @param file A file path.
+//' @return The encoding of file.
+//' @author Wu Yongwei
+//' @references \url{https://github.com/adah1972/tellenc}
 //' @export
 // [[Rcpp::export]]
-CharacterVector filecoding(CharacterVector files){
-  const char *const filename = files[0];
+CharacterVector filecoding(CharacterVector file){
+  const char *const filename = file[0];
   FILE *fp = fopen(filename, "rb");
   if (fp == NULL)
   {

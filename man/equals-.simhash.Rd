@@ -21,4 +21,7 @@ test1 == ( "hello world" ~ "hello world")}
 \author{
 Qin Wenfeng <\url{http://qinwenfeng.com}>
 }
+\seealso{
+\code{\link{distance}}
+}
 

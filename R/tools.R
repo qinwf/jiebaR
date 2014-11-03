@@ -1,4 +1,4 @@
-#' Show default dictionaries' path
+#' Show default path of dictionaries
 #' 
 #' Show the default dictionaries' path. \code{HMMPATH}, \code{DICTPATH}
 #' , \code{IDFPATH}, \code{STOPPATH} and \code{USERPATH} can be changed 

@@ -86,6 +86,7 @@ print.inv<-function(x){
 #' @param jiebar jiebaR Worker.
 #' @param formula  Two Chinese sentence or the path of text file. 
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
+#' @seealso \code{\link{distance}}
 #' @examples 
 #' \donttest{
 #' test1 = worker("simhash",topn=1)

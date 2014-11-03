@@ -1,4 +1,23 @@
-
+#' Speech Tagging
+#' 
+#' The function uses Speech Tagging worker to cut word and 
+#' tags each word after segmentation, using labels compatible with 
+#' ictclas.  \code{dict} 
+#' \code{hmm} and \code{user} should be provided when initializing 
+#' jiebaR worker.
+#' 
+#' There is a symbol \code{<=} for this function.
+#' @seealso \code{\link{<=.tagger}} \code{\link{worker}} 
+#' @param code A Chinese sentence or the path of a text file. 
+#' @param jiebar jiebaR Worker.
+#' @examples 
+#' \donttest{
+#' words = "hello world"
+#' ### Speech Tagging 
+#' tagger = worker("tag")
+#' tagger <= words
+#' }
+#' @author Qin Wenfeng
 #' @export
 tag<- function(code, jiebar) {
   

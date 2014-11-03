@@ -1,4 +1,22 @@
-
+#' Keyword extraction
+#' 
+#' Keyword Extraction worker use MixSegment model to cut word and use 
+#' TF-IDF algorithm to find the keywords.  \code{dict} ,\code{hmm}, 
+#' \code{idf}, \code{stop_word} and \code{topn} should be provided when initializing 
+#' jiebaR worker.
+#' 
+#' There is a symbol \code{<=} for this function.
+#' @seealso \code{\link{<=.keywords}} \code{\link{worker}} 
+#' @param code A Chinese sentence or the path of a text file. 
+#' @param jiebar jiebaR Worker.
+#' @return a vector of keywords with weight.
+#' @references \url{http://en.wikipedia.org/wiki/Tf-idf}
+#' @author Qin Wenfeng
+#' @examples 
+#' \donttest{
+#' ### Keyword Extraction
+#' keys = worker("keywords", topn = 1)
+#' keys <= "words of fun"}
 #' @export
 keywords <- function(code, jiebar) {
   
