@@ -25,6 +25,8 @@
 }
 \arguments{
 \item{x}{The jiebaR Worker.}
+
+\item{...}{Other arguments.}
 }
 \description{
 The functoin print the worker settings.

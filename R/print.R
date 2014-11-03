@@ -3,6 +3,7 @@
 #' The functoin print the worker settings.
 #' 
 #' @param x The jiebaR Worker.
+#' @param ... Other arguments.
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @export
 print.hmmseg<-function(x,...){
