@@ -28,8 +28,8 @@ namespace Limonp
 {
     using namespace std;
     enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};
-    static const char * LOG_LEVEL_ARRAY[LEVEL_ARRAY_SIZE]= {"DEBUG","INFO","WARN","ERROR","FATAL"};
-    static const char * LOG_FORMAT = "%s %s:%d %s %s\n";
+//    static const char * LOG_LEVEL_ARRAY[LEVEL_ARRAY_SIZE]= {"DEBUG","INFO","WARN","ERROR","FATAL"};
+//    static const char * LOG_FORMAT = "%s %s:%d %s %s\n";
     static const char * LOG_TIME_FORMAT = "%Y-%m-%d %H:%M:%S";
 
     class Logger
@@ -42,7 +42,7 @@ namespace Limonp
                 time_t timeNow;
                 time(&timeNow);
                 strftime(buf, sizeof(buf), LOG_TIME_FORMAT, localtime(&timeNow));
-                fprintf(stderr, LOG_FORMAT, buf, fileName, lineno,LOG_LEVEL_ARRAY[level], msg.c_str());
+              //  fprintf(stderro, LOG_FORMAT, buf, fileName, lineno,LOG_LEVEL_ARRAY[level], msg.c_str());
             }
             static void LoggingF(size_t level, const char* fileName, int lineno, const char* const fmt, ...)
             {

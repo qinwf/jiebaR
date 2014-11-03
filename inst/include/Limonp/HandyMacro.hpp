@@ -3,9 +3,9 @@
 
 #include <cstdio>
 #include <cstdlib>
-
+#include "Rcpp.h"
 #define LIMONP_CHECK(exp) \
-    if(!(exp)){fprintf(stderr, "File:%s, Line:%d Exp:[" #exp "] is true, abort.\n", __FILE__, __LINE__); }
+    if(!(exp)){Rcpp::Rcout<<"LIMONP_CHECK Failed." <<endl ;}
 
 #define print(x) cout<< #x": " << x <<endl
 /*

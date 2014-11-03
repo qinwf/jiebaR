@@ -13,23 +13,23 @@ worker(type = "mix", dict = DICTPATH, hmm = HMMPATH, user = USERPATH,
   \code{query}, \code{tag}, \code{simhash}, and \code{keywords}.}
 
 \item{dict}{A path to main dictionary, default value is \code{
-  jiebaR:::DICTPATH}, and the value is used for \code{mix}, \code{mp}, \code{query},
+  DICTPATH}, and the value is used for \code{mix}, \code{mp}, \code{query},
  \code{tag}, \code{simhash} and \code{keywords} workers.}
 
 \item{hmm}{A path to Hidden Markov Model, default value is \code{
-  jiebaR:::HMMPATH}, and the value is used for \code{mix}, \code{hmm}, \code{query},
+  HMMPATH}, and the value is used for \code{mix}, \code{hmm}, \code{query},
   \code{tag}, \code{simhash} and \code{keywords} workers.}
 
 \item{user}{A path to user dictionary, default value is \code{
-  jiebaR:::USERPATH}, and the value is used for \code{mix},
+  USERPATH}, and the value is used for \code{mix},
   \code{tag} and \code{mp} workers.}
 
 \item{idf}{A path to inverse document frequency, default value is \code{
-  jiebaR:::IDFPATH}, and the value is used for
+  IDFPATH}, and the value is used for
   \code{simhash} and \code{keywords} workers.}
 
 \item{stop_word}{A path to stop word dictionary, default value is \code{
-  jiebaR:::STOPPATH}, and the value is used for
+  STOPPATH}, and the value is used for
   \code{simhash} and \code{keywords} workers.}
 
 \item{write}{Whether to write the output to a file, or return
