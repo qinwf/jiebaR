@@ -4,7 +4,7 @@
 #' 
 #' @param x The jiebaR Worker.
 #' @param ... Other arguments.
-#' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
+#' @author Qin Wenfeng 
 #' @export
 print.hmmseg<-function(x,...){
   cat("Worker Type:  Hidden Markov Model Segment\n"); cat("\n")

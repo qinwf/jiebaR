@@ -130,7 +130,7 @@
 #' tagger = worker("tag")
 #' tagger <= words}
 #' 
-#' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
+#' @author Qin Wenfeng 
 #' @export
 worker <- function(type = "mix", dict=DICTPATH, hmm=HMMPATH, 
                    user=USERPATH, idf=IDFPATH, stop_word=STOPPATH, write=T,

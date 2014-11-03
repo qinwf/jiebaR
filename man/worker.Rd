@@ -142,6 +142,6 @@ tagger = worker("tag")
 tagger <= words}
 }
 \author{
-Qin Wenfeng <\url{http://qinwenfeng.com}>
+Qin Wenfeng
 }
 

@@ -32,6 +32,6 @@
 The functoin print the worker settings.
 }
 \author{
-Qin Wenfeng <\url{http://qinwenfeng.com}>
+Qin Wenfeng
 }
 

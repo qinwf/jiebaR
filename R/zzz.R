@@ -9,6 +9,7 @@ NULL
     if (.Platform$OS.type == "windows") {
       Sys.setlocale( locale = "English")
     }
+    ###Loading DICTPATH when package loaded.
     DICTPATH<<-file.path(find.package("jiebaR"),"dict","jieba.dict.utf8")
     HMMPATH<<-file.path(find.package("jiebaR"),"dict","hmm_model.utf8")
     USERPATH<<-file.path(find.package("jiebaR"),"dict","user.dict.utf8")
