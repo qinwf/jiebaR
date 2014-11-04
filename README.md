@@ -39,7 +39,7 @@ library(jiebaR)
 mixseg = worker()
 
 ##  相当于：
-##       jiebar( type = "mix", dict = "inst/dict/jieba.dict.utf8",
+##       worker( type = "mix", dict = "inst/dict/jieba.dict.utf8",
 ##               hmm  = "inst/dict/hmm_model.utf8",  ### HMM模型数据
 ##               user = "inst/dict/user.dict.utf8") ### 用户自定义词库
 
