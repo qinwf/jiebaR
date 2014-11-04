@@ -12,7 +12,7 @@
 + 支持加载自定义用户词库，设置词频、词性。
 + 同时支持简体中文、繁体中文分词。
 + 支持自动判断编码模式。
-+ 比原[jieba分词]速度快，是其他R分词包的5-20倍。
++ 比原["结巴"中文分词]速度快，是其他R分词包的5-20倍。
 + 安装简单，无需复杂设置。
 + 可以通过[Rpy2]，[jvmr]等被其他语言调用。
 + 基于MIT协议。
@@ -371,7 +371,6 @@ $rhs
 
 
 ["结巴"中文分词]:https://github.com/fxsjy/jieba
-[jieba分词]:https://github.com/fxsjy/jieba
 [Rcpp]:https://github.com/RcppCore/Rcpp
 [Cppjieba]:https://github.com/aszxqw/cppjieba
 [Rtools]:http://mirrors.xmu.edu.cn/CRAN/bin/windows/Rtools
