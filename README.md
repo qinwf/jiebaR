@@ -147,8 +147,8 @@ keys <= "一个文件路径.txt"
   8.9954 
 "天安门" 
 ```
-### Simhash Distance
-对中文文档计算出对于的simhash值。simhash是谷歌用来进行文本去重的算法，现在广泛应用在文本处理中。Simhash引擎先进行分词和关键词提取，后计算Simhash值和海明距离。
+### Simhash 与海明距离
+对中文文档计算出对应的simhash值。simhash是谷歌用来进行文本去重的算法，现在广泛应用在文本处理中。Simhash引擎先进行分词和关键词提取，后计算Simhash值和海明距离。
 
 ```r
  words = "hello world!"
