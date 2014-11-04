@@ -14,7 +14,7 @@ distance(codel, coder, jiebar)
 }
 \description{
 The function uses Simhash worker to do keyword extraction worker and find
-the keywords, then computes Hamming distance of them.
+the keywords from two inputs, then computes Hamming distance of them.
 }
 \details{
 There is a symbol \code{==} for this function.

@@ -15,7 +15,7 @@ a vector of keywords with weight.
 }
 \description{
 Keyword Extraction worker use MixSegment model to cut word and use
-TF-IDF algorithm to find the keywords.  \code{dict} ,\code{hmm},
+TF-IDF algorithm to find the keywords.  \code{dict} , \code{hmm},
 \code{idf}, \code{stop_word} and \code{topn} should be provided when initializing
 jiebaR worker.
 }
