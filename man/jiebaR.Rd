@@ -3,7 +3,7 @@
 \name{jiebaR}
 \alias{jiebaR}
 \alias{jiebaR-package}
-\title{Chinese text segmentation}
+\title{A package for Chinese text segmentation}
 \description{
 This is a package for Chinese text segmentation, Keyword Extraction
 and Speech Tagging with Rcpp and cppjieba. jiebaR Supports four

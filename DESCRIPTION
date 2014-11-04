@@ -14,5 +14,7 @@ Imports:
     Rcpp,methods
 LinkingTo: Rcpp
 Suggests:
-    testthat
+    testthat,
+    knitr
 URL: https://github.com/qinwf/jiebaR/
+VignetteBuilder: knitr

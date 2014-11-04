@@ -1,4 +1,4 @@
-#' Chinese text segmentation
+#' A package for Chinese text segmentation
 #'
 #' This is a package for Chinese text segmentation, Keyword Extraction 
 #' and Speech Tagging with Rcpp and cppjieba. jiebaR Supports four 
