@@ -5,11 +5,11 @@ output:
     theme: null
     css: mystyle.css
     toc: yes
-vignette: >
-  %\VignetteIndexEntry{Quick Start Guide}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
 ---
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Quick Start Guide}
+-->
 
 This is a package for Chinese text segmentation, Keyword Extraction
 and Speech Tagging with Rcpp and cppjieba. jiebaR Supports four
