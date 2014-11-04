@@ -1,4 +1,4 @@
-#' Chinese words segmentation
+#' Chinese text segmentation function
 #' 
 #' The function uses initialized engines for word segmentation. You 
 #' can initialize multiple engines simultaneously using \code{worker()}, 

@@ -2,9 +2,9 @@ print.inv<-function(x){
   invisible()
 }
 
-#' Word segmentation symbol
+#' Text segmentation symbol
 #' 
-#' Word segmentation symbol to cut words.
+#' Text segmentation symbol to cut words.
 #' @param jiebar jiebaR Worker.
 #' @param code   A Chinese sentence or the path of a text file. 
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>

@@ -76,7 +76,7 @@ simhashw <- function(code, jiebar) {
 #' Hamming distance of words
 #' 
 #' The function uses Simhash worker to do keyword extraction worker and find 
-#' the keywords, then computes Hamming distance of them.
+#' the keywords from two inputs, then computes Hamming distance of them.
 #' 
 #' There is a symbol \code{==} for this function.
 #' 
