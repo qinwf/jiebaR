@@ -12,14 +12,14 @@
 + 支持加载自定义用户词库，设置词频、词性。
 + 同时支持简体中文、繁体中文分词。
 + 支持自动判断编码模式。
-+ 分词速度快，是其他R分词包的5-20倍，是[jieba分词]的10倍左右。
++ 比原[jieba分词]速度快，是其他R分词包的5-20倍。
 + 安装简单，无需复杂设置。
 + 可以通过[Rpy2]，[jvmr]等被其他语言调用。
 + 基于MIT协议。
 
 ## 安装
 
-目前该包还没有发布到CRAN，可以通过Github进行安装。Windows系统需要安装 [Rtools]，或者可以下载[二进制包]（完善文档后发布），进行安装：
+目前该包还没有发布到CRAN，可以通过Github进行安装。Windows系统需要安装 [Rtools]，或者可以下载[二进制包]，进行安装：
 
 ```r
 library(devtools)
@@ -74,27 +74,301 @@ mixseg <= "./temp.dat"  ### 自动判断输入文件编码模式，默认文件�
 
 
 ```r
-mixseg2 = worker(type = "mix", dict = "inst/dict/jieba.dict.utf8",
-                 hmm  = "inst/dict/hmm_model.utf8",  
-                 user = "inst/dict/test.dict.utf8"  ### 自定义用户词库路径
-                 )   
+mixseg2 = worker(type  = "mix", dict = "dict/jieba.dict.utf8",
+                 hmm   = "dict/hmm_model.utf8",  
+                 user  = "dict/test.dict.utf8",
+                 detect=T,      symbol = F,
+                 lines = 1e+05, output = NULL
+                 ) 
+mixseg2   ### 输出worker的设置
+```
 
-hmmseg = worker(type  = "hmm")  ### 隐式马尔科夫模型分词引擎
+```r
+Worker Type:  Mix Segment
 
-mpseg =  worker(type  = "mp" ,dict = "inst/dict/jieba.dict.utf8",
-                user = "inst/dict/test.dict.utf8" ) ### 最大概率法分词引擎
+Detect Encoding :  TRUE
+Default Encoding:  UTF-8
+Keep Symbols    :  FALSE
+Output Path     :  
+Write File      :  TRUE
+Max Read Lines  :  1e+05
+
+Fixed Model Components:  
+
+$dict
+[1] "dict/jieba.dict.utf8"
+
+$hmm
+[1] "dict/hmm_model.utf8"
+
+$user
+[1] "dict/test.dict.utf8"
+
+$detect $encoding $symbol $output $write $lines can be reset.
+```
+
+可以通过R语言常用的 `$`符号重设一些`worker`的参数设置 , 如 ` WorkerName$symbol = T `，在输出中保留标点符号。一些参数在初始化的时候已经确定，无法修改, 可以通过`WorkerName$PrivateVarible`来获得这些信息。
+
+```r
+mixseg$encoding
+
+mixseg$detect = F
 ```
 
 可以自定义用户词库，推荐使用[深蓝词库转换]构建分词词库，它可以快速地将搜狗细胞词库等输入法词库转换为jiebaR的词库格式。
 
 ```r
-ShowDictPath()  ### 显示默认词库目录
-EditDict()      ### 打开默认用户词库
+ShowDictPath()  ### 显示词典路径
+EditDict()      ### 编辑用户词典
+?EditDict()     ### 打开帮助系统
 ```
+### 词性标注
+可以使用 `<=.tagger` 或者 `tag` 来进行分词和词性标注, 词性标注使用混合模型模型分词，标注采用和 ictclas 兼容的标记法。
+
+```r
+words = "我爱北京天安门"
+tagger = worker("tag")
+tagger <= words
+```
+
+```r
+     r        v       ns       ns 
+    "我"     "爱"   "北京" "天安门" 
+```
+### 关键词提取
+关键词提取所使用逆向文件频率（IDF）文本语料库可以切换成自定义语料库的路径,使用方法与分词类似。`topn`参数为关键词的个数。
+
+```r
+keys = worker("keywords", topn = 1)
+keys <= "我爱北京天安门"
+keys <= "一个文件路径.txt"
+```
+```r
+  8.9954 
+"天安门" 
+```
+### Simhash Distance
+对中文文档计算出对于的simhash值。simhash是谷歌用来进行文本去重的算法，现在广泛应用在文本处理中。Simhash引擎先进行分词和关键词提取，后计算Simhash值和海明距离。
+
+```r
+ words = "hello world!"
+ simhasher = worker("simhash",topn=2)
+ simhasher <= "江州市长江大桥参加了长江大桥的通车仪式"
+```
+ 
+ ```r
+$simhash
+[1] "12882166450308878002"
+
+$keyword
+   22.3853    8.69667 
+"长江大桥"     "江州" 
+```
+
+```r
+simhasher == ("江州市长江大桥参加了长江大桥的通车仪式" ~ "hello world!")
+
+### 或者使用distance("江州市长江大桥参加了长江大桥的通车仪式",
+                     words, simhasher) 
+```
+
+```r
+$distance
+[1] "23"
+
+$lhs
+   22.3853    8.69667 
+"长江大桥"     "江州" 
+
+$rhs
+11.7392 11.7392 
+"hello" "world" 
+```
+
 ## 计划支持
 
 + 支持 Windows , Linux , Mac 操作系统并行分词。
 + 简单的自然语言统计分析功能。
+
+# jiebaR
+This is a package for Chinese text segmentation, Keyword Extraction
+and Speech Tagging with Rcpp and cppjieba. jiebaR Supports four
+types of segmentation mode: Maximum Probability, Hidden Markov Model, Query Segment and Mix Segment.
+
+## Features
+
++ Support Windows, Linux,and Mac.
++ Using Rcpp Modules to load different segmentation worker at the same time.
++ Support Chinese text segmentation, keyword extraction, speech tagging and simhash computation.
++ Custom dictionary to be included in the jiebaR default dictionary.
++ Support simplified Chinese and traditional Chinese.
++ New words Identificatioin.
++ Auto encoding detection.
++ Fast text segmentation.
++ Easy installation.
++ MIT license.
+
+## Example
+
+### Text Segmentation
+
+There are four segmentation models，and you can use `worker()` to initialize worker, then use `<=` or `segment()` to do the segmentation.
+
+```r
+library(jiebaR)
+
+##  Using default argument to initialize worker.
+mixseg = worker()
+
+##       jiebar( type = "mix", dict = "dictpath/jieba.dict.utf8",
+##               hmm  = "dictpath/hmm_model.utf8",  ### HMM model data
+##               user = "dictpath/user.dict.utf8") ### user dictionary
+
+###  Note: Can not display Chinese character here.
+
+mixseg <= "This is a good day!"  
+
+## OR segment( "This is a good day!" , mixseg )
+
+```
+
+```r
+[1] "This" "is"   "a"    "good" "day" 
+```
+
+You can pipe a file path to cut file.
+
+```r
+mixseg <= "./temp.dat"  ### Auto encoding detection.
+
+## OR segment( "./temp.dat" , mixseg )   
+```
+
+The package uses initialized engines for word segmentation, you
+can initialize multiple engines simultaneously.
+
+```r
+mixseg2 = worker(type  = "mix", dict = "dict/jieba.dict.utf8",
+                 hmm   = "dict/hmm_model.utf8",  
+                 user  = "dict/test.dict.utf8",
+                 detect=T,      symbol = F,
+                 lines = 1e+05, output = NULL
+                 ) 
+mixseg2   ### Print information of worker
+```
+
+```r
+Worker Type:  Mix Segment
+
+Detect Encoding :  TRUE
+Default Encoding:  UTF-8
+Keep Symbols    :  FALSE
+Output Path     :  
+Write File      :  TRUE
+Max Read Lines  :  1e+05
+
+Fixed Model Components:  
+
+$dict
+[1] "dict/jieba.dict.utf8"
+
+$hmm
+[1] "dict/hmm_model.utf8"
+
+$user
+[1] "dict/test.dict.utf8"
+
+$detect $encoding $symbol $output $write $lines can be reset.
+```
+
+You can reset the model public settings can be modified and get using `$` , such as ` WorkerName$symbol = T `. some private setting are fixed when engine is initialized, and you can get then by `WorkerName$PrivateVarible`
+
+```r
+mixseg$encoding
+
+mixseg$detect = F
+```
+
+Users can specify their own custom dictionary to be included in the jieba default dictionary. Jieba is able to identify new words, but adding your own new words can ensure a higher accuracy. [imewlconverter] is a good tools for dictionary construction.
+
+```r
+ShowDictPath()  ### Show path
+EditDict()      ### Edit user dictionary
+?EditDict()     ### For more information
+```
+
+### Speech Tagging
+Speech Tagging function `<=.tagger` or `tag` uses Speech Tagging worker to cut word and tags each word after segmentation, using labels compatible with ictclas.  `dict` `hmm` and `user` should be provided when initializing jiebaR worker.
+
+```r
+words = "hello world"
+tagger = worker("tag")
+tagger <= words
+```
+```r
+      x       x 
+"hello" "world" 
+```
+### Keyword Extraction
+Keyword Extraction worker use MixSegment model to cut word and use 
+ TF-IDF algorithm to find the keywords.  `dict`, `hmm`, 
+ `idf`, `stop_word` and `topn` should be provided when initializing  jiebaR worker.
+
+```r
+keys = worker("keywords", topn = 1)
+keys <= "words of fun"
+```
+```r
+11.7392 
+  "fun" 
+```
+### Simhash Distance
+Simhash worker can do keyword extraction worker and find 
+the keywords for two inputs, then computes Hamming distance of them.
+
+```r
+ words = "hello world"
+ simhasher = worker("simhash",topn=1)
+ simhasher <= words
+ ```
+ 
+ ```r
+ $simhash
+[1] "3804341492420753273"
+
+$keyword
+11.7392 
+"hello" 
+```
+
+```r
+ simhasher == ("hello world" ~ "hello world!")
+```
+
+```r
+$distance
+[1] "0"
+
+$lhs
+11.7392 
+"hello" 
+
+$rhs
+11.7392 
+"hello" 
+```
+
+## Future Development
+
++ Support parallel programming on Windows , Linux , Mac.
++ Simple Natural Language Processing features.
+
+## More Information and Issues
+[https://github.com/qinwf/jiebaR](https://github.com/qinwf/jiebaR)
+
+[https://github.com/aszxqw/cppjieba](https://github.com/aszxqw/cppjieba)
+
+
 
 ["结巴"中文分词]:https://github.com/fxsjy/jieba
 [jieba分词]:https://github.com/fxsjy/jieba

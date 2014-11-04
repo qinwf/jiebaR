@@ -93,5 +93,6 @@ print.inv<-function(x){
 #' test1 == ( "hello world" ~ "hello world")}
 #' @export
 `==.simhash`<-function(jiebar,formula){
+
   distance(formula[[2]],formula[[3]],jiebar)
 }

@@ -16,4 +16,3 @@ LinkingTo: Rcpp
 Suggests:
     testthat
 URL: https://github.com/qinwf/jiebaR/
-
