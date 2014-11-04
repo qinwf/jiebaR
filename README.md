@@ -30,7 +30,7 @@ install_github("qinwf/jiebaR")
 
 ### 分词
 
-jiebaR提供了四种分词模式，可以通过`jiebar()`来初始化分词引擎，使用`segment()`进行分词。
+jiebaR提供了四种分词模式，可以通过`worker()`来初始化分词引擎，使用`segment()`进行分词。
 
 ```r
 library(jiebaR)
