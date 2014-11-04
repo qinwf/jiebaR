@@ -48,7 +48,7 @@
 #' @param symbol Whether to keep symbols in the sentence.
 #' 
 #' @param lines The maximal number of lines to read at one 
-#'   time when strwords is a file. the value 
+#'   time when input is a file. the value 
 #'   is used for segment and speech tagging  workers.
 #'   
 #' @param output A path to the output file, and default worker will
