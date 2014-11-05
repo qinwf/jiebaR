@@ -1,0 +1,39 @@
+The files in src/ subdirectory,
+  detect.cpp
+were originally written by
+   Wu Yongwei <wuyongwei@gmail.com>
+and modified by Qin Wenfeng.
+
+The files in inst/include and inst/include/Limonp subdirectory,
+  DictTrie.hpp
+  FullSegment.hpp
+  HMMSegment.hpp
+  ISegment.hpp
+  KeywordExtractor.hpp
+  MixSegment.hpp
+  MPSegment.hpp
+  PosTagger.hpp
+  QuerySegment.hpp
+  SegmentBase.hpp
+  Simhasher.hpp
+  TransCode.hpp
+  Trie.hpp
+  CodeConverter.hpp
+  Condition.hpp
+  HandyMacro.hpp
+  LocalVector.hpp
+  Logger.hpp
+  NonCopyable.hpp
+  StdExtension.hpp
+  StringUtil.hpp
+were originally written by
+   Yanyi Wu <i@yanyiwu.com>
+   Ruochen Xu <ruochen.xu@gmail.com>
+and modified by Qin Wenfeng.
+
+The files in inst/include/hashes subdirectory,
+  jenkins.h
+ were originally written by
+    Bob Jenkins
+
+Other part of this package is written by Qin Wenfeng.

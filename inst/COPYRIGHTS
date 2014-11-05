@@ -1,0 +1,60 @@
+jiebaR is built upon several other projects, and part of the code is copied
+or derived from these projects.
+
+The files in inst/include and inst/include/Limonp subdirectory,
+  DictTrie.hpp
+  FullSegment.hpp
+  HMMSegment.hpp
+  ISegment.hpp
+  KeywordExtractor.hpp
+  MixSegment.hpp
+  MPSegment.hpp
+  PosTagger.hpp
+  QuerySegment.hpp
+  SegmentBase.hpp
+  Simhasher.hpp
+  TransCode.hpp
+  Trie.hpp
+  CodeConverter.hpp
+  Condition.hpp
+  HandyMacro.hpp
+  LocalVector.hpp
+  Logger.hpp
+  NonCopyable.hpp
+  StdExtension.hpp
+  StringUtil.hpp
+are derived and modified from the CppJieba project (https://github.com/aszxqw/cppjieba) under MIT lisence.
+
+The files in src/ subdirectory,
+  detect.cpp
+is derived and modified from the tellenc project (https://github.com/adah1972/tellenc).
+
+Copyright (C) 2006-2010 Wu Yongwei <wuyongwei@gmail.com>
+
+This software is provided 'as-is', without any express or implied
+warranty.  In no event will the authors be held liable for any
+damages arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute
+it freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must
+   not claim that you wrote the original software.  If you use this
+   software in a product, an acknowledgement in the product
+   documentation would be appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must
+   not be misrepresented as being the original software.
+3. This notice may not be removed or altered from any source
+   distribution.
+
+
+The latest version of this software should be available at:
+    <URL:http://wyw.dcweb.cn/>
+
+
+The files in inst/include/hashes subdirectory,
+  jenkins.h
+was taken from http://www.burtleburtle.net/bob/c/lookup3.c
+
+lookup3.c, by Bob Jenkins, May 2006, Public Domain.
