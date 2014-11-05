@@ -3,7 +3,7 @@ Type: Package
 Title: Chinese text segmentation
 Version: 0.1
 Date: 2014-10-13
-Author: Qin Wenfeng <wenfeng.qin@qq.com>
+Authors@R: as.person(c( "Qin Wenfeng <wenfeng.qin@qq.com> [aut, cre]"))
 Maintainer: Qin Wenfeng <wenfeng.qin@qq.com>
 Description: Chinese text segmentation, Keyword Extraction and Speech Tagging
     with Rcpp and cppjieba.
