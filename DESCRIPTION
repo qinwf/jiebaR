@@ -11,8 +11,8 @@ License: MIT + file LICENSE
 Depends:
     R (>= 3.0)
 Imports:
-    Rcpp,methods
-LinkingTo: Rcpp
+    Rcpp,methods,RcppParallel
+LinkingTo: Rcpp,RcppParallel
 Suggests:
     testthat
 URL: https://github.com/qinwf/jiebaR/

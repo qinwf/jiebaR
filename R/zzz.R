@@ -1,6 +1,7 @@
 ##' @useDynLib jiebaR
 ##' @import Rcpp
 ##' @import methods
+##' @import RcppParallel
 NULL 
 
 
