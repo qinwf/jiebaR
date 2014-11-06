@@ -67,11 +67,11 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
           }
           out.lines <- tagw(code = tmp.lines, jiebar = jiebar, 
                             symbol = symbol, FILESMODE = FILESMODE)
-          
+          out.lines<-gsub("\\s x\\s","",paste(out.lines, collapse = " "))
           if (.Platform$OS.type == "windows") {
-            writeBin(charToRaw(paste(out.lines, collapse = " ")), output.w)
+            writeBin(charToRaw(out.lines), output.w)
           } else {
-            writeLines(paste(out.lines, collapse = " "), output.w)
+            writeLines(out.lines, output.w)
           }
           
         } 
