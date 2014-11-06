@@ -34,10 +34,7 @@ keywords <- function(code, jiebar) {
 }
 
 keyl <- function(code, jiebar, encoding) {
-  if (.Platform$OS.type == "windows"){
-    old.locale <- Sys.getlocale("LC_CTYPE")
-    Sys.setlocale(category = "LC_CTYPE", locale = "chs")
-  }
+
   input.r <- file(code, open = "r")
   OUT <- FALSE
   tryCatch({
@@ -55,9 +52,7 @@ keyl <- function(code, jiebar, encoding) {
     return(out.lines)
   }, finally = {
     try(close(input.r), silent = TRUE)
-    if (.Platform$OS.type == "windows"){
-      Sys.setlocale(category = "LC_CTYPE", locale = old.locale)
-    }
+
   })
 }
 
