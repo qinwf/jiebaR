@@ -36,7 +36,10 @@ simhash <- function(code, jiebar) {
 }
 
 simhashl <- function(code, jiebar, encoding) {
-  
+  if (.Platform$OS.type == "windows"){
+    old.locale <- Sys.getlocale("LC_CTYPE")
+    Sys.setlocale(category = "LC_CTYPE", locale = "chs")
+  }
   input.r <- file(code, open = "r")
   OUT <- FALSE
   tryCatch({
@@ -53,6 +56,9 @@ simhashl <- function(code, jiebar, encoding) {
     return(out.lines)
   }, finally = {
     try(close(input.r), silent = TRUE)
+    if (.Platform$OS.type == "windows"){
+      Sys.setlocale(category = "LC_CTYPE", locale = old.locale)
+    }
   })
 }
 
@@ -67,9 +73,7 @@ simhashw <- function(code, jiebar) {
     result <- jiebar$worker$simhash(code,jiebar$topn)
 
   if (.Platform$OS.type == "windows") {
-    result$keyword<-iconv(result$keyword, "UTF-8", "GBK")
-    
-    return(result)
+    Encoding(result$keyword)<-"UTF-8"
   }
   return(result)
 } 
@@ -111,15 +115,18 @@ distance<-function(codel,coder,jiebar){
   }
   result<-jiebar$worker$distance(codel,coder,jiebar$topn)
   if (.Platform$OS.type == "windows") {
-    result$lhs<-iconv(result$lhs, "UTF-8", "GBK")
-    result$rhs<-iconv(result$rhs, "UTF-8", "GBK")
+    Encoding(result$rhs)<-"UTF-8"
+    Encoding(result$lhs)<-"UTF-8"
   }
   result  
 }
 
 
 distancel <- function(code, jiebar, encoding) {
-  
+  if (.Platform$OS.type == "windows"){
+    old.locale <- Sys.getlocale("LC_CTYPE")
+    Sys.setlocale(category = "LC_CTYPE", locale = "chs")
+  }
   input.r <- file(code, open = "r")
   OUT <- FALSE
   tryCatch({
@@ -140,5 +147,8 @@ distancel <- function(code, jiebar, encoding) {
     return(tmp.lines)
   }, finally = {
     try(close(input.r), silent = TRUE)
+    if (.Platform$OS.type == "windows"){
+      Sys.setlocale(category = "LC_CTYPE", locale = old.locale)
+    }
   })
 }
