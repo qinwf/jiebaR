@@ -42,10 +42,7 @@ tag<- function(code, jiebar) {
 }
 
 tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE) {
-  if (.Platform$OS.type == "windows"){
-    old.locale <- Sys.getlocale("LC_CTYPE")
-    Sys.setlocale(category = "LC_CTYPE", locale = "chs")
-  }
+
   nlines <- lines
   input.r <- file(code, open = "r")
   if(write_file==T){
@@ -80,9 +77,7 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
     , finally = {
       try(close(input.r), silent = TRUE)
       try(close(output.w), silent = TRUE)
-      if (.Platform$OS.type == "windows"){
-        Sys.setlocale(category = "LC_CTYPE", locale = old.locale)
-      }
+
     })
     OUT <- TRUE
     cat(paste("Output file: ", output, "\n"))
@@ -110,9 +105,7 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
     }
     , finally = {
       try(close(input.r), silent = TRUE)
-      if (.Platform$OS.type == "windows"){
-        Sys.setlocale(category = "LC_CTYPE", locale = old.locale)
-      }
+
     })
 
     return(result)
