@@ -62,6 +62,10 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
   nlines <- lines
   input.r <- file(code, open = "r")
   if(write_file==T){
+    if (.Platform$OS.type == "windows"){
+      old.locale <- Sys.getlocale("LC_CTYPE")
+      Sys.setlocale(category = "LC_CTYPE", locale = "chs")
+    }
     if (.Platform$OS.type == "windows") {
       output.w <- file(output, open = "ab", encoding = "UTF-8")
     } else {
@@ -93,6 +97,9 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
     , finally = {
       try(close(input.r), silent = TRUE)
       try(close(output.w), silent = TRUE)
+      if (.Platform$OS.type == "windows"){
+        Sys.setlocale(category = "LC_CTYPE", locale = old.locale)
+      }
     })
     OUT <- TRUE
     cat(paste("Output file: ", output, "\n"))
@@ -121,8 +128,6 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
     , finally = {
       try(close(input.r), silent = TRUE)
     })
-    if(.Platform$OS.type == "windows")
-    return(iconv(result, "UTF-8", "GBK"))
     return(result)
   }
 
@@ -139,10 +144,8 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
   if (symbol == F) {
     result <- grep("[^[:space:]]", result, value = T)
   }
-  if (.Platform$OS.type == "windows" && FILESMODE == F) {
-    
-    return(iconv(result, "UTF-8", "GBK"))
-  }
+  if (.Platform$OS.type == "windows") {
+  Encoding(result)<-"UTF-8"}
   return(result)
 } 
 

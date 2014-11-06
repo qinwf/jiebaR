@@ -1,4 +1,6 @@
-print.inv<-function(x){
+#' @rdname print.hmmseg
+#' @export
+print.inv<-function(x,...){
   invisible()
 }
 
