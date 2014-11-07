@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <fstream>
 #include <cstdlib>
 #include <cstdio>
@@ -13,6 +14,10 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 using namespace CppJieba;
+
+// [[Rcpp::depends(RcppParallel)]]
+#include <RcppParallel.h>
+using namespace RcppParallel;
 
 string itos(double i)  // convert int to string
 {
@@ -30,12 +35,12 @@ string int64tos(uint64_t i)  // convert int to string
 //////////segment
 class mpseg
 {
-  public:
+public:
   const char *const dict_path;
   const char *const user_path;
   MPSegment mpsegment;
   mpseg(CharacterVector dict, CharacterVector user) :
-  dict_path(dict[0]), user_path(user[0]), mpsegment(dict_path, user_path)
+    dict_path(dict[0]), user_path(user[0]), mpsegment(dict_path, user_path)
   {
   }
   ~mpseg() {};
@@ -58,44 +63,14 @@ RCPP_MODULE(mod_mpseg)
   ;
 }
 
-class mixseg
-{
-  public:
-  const char *const dict_path;
-  const char *const model_path;
-  const char *const user_path;
-  MixSegment mixsegment;
-  mixseg(CharacterVector dict, CharacterVector model, CharacterVector user) :
-  dict_path(dict[0]), model_path(model[0]), user_path(user[0]), mixsegment(dict_path, model_path, user_path)
-  {
-  }
-  ~mixseg() {};
-  
-  CharacterVector cut(CharacterVector x)
-  {
-    const char *const test_lines = x[0];
-    vector<string> words;
-    mixsegment.cut(test_lines, words);
-    return wrap(words);
-  }
-};
-
-RCPP_MODULE(mod_mixseg)
-{
-  class_<mixseg>( "mixseg")
-  .constructor<CharacterVector, CharacterVector, CharacterVector>()
-  .method( "cut", &mixseg::cut)
-  ;
-}
-
 class queryseg
 {
-  public:
+public:
   const char *const dict_path;
   const char *const model_path;
   QuerySegment querysegment;
   queryseg(CharacterVector dict, CharacterVector model, int n) :
-  dict_path(dict[0]), model_path(model[0]), querysegment(dict_path, model_path, n)
+    dict_path(dict[0]), model_path(model[0]), querysegment(dict_path, model_path, n)
   {
   }
   ~queryseg() {};
@@ -120,11 +95,11 @@ RCPP_MODULE(mod_query)
 
 class hmmseg
 {
-  public:
+public:
   const char *const model_path;
   HMMSegment hmmsegment;
   hmmseg(CharacterVector model) :
-  model_path(model[0]), hmmsegment(model_path)
+    model_path(model[0]), hmmsegment(model_path)
   {
   }
   ~hmmseg() {};
@@ -149,13 +124,13 @@ RCPP_MODULE(mod_hmmseg)
 //////////keyword
 class tagger
 {
-  public:
+public:
   const char *const dict_path;
   const char *const model_path;
   const char *const user_path;
   PosTagger  taggerseg;
   tagger(CharacterVector dict, CharacterVector model, CharacterVector user) :
-  dict_path(dict[0]), model_path(model[0]), user_path(user[0]), taggerseg(dict_path, model_path, user_path)
+    dict_path(dict[0]), model_path(model[0]), user_path(user[0]), taggerseg(dict_path, model_path, user_path)
   {
   }
   ~tagger() {};
@@ -207,19 +182,19 @@ RCPP_MODULE(mod_tag)
 
 class keyword
 {
-  public:
+public:
   size_t topN;
   const char *const dict_path;
   const char *const model_path;
   const char *const stop_path;
   const char *const idf_path;
-
-
+  
+  
   
   KeywordExtractor extractor;
   keyword(unsigned int n, CharacterVector dict, CharacterVector model, CharacterVector idf, CharacterVector stop) :
-  topN(n), dict_path(dict[0]), model_path(model[0]), stop_path(stop[0]),
-  idf_path(idf[0]), extractor(dict_path, model_path, idf_path, stop_path)
+    topN(n), dict_path(dict[0]), model_path(model[0]), stop_path(stop[0]),
+    idf_path(idf[0]), extractor(dict_path, model_path, idf_path, stop_path)
   {
   }
   ~keyword() {};
@@ -263,12 +238,12 @@ RCPP_MODULE(mod_key)
 
 class sim
 {
-  public:
+public:
   const char *const dict_path;
   const char *const model_path;
   const char *const stop_path;
   const char *const idf_path;
-
+  
   Simhash::Simhasher hash;
   sim(CharacterVector dict, CharacterVector model, CharacterVector idf, CharacterVector stop) : dict_path(dict[0]), model_path(model[0]), stop_path(stop[0]),
   idf_path(idf[0]), hash(dict_path, model_path, idf_path, stop_path) {}
@@ -292,7 +267,7 @@ class sim
     CharacterVector hashvec;
     hashvec.push_back(int64tos(hashres));
     return List::create( Named("simhash") = hashvec,
-    Named("keyword") = lhsm);
+                         Named("keyword") = lhsm);
   }
   
   List distance(CharacterVector lhs, CharacterVector rhs, int topn)
@@ -326,8 +301,8 @@ class sim
     CharacterVector hashvec;
     hashvec.push_back(int64tos(hash.distances(lhsres, rhsres)));
     return List::create( Named("distance") = hashvec,
-    Named("lhs") = lhsm,
-    Named("rhs") = rhsm
+                         Named("lhs") = lhsm,
+                         Named("rhs") = rhsm
     );
     
   }
@@ -344,3 +319,4 @@ RCPP_MODULE(mod_sim)
   .method( "distance", &sim::distance)
   ;
 }
+

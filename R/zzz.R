@@ -30,4 +30,5 @@ setLoadAction(
     loadModule("mod_tag", TRUE)
     loadModule("mod_key", TRUE)
     loadModule("mod_sim", TRUE)
+    loadModule("mod_paramix", TRUE)
     })
