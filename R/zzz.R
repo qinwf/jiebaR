@@ -3,21 +3,41 @@
 ##' @import methods
 NULL 
 
+#' The path of dictionary
+#' 
+#' The path of dictionary, and it is used by segmentation and other 
+#' functon. 
+#' @format  character
+#' @export
+DICTPATH<-NULL
 
+#' @rdname DICTPATH
+#' @export
+HMMPATH<-NULL
+
+#' @rdname DICTPATH
+#' @export
+USERPATH<-NULL
+
+#' @rdname DICTPATH
+#' @export
+IDFPATH<-NULL
+
+#' @rdname DICTPATH
+#' @export
+STOPPATH<-NULL
 
 .onLoad <- function(libname, pkgname) {
     if (.Platform$OS.type == "windows") {
       Sys.setlocale( locale = "English")
     }
-    ###Loading DICTPATH when package loaded.
-    DICTPATH<<-file.path(find.package("jiebaR"),"dict","jieba.dict.utf8")
-    HMMPATH<<-file.path(find.package("jiebaR"),"dict","hmm_model.utf8")
-    USERPATH<<-file.path(find.package("jiebaR"),"dict","user.dict.utf8")
-    STOPPATH<<-file.path(find.package("jiebaR"),"dict","stop_words.utf8")
-    IDFPATH<<-file.path(find.package("jiebaR"),"dict","idf.utf8")
     
+    assign(x = "DICTPATH", file.path(find.package("jiebaR"),"dict","jieba.dict.utf8"),asNamespace('jiebaR'))
+    assign(x = "HMMPATH",  file.path(find.package("jiebaR"),"dict","hmm_model.utf8"),asNamespace('jiebaR'))
+    assign(x = "USERPATH", file.path(find.package("jiebaR"),"dict","user.dict.utf8"),asNamespace('jiebaR'))
+    assign(x = "STOPPATH", file.path(find.package("jiebaR"),"dict","stop_words.utf8"),asNamespace('jiebaR'))
+    assign(x = "IDFPATH",  file.path(find.package("jiebaR"),"dict","idf.utf8"),asNamespace('jiebaR'))
 
-    
 }
 
 setLoadAction(
@@ -29,4 +49,6 @@ setLoadAction(
     loadModule("mod_tag", TRUE)
     loadModule("mod_key", TRUE)
     loadModule("mod_sim", TRUE)
-    })
+    ###Loading DICTPATH when package loaded.
+
+   })
