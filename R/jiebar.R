@@ -135,7 +135,7 @@
 worker <- function(type = "mix", dict=DICTPATH, hmm=HMMPATH, 
                    user=USERPATH, idf=IDFPATH, stop_word=STOPPATH, parallel=F,write=T,
                    qmax = 20, topn = 5, encoding = "UTF-8", detect=T,symbol = F,
-                   lines = 1e+05,output = NULL,numThreads==NULL) 
+                   lines = 1e+05,output = NULL,numThreads=NULL) 
 { 
   if(!any(type==c("mix","mp","hmm","query","simhash","keywords","tag"))){
     stop("Unkowned worker type")
