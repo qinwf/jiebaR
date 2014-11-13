@@ -137,7 +137,18 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
     code <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", code)
   } 
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
+  if(jiebar$PrivateVarible$parallel == T && jiebar$PrivateVarible$numThreads != 1 ){
+    splitlenght = nchar(code) %/% jiebar$PrivateVarible$numThreads
+    splitcode = character(jiebar$PrivateVarible$numThreads)
+    for( i in 1:(jiebar$PrivateVarible$numThreads-1)){
+      
+      splitcode[i] = substr(code,1+(i-1)*splitlenght,i*splitlenght )
+    }
+    splitcode[jiebar$PrivateVarible$numThreads] = substr(code,1+(jiebar$PrivateVarible$numThreads-1)*splitlenght, nchar(code) )
+    result <- jiebar$worker$cut(splitcode)
+  } else{
   result <- jiebar$worker$cut(code)
+  }
   if (symbol == F) {
     result <- grep("[^[:space:]]", result, value = T)
   }

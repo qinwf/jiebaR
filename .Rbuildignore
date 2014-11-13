@@ -4,3 +4,4 @@
 ^packrat/
 ^\.travis\.yml$
 ^\.dat$
+^.*\.txt$
