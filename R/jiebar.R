@@ -135,64 +135,66 @@
 worker <- function(type = "mix", dict=DICTPATH, hmm=HMMPATH, 
                    user=USERPATH, idf=IDFPATH, stop_word=STOPPATH, parallel=F,write=T,
                    qmax = 20, topn = 5, encoding = "UTF-8", detect=T,symbol = F,
-                   lines = 1e+05,output = NULL) 
+                   lines = 1e+05,output = NULL,numThreads==NULL) 
 { 
   if(!any(type==c("mix","mp","hmm","query","simhash","keywords","tag"))){
     stop("Unkowned worker type")
   }
   result = new.env(parent = emptyenv())
   if(parallel==F){
-  switch(type, 
-         mp = {
-           worker  = new(mpseg, dict, user)
-           private = list(dict=dict,user=user,parallel=parallel)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","segment","mpseg")
-         }, 
-         
-         mix = {
-           worker  =  new(mixseg, dict, hmm, user)
-           private = list(dict=dict,hmm=hmm,user=user,parallel=parallel)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","segment","mixseg")
-         },
-         hmm = {
-           worker  =  new(hmmseg, hmm)
-           private = list(hmm=hmm,parallel=parallel)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","segment","hmmseg")
-         },
-         query = {
-           worker  =  new(queryseg, dict,hmm,qmax)
-           private = list(dict=dict,hmm=hmm,max_word_lenght=qmax,parallel=parallel)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+    switch(type, 
+           mp = {
+             worker  = new(mpseg, dict, user)
+             private = list(dict=dict,user=user,parallel=parallel)
+             assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+             class(result)<-c("jiebar","segment","mpseg")
+           }, 
            
-           class(result)<-c("jiebar","segment","queryseg")
-         },
-         simhash = {
-           worker  =  new(sim, dict,hmm,idf,stop_word)
-           private = list(dict=dict,hmm=hmm,idf=idf,stop_word=stop_word,parallel=parallel)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","simhash")
-           result$topn = topn
-         },
-         keywords = {
-           worker  =  new(keyword,topn, dict,hmm,idf,stop_word)
-           private = list(top_n_word=topn,dict=dict,hmm=hmm,idf=idf,stop_word=stop_word,parallel=parallel)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","keywords")
-         },
-         tag = {
-           worker  =  new(tagger, dict,hmm,user)
-           private = list(dict=dict,hmm=hmm,user=user,parallel=parallel)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","tagger")         
-         })
+           mix = {
+             worker  =  new(mixseg, dict, hmm, user)
+             private = list(dict=dict,hmm=hmm,user=user,parallel=parallel)
+             assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+             class(result)<-c("jiebar","segment","mixseg")
+           },
+           hmm = {
+             worker  =  new(hmmseg, hmm)
+             private = list(hmm=hmm,parallel=parallel)
+             assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+             class(result)<-c("jiebar","segment","hmmseg")
+           },
+           query = {
+             worker  =  new(queryseg, dict,hmm,qmax)
+             private = list(dict=dict,hmm=hmm,max_word_lenght=qmax,parallel=parallel)
+             assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+             
+             class(result)<-c("jiebar","segment","queryseg")
+           },
+           simhash = {
+             worker  =  new(sim, dict,hmm,idf,stop_word)
+             private = list(dict=dict,hmm=hmm,idf=idf,stop_word=stop_word,parallel=parallel)
+             assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+             class(result)<-c("jiebar","simhash")
+             result$topn = topn
+           },
+           keywords = {
+             worker  =  new(keyword,topn, dict,hmm,idf,stop_word)
+             private = list(top_n_word=topn,dict=dict,hmm=hmm,idf=idf,stop_word=stop_word,parallel=parallel)
+             assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+             class(result)<-c("jiebar","keywords")
+           },
+           tag = {
+             worker  =  new(tagger, dict,hmm,user)
+             private = list(dict=dict,hmm=hmm,user=user,parallel=parallel)
+             assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+             class(result)<-c("jiebar","tagger")         
+           })
   } else {
-    if(Sys.getenv("RCPP_PARALLEL_NUM_THREADS")==""){
-      numThreads = RcppParallel::defaultNumThreads()
-    } else{
-      numThreads = as.numeric(Sys.getenv("RCPP_PARALLEL_NUM_THREADS"))
+    if(numThreads==NULL){
+      if(Sys.getenv("RCPP_PARALLEL_NUM_THREADS")==""){
+        numThreads = RcppParallel::defaultNumThreads()
+      } else{
+        numThreads = as.numeric(Sys.getenv("RCPP_PARALLEL_NUM_THREADS"))
+      }
     }
     switch(type, 
            mp = {
