@@ -1,16 +1,16 @@
 #' Chinese text segmentation function
 #' 
-#' The function uses initialized engines for word segmentation. You 
+#' The function uses initialized engines for words segmentation. You 
 #' can initialize multiple engines simultaneously using \code{worker()}, 
-#' and reset the model public settings can be modified and get using \code{$} 
+#' and the model public settings can be got and modified using \code{$} 
 #' like \code{ WorkerName$symbol = T }. some private setting are fixed 
 #' when engine is initialized,and you can get then by 
 #' \code{WorkerName$PrivateVarible}.
 #' 
-#' There are four kinds of model:
+#' There are four kinds of models:
 #' 
 #' Maximum probability segmentation model uses Trie tree to construct
-#' a directed acyclic graph and dynamic programming algorithm,and 
+#' a directed acyclic graph and dynamic programming algorithm,and it
 #' is the core segmentation algorithm. \code{dict} and \code{user}
 #' should be provided when initializing jiebaR worker.
 #'  
@@ -39,9 +39,12 @@ segment <- function(code, jiebar) {
   
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
+  
   if (file.exists(code)) {
     if(is.null(jiebar$output)){
-      output<-paste0("rjieba", as.numeric(Sys.time()), ".dat")
+      basenames <- gsub("\\.[^\\.]*$", "", code)
+      extnames  <- gsub(basenames, "", code, fixed = TRUE)
+      output    <- paste(basenames, ".segment", as.numeric(Sys.time()), extnames, sep = "")
     } else {
       output<-jiebar$output
     }

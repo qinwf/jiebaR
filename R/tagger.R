@@ -26,8 +26,10 @@ tag<- function(code, jiebar) {
   if (file.exists(code)) {
     encoding<-jiebar$encoding
     if(is.null(jiebar$output)){
-      output<-paste0("rjieba", as.numeric(Sys.time()), ".dat")
-    } else {
+      basenames <- gsub("\\.[^\\.]*$", "", code)
+      extnames  <- gsub(basenames, "", code, fixed = TRUE)
+      output    <- paste(basenames, ".segment", as.numeric(Sys.time()), extnames, sep = "")
+    }  else {
       output<-jiebar$output
     }
     if(jiebar$detect==T)  encoding<-filecoding(code)
@@ -42,7 +44,7 @@ tag<- function(code, jiebar) {
 }
 
 tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE) {
-
+  
   nlines <- lines
   input.r <- file(code, open = "r")
   if(write_file==T){
@@ -77,7 +79,7 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
     , finally = {
       try(close(input.r), silent = TRUE)
       try(close(output.w), silent = TRUE)
-
+      
     })
     OUT <- TRUE
     cat(paste("Output file: ", output, "\n"))
@@ -105,9 +107,9 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
     }
     , finally = {
       try(close(input.r), silent = TRUE)
-
+      
     })
-
+    
     return(result)
   }
   
@@ -121,7 +123,7 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
   } 
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
   if(FILESMODE==T ){
-  result <- jiebar$worker$file(code)
+    result <- jiebar$worker$file(code)
   } else{
     result <- jiebar$worker$tag(code)
   }

@@ -56,7 +56,7 @@ print.inv<-function(x, ...){
 #' test1 = worker("simhash",topn=1)
 #' test1 <= words}
 #' @export
-`<=.simhash` <- function(jiebar,c ode){
+`<=.simhash` <- function(jiebar,code){
   simhash(code, jiebar)
 }
 
