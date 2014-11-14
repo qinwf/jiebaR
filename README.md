@@ -166,10 +166,8 @@ $keyword
 ```
 
 ```r
-simhasher == ("江州市长江大桥参加了长江大桥的通车仪式" ~ "hello world!")
+distance("江州市长江大桥参加了长江大桥的通车仪式" , "hello world!", simhasher)
 
-### 或者使用distance("江州市长江大桥参加了长江大桥的通车仪式",
-                     words, simhasher) 
 ```
 
 ```r
