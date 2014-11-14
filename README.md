@@ -342,7 +342,7 @@ $keyword
 ```
 
 ```r
- simhasher == ("hello world" ~ "hello world!")
+distance("hello world" , "hello world!" , simhasher)
 ```
 
 ```r

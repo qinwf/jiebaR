@@ -23,7 +23,7 @@ There is a symbol \code{<=} for this function.
 words = "hello world"
 simhasher = worker("simhash",topn=1)
 simhasher <= words
-simhasher == ("hello world" ~ "hello world!")
+distance("hello world" , "hello world!" , simhasher)
 }
 }
 \author{

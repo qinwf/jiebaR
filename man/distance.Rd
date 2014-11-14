@@ -6,26 +6,24 @@
 distance(codel, coder, jiebar)
 }
 \arguments{
-\item{codel}{A Chinese sentence or the path of a text file.}
+\item{codel}{a Chinese sentence or the path of a text file}
 
-\item{coder}{A Chinese sentence or the path of a text file.}
+\item{coder}{a Chinese sentence or the path of a text file}
 
-\item{jiebar}{jiebaR Worker.}
+\item{jiebar}{jiebaR Worker}
 }
 \description{
-The function uses Simhash worker to do keyword extraction worker and find
-the keywords from two inputs, then computes Hamming distance of them.
-}
-\details{
-There is a symbol \code{==} for this function.
+The function uses Simhash worker to do keyword extraction and find
+the keywords from two inputs, and then computes Hamming distance
+of between them.
 }
 \examples{
 \donttest{
 ### Simhash
 words = "hello world"
-simhasher = worker("simhash",topn=1)
+simhasher = worker("simhash", topn = 1)
 simhasher <= words
-simhasher == ("hello world" ~ "hello world!")
+distance("hello world" , "hello world!" , simhasher)
 }
 }
 \author{
@@ -35,6 +33,6 @@ Qin Wenfeng
 \url{http://en.wikipedia.org/wiki/Hamming_distance}
 }
 \seealso{
-\code{\link{==.simhash}} \code{\link{worker}}
+\code{\link{worker}}
 }
 

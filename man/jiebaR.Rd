@@ -5,15 +5,15 @@
 \alias{jiebaR-package}
 \title{A package for Chinese text segmentation}
 \description{
-This is a package for Chinese text segmentation, Keyword Extraction
-and Speech Tagging with Rcpp and cppjieba. jiebaR Supports four
+This is a package for Chinese text segmentation, keyword extraction
+and speech tagging with Rcpp and cppjieba. JiebaR supports four
 types of segmentation mode: Maximum Probability, Hidden Markov Model,
 Query Segment and Mix Segment.
 }
 \details{
-Users can specify their own custom
-dictionary to be included in the jieba default dictionary. JiebaR is able
-to identify new words,but adding your own new words can ensure a higher
+You can use custom
+dictionary to be included in the jiebaR default dictionary. JiebaR also
+can identify new words, but adding your own new words will ensure a higher
 accuracy.
 }
 \examples{
@@ -42,9 +42,9 @@ tagger = worker("tag")
 tagger <= words
 
 ### Simhash
-simhasher = worker("simhash",topn=1)
+simhasher = worker("simhash", topn = 1)
 simhasher <= words
-simhasher == ("hello world" ~ "hello world!")
+distance("hello world" , "hello world!" , simhasher)
 
 }
 ShowDictPath()
