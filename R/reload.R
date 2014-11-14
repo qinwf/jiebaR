@@ -1,6 +1,6 @@
 #' @rdname print.hmmseg
 #' @export
-print.inv<-function(x,...){
+print.inv<-function(x, ...){
   invisible()
 }
 
@@ -16,14 +16,14 @@ print.inv<-function(x,...){
 #' test1 = worker()
 #' test1 <= words}
 #' @export
-`<=.segment`<-function(jiebar,code){
-  if(file.exists(code) && jiebar$write==T) {
+`<=.segment`<-function(jiebar, code){
+  if(file.exists(code) && jiebar$write == T) {
     segment(code,jiebar)
     xx<-NA
     class(xx) = "inv"
     return(xx)
   }
-  else return(segment(code,jiebar))
+  else return(segment(code, jiebar))
 
 
 }
@@ -40,8 +40,8 @@ print.inv<-function(x,...){
 #' test1 = worker("keywords",topn=1)
 #' test1 <= words}
 #' @export
-`<=.keywords`<-function(jiebar,code){
-  keywords(code,jiebar)
+`<=.keywords` <- function(jiebar, code){
+  keywords(code, jiebar)
 }
 
 #' Simhash symbol
@@ -56,8 +56,8 @@ print.inv<-function(x,...){
 #' test1 = worker("simhash",topn=1)
 #' test1 <= words}
 #' @export
-`<=.simhash`<-function(jiebar,code){
-  simhash(code,jiebar)
+`<=.simhash` <- function(jiebar,c ode){
+  simhash(code, jiebar)
 }
 
 #' Tagger symbol
@@ -72,14 +72,14 @@ print.inv<-function(x,...){
 #' test1 = worker("tag")
 #' test1 <= words}
 #' @export
-`<=.tagger`<-function(jiebar,code){
-  if(file.exists(code) && jiebar$write==T) {
-    tag(code,jiebar)
-    xx<-NA
+`<=.tagger`<-function(jiebar, code){
+  if(file.exists(code) && jiebar$write == T) {
+    tag(code, jiebar)
+    xx <- NA
     class(xx) = "inv"
     return(xx)
   }
-  else return(tag(code,jiebar))
+  else return(tag(code, jiebar))
 }
 
 #' Distance symbol
@@ -94,7 +94,7 @@ print.inv<-function(x,...){
 #' test1 = worker("simhash",topn=1)
 #' test1 == ( "hello world" ~ "hello world")}
 #' @export
-`==.simhash`<-function(jiebar,formula){
-  warning("==.simhash() is deprecated. Please use distance() instead.\n")
-  distance(formula[[2]],formula[[3]],jiebar)
+`==.simhash` <- function(jiebar,formula){
+  warning("==.simhash() was depreciated. Please use distance() instead.\n")
+  distance(formula[[2]], formula[[3]], jiebar)
 }

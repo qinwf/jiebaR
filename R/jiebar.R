@@ -1,7 +1,7 @@
 #' Initialize jiebaR worker
 #' 
-#' This function initialize jiebaR workers. You can initialize different 
-#' kinds of worker including \code{mix}, \code{mp}, \code{hmm}, 
+#' This function initializes jiebaR workers. You can initialize different 
+#' kinds of workers including \code{mix}, \code{mp}, \code{hmm}, 
 #' \code{query}, \code{tag}, \code{simhash}, and \code{keywords}.
 #' see Detail for more information.
 #' 
@@ -63,12 +63,12 @@
 #' The package uses initialized engines for word segmentation, you 
 #' can initialize multiple engines simultaneously, and reset the model
 #' public settings can be modified and get using \code{$} like 
-#' \code{ WorkerName$symbol = T }. some private setting are fixed 
-#' when engine is initialized,and you can get then by 
+#' \code{ WorkerName$symbol = T }. Some private setting are fixed 
+#' when engine is initialized, and you can get then by 
 #' \code{WorkerName$PrivateVarible}.
 #' 
 #' Maximum probability segmentation model uses Trie tree to construct
-#' a directed acyclic graph and dynamic programming algorithm,and 
+#' a directed acyclic graph and dynamic programming algorithm, and it
 #' is the core segmentation algorithm. \code{dict} and \code{user}
 #' should be provided when initializing jiebaR worker.
 #'  
@@ -132,61 +132,61 @@
 #' 
 #' @author Qin Wenfeng 
 #' @export
-worker <- function(type = "mix", dict=DICTPATH, hmm=HMMPATH, 
-                   user=USERPATH, idf=IDFPATH, stop_word=STOPPATH, write=T,
-                   qmax = 20, topn = 5, encoding = "UTF-8", detect=T,symbol = F,
-                   lines = 1e+05,output = NULL) 
+worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH, 
+                   user = USERPATH, idf = IDFPATH, stop_word = STOPPATH, write = T,
+                   qmax = 20, topn = 5, encoding = "UTF-8", detect = T, symbol = F,
+                   lines = 1e+05, output = NULL) 
 { 
-  if(!any(type==c("mix","mp","hmm","query","simhash","keywords","tag"))){
+  if(!any(type == c("mix","mp","hmm","query","simhash","keywords","tag"))){
     stop("Unkowned worker type")
   }
   result = new.env(parent = emptyenv())
   
   switch(type, 
-         mp = {
+           mp      = {
            worker  = new(mpseg, dict, user)
-           private = list(dict=dict,user=user)
+           private = list(dict = dict,user = user)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","segment","mpseg")
+           class(result) <- c("jiebar","segment","mpseg")
          }, 
          
-         mix = {
-           worker  =  new(mixseg, dict, hmm, user)
-           private = list(dict=dict,hmm=hmm,user=user)
+           mix     = {
+           worker  = new(mixseg, dict, hmm, user)
+           private = list(dict = dict,hmm = hmm,user = user)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","segment","mixseg")
+           class(result) <- c("jiebar","segment","mixseg")
          },
-         hmm = {
-           worker  =  new(hmmseg, hmm)
-           private = list(hmm=hmm)
+           hmm     = {
+           worker  = new(hmmseg, hmm)
+           private = list(hmm = hmm)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","segment","hmmseg")
+           class(result) <- c("jiebar","segment","hmmseg")
          },
-         query = {
-           worker  =  new(queryseg, dict,hmm,qmax)
-           private = list(dict=dict,hmm=hmm,max_word_lenght=qmax)
+           query   = {
+           worker  = new(queryseg, dict,hmm,qmax)
+           private = list(dict = dict,hmm = hmm,max_word_lenght = qmax)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
            
-           class(result)<-c("jiebar","segment","queryseg")
+           class(result) <- c("jiebar","segment","queryseg")
          },
-         simhash = {
-           worker  =  new(sim, dict,hmm,idf,stop_word)
+          simhash  = {
+           worker  = new(sim, dict,hmm,idf,stop_word)
            private = list(dict=dict,hmm=hmm,idf=idf,stop_word=stop_word)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","simhash")
+           class(result) <- c("jiebar","simhash")
            result$topn = topn
          },
-         keywords = {
+         keywords  = {
            worker  =  new(keyword,topn, dict,hmm,idf,stop_word)
            private = list(top_n_word=topn,dict=dict,hmm=hmm,idf=idf,stop_word=stop_word)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","keywords")
+           class(result) <- c("jiebar","keywords")
          },
-         tag = {
+           tag     = {
            worker  =  new(tagger, dict,hmm,user)
            private = list(dict=dict,hmm=hmm,user=user)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result)<-c("jiebar","tagger")         
+           class(result) <- c("jiebar","tagger")         
          })
   result
 }
