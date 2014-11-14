@@ -8,11 +8,12 @@
 #' 
 #' There is a symbol \code{<=} for this function.
 #' @seealso \code{\link{<=.tagger}} \code{\link{worker}} 
-#' @param code A Chinese sentence or the path of a text file. 
-#' @param jiebar jiebaR Worker.
+#' @param code a Chinese sentence or the path of a text file
+#' @param jiebar jiebaR Worker
 #' @examples 
 #' \donttest{
 #' words = "hello world"
+#' 
 #' ### Speech Tagging 
 #' tagger = worker("tag")
 #' tagger <= words
@@ -23,8 +24,11 @@ tag<- function(code, jiebar) {
   
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
+  
   if (file.exists(code)) {
+    
     encoding<-jiebar$encoding
+    
     if(is.null(jiebar$output)){
       basenames <- gsub("\\.[^\\.]*$", "", code)
       extnames  <- gsub(basenames, "", code, fixed = TRUE)
@@ -32,12 +36,17 @@ tag<- function(code, jiebar) {
     }  else {
       output<-jiebar$output
     }
+    
     if(jiebar$detect==T)  encoding<-filecoding(code)
+    
     FILESMODE <- T
+    
     tagl(code = code, jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
          output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE)
   } else {
+    
     FILESMODE <- F
+    
     tagw(code = code, jiebar=jiebar,symbol=jiebar$symbol, 
          FILESMODE = FILESMODE)
   }
@@ -46,8 +55,11 @@ tag<- function(code, jiebar) {
 tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE) {
   
   nlines <- lines
+  
   input.r <- file(code, open = "r")
+  
   if(write_file==T){
+    
     if (.Platform$OS.type == "windows") {
       output.w <- file(output, open = "ab", encoding = "UTF-8")
     } else {
@@ -87,6 +99,7 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
   } else{
     result<-c()
     FILESMODE=F
+    
     tryCatch({
       while (nlines == lines) {
         tmp.lines <- readLines(input.r, n = lines, encoding = encoding)
@@ -100,8 +113,7 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
                             symbol = symbol, FILESMODE = FILESMODE)
           
           result<-c(result,out.lines)
-          
-          
+
         } 
       } 
     }
@@ -122,6 +134,7 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
     code <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", code)
   } 
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
+  
   if(FILESMODE==T ){
     result <- jiebar$worker$file(code)
   } else{
@@ -131,7 +144,10 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
   if (symbol == F && FILESMODE  ==F) {
     result <- grep("[^[:space:]]", result, value = T)
   }
+  
   if (.Platform$OS.type == "windows") {
-    Encoding(result)<-"UTF-8"}
-  return(result)
+    Encoding(result)<-"UTF-8"
+  }
+  
+  result
 } 
