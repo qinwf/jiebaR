@@ -95,6 +95,6 @@ print.inv<-function(x, ...){
 #' test1 == ( "hello world" ~ "hello world")}
 #' @export
 `==.simhash` <- function(jiebar,formula){
-  warning("==.simhash() was depreciated. Please use distance() instead.\n")
+  warning("==.simhash() was deprecated. Please use distance() instead.\n")
   distance(formula[[2]], formula[[3]], jiebar)
 }

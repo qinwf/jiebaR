@@ -218,7 +218,7 @@ library(jiebaR)
 ##  Using default argument to initialize worker.
 mixseg = worker()
 
-##       jiebar( type = "mix", dict = "dictpath/jieba.dict.utf8",
+##       worker( type = "mix", dict = "dictpath/jieba.dict.utf8",
 ##               hmm  = "dictpath/hmm_model.utf8",  ### HMM model data
 ##               user = "dictpath/user.dict.utf8") ### user dictionary
 

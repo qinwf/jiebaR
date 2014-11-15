@@ -138,7 +138,7 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
                    lines = 1e+05, output = NULL) 
 { 
   if(!any(type == c("mix","mp","hmm","query","simhash","keywords","tag"))){
-    stop("Unkowned worker type")
+    stop("Unkown worker type")
   }
   result = new.env(parent = emptyenv())
   
