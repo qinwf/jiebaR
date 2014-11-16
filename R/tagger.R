@@ -44,7 +44,9 @@ tag<- function(code, jiebar) {
     tagl(code = code, jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
          output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE)
   } else {
-    
+    if (.Platform$OS.type == "windows") {
+      code<-enc2utf8(code)
+    }
     FILESMODE <- F
     
     tagw(code = code, jiebar=jiebar,symbol=jiebar$symbol, 

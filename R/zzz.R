@@ -28,9 +28,9 @@ IDFPATH<-NULL
 STOPPATH<-NULL
 
 .onLoad <- function(libname, pkgname) {
-    if (.Platform$OS.type == "windows") {
-      Sys.setlocale( locale = "English")
-    }
+#     if (.Platform$OS.type == "windows") {
+#       Sys.setlocale( locale = "English")
+#     }
     
     assign(x = "DICTPATH", file.path(find.package("jiebaR"),"dict","jieba.dict.utf8"),asNamespace('jiebaR'))
     assign(x = "HMMPATH",  file.path(find.package("jiebaR"),"dict","hmm_model.utf8"),asNamespace('jiebaR'))

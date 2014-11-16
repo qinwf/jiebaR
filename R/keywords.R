@@ -30,7 +30,9 @@ keywords <- function(code, jiebar) {
     keyl(code = code, jiebar = jiebar, encoding = encoding)
     
   } else {
-    
+    if (.Platform$OS.type == "windows") {
+      code<-enc2utf8(code)
+    }
     keyw(code = code, jiebar = jiebar)
     
   }

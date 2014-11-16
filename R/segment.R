@@ -36,7 +36,7 @@
 #' @seealso  \code{\link{<=.segment}} \code{\link{worker}} 
 #' @export
 segment <- function(code, jiebar) {
-  
+
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   
@@ -54,6 +54,9 @@ segment <- function(code, jiebar) {
     cutl(code = code, jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
          output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE)
   } else {
+    if (.Platform$OS.type == "windows") {
+      code<-enc2utf8(code)
+    }
     FILESMODE <- F
     cutw(code = code, jiebar=jiebar,symbol=jiebar$symbol, 
          FILESMODE = FILESMODE)
@@ -62,11 +65,11 @@ segment <- function(code, jiebar) {
 }
 
 cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE) {
-
+  
   nlines <- lines
   input.r <- file(code, open = "r")
   if(write_file==T){
-
+    
     if (.Platform$OS.type == "windows") {
       output.w <- file(output, open = "ab", encoding = "UTF-8")
     } else {
@@ -98,7 +101,7 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
     , finally = {
       try(close(input.r), silent = TRUE)
       try(close(output.w), silent = TRUE)
-
+      
     })
     OUT <- TRUE
     cat(paste("Output file: ", output, "\n"))
@@ -118,19 +121,18 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
           out.lines <- cutw(code = tmp.lines, jiebar = jiebar, 
                             symbol = symbol, FILESMODE = FILESMODE)
           
-            result<-c(result,out.lines)
-          
-          
+          result<-c(result,out.lines)
+
         } 
       } 
     }
     , finally = {
       try(close(input.r), silent = TRUE)
-
+      
     })
     return(result)
   }
-
+  
 }
 
 
@@ -145,7 +147,7 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
     result <- grep("[^[:space:]]", result, value = T)
   }
   if (.Platform$OS.type == "windows") {
-  Encoding(result)<-"UTF-8"}
+    Encoding(result)<-"UTF-8"}
   return(result)
 } 
 
