@@ -26,6 +26,8 @@ library(devtools)
 install_github("qinwf/jiebaR")
 ```
 
+jiebaR支持 R >= 3.1 ，建议使用 gcc >= 4.6 编译包。
+
 ## 使用示例
 
 ### 分词
