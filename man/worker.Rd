@@ -65,8 +65,8 @@ settings and worker. Public settings can be modified and get
 using \code{$}.
 }
 \description{
-This function initialize jiebaR workers. You can initialize different
-kinds of worker including \code{mix}, \code{mp}, \code{hmm},
+This function initializes jiebaR workers. You can initialize different
+kinds of workers including \code{mix}, \code{mp}, \code{hmm},
 \code{query}, \code{tag}, \code{simhash}, and \code{keywords}.
 see Detail for more information.
 }
@@ -74,12 +74,12 @@ see Detail for more information.
 The package uses initialized engines for word segmentation, you
 can initialize multiple engines simultaneously, and reset the model
 public settings can be modified and get using \code{$} like
-\code{ WorkerName$symbol = T }. some private setting are fixed
-when engine is initialized,and you can get then by
+\code{ WorkerName$symbol = T }. Some private setting are fixed
+when engine is initialized, and you can get then by
 \code{WorkerName$PrivateVarible}.
 
 Maximum probability segmentation model uses Trie tree to construct
-a directed acyclic graph and dynamic programming algorithm,and
+a directed acyclic graph and dynamic programming algorithm, and it
 is the core segmentation algorithm. \code{dict} and \code{user}
 should be provided when initializing jiebaR worker.
 

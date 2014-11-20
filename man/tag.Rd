@@ -6,9 +6,9 @@
 tag(code, jiebar)
 }
 \arguments{
-\item{code}{A Chinese sentence or the path of a text file.}
+\item{code}{a Chinese sentence or the path of a text file}
 
-\item{jiebar}{jiebaR Worker.}
+\item{jiebar}{jiebaR Worker}
 }
 \description{
 The function uses Speech Tagging worker to cut word and
@@ -23,6 +23,7 @@ There is a symbol \code{<=} for this function.
 \examples{
 \donttest{
 words = "hello world"
+
 ### Speech Tagging
 tagger = worker("tag")
 tagger <= words

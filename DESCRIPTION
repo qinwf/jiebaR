@@ -1,18 +1,20 @@
 Package: jiebaR
 Type: Package
 Title: Chinese text segmentation
-Version: 0.1
-Date: 2014-10-13
+Version: 0.1.2
+Date: 2014-11-19
 Authors@R: as.person(c( "Qin Wenfeng <wenfeng.qin@qq.com> [aut, cre]"))
 Maintainer: Qin Wenfeng <wenfeng.qin@qq.com>
-Description: Chinese text segmentation, Keyword Extraction and Speech Tagging
-    with Rcpp and cppjieba.
+Description: Chinese text segmentation, keyword extraction and speech tagging
+    with Rcpp and CppJieba.
 License: MIT + file LICENSE
 Depends:
-    R (>= 3.0)
+    R (>= 3.1)
 Imports:
     Rcpp,methods
 LinkingTo: Rcpp
 Suggests:
     testthat
 URL: https://github.com/qinwf/jiebaR/
+Authors: Qin Wenfeng;
+         the authors of CppJieba for the included version of CppJieba
