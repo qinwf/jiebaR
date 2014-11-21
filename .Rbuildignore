@@ -1,6 +1,7 @@
-
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^packrat/
 ^\.travis\.yml$
 ^\.dat$
+^.*\.txt$
+^.*\.dat$
