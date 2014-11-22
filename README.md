@@ -6,7 +6,7 @@
 
 ## 特性
 
-+ 支持 Windows , Linux操作系统（Mac 暂未测试）。
++ 支持 Windows , Linux， Mac 操作系统。
 + 通过Rcpp Modules实现同时加载多个分词系统,可以分别使用不同的分词模式和词库。
 + 支持多种分词模式、中文姓名识别、关键词提取、词性标注以及文本Simhash相似度比较等功能。
 + 支持加载自定义用户词库，设置词频、词性。
@@ -19,14 +19,14 @@
 
 ## 安装
 
-目前该包还没有发布到CRAN，可以通过Github进行安装。Windows系统需要安装 [Rtools]，或者可以下载[二进制包]，进行安装：
+目前该包还没有发布到CRAN，可以通过Github进行安装，Windows 和 Mac OS X Mavericks 还可以下载简单的[安装包]进行安装：
 
 ```r
 library(devtools)
 install_github("qinwf/jiebaR")
 ```
 
-jiebaR支持 R >= 3.1 ，建议使用 gcc >= 4.6 编译包。
+Windows系统需要安装 [Rtools]，jiebaR支持 R >= 3.1 ，建议使用 gcc >= 4.6 编译包。
 
 ## 使用示例
 
@@ -375,6 +375,6 @@ $rhs
 [Cppjieba]:https://github.com/aszxqw/cppjieba
 [Rtools]:http://mirrors.xmu.edu.cn/CRAN/bin/windows/Rtools
 [深蓝词库转换]:https://github.com/studyzy/imewlconverter
-[二进制包]:https://github.com/qinwf/jiebaR/releases
+[安装包]:https://github.com/qinwf/jiebaR/releases
 [Rpy2]:http://rpy.sourceforge.net/
 [jvmr]:http://dahl.byu.edu/software/jvmr/
