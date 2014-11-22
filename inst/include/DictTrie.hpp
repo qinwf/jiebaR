@@ -159,7 +159,7 @@ private:
             }
             if (!TransCode::decode(buf[0], nodeInfo.word))
             {
-                LogError("line[%u:%s] illegal.", lineno, line.c_str());
+                // LogError("line[%u:%s] illegal.", lineno, line.c_str());
                 continue;
             }
             if (nodeInfo.word.size() == 1)
@@ -170,7 +170,7 @@ private:
             nodeInfo.tag = (buf.size() == 2 ? buf[1] : defaultTag);
             _nodeInfos.push_back(nodeInfo);
         }
-        LogInfo("load userdict[%s] ok. lines[%u]", filePath.c_str(), lineno);
+        // LogInfo("load userdict[%s] ok. lines[%u]", filePath.c_str(), lineno);
     }
     void _loadDict(const string &filePath)
     {
@@ -194,7 +194,7 @@ private:
             }
             if (!TransCode::decode(buf[0], nodeInfo.word))
             {
-                LogError("line[%u:%s] illegal.", lineno, line.c_str());
+                // LogError("line[%u:%s] illegal.", lineno, line.c_str());
                 continue;
             }
             nodeInfo.weight = atof(buf[1].c_str());

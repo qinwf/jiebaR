@@ -26,7 +26,7 @@ namespace CppJieba
             {
                 LIMONP_CHECK(_mpSeg.init(mpSegDict, userDict));
                 LIMONP_CHECK(_hmmSeg.init(hmmSegDict));
-                LogInfo("MixSegment init(%s, %s)", mpSegDict.c_str(), hmmSegDict.c_str());
+                // LogInfo("MixSegment init(%s, %s)", mpSegDict.c_str(), hmmSegDict.c_str());
                 return true;
             }
         public:

@@ -56,7 +56,7 @@ public:
         _emitProbVec.push_back(&_emitProbM);
         _emitProbVec.push_back(&_emitProbS);
         LIMONP_CHECK(_loadModel(filePath.c_str()));
-        LogInfo("HMMSegment init(%s) ok.", filePath.c_str());
+        // LogInfo("HMMSegment init(%s) ok.", filePath.c_str());
         return true;
     }
 public:
@@ -268,7 +268,7 @@ private:
     }
     bool _loadModel(const char *const filePath)
     {
-        LogDebug("loadModel [%s] start ...", filePath);
+        // LogDebug("loadModel [%s] start ...", filePath);
         ifstream ifile(filePath);
         string line;
         vector<string> tmp;
@@ -335,7 +335,7 @@ private:
             return false;
         }
 
-        LogDebug("loadModel [%s] end.", filePath);
+        // LogDebug("loadModel [%s] end.", filePath);
 
         return true;
     }

@@ -58,7 +58,7 @@ public:
         vector<string> words;
         if (!_segment.cut(str, words))
         {
-            LogError("segment cut(%s) failed.", str.c_str());
+            // LogError("segment cut(%s) failed.", str.c_str());
             return false;
         }
 
@@ -105,7 +105,7 @@ private:
         ifstream ifs(idfPath.c_str());
         if (!ifs)
         {
-            LogError("open %s failed.", idfPath.c_str());
+            // LogError("open %s failed.", idfPath.c_str());
             stop("Open Failed  KeywordExtractor.hpp : 109 ");
         }
         string line ;
@@ -118,12 +118,12 @@ private:
             buf.clear();
             if (line.empty())
             {
-                LogError("line[%d] empty. skipped.", lineno);
+                // LogError("line[%d] empty. skipped.", lineno);
                 continue;
             }
             if (!split(line, buf, " ") || buf.size() != 2)
             {
-                LogError("line %d [%s] illegal. skipped.", lineno, line.c_str());
+                // LogError("line %d [%s] illegal. skipped.", lineno, line.c_str());
                 continue;
             }
             idf = atof(buf[1].c_str());

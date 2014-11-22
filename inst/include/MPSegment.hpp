@@ -42,7 +42,7 @@ public:
     bool init(const string &dictPath, const string &userDictPath = "")
     {
         LIMONP_CHECK(_dictTrie.init(dictPath, userDictPath));
-        LogInfo("MPSegment init(%s) ok", dictPath.c_str());
+        // LogInfo("MPSegment init(%s) ok", dictPath.c_str());
         return true;
     }
     bool isUserDictSingleChineseWord(const Unicode::value_type &value) const
