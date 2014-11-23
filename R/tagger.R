@@ -145,7 +145,7 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
   }
   
   if (symbol == F && FILESMODE  ==F) {
-    result <- grep("[^[:space:]]", result, value = T)
+    result = result[ result != " "]
   }
   
   if (.Platform$OS.type == "windows") {
