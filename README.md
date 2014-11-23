@@ -19,14 +19,24 @@
 
 ## 安装
 
-目前该包还没有发布到CRAN，可以通过Github进行安装，Windows 和 Mac OS X Mavericks 还可以下载简单的[安装包]进行安装：
+目前该包已经发布到CRAN：
+
+```r
+install.packages("jiebaR")
+library("jiebaR")
+```
+
+同时还可以通过Github安装正在测试的开发版：
 
 ```r
 library(devtools)
 install_github("qinwf/jiebaR")
+library("jiebaR")
 ```
 
-Windows系统需要安装 [Rtools]，jiebaR支持 R >= 3.1 ，建议使用 gcc >= 4.6 编译包。
+通过Github进行安装时，Windows系统需要安装 [Rtools]，建议使用 gcc >= 4.6 编译包，jiebaR支持 R >= 3.1 。
+
+Windows 和 Mac OS X Mavericks 还可以下载[安装包]进行安装。
 
 ## 使用示例
 
@@ -209,6 +219,20 @@ types of segmentation modes: Maximum Probability, Hidden Markov Model, Query Seg
 + Easy installation.
 + MIT license.
 
+## Installation
+
+Install the latest development version from GitHub:
+
+```r
+devtools::install_github("qinwf/jiebaR")
+```
+
+Install from [CRAN](http://cran.r-project.org/web/packages/jiebaR/index.html):
+
+```r
+install.packages("jiebaR")
+```
+
 ## Example
 
 ### Text Segmentation
@@ -368,6 +392,7 @@ $rhs
 [https://github.com/qinwf/jiebaR](https://github.com/qinwf/jiebaR)
 
 [https://github.com/aszxqw/cppjieba](https://github.com/aszxqw/cppjieba)
+
 ["结巴"中文分词]:https://github.com/fxsjy/jieba
 [Rcpp]:https://github.com/RcppCore/Rcpp
 [Cppjieba]:https://github.com/aszxqw/cppjieba
