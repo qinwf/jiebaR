@@ -193,7 +193,7 @@ $rhs
 # jiebaR
 
 This is a package for Chinese text segmentation, keyword extraction
-and speech tagging with Rcpp and cppjieba. `jiebaR` supports four
+and speech tagging. `jiebaR` supports four
 types of segmentation modes: Maximum Probability, Hidden Markov Model, Query Segment and Mix Segment.
 
 ## Features
@@ -203,7 +203,7 @@ types of segmentation modes: Maximum Probability, Hidden Markov Model, Query Seg
 + Support Chinese text segmentation, keyword extraction, speech tagging and simhash computation.
 + Custom dictionary path.
 + Support simplified Chinese and traditional Chinese.
-+ New words Identificatioin.
++ New words identification.
 + Auto encoding detection.
 + Fast text segmentation.
 + Easy installation.
@@ -290,7 +290,7 @@ cutter$encoding
 cutter$detect = F
 ```
 
-Users can specify their own custom dictionary to be included in the jieba default dictionary. Jieba is able to identify new words, but adding your own new words can ensure a higher accuracy. [imewlconverter] is a good tools for dictionary construction.
+Users can specify their own custom dictionary to be included in the jiebaR default dictionary. jiebaR is able to identify new words, but adding your own new words can ensure a higher accuracy. [imewlconverter] is a good tools for dictionary construction.
 
 ```r
 ShowDictPath()  ### Show path
@@ -325,7 +325,7 @@ keys <= "words of fun"
 ```
 ### Simhash Distance
 Simhash worker can do keyword extraction and find 
-the keywords from two inputs, and then computes Hamming distance betwwen them.
+the keywords from two inputs, and then computes Hamming distance between them.
 
 ```r
  words = "hello world"
@@ -368,9 +368,6 @@ $rhs
 [https://github.com/qinwf/jiebaR](https://github.com/qinwf/jiebaR)
 
 [https://github.com/aszxqw/cppjieba](https://github.com/aszxqw/cppjieba)
-
-
-
 ["结巴"中文分词]:https://github.com/fxsjy/jieba
 [Rcpp]:https://github.com/RcppCore/Rcpp
 [Cppjieba]:https://github.com/aszxqw/cppjieba

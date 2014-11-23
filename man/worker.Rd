@@ -37,7 +37,7 @@ worker(type = "mix", dict = DICTPATH, hmm = HMMPATH, user = USERPATH,
   default value is TRUE. The value
   is used for segment and speech tagging workers.}
 
-\item{qmax}{Max query lenght of words, and the value
+\item{qmax}{Max query length of words, and the value
   is used for \code{query} workers.}
 
 \item{topn}{The number of keywords, and the value is used for
@@ -59,11 +59,11 @@ worker(type = "mix", dict = DICTPATH, hmm = HMMPATH, user = USERPATH,
   is used for segmentation and speech tagging  workers.}
 
 \item{output}{A path to the output file, and default worker will
-  generate filename by system time stamp, the value
+  generate file name by system time stamp, the value
   is used for segmentation and speech tagging  workers.}
 }
 \value{
-Thie function return an enviroment containing segmentation
+This function returns an environment containing segmentation
 settings and worker. Public settings can be modified and got
 using \code{$}.
 }
@@ -86,7 +86,7 @@ a directed acyclic graph and uses dynamic programming algorithm. It
 is the core segmentation algorithm. \code{dict} and \code{user}
 should be provided when initializing jiebaR worker.
 
-Hidden Markov Model uses HMM model to determin status set and
+Hidden Markov Model uses HMM model to determine status set and
 observed set of words. The default HMM model is based on People's Daily
 language library. \code{hmm} should be provided when initializing
 jiebaR worker.

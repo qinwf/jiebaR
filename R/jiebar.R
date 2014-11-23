@@ -33,7 +33,7 @@
 #'   default value is TRUE. The value 
 #'   is used for segment and speech tagging workers.
 #' 
-#' @param qmax Max query lenght of words, and the value 
+#' @param qmax Max query length of words, and the value 
 #'   is used for \code{query} workers.
 #'   
 #' @param topn The number of keywords, and the value is used for 
@@ -55,10 +55,10 @@
 #'   is used for segmentation and speech tagging  workers.
 #'   
 #' @param output A path to the output file, and default worker will
-#'   generate filename by system time stamp, the value 
+#'   generate file name by system time stamp, the value 
 #'   is used for segmentation and speech tagging  workers. 
 #'   
-#' @return  Thie function return an enviroment containing segmentation 
+#' @return  This function returns an environment containing segmentation 
 #' settings and worker. Public settings can be modified and got 
 #' using \code{$}.
 #' 
@@ -75,7 +75,7 @@
 #' is the core segmentation algorithm. \code{dict} and \code{user}
 #' should be provided when initializing jiebaR worker.
 #'  
-#' Hidden Markov Model uses HMM model to determin status set and 
+#' Hidden Markov Model uses HMM model to determine status set and 
 #' observed set of words. The default HMM model is based on People's Daily 
 #' language library. \code{hmm} should be provided when initializing 
 #' jiebaR worker.

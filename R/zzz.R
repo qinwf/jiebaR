@@ -6,7 +6,7 @@ NULL
 #' The path of dictionary
 #' 
 #' The path of dictionary, and it is used by segmentation and other 
-#' functon. 
+#' function. 
 #' @format  character
 #' @export
 DICTPATH<-NULL

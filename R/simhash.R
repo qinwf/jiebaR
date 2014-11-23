@@ -1,4 +1,4 @@
-#' Simhash computatioin
+#' Simhash computation
 #' 
 #' Simhash worker uses the keyword extraction worker to find the keywords
 #' and uses simhash algorithm to compute simhash.  \code{dict} 

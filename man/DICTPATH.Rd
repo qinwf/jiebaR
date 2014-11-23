@@ -21,7 +21,7 @@ STOPPATH
 }
 \description{
 The path of dictionary, and it is used by segmentation and other
-functon.
+function.
 }
 \keyword{datasets}
 

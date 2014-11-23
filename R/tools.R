@@ -2,7 +2,7 @@
 #' 
 #' Show the default dictionaries' path. \code{HMMPATH}, \code{DICTPATH}
 #' , \code{IDFPATH}, \code{STOPPATH} and \code{USERPATH} can be changed 
-#' in default enviroment.
+#' in default environment.
 #' @author Qin Wenfeng 
 #' 
 #' @export

@@ -14,7 +14,7 @@
 #' is the core segmentation algorithm. \code{dict} and \code{user}
 #' should be provided when initializing jiebaR worker.
 #'  
-#' Hidden Markov Model uses HMM model to determin status set and 
+#' Hidden Markov Model uses HMM model to determine status set and 
 #' observed set of words. The default HMM model is based on People's Daily 
 #' language library. \code{hmm} should be provided when initializing 
 #' jiebaR worker.

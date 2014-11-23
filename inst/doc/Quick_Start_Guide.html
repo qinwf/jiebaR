@@ -71,7 +71,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>Support Chinese text segmentation, keyword extraction, speech tagging and simhash computation.</li>
 <li>Custom dictionary path.</li>
 <li>Support simplified Chinese and traditional Chinese.</li>
-<li>New words Identificatioin.</li>
+<li>New words identification.</li>
 <li>Auto encoding detection.</li>
 <li>Fast text segmentation.</li>
 <li>Easy installation.</li>
@@ -136,7 +136,7 @@ $detect $encoding $symbol $output $write $lines can be reset.</code></pre>
 <pre class="r"><code>cutter$encoding
 
 cutter$detect = F</code></pre>
-<p>Users can specify their own custom dictionary to be included in the jieba default dictionary. Jieba is able to identify new words, but adding your own new words can ensure a higher accuracy. <a href="https://github.com/studyzy/imewlconverter">imewlconverter</a> is a good tools for dictionary construction.</p>
+<p>Users can specify their own custom dictionary to be included in the jiebaR default dictionary. jiebaR is able to identify new words, but adding your own new words can ensure a higher accuracy. <a href="https://github.com/studyzy/imewlconverter">imewlconverter</a> is a good tools for dictionary construction.</p>
 <pre class="r"><code>ShowDictPath()  ### Show path
 EditDict()      ### Edit user dictionary
 ?EditDict()     ### For more information</code></pre>
@@ -160,7 +160,7 @@ keys &lt;= &quot;words of fun&quot;</code></pre>
 </div>
 <div id="simhash-distance" class="section level3">
 <h3>Simhash Distance</h3>
-<p>Simhash worker can do keyword extraction and find the keywords from two inputs, and then computes Hamming distance betwwen them.</p>
+<p>Simhash worker can do keyword extraction and find the keywords from two inputs, and then computes Hamming distance between them.</p>
 <pre class="r"><code> words = &quot;hello world&quot;
  simhasher = worker(&quot;simhash&quot;,topn=1)
  simhasher &lt;= words
