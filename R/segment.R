@@ -145,7 +145,7 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
   code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
   result <- jiebar$worker$cut(code)
   if (symbol == F) {
-    result <- grep("[^[:space:]]", result, value = T)
+    result = result[ result != " "]
   }
   if (.Platform$OS.type == "windows") {
     Encoding(result)<-"UTF-8"}
