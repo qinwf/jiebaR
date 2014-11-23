@@ -1,9 +1,10 @@
 #' Simhash computatioin
 #' 
-#' Simhash worker use the keyword extraction worker to find the keywords
-#' and using simhash algorithm to compute simhash.  \code{dict} 
+#' Simhash worker uses the keyword extraction worker to find the keywords
+#' and uses simhash algorithm to compute simhash.  \code{dict} 
 #' \code{hmm}, \code{idf} and \code{stop_word} should be provided when initializing 
 #' jiebaR worker.
+#' 
 #' There is a symbol \code{<=} for this function.
 #' @seealso \code{\link{<=.simhash}} \code{\link{worker}} 
 #' @param code A Chinese sentence or the path of a text file. 
@@ -77,7 +78,7 @@ simhashw <- function(code, jiebar) {
 #' 
 #' The function uses Simhash worker to do keyword extraction and find 
 #' the keywords from two inputs, and then computes Hamming distance 
-#' of between them.
+#' between them.
 #' 
 #' @param codel a Chinese sentence or the path of a text file
 #' @param coder a Chinese sentence or the path of a text file

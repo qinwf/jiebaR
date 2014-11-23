@@ -11,10 +11,12 @@ simhash(code, jiebar)
 \item{jiebar}{jiebaR Worker.}
 }
 \description{
-Simhash worker use the keyword extraction worker to find the keywords
-and using simhash algorithm to compute simhash.  \code{dict}
+Simhash worker uses the keyword extraction worker to find the keywords
+and uses simhash algorithm to compute simhash.  \code{dict}
 \code{hmm}, \code{idf} and \code{stop_word} should be provided when initializing
 jiebaR worker.
+}
+\details{
 There is a symbol \code{<=} for this function.
 }
 \examples{

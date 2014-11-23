@@ -5,7 +5,7 @@
 #' @description The function detect the encoding of input files encoding.
 #' @param file A file path.
 #' @return The encoding of file.
-#' @author Wu Yongwei
+#' @author Wu Yongwei, Qin wenfeng
 #' @references \url{https://github.com/adah1972/tellenc}
 #' @export
 filecoding <- function(file) {

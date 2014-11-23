@@ -104,7 +104,7 @@ $user
 $detect $encoding $symbol $output $write $lines can be reset.
 ```
 
-The model public settings can be modified and got using `$` , such as ` WorkerName$symbol = T `. some private setting are fixed when the engine is initialized, and you can get then by `WorkerName$PrivateVarible`
+The model public settings can be modified and got using `$` , such as ` WorkerName$symbol = T `. Some private settings are fixed when the engine is initialized, and you can get them by `WorkerName$PrivateVarible`.
 
 ```r
 cutter$encoding

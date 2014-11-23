@@ -15,7 +15,7 @@ The encoding of file.
 The function detect the encoding of input files encoding.
 }
 \author{
-Wu Yongwei
+Wu Yongwei, Qin wenfeng
 }
 \references{
 \url{https://github.com/adah1972/tellenc}

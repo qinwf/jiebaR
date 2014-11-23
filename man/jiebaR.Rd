@@ -12,8 +12,8 @@ Query Segment and Mix Segment.
 }
 \details{
 You can use custom
-dictionary to be included in the jiebaR default dictionary. JiebaR also
-can identify new words, but adding your own new words will ensure a higher
+dictionary to be included in the jiebaR default dictionary. JiebaR can
+also identify new words, but adding your own new words will ensure a higher
 accuracy.
 }
 \examples{

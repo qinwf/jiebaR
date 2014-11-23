@@ -11,7 +11,8 @@
 \item{formula}{Two Chinese sentence or the path of text file.}
 }
 \description{
-Distance symbol to compute distance.
+Distance symbol to compute distance.  This symbol is deprecated, and
+please use \code{\link{distance}} instead.
 }
 \examples{
 \donttest{

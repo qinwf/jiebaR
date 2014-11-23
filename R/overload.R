@@ -84,7 +84,8 @@ print.inv<-function(x, ...){
 
 #' Distance symbol
 #' 
-#' Distance symbol to compute distance.
+#' Distance symbol to compute distance.  This symbol is deprecated, and
+#' please use \code{\link{distance}} instead.
 #' @param jiebar jiebaR Worker.
 #' @param formula  Two Chinese sentence or the path of text file. 
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>

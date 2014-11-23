@@ -12,7 +12,7 @@ tag(code, jiebar)
 }
 \description{
 The function uses Speech Tagging worker to cut word and
-tags each word after segmentation, using labels compatible with
+tags each word after segmentation using labels compatible with
 ictclas.  \code{dict}
 \code{hmm} and \code{user} should be provided when initializing
 jiebaR worker.
@@ -31,6 +31,9 @@ tagger <= words
 }
 \author{
 Qin Wenfeng
+}
+\references{
+The ictclas speech tag : \url{http://t.cn/8FdDD3I}
 }
 \seealso{
 \code{\link{<=.tagger}} \code{\link{worker}}

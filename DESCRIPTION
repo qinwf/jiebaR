@@ -8,12 +8,12 @@ Maintainer: Qin Wenfeng <wenfeng.qin@qq.com>
 Description: Chinese text segmentation, keyword extraction and speech tagging
     with Rcpp and CppJieba.
 License: MIT + file LICENSE
-Depends: 
+Depends:
     R (>= 3.1)
-Imports: 
+Imports:
     Rcpp,methods
 LinkingTo: Rcpp
-Suggests: 
+Suggests:
     testthat,
     knitr
 URL: https://github.com/qinwf/jiebaR/

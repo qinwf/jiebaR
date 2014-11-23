@@ -12,27 +12,27 @@ segment(code, jiebar)
 }
 \description{
 The function uses initialized engines for words segmentation. You
-can initialize multiple engines simultaneously using \code{worker()},
-and the model public settings can be got and modified using \code{$}
-like \code{ WorkerName$symbol = T }. some private setting are fixed
-when engine is initialized,and you can get then by
+can initialize multiple engines simultaneously using \code{worker()}.
+Public settings of workers can be got and modified using \code{$},
+such as \code{ WorkerName$symbol = T }. Some private settings are fixed
+when engine is initialized, and you can get then by
 \code{WorkerName$PrivateVarible}.
 }
 \details{
 There are four kinds of models:
 
 Maximum probability segmentation model uses Trie tree to construct
-a directed acyclic graph and dynamic programming algorithm,and it
+a directed acyclic graph and uses dynamic programming algorithm. It
 is the core segmentation algorithm. \code{dict} and \code{user}
 should be provided when initializing jiebaR worker.
 
 Hidden Markov Model uses HMM model to determin status set and
-observed set of words. The default hmm model is base on People's Daily
+observed set of words. The default HMM model is based on People's Daily
 language library. \code{hmm} should be provided when initializing
 jiebaR worker.
 
 MixSegment model uses both Maximum probability segmentation model
-and Hidden Markov Model to construct segmentation.  \code{dict}
+and Hidden Markov Model to construct segmentation.  \code{dict},
 \code{hmm} and \code{user} should be provided when initializing
 jiebaR worker.
 

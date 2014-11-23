@@ -1,7 +1,7 @@
 #' Speech Tagging
 #' 
 #' The function uses Speech Tagging worker to cut word and 
-#' tags each word after segmentation, using labels compatible with 
+#' tags each word after segmentation using labels compatible with 
 #' ictclas.  \code{dict} 
 #' \code{hmm} and \code{user} should be provided when initializing 
 #' jiebaR worker.
@@ -10,6 +10,7 @@
 #' @seealso \code{\link{<=.tagger}} \code{\link{worker}} 
 #' @param code a Chinese sentence or the path of a text file
 #' @param jiebar jiebaR Worker
+#' @references  The ictclas speech tag : \url{http://t.cn/8FdDD3I}
 #' @examples 
 #' \donttest{
 #' words = "hello world"

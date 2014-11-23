@@ -1,6 +1,6 @@
 #' Keyword extraction
 #' 
-#' Keyword Extraction worker use MixSegment model to cut word and use 
+#' Keyword Extraction worker uses MixSegment model to cut word and uses 
 #' TF-IDF algorithm to find the keywords.  \code{dict} , \code{hmm}, 
 #' \code{idf}, \code{stop_word} and \code{topn} should be provided when initializing 
 #' jiebaR worker.

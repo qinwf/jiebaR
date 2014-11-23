@@ -1,6 +1,6 @@
 #' Print worker settings
 #' 
-#' The functoin print the worker settings.
+#' These functoins print the worker settings.
 #' 
 #' @param x The jiebaR Worker.
 #' @param ... Other arguments.

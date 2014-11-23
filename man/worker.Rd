@@ -33,58 +33,61 @@ worker(type = "mix", dict = DICTPATH, hmm = HMMPATH, user = USERPATH,
   \code{simhash} and \code{keywords} workers.}
 
 \item{write}{Whether to write the output to a file, or return
-  a the obeject in a object, and default value is TRUE, and the value
+  a the result in a object, when the input is a file path. The
+  default value is TRUE. The value
   is used for segment and speech tagging workers.}
 
 \item{qmax}{Max query lenght of words, and the value
   is used for \code{query} workers.}
 
-\item{topn}{The number of keywords, the value is used for
+\item{topn}{The number of keywords, and the value is used for
   \code{simhash} and \code{keywords} workers.}
 
-\item{encoding}{The encoding of Input file, if encoding
+\item{encoding}{The encoding of the input file. If encoding
   detection is enable, the value of \code{encoding} will be
   ignore.}
 
 \item{detect}{Whether to detect the encoding of input file
- using \code{filecoding} function.}
+ using \code{filecoding} function. If encoding
+ detection is enable, the value of \code{encoding} will be
+ ignore.}
 
 \item{symbol}{Whether to keep symbols in the sentence.}
 
 \item{lines}{The maximal number of lines to read at one
-  time when input is a file. the value
-  is used for segment and speech tagging  workers.}
+  time when input is a file. The value
+  is used for segmentation and speech tagging  workers.}
 
 \item{output}{A path to the output file, and default worker will
   generate filename by system time stamp, the value
-  is used for segment and speech tagging  workers.}
+  is used for segmentation and speech tagging  workers.}
 }
 \value{
-The function return an enviroment which is containing segmentation
-settings and worker. Public settings can be modified and get
+Thie function return an enviroment containing segmentation
+settings and worker. Public settings can be modified and got
 using \code{$}.
 }
 \description{
-This function initializes jiebaR workers. You can initialize different
+This function can initialize jiebaR workers. You can initialize different
 kinds of workers including \code{mix}, \code{mp}, \code{hmm},
 \code{query}, \code{tag}, \code{simhash}, and \code{keywords}.
 see Detail for more information.
 }
 \details{
-The package uses initialized engines for word segmentation, you
-can initialize multiple engines simultaneously, and reset the model
-public settings can be modified and get using \code{$} like
-\code{ WorkerName$symbol = T }. Some private setting are fixed
-when engine is initialized, and you can get then by
+The package uses initialized engines for word segmentation, and you
+can initialize multiple engines simultaneously. You can also reset the model
+public settings using \code{$} such as
+\code{ WorkerName$symbol = T }. Some private settings are fixed
+when a engine is initialized, and you can get then by
 \code{WorkerName$PrivateVarible}.
 
 Maximum probability segmentation model uses Trie tree to construct
-a directed acyclic graph and dynamic programming algorithm, and it
+a directed acyclic graph and uses dynamic programming algorithm. It
 is the core segmentation algorithm. \code{dict} and \code{user}
 should be provided when initializing jiebaR worker.
 
 Hidden Markov Model uses HMM model to determin status set and
-observed set of words. The default hmm model is base on People's Daily
+observed set of words. The default HMM model is based on People's Daily
 language library. \code{hmm} should be provided when initializing
 jiebaR worker.
 
@@ -98,19 +101,19 @@ enumerates all the possible long words in the dictionary.  \code{dict},
 \code{hmm} and \code{qmax} should be provided when initializing
 jiebaR worker.
 
-Speech Tagging worker use MixSegment model to cut word and
-tag each word after segmentation, using labels compatible with
-ictclas.  \code{dict}
+Speech Tagging worker uses MixSegment model to cut word and
+tag each word after segmentation using labels compatible with
+ictclas.  \code{dict},
 \code{hmm} and \code{user} should be provided when initializing
 jiebaR worker.
 
-Keyword Extraction worker use MixSegment model to cut word and use
+Keyword Extraction worker uses MixSegment model to cut word and use
 TF-IDF algorithm to find the keywords.  \code{dict} ,\code{hmm},
 \code{idf}, \code{stop_word} and \code{topn} should be provided when initializing
 jiebaR worker.
 
-Simhash worker use the keyword extraction worker to find the keywords
-and using simhash algorithm to compute simhash.  \code{dict}
+Simhash worker uses the keyword extraction worker to find the keywords
+and uses simhash algorithm to compute simhash.  \code{dict}
 \code{hmm}, \code{idf} and \code{stop_word} should be provided when initializing
 jiebaR worker.
 }
