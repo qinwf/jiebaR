@@ -31,16 +31,7 @@ STOPPATH<-NULL
 #     if (.Platform$OS.type == "windows") {
 #       Sys.setlocale( locale = "English")
 #     }
-    if(!file.exists(file.path(find.package("jiebaR"),"dict","jieba.dict.utf8"))){
-      unzip(file.path(find.package("jiebaR"),"dict","jieba.dict.zip"),exdir =file.path(find.package("jiebaR"),"dict") )
-    }
-    if(!file.exists(file.path(find.package("jiebaR"),"dict","hmm_model.utf8"))){
-      unzip(file.path(find.package("jiebaR"),"dict","hmm_model.zip"),exdir =file.path(find.package("jiebaR"),"dict") )
-    }
-    if(!file.exists(file.path(find.package("jiebaR"),"dict","idf.utf8"))){
-      unzip(file.path(find.package("jiebaR"),"dict","idf.zip"),exdir =file.path(find.package("jiebaR"),"dict") )
-    }
-   
+  
     assign(x = "DICTPATH", file.path(find.package("jiebaR"),"dict","jieba.dict.utf8"),asNamespace('jiebaR'))
     assign(x = "HMMPATH",  file.path(find.package("jiebaR"),"dict","hmm_model.utf8"),asNamespace('jiebaR'))
     assign(x = "USERPATH", file.path(find.package("jiebaR"),"dict","user.dict.utf8"),asNamespace('jiebaR'))
