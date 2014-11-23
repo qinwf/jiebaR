@@ -59,16 +59,17 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <!--
 %\VignetteEngine{knitr::rmarkdown}
 %\VignetteIndexEntry{Quick Start Guide}
+  \usepackage[utf8]{inputenc}
 -->
-
-<p>This is a package for Chinese text segmentation, Keyword Extraction and Speech Tagging with Rcpp and cppjieba. jiebaR Supports four types of segmentation mode: Maximum Probability, Hidden Markov Model, Query Segment and Mix Segment.</p>
+<p><a href="https://github.com/qinwf/jiebaR">Chinese Version</a></p>
+<p>This is a package for Chinese text segmentation, keyword extraction and speech tagging. <code>jiebaR</code> supports four types of segmentation modes: Maximum Probability, Hidden Markov Model, Query Segment and Mix Segment.</p>
 <div id="features" class="section level2">
 <h2>Features</h2>
 <ul>
 <li>Support Windows, Linux,and Mac.</li>
 <li>Using Rcpp Modules to load different segmentation worker at the same time.</li>
 <li>Support Chinese text segmentation, keyword extraction, speech tagging and simhash computation.</li>
-<li>Custom dictionary to be included in the jiebaR default dictionary.</li>
+<li>Custom dictionary path.</li>
 <li>Support simplified Chinese and traditional Chinese.</li>
 <li>New words Identificatioin.</li>
 <li>Auto encoding detection.</li>
@@ -81,11 +82,11 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <h2>Example</h2>
 <div id="text-segmentation" class="section level3">
 <h3>Text Segmentation</h3>
-<p>There are four segmentation models，and you can use <code>worker()</code> to initialize worker, then use <code>&lt;=</code> or <code>segment()</code> to do the segmentation.</p>
+<p>There are four segmentation models. You can use <code>worker()</code> to initialize a worker, and then use <code>&lt;=</code> or <code>segment()</code> to do the segmentation.</p>
 <pre class="r"><code>library(jiebaR)
 
 ##  Using default argument to initialize worker.
-mixseg = worker()
+cutter = worker()
 
 ##       jiebar( type = &quot;mix&quot;, dict = &quot;dictpath/jieba.dict.utf8&quot;,
 ##               hmm  = &quot;dictpath/hmm_model.utf8&quot;,  ### HMM model data
@@ -93,23 +94,23 @@ mixseg = worker()
 
 ###  Note: Can not display Chinese character here.
 
-mixseg &lt;= &quot;This is a good day!&quot;  
+cutter &lt;= &quot;This is a good day!&quot;  
 
-## OR segment( &quot;This is a good day!&quot; , mixseg )
+## OR segment( &quot;This is a good day!&quot; , cutter )
 </code></pre>
 <pre class="r"><code>[1] &quot;This&quot; &quot;is&quot;   &quot;a&quot;    &quot;good&quot; &quot;day&quot; </code></pre>
 <p>You can pipe a file path to cut file.</p>
-<pre class="r"><code>mixseg &lt;= &quot;./temp.dat&quot;  ### Auto encoding detection.
+<pre class="r"><code>cutter &lt;= &quot;./temp.dat&quot;  ### Auto encoding detection.
 
-## OR segment( &quot;./temp.dat&quot; , mixseg )   </code></pre>
-<p>The package uses initialized engines for word segmentation, you can initialize multiple engines simultaneously.</p>
-<pre class="r"><code>mixseg2 = worker(type  = &quot;mix&quot;, dict = &quot;dict/jieba.dict.utf8&quot;,
+## OR segment( &quot;./temp.dat&quot; , cutter )   </code></pre>
+<p>The package uses initialized engines for word segmentation. You can initialize multiple engines simultaneously.</p>
+<pre class="r"><code>cutter2 = worker(type  = &quot;mix&quot;, dict = &quot;dict/jieba.dict.utf8&quot;,
                  hmm   = &quot;dict/hmm_model.utf8&quot;,  
                  user  = &quot;dict/test.dict.utf8&quot;,
                  detect=T,      symbol = F,
                  lines = 1e+05, output = NULL
                  ) 
-mixseg2   ### Print information of worker</code></pre>
+cutter2   ### Print information of worker</code></pre>
 <pre class="r"><code>Worker Type:  Mix Segment
 
 Detect Encoding :  TRUE
@@ -131,10 +132,10 @@ $user
 [1] &quot;dict/test.dict.utf8&quot;
 
 $detect $encoding $symbol $output $write $lines can be reset.</code></pre>
-<p>You can reset the model public settings can be modified and get using <code>$</code> , such as <code>WorkerName$symbol = T</code>. some private setting are fixed when engine is initialized, and you can get then by <code>WorkerName$PrivateVarible</code></p>
-<pre class="r"><code>mixseg$encoding
+<p>The model public settings can be modified and got using <code>$</code> , such as <code>WorkerName$symbol = T</code>. some private setting are fixed when the engine is initialized, and you can get then by <code>WorkerName$PrivateVarible</code></p>
+<pre class="r"><code>cutter$encoding
 
-mixseg$detect = F</code></pre>
+cutter$detect = F</code></pre>
 <p>Users can specify their own custom dictionary to be included in the jieba default dictionary. Jieba is able to identify new words, but adding your own new words can ensure a higher accuracy. <a href="https://github.com/studyzy/imewlconverter">imewlconverter</a> is a good tools for dictionary construction.</p>
 <pre class="r"><code>ShowDictPath()  ### Show path
 EditDict()      ### Edit user dictionary
@@ -142,7 +143,7 @@ EditDict()      ### Edit user dictionary
 </div>
 <div id="speech-tagging" class="section level3">
 <h3>Speech Tagging</h3>
-<p>Speech Tagging function <code>&lt;=.tagger</code> or <code>tag</code> uses Speech Tagging worker to cut word and tags each word after segmentation, using labels compatible with ictclas. <code>dict</code> <code>hmm</code> and <code>user</code> should be provided when initializing jiebaR worker.</p>
+<p>Speech Tagging function <code>&lt;=.tagger</code> or <code>tag</code> uses speech tagging worker to cut word and tags each word after segmentation, using labels compatible with ictclas. <code>dict</code> <code>hmm</code> and <code>user</code> should be provided when initializing <code>jiebaR</code> worker.</p>
 <pre class="r"><code>words = &quot;hello world&quot;
 tagger = worker(&quot;tag&quot;)
 tagger &lt;= words</code></pre>
@@ -151,7 +152,7 @@ tagger &lt;= words</code></pre>
 </div>
 <div id="keyword-extraction" class="section level3">
 <h3>Keyword Extraction</h3>
-<p>Keyword Extraction worker use MixSegment model to cut word and use TF-IDF algorithm to find the keywords. <code>dict</code>, <code>hmm</code>, <code>idf</code>, <code>stop_word</code> and <code>topn</code> should be provided when initializing jiebaR worker.</p>
+<p>Keyword Extraction worker use MixSegment model to cut word and use TF-IDF algorithm to find the keywords. <code>dict</code>, <code>hmm</code>, <code>idf</code>, <code>stop_word</code> and <code>topn</code> should be provided when initializing <code>jiebaR</code> worker.</p>
 <pre class="r"><code>keys = worker(&quot;keywords&quot;, topn = 1)
 keys &lt;= &quot;words of fun&quot;</code></pre>
 <pre class="r"><code>11.7392 
@@ -159,7 +160,7 @@ keys &lt;= &quot;words of fun&quot;</code></pre>
 </div>
 <div id="simhash-distance" class="section level3">
 <h3>Simhash Distance</h3>
-<p>Simhash worker can do keyword extraction worker and find the keywords for two inputs, then computes Hamming distance of them.</p>
+<p>Simhash worker can do keyword extraction and find the keywords from two inputs, and then computes Hamming distance betwwen them.</p>
 <pre class="r"><code> words = &quot;hello world&quot;
  simhasher = worker(&quot;simhash&quot;,topn=1)
  simhasher &lt;= words
@@ -172,7 +173,7 @@ keys &lt;= &quot;words of fun&quot;</code></pre>
 $keyword
 11.7392 
 &quot;hello&quot; </code></pre>
-<pre class="r"><code> simhasher == (&quot;hello world&quot; ~ &quot;hello world!&quot;)</code></pre>
+<pre class="r"><code>distance(&quot;hello world&quot; , &quot;hello world!&quot; , simhasher)</code></pre>
 <pre class="r"><code>$distance
 [1] &quot;0&quot;
 
@@ -194,8 +195,8 @@ $rhs
 </div>
 <div id="more-information-and-issues" class="section level2">
 <h2>More Information and Issues</h2>
-<p><a href="https://github.com/qinwf/jiebaR"><a href="https://github.com/qinwf/jiebaR">https://github.com/qinwf/jiebaR</a></a></p>
-<p><a href="https://github.com/aszxqw/cppjieba"><a href="https://github.com/aszxqw/cppjieba">https://github.com/aszxqw/cppjieba</a></a></p>
+<p><a href="https://github.com/qinwf/jiebaR"><a href="https://github.com/qinwf/jiebaR" class="uri">https://github.com/qinwf/jiebaR</a></a></p>
+<p><a href="https://github.com/aszxqw/cppjieba"><a href="https://github.com/aszxqw/cppjieba" class="uri">https://github.com/aszxqw/cppjieba</a></a></p>
 </div>
 
 

@@ -1,0 +1,195 @@
+---
+title: "Quick Start Guide - jiebaR"
+output: 
+  html_document:
+    theme: null
+    css: mystyle.css
+    toc: yes
+---
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Quick Start Guide}
+  \usepackage[utf8]{inputenc}
+-->
+
+[Chinese Version]
+
+This is a package for Chinese text segmentation, keyword extraction
+and speech tagging. `jiebaR` supports four
+types of segmentation modes: Maximum Probability, Hidden Markov Model, Query Segment and Mix Segment.
+
+## Features
+
++ Support Windows, Linux,and Mac.
++ Using Rcpp Modules to load different segmentation worker at the same time.
++ Support Chinese text segmentation, keyword extraction, speech tagging and simhash computation.
++ Custom dictionary path.
++ Support simplified Chinese and traditional Chinese.
++ New words Identificatioin.
++ Auto encoding detection.
++ Fast text segmentation.
++ Easy installation.
++ MIT license.
+
+## Example
+
+### Text Segmentation
+
+There are four segmentation models. You can use `worker()` to initialize a worker, and then use `<=` or `segment()` to do the segmentation.
+
+```r
+library(jiebaR)
+
+##  Using default argument to initialize worker.
+cutter = worker()
+
+##       jiebar( type = "mix", dict = "dictpath/jieba.dict.utf8",
+##               hmm  = "dictpath/hmm_model.utf8",  ### HMM model data
+##               user = "dictpath/user.dict.utf8") ### user dictionary
+
+###  Note: Can not display Chinese character here.
+
+cutter <= "This is a good day!"  
+
+## OR segment( "This is a good day!" , cutter )
+
+```
+
+```r
+[1] "This" "is"   "a"    "good" "day" 
+```
+
+You can pipe a file path to cut file.
+
+```r
+cutter <= "./temp.dat"  ### Auto encoding detection.
+
+## OR segment( "./temp.dat" , cutter )   
+```
+
+The package uses initialized engines for word segmentation. You
+can initialize multiple engines simultaneously.
+
+```r
+cutter2 = worker(type  = "mix", dict = "dict/jieba.dict.utf8",
+                 hmm   = "dict/hmm_model.utf8",  
+                 user  = "dict/test.dict.utf8",
+                 detect=T,      symbol = F,
+                 lines = 1e+05, output = NULL
+                 ) 
+cutter2   ### Print information of worker
+```
+
+```r
+Worker Type:  Mix Segment
+
+Detect Encoding :  TRUE
+Default Encoding:  UTF-8
+Keep Symbols    :  FALSE
+Output Path     :  
+Write File      :  TRUE
+Max Read Lines  :  1e+05
+
+Fixed Model Components:  
+
+$dict
+[1] "dict/jieba.dict.utf8"
+
+$hmm
+[1] "dict/hmm_model.utf8"
+
+$user
+[1] "dict/test.dict.utf8"
+
+$detect $encoding $symbol $output $write $lines can be reset.
+```
+
+The model public settings can be modified and got using `$` , such as ` WorkerName$symbol = T `. some private setting are fixed when the engine is initialized, and you can get then by `WorkerName$PrivateVarible`
+
+```r
+cutter$encoding
+
+cutter$detect = F
+```
+
+Users can specify their own custom dictionary to be included in the jieba default dictionary. Jieba is able to identify new words, but adding your own new words can ensure a higher accuracy. [imewlconverter] is a good tools for dictionary construction.
+
+```r
+ShowDictPath()  ### Show path
+EditDict()      ### Edit user dictionary
+?EditDict()     ### For more information
+```
+
+### Speech Tagging
+Speech Tagging function `<=.tagger` or `tag` uses speech tagging worker to cut word and tags each word after segmentation, using labels compatible with ictclas.  `dict` `hmm` and `user` should be provided when initializing `jiebaR` worker.
+
+```r
+words = "hello world"
+tagger = worker("tag")
+tagger <= words
+```
+```r
+      x       x 
+"hello" "world" 
+```
+### Keyword Extraction
+Keyword Extraction worker use MixSegment model to cut word and use 
+ TF-IDF algorithm to find the keywords.  `dict`, `hmm`, 
+ `idf`, `stop_word` and `topn` should be provided when initializing  `jiebaR` worker.
+
+```r
+keys = worker("keywords", topn = 1)
+keys <= "words of fun"
+```
+```r
+11.7392 
+  "fun" 
+```
+### Simhash Distance
+Simhash worker can do keyword extraction and find 
+the keywords from two inputs, and then computes Hamming distance betwwen them.
+
+```r
+ words = "hello world"
+ simhasher = worker("simhash",topn=1)
+ simhasher <= words
+ ```
+ 
+ ```r
+ $simhash
+[1] "3804341492420753273"
+
+$keyword
+11.7392 
+"hello" 
+```
+
+```r
+distance("hello world" , "hello world!" , simhasher)
+```
+
+```r
+$distance
+[1] "0"
+
+$lhs
+11.7392 
+"hello" 
+
+$rhs
+11.7392 
+"hello" 
+```
+
+## Future Development
+
++ Support parallel programming on Windows , Linux , Mac.
++ Simple Natural Language Processing features.
+
+## More Information and Issues
+[https://github.com/qinwf/jiebaR](https://github.com/qinwf/jiebaR)
+
+[https://github.com/aszxqw/cppjieba](https://github.com/aszxqw/cppjieba)
+
+[Chinese Version]:https://github.com/qinwf/jiebaR
+[imewlconverter]:https://github.com/studyzy/imewlconverter

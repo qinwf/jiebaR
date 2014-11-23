@@ -191,16 +191,17 @@ $rhs
 + 简单的自然语言统计分析功能。
 
 # jiebaR
-This is a package for Chinese text segmentation, Keyword Extraction
-and Speech Tagging with Rcpp and cppjieba. jiebaR Supports four
-types of segmentation mode: Maximum Probability, Hidden Markov Model, Query Segment and Mix Segment.
+
+This is a package for Chinese text segmentation, keyword extraction
+and speech tagging with Rcpp and cppjieba. `jiebaR` supports four
+types of segmentation modes: Maximum Probability, Hidden Markov Model, Query Segment and Mix Segment.
 
 ## Features
 
 + Support Windows, Linux,and Mac.
 + Using Rcpp Modules to load different segmentation worker at the same time.
 + Support Chinese text segmentation, keyword extraction, speech tagging and simhash computation.
-+ Custom dictionary to be included in the jiebaR default dictionary.
++ Custom dictionary path.
 + Support simplified Chinese and traditional Chinese.
 + New words Identificatioin.
 + Auto encoding detection.
@@ -212,23 +213,23 @@ types of segmentation mode: Maximum Probability, Hidden Markov Model, Query Segm
 
 ### Text Segmentation
 
-There are four segmentation models，and you can use `worker()` to initialize worker, then use `<=` or `segment()` to do the segmentation.
+There are four segmentation models. You can use `worker()` to initialize a worker, and then use `<=` or `segment()` to do the segmentation.
 
 ```r
 library(jiebaR)
 
 ##  Using default argument to initialize worker.
-mixseg = worker()
+cutter = worker()
 
-##       worker( type = "mix", dict = "dictpath/jieba.dict.utf8",
+##       jiebar( type = "mix", dict = "dictpath/jieba.dict.utf8",
 ##               hmm  = "dictpath/hmm_model.utf8",  ### HMM model data
 ##               user = "dictpath/user.dict.utf8") ### user dictionary
 
 ###  Note: Can not display Chinese character here.
 
-mixseg <= "This is a good day!"  
+cutter <= "This is a good day!"  
 
-## OR segment( "This is a good day!" , mixseg )
+## OR segment( "This is a good day!" , cutter )
 
 ```
 
@@ -239,22 +240,22 @@ mixseg <= "This is a good day!"
 You can pipe a file path to cut file.
 
 ```r
-mixseg <= "./temp.dat"  ### Auto encoding detection.
+cutter <= "./temp.dat"  ### Auto encoding detection.
 
-## OR segment( "./temp.dat" , mixseg )   
+## OR segment( "./temp.dat" , cutter )   
 ```
 
-The package uses initialized engines for word segmentation, you
+The package uses initialized engines for word segmentation. You
 can initialize multiple engines simultaneously.
 
 ```r
-mixseg2 = worker(type  = "mix", dict = "dict/jieba.dict.utf8",
+cutter2 = worker(type  = "mix", dict = "dict/jieba.dict.utf8",
                  hmm   = "dict/hmm_model.utf8",  
                  user  = "dict/test.dict.utf8",
                  detect=T,      symbol = F,
                  lines = 1e+05, output = NULL
                  ) 
-mixseg2   ### Print information of worker
+cutter2   ### Print information of worker
 ```
 
 ```r
@@ -281,12 +282,12 @@ $user
 $detect $encoding $symbol $output $write $lines can be reset.
 ```
 
-You can reset the model public settings can be modified and get using `$` , such as ` WorkerName$symbol = T `. some private setting are fixed when engine is initialized, and you can get then by `WorkerName$PrivateVarible`
+The model public settings can be modified and got using `$` , such as ` WorkerName$symbol = T `. some private setting are fixed when the engine is initialized, and you can get then by `WorkerName$PrivateVarible`
 
 ```r
-mixseg$encoding
+cutter$encoding
 
-mixseg$detect = F
+cutter$detect = F
 ```
 
 Users can specify their own custom dictionary to be included in the jieba default dictionary. Jieba is able to identify new words, but adding your own new words can ensure a higher accuracy. [imewlconverter] is a good tools for dictionary construction.
@@ -298,7 +299,7 @@ EditDict()      ### Edit user dictionary
 ```
 
 ### Speech Tagging
-Speech Tagging function `<=.tagger` or `tag` uses Speech Tagging worker to cut word and tags each word after segmentation, using labels compatible with ictclas.  `dict` `hmm` and `user` should be provided when initializing jiebaR worker.
+Speech Tagging function `<=.tagger` or `tag` uses speech tagging worker to cut word and tags each word after segmentation, using labels compatible with ictclas.  `dict` `hmm` and `user` should be provided when initializing `jiebaR` worker.
 
 ```r
 words = "hello world"
@@ -312,7 +313,7 @@ tagger <= words
 ### Keyword Extraction
 Keyword Extraction worker use MixSegment model to cut word and use 
  TF-IDF algorithm to find the keywords.  `dict`, `hmm`, 
- `idf`, `stop_word` and `topn` should be provided when initializing  jiebaR worker.
+ `idf`, `stop_word` and `topn` should be provided when initializing  `jiebaR` worker.
 
 ```r
 keys = worker("keywords", topn = 1)
@@ -323,8 +324,8 @@ keys <= "words of fun"
   "fun" 
 ```
 ### Simhash Distance
-Simhash worker can do keyword extraction worker and find 
-the keywords for two inputs, then computes Hamming distance of them.
+Simhash worker can do keyword extraction and find 
+the keywords from two inputs, and then computes Hamming distance betwwen them.
 
 ```r
  words = "hello world"
@@ -378,3 +379,4 @@ $rhs
 [安装包]:https://github.com/qinwf/jiebaR/releases
 [Rpy2]:http://rpy.sourceforge.net/
 [jvmr]:http://dahl.byu.edu/software/jvmr/
+[imewlconverter]:https://github.com/studyzy/imewlconverter
