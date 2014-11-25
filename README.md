@@ -1,15 +1,12 @@
 # jiebaR
 
-**CRAN 版本** : [v0.2  CRAN](http://cran.r-project.org/web/packages/jiebaR/index.html)，released 1<sup>st</sup> <br>
-**GitHub版本** : [v0.2.1  GitHub](https://github.com/qinwf/jiebaR/)， [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](https://travis-ci.org/qinwf/jiebaR)
-
----
+[![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](https://travis-ci.org/qinwf/jiebaR)
 
 ["结巴"中文分词]的R语言版本，支持最大概率法（Maximum Probability），隐式马尔科夫模型（Hidden Markov Model），索引模型（QuerySegment），混合模型（MixSegment），共四种分词模式，同时有词性标注，关键词提取，文本Simhash相似度比较等功能。项目使用了[Rcpp]和[CppJieba]进行开发。
 
 ## 特性
 
-+ 支持 Windows , Linux， Mac 操作系统。
++ 支持 Windows，Linux，Mac 操作系统。
 + 通过Rcpp Modules实现同时加载多个分词系统,可以分别使用不同的分词模式和词库。
 + 支持多种分词模式、中文姓名识别、关键词提取、词性标注以及文本Simhash相似度比较等功能。
 + 支持加载自定义用户词库，设置词频、词性。
@@ -122,7 +119,7 @@ $user
 $detect $encoding $symbol $output $write $lines can be reset.
 ```
 
-可以通过R语言常用的 `$`符号重设一些`worker`的参数设置 , 如 ` WorkerName$symbol = T `，在输出中保留标点符号。一些参数在初始化的时候已经确定，无法修改, 可以通过`WorkerName$PrivateVarible`来获得这些信息。
+可以通过R语言常用的 `$`符号重设一些`worker`的参数设置，如 ` WorkerName$symbol = T `，在输出中保留标点符号。一些参数在初始化的时候已经确定，无法修改， 可以通过`WorkerName$PrivateVarible`来获得这些信息。
 
 ```r
 mixseg$encoding
@@ -152,11 +149,10 @@ qseg <= "江州市长江大桥参加了长江大桥的通车仪式"
 [1] "江州"     "市长"     "江大桥"   "参加"     "了"       "长江大桥" "的"      
 [8] "通车"     "仪式"   
 ```
-`qseg` ~ quick segmentation，使用默认分词模式，自动建立分词引擎。有点像`ggplot2`包里面的`qplot`。
+`qseg` ~ quick segmentation，使用默认分词模式，自动建立分词引擎，类似于`ggplot2`包里面的`qplot`函数。
 
 ```r
 ### 第一次运行时，启动默认引擎 quick_worker，第二次运行，不再启动引擎。
-
 qseg <= "这是测试文本。" 
 
 ```
@@ -196,7 +192,7 @@ get_qsegmodel()         ### 获得当前快速模式的默认参数
 ```
 
 ### 词性标注
-可以使用 `<=.tagger` 或者 `tag` 来进行分词和词性标注, 词性标注使用混合模型模型分词，标注采用和 ictclas 兼容的标记法。
+可以使用 `<=.tagger` 或者 `tag` 来进行分词和词性标注，词性标注使用混合模型模型分词，标注采用和 ictclas 兼容的标记法。
 
 ```r
 words = "我爱北京天安门"
@@ -209,7 +205,7 @@ tagger <= words
     "我"     "爱"   "北京" "天安门" 
 ```
 ### 关键词提取
-关键词提取所使用逆向文件频率（IDF）文本语料库可以切换成自定义语料库的路径,使用方法与分词类似。`topn`参数为关键词的个数。
+关键词提取所使用逆向文件频率（IDF）文本语料库可以切换成自定义语料库的路径，使用方法与分词类似。`topn`参数为关键词的个数。
 
 ```r
 keys = worker("keywords", topn = 1)
