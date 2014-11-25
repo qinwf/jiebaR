@@ -1,6 +1,9 @@
 # jiebaR
 
-[![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](https://travis-ci.org/qinwf/jiebaR)
+**CRAN版本** : [v0.2 on CRAN](http://cran.r-project.org/web/packages/jiebaR/index.html), released 1<sup>nd</sup> 2014-11.<br>
+**GitHub版本** : [v0.2.1 on GitHub](https://github.com/qinwf/jiebaR/) [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](https://travis-ci.org/qinwf/jiebaR)
+
+---
 
 ["结巴"中文分词]的R语言版本，支持最大概率法（Maximum Probability），隐式马尔科夫模型（Hidden Markov Model），索引模型（QuerySegment），混合模型（MixSegment），共四种分词模式，同时有词性标注，关键词提取，文本Simhash相似度比较等功能。项目使用了[Rcpp]和[CppJieba]进行开发。
 
@@ -17,26 +20,28 @@
 + 可以通过[Rpy2]，[jvmr]等被其他语言调用。
 + 基于MIT协议。
 
+## GitHub 版更新 v0.2.1
+
++ 2X 分词速度
++ 快速模式
++ 修正特定环境下的编码转换问题
+
 ## 安装
 
-目前该包已经发布到CRAN：
+通过CRAN安装:
 
 ```r
 install.packages("jiebaR")
 library("jiebaR")
 ```
 
-同时还可以通过Github安装正在测试的开发版：
+同时还可以通过Github安装开发版,建议使用 gcc >= 4.6 编译包：
 
 ```r
 library(devtools)
 install_github("qinwf/jiebaR")
 library("jiebaR")
 ```
-
-通过Github进行安装时，Windows系统需要安装 [Rtools]，建议使用 gcc >= 4.6 编译包，jiebaR支持 R >= 3.1 。
-
-Windows 和 Mac OS X Mavericks 还可以下载[安装包]进行安装。
 
 ## 使用示例
 
