@@ -1,7 +1,7 @@
 # jiebaR
 
-**CRAN版本** : [v0.2 on CRAN](http://cran.r-project.org/web/packages/jiebaR/index.html), released 1<sup>nd</sup> 2014-11.<br>
-**GitHub版本** : [v0.2.1 on GitHub](https://github.com/qinwf/jiebaR/) [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](https://travis-ci.org/qinwf/jiebaR)
+**CRAN 版本** : [v0.2  CRAN](http://cran.r-project.org/web/packages/jiebaR/index.html)，released 1<sup>st</sup> <br>
+**GitHub版本** : [v0.2.1  GitHub](https://github.com/qinwf/jiebaR/)， [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](https://travis-ci.org/qinwf/jiebaR)
 
 ---
 
@@ -50,8 +50,6 @@ library("jiebaR")
 jiebaR提供了四种分词模式，可以通过`worker()`来初始化分词引擎，使用`segment()`进行分词。
 
 ```r
-library(jiebaR)
-
 ##  接受默认参数，建立分词引擎 
 mixseg = worker()
 
@@ -139,6 +137,64 @@ ShowDictPath()  ### 显示词典路径
 EditDict()      ### 编辑用户词典
 ?EditDict()     ### 打开帮助系统
 ```
+
+### 快速模式
+
+无需使用`worker()`，使用默认参数启动引擎，并立即进行分词：
+
+```r
+library(jiebaR)
+
+qseg <= "江州市长江大桥参加了长江大桥的通车仪式" 
+```
+
+```r
+[1] "江州"     "市长"     "江大桥"   "参加"     "了"       "长江大桥" "的"      
+[8] "通车"     "仪式"   
+```
+`qseg` ~ quick segmentation，使用默认分词模式，自动建立分词引擎。有点像`ggplot2`包里面的`qplot`。
+
+```r
+### 第一次运行时，启动默认引擎 quick_worker，第二次运行，不再启动引擎。
+
+qseg <= "这是测试文本。" 
+
+```
+
+```r
+[1] "这是" "测试" "文本"
+```
+
+```r
+### 效果相同
+quick_worker <=  "这是测试文本。" 
+
+qseg
+```
+
+```r
+Worker Type:  Mix Segment
+
+Detect Encoding :  TRUE
+Default Encoding:  UTF-8
+Keep Symbols    :  FALSE
+Output Path     :  NULL
+.......
+```
+
+可以通过`qseg$`重设模型参数，重设模型参数将会修改以后每次默认启动的默认参数，如果只是希望单次修改模型参数，可以使用非快速模式的修改方式`quick_worker$`。
+
+```r
+qseg$type = "mp" ### 重设模型参数的同时，重新启动引擎。
+
+qseg$type        ### 下次重新启动包是将使用现在的参数，构建模型。
+
+quick_worker$detect = T ### 临时修改，对下次重新启动包时，没有影响。
+
+get_qsegmodel()         ### 获得当前快速模式的默认参数
+
+```
+
 ### 词性标注
 可以使用 `<=.tagger` 或者 `tag` 来进行分词和词性标注, 词性标注使用混合模型模型分词，标注采用和 ictclas 兼容的标记法。
 

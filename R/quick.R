@@ -1,6 +1,6 @@
 #' @export
 `<=.qseg`<-function(qseg, code){
-  if(!exists("quick_worker",envir = .GlobalEnv )){
+  if(!exists("quick_worker",envir = .GlobalEnv ,inherits = F)){
     if(exists("qseg",envir = .GlobalEnv,inherits = FALSE )) rm("qseg",envir = .GlobalEnv)
     modelpath  = file.path(find.package("jiebaR"),"dict","model.rda")
     quickparam = readRDS(modelpath)

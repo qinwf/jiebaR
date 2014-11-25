@@ -103,3 +103,9 @@ print.mpseg<-function(x,...){
   print(x$PrivateVarible)
   cat("$detect $encoding $symbol $output $write $lines can be reset.\n")
 }
+
+#' @export
+print.qseg<-function(x,...){
+  if(exists("quick_worker",envir = .GlobalEnv,inherits = F ))
+     print(quick_worker)
+}
