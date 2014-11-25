@@ -10,23 +10,16 @@
     if(quickparam$user == "AUTO") quickparam$user = USERPATH
     if(quickparam$stop_word == "AUTO") quickparam$stop_word = STOPPATH
     if(quickparam$idf == "AUTO") quickparam$idf = IDFPATH
-    
-    assign("quick_worker",worker(
-      type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
-      user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
-      write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
-      encoding = quickparam$encoding, detect = quickparam$detect ,
-      symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
-    ) ,envir = .GlobalEnv )
+    createquickworker(quickparam)
     setactive()
   }
-  if(file.exists(code) && quick_worker$write == T) {
-    segment(code,quick_worker)
+  if(file.exists(code) && .GlobalEnv$quick_worker$write == T) {
+    segment(code,.GlobalEnv$quick_worker)
     xx<-NA
     class(xx) = "inv"
     return(xx)
   }
-  else return(segment(code, quick_worker))
+  else return(segment(code, .GlobalEnv$quick_worker))
   
 }
 
@@ -37,7 +30,7 @@ qseg = new.env()
 class(qseg) = "qseg"
 setactive<-function(){
   
-  assign("qseg",  new.env(parent = emptyenv()),envir = .GlobalEnv)
+  .GlobalEnv$qseg<-new.env(parent = emptyenv())
   class(.GlobalEnv$qseg) = "qseg"
   qtype <- function(v) {
     if (missing(v))
@@ -63,13 +56,7 @@ setactive<-function(){
       if(quickparam$user == "AUTO") quickparam$user = USERPATH
       if(quickparam$stop_word == "AUTO") quickparam$stop_word = STOPPATH
       if(quickparam$idf == "AUTO") quickparam$idf = IDFPATH
-      assign("quick_worker",worker(
-        type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
-        user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
-        write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
-        encoding = quickparam$encoding, detect = quickparam$detect ,
-        symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
-      ) ,envir = .GlobalEnv )
+      createquickworker(quickparam)
       cat("Reset default quick worker type, new worker:\n")
       print(.GlobalEnv$quick_worker)
     }
@@ -92,13 +79,7 @@ setactive<-function(){
       if(quickparam$user == "AUTO") quickparam$user = USERPATH
       if(quickparam$stop_word == "AUTO") quickparam$stop_word = STOPPATH
       if(quickparam$idf == "AUTO") quickparam$idf = IDFPATH
-      assign("quick_worker",worker(
-        type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
-        user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
-        write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
-        encoding = quickparam$encoding, detect = quickparam$detect ,
-        symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
-      ) ,envir = .GlobalEnv )
+      createquickworker(quickparam)
       cat("Reset default dict path, new worker:\n")
       print(.GlobalEnv$quick_worker)
     }
@@ -120,13 +101,7 @@ setactive<-function(){
       if(quickparam$user == "AUTO") quickparam$user = USERPATH
       if(quickparam$stop_word == "AUTO") quickparam$stop_word = STOPPATH
       if(quickparam$idf == "AUTO") quickparam$idf = IDFPATH
-      assign("quick_worker",worker(
-        type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
-        user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
-        write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
-        encoding = quickparam$encoding, detect = quickparam$detect ,
-        symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
-      ) ,envir = .GlobalEnv )
+      createquickworker(quickparam)
       cat("Reset default hmm path, new worker:\n")
       print(.GlobalEnv$quick_worker)
     }
@@ -148,13 +123,7 @@ setactive<-function(){
       if(quickparam$user == "AUTO") quickparam$user = USERPATH
       if(quickparam$stop_word == "AUTO") quickparam$stop_word = STOPPATH
       if(quickparam$idf == "AUTO") quickparam$idf = IDFPATH
-      assign("quick_worker",worker(
-        type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
-        user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
-        write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
-        encoding = quickparam$encoding, detect = quickparam$detect ,
-        symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
-      ) ,envir = .GlobalEnv )
+      createquickworker(quickparam)
       cat("Reset default stop_word path, new worker:\n")
       print(.GlobalEnv$quick_worker)
     }
@@ -176,13 +145,7 @@ setactive<-function(){
       if(quickparam$user == "AUTO") quickparam$user = USERPATH
       if(quickparam$stop_word == "AUTO") quickparam$stop_word = STOPPATH
       if(quickparam$idf == "AUTO") quickparam$idf = IDFPATH
-      assign("quick_worker",worker(
-        type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
-        user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
-        write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
-        encoding = quickparam$encoding, detect = quickparam$detect ,
-        symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
-      ) ,envir = .GlobalEnv )
+      createquickworker(quickparam)
       cat("Reset default user dict path, new worker:\n")
       print(.GlobalEnv$quick_worker)
     }
@@ -204,13 +167,7 @@ setactive<-function(){
       if(quickparam$user == "AUTO") quickparam$user = USERPATH
       if(quickparam$stop_word == "AUTO") quickparam$stop_word = STOPPATH
       if(quickparam$idf == "AUTO") quickparam$idf = IDFPATH
-      assign("quick_worker",worker(
-        type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
-        user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
-        write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
-        encoding = quickparam$encoding, detect = quickparam$detect ,
-        symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
-      ) ,envir = .GlobalEnv )
+      createquickworker(quickparam)
       cat("Reset default idf path, new worker:\n")
       print(.GlobalEnv$quick_worker)
     }
@@ -232,13 +189,7 @@ setactive<-function(){
       if(quickparam$user == "AUTO") quickparam$user = USERPATH
       if(quickparam$stop_word == "AUTO") quickparam$stop_word = STOPPATH
       if(quickparam$idf == "AUTO") quickparam$idf = IDFPATH
-      assign("quick_worker",worker(
-        type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
-        user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
-        write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
-        encoding = quickparam$encoding, detect = quickparam$detect ,
-        symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
-      ) ,envir = .GlobalEnv )
+      createquickworker(quickparam)
       cat("Reset default qmax, new worker:\n")
       print(.GlobalEnv$quick_worker)
     }
@@ -260,13 +211,7 @@ setactive<-function(){
       if(quickparam$user == "AUTO") quickparam$user = USERPATH
       if(quickparam$stop_word == "AUTO") quickparam$stop_word = STOPPATH
       if(quickparam$idf == "AUTO") quickparam$idf = IDFPATH
-      assign("quick_worker",worker(
-        type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
-        user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
-        write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
-        encoding = quickparam$encoding, detect = quickparam$detect ,
-        symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
-      ) ,envir = .GlobalEnv )
+      createquickworker(quickparam)
       cat("Reset default topn, new worker:\n")
       print(.GlobalEnv$quick_worker)
     }
@@ -417,4 +362,14 @@ reset_qsegmodel<-function(){
   file.copy(file.path(find.package("jiebaR"),"dict","backup.rda"),
             file.path(find.package("jiebaR"),"dict","model.rda"),
             overwrite = T)
+}
+
+createquickworker<-function(quickparam){
+  .GlobalEnv$quick_worker <- worker(
+  type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
+  user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
+  write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
+  encoding = quickparam$encoding, detect = quickparam$detect ,
+  symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
+) 
 }

@@ -107,5 +107,5 @@ print.mpseg<-function(x,...){
 #' @export
 print.qseg<-function(x,...){
   if(exists("quick_worker",envir = .GlobalEnv,inherits = F ))
-     print(quick_worker)
+     print(.GlobalEnv$quick_worker)
 }
