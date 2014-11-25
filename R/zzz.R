@@ -49,6 +49,14 @@ setLoadAction(
     loadModule("mod_tag", TRUE)
     loadModule("mod_key", TRUE)
     loadModule("mod_sim", TRUE)
-    ###Loading DICTPATH when package loaded.
-
+    ###Loading DICTPATH when package loaded.    
    })
+
+.onDetach<- function(libpath) {
+  #     if (.Platform$OS.type == "windows") {
+  #       Sys.setlocale( locale = "English")
+  #     }
+  if(exists("quick_worker",envir = .GlobalEnv,,inherits = FALSE )) rm("quick_worker",envir = .GlobalEnv)
+  if(exists("qseg",envir = .GlobalEnv,,inherits = FALSE )) rm("qseg",envir = .GlobalEnv)
+  
+}

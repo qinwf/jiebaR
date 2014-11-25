@@ -186,20 +186,20 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
            worker  = new(sim, dict,hmm,idf,stop_word)
            private = list(dict=dict,hmm=hmm,idf=idf,stop_word=stop_word)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result) <- c("jiebar","simhash")
+           class(result) <- c("jiebar","nonsegment","simhash")
            result$topn = topn
          },
          keywords  = {
            worker  =  new(keyword,topn, dict,hmm,idf,stop_word)
            private = list(top_n_word=topn,dict=dict,hmm=hmm,idf=idf,stop_word=stop_word)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result) <- c("jiebar","keywords")
+           class(result) <- c("jiebar","nonsegment","keywords")
          },
            tag     = {
            worker  =  new(tagger, dict,hmm,user)
            private = list(dict=dict,hmm=hmm,user=user)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
-           class(result) <- c("jiebar","tagger")         
+           class(result) <- c("jiebar","nonsegment","tagger")         
          })
   result
 }
