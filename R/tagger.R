@@ -22,7 +22,7 @@
 #' @author Qin Wenfeng
 #' @export
 tag<- function(code, jiebar) {
-  
+  stopifnot("tagger" %in% class(jiebar))
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   

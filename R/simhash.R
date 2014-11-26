@@ -21,7 +21,7 @@
 #' }
 #' @export
 simhash <- function(code, jiebar) {
-  
+  stopifnot("simhash" %in% class(jiebar))
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   
@@ -96,6 +96,7 @@ simhashw <- function(code, jiebar) {
 #' }
 #' @export
 distance <- function(codel,coder,jiebar){
+  stopifnot("simhash" %in% class(jiebar))
   if (!is.character(codel)   || length(codel) != 1 ||
       !is.character(coder)   || length(coder) != 1) 
     stop("Argument 'code' must be an string.")

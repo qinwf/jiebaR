@@ -37,7 +37,7 @@
 #' 
 #' @export
 segment <- function(code, jiebar) {
-
+  stopifnot("segment" %in% class(jiebar))
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   

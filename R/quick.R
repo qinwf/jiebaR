@@ -1,3 +1,33 @@
+#' Quick mode symbol
+#' 
+#' Quick mode symbol to do segmentation, keyword extraction 
+#' and speech tagging. This symbol will initialize a \code{quick_worker} when it is 
+#' first called, and will do segmentation or other work immediately.
+#' 
+#' You can reset the default model setting by \code{$}, and it will change the 
+#' default setting when the next time you use quick mode. If you only want to 
+#' change the parameter temporary, you can reset the settings of \code{quick_worker}.
+#' 
+#' \code{get_qsegmodel}, \code{set_qsegmodel},and \code{reset_qsegmodel} are 
+#' also available for setting quick mode settings.
+#' @format qseg an environment
+#' @examples 
+#' \donttest{
+#' qseg <= "This is test"
+#' qseg <= "This is the second test"
+#' }
+#' 
+#' \dontrun{
+#' qseg <= "This is test"
+#' qseg$detect = T
+#' qseg
+#' get_qsegmodel()
+#' }
+#' @param qseg a qseg object.
+#' @param code a string
+#' 
+#' @seealso \code{\link{set_qsegmodel}} \code{\link{worker}} 
+#' @author Qin Wenfeng 
 #' @export
 `<=.qseg`<-function(qseg, code){
   if(!exists("quick_worker",envir = .GlobalEnv ,inherits = F)){
@@ -13,17 +43,24 @@
     createquickworker(quickparam)
     setactive()
   }
-  if(file.exists(code) && .GlobalEnv$quick_worker$write == T) {
-    segment(code,.GlobalEnv$quick_worker)
-    xx<-NA
-    class(xx) = "inv"
-    return(xx)
+  if("segment" %in% class(.GlobalEnv$quick_worker)){
+    if(file.exists(code) && .GlobalEnv$quick_worker$write == T) {
+      segment(code,.GlobalEnv$quick_worker)
+      xx<-NA
+      class(xx) = "inv"
+      return(xx)
+    }
+    else return(segment(code, .GlobalEnv$quick_worker))
+  } else if("tagger" %in% class(.GlobalEnv$quick_worker)){
+    tag(code,.GlobalEnv$quick_worker)
+  } else if("keywords" %in% class(.GlobalEnv$quick_worker)){
+    keywords(code,.GlobalEnv$quick_worker)
+  } else if("simhash" %in% class(.GlobalEnv$quick_worker)){
+    simhash(code,.GlobalEnv$quick_worker)
   }
-  else return(segment(code, .GlobalEnv$quick_worker))
-  
 }
 
-
+#' @rdname less-than-equals-.qseg
 #' @export
 qseg = new.env()
 
@@ -328,48 +365,65 @@ setactive<-function(){
   
 }
 
+#' @rdname set_qsegmodel
 #' @export
 get_qsegmodel<-function(){
   modelpath  = file.path(find.package("jiebaR"),"dict","model.rda")
   readRDS(modelpath)
 }
 
+#' Set quick mode model
+#' 
+#' These function can get and modify quick mode model. \code{get_qsegmodel} returns
+#' the default model parameters. \code{set_qsegmodel} can modify quick mode model 
+#' using a list, which has the same structure as the return value of get_qsegmodel.
+#' \code{reset_qsegmodel} can reset the default model to origin \code{jiebaR} default
+#' model.
+#' @param  qsegmodel a list which has the same structure as the return value of get_qsegmodel
+#' @seealso \code{\link{qseg}} \code{\link{worker}} 
+#' @author Qin Wenfeng 
+#' @examples 
+#' \donttest{
+#' qseg <= "This is test"
+#' qseg <= "This is the second test"
+#' }
+#' 
+#' \dontrun{
+#' qseg <= "This is test"
+#' qseg$detect = T
+#' qseg
+#' get_qsegmodel()
+#' model = get_qsegmodel()
+#' model$detect = F
+#' set_qsegmodel(model)
+#' reset_qsegmodel()
+#' }
 #' @export
-set_qsegmodel<-function(qsegmodel){
-  testenv <- list2env(qsegmodel,parent =emptyenv())
+set_qsegmodel<-function(qsegmodel){  
   stopifnot(
-    exists("type",envir = testenv),
-    exists("dict",envir = testenv),
-    exists("user",envir = testenv),
-    exists("hmm",envir = testenv),
-    exists("idf",envir = testenv),
-    exists("stop_word",envir = testenv),
-    exists("write",envir = testenv),
-    exists("qmax",envir = testenv),
-    exists("topn",envir = testenv),
-    exists("encoding",envir = testenv),
-    exists("detect",envir = testenv),
-    exists("symbol",envir = testenv),
-    exists("lines",envir = testenv),
-    exists("output",envir = testenv)
+    names(qsegmodel)%in%c("type","dict","user","hmm","idf","write","stop_word",
+                          "qmax","topn","encoding","detect","symbol","lines",
+                          "output")
   )
   modelpath  = file.path(find.package("jiebaR"),"dict","model.rda")
   saveRDS(qsegmodel,modelpath)
 }
 
+#' @rdname set_qsegmodel
 #' @export
 reset_qsegmodel<-function(){
   file.copy(file.path(find.package("jiebaR"),"dict","backup.rda"),
             file.path(find.package("jiebaR"),"dict","model.rda"),
             overwrite = T)
+  invisible()
 }
 
 createquickworker<-function(quickparam){
   .GlobalEnv$quick_worker <- worker(
-  type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
-  user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
-  write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
-  encoding = quickparam$encoding, detect = quickparam$detect ,
-  symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
-) 
+    type = quickparam$type, dict= quickparam$dict,hmm=quickparam$hmm, 
+    user = quickparam$user, idf = quickparam$idf, stop_word = quickparam$stop_word, 
+    write = quickparam$write, qmax = quickparam$qmax, topn = quickparam$topn, 
+    encoding = quickparam$encoding, detect = quickparam$detect ,
+    symbol = quickparam$symbol, lines = quickparam$lines, output = quickparam$output
+  ) 
 }
