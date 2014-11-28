@@ -17,16 +17,17 @@ qseg
 }
 \description{
 Quick mode symbol to do segmentation, keyword extraction
-and speech tagging. This symbol will initialize a \code{quick_worker} when it is
-first called, and will do segmentation or other work immediately.
+and speech tagging. This symbol will initialize a \code{quick_worker}
+when it is first called, and will do segmentation or other types of work
+immediately.
 }
 \details{
-You can reset the default model setting by \code{$}, and it will change the
-default setting when the next time you use quick mode. If you only want to
-change the parameter temporary, you can reset the settings of \code{quick_worker}.
-
-\code{get_qsegmodel}, \code{set_qsegmodel},and \code{reset_qsegmodel} are
-also available for setting quick mode settings.
+You can reset the default model setting by \code{$}, and
+it will change the default setting the next time you use quick mode.
+If you only want to change the parameter temporarily, you can reset the
+settings of \code{quick_worker$}. \code{\link{get_qsegmodel}},
+\code{\link{set_qsegmodel}}, and \code{\link{reset_qsegmodel}}
+are also available for setting quick mode settings.
 }
 \examples{
 \donttest{
