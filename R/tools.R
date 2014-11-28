@@ -31,6 +31,9 @@ ShowDictPath<-function(){
 #' @export
 edit_dict<-function(){
   file.show(file.path(path.package("jiebaR"),"dict","user.dict.utf8"))
+  if (.Platform$OS.type == "windows") {
+    warning("You should save the dictionary without BOM on Windows")
+  }
 }
 
 #' @rdname edit_dict
@@ -38,5 +41,7 @@ edit_dict<-function(){
 EditDict<-function(){
   file.show(file.path(path.package("jiebaR"),"dict","user.dict.utf8"))
   warning("EditDict was deprecated. Please use edit_dict() instead.")
-  
+  if (.Platform$OS.type == "windows") {
+    warning("You should save the dictionary without BOM on Windows")
+  }
 }
