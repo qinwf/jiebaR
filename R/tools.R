@@ -6,8 +6,15 @@
 #' @author Qin Wenfeng 
 #' 
 #' @export
+show_dictpath<-function(){
+  print(file.path(path.package("jiebaR"),"dict"))
+}
+
+#' @rdname show_dictpath
+#' @export
 ShowDictPath<-function(){
   print(file.path(path.package("jiebaR"),"dict"))
+  warning("ShowDictPath() was deprecated. Please use show_dictpath() instead.")
 }
 
 #' Edit default user dictionary
@@ -22,7 +29,14 @@ ShowDictPath<-function(){
 #' 
 #' @author Qin Wenfeng 
 #' @export
-EditDict<-function(){
+edit_dict<-function(){
   file.show(file.path(path.package("jiebaR"),"dict","user.dict.utf8"))
 }
 
+#' @rdname edit_dict
+#' @export
+EditDict<-function(){
+  file.show(file.path(path.package("jiebaR"),"dict","user.dict.utf8"))
+  warning("EditDict was deprecated. Please use edit_dict() instead.")
+  
+}
