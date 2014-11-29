@@ -216,8 +216,8 @@ bool utf8ToUnicode(const char *const str, size_t len, Uint16Container &vec)
         }
         else if ((uint8_t)str[i] <= 0xef && i + 2 < len)
         {
-            ch1 = (str[i] << 4) | ((str[i + 1] >> 2) & 0x0f );
-            ch2 = ((str[i + 1] << 6) & 0xc0) | (str[i + 2] & 0x3f);
+            ch1 = ((uint8_t)str[i] << 4) | ((str[i + 1] >> 2) & 0x0f );
+            ch2 = (((uint8_t)str[i + 1] << 6) & 0xc0) | (str[i + 2] & 0x3f);
             tmp = (((uint16_t(ch1) & 0x00ff ) << 8) | (uint16_t(ch2) & 0x00ff));
             vec.push_back(tmp);
             i += 3;
