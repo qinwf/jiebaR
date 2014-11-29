@@ -5,3 +5,4 @@
 ^\.dat$
 ^.*\.txt$
 ^.*\.dat$
+^appveyor\.yml$
