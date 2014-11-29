@@ -11,6 +11,10 @@ env:
     - PKG_CFLAGS="-g -O3 -Wall -pedantic -I../inst/include -DLOGGER_LEVEL=LL_WARN"
     - R_BUILD_ARGS="--no-build-vignettes --no-manual"
     - R_CHECK_ARGS="--no-vignettes --no-manual"
+  matrix:
+    - _R_CHECK_CRAN_INCOMING_=FALSE
+    - R_CHECK_ARGS="--as-cran" _R_CHECK_CRAN_INCOMING_=TRUE
+
 
 before_install:
   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
