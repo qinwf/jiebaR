@@ -1,6 +1,6 @@
 # jiebaR
 
-[![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](https://travis-ci.org/qinwf/jiebaR)
+[![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](https://travis-ci.org/qinwf/jiebaR) [![Build status](https://ci.appveyor.com/api/projects/status/k8swxpkue1caiiwi/branch/master?svg=true)](https://ci.appveyor.com/project/qinwf53234/jiebar/branch/master)
 
 ["结巴"中文分词]的R语言版本，支持最大概率法（Maximum Probability），隐式马尔科夫模型（Hidden Markov Model），索引模型（QuerySegment），混合模型（MixSegment），共四种分词模式，同时有词性标注，关键词提取，文本Simhash相似度比较等功能。项目使用了[Rcpp]和[CppJieba]进行开发。
 
@@ -32,7 +32,7 @@ install.packages("jiebaR")
 library("jiebaR")
 ```
 
-同时还可以通过Github安装开发版,建议使用 gcc >= 4.6 编译包：
+同时还可以通过Github安装[开发版],建议使用 gcc >= 4.6 编译包：
 
 ```r
 library(devtools)
@@ -455,7 +455,7 @@ $rhs
 [Cppjieba]:https://github.com/aszxqw/cppjieba
 [Rtools]:http://mirrors.xmu.edu.cn/CRAN/bin/windows/Rtools
 [深蓝词库转换]:https://github.com/studyzy/imewlconverter
-[安装包]:https://github.com/qinwf/jiebaR/releases
+[开发版]:https://ci.appveyor.com/project/qinwf53234/jiebar/branch/master/artifacts
 [Rpy2]:http://rpy.sourceforge.net/
 [jvmr]:http://dahl.byu.edu/software/jvmr/
 [imewlconverter]:https://github.com/studyzy/imewlconverter
