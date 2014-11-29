@@ -13,7 +13,7 @@ env:
     - R_CHECK_ARGS="--no-vignettes --no-manual"
   matrix:
     - _R_CHECK_CRAN_INCOMING_=FALSE
-    - R_CHECK_ARGS="--as-cran" _R_CHECK_CRAN_INCOMING_=TRUE
+    - R_BUILD_ARGS=" " R_CHECK_ARGS="--as-cran" BOOTSTRAP_LATEX="1" _R_CHECK_CRAN_INCOMING_=TRUE BOOTSTRAP_PANDOC="1"
 
 
 before_install:
