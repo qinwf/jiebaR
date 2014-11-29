@@ -15,6 +15,7 @@ Imports:
     Rcpp,methods
 LinkingTo: Rcpp
 Suggests:
+    testthat,
     knitr
 URL: https://github.com/qinwf/jiebaR/
 BugReports: https://github.com/qinwf/jiebaR/issues
