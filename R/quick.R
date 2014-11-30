@@ -30,7 +30,7 @@
 #' @param code a string
 #' 
 #' @seealso \code{\link{set_qsegmodel}} \code{\link{worker}} 
-#' @author Qin Wenfeng 
+#' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @export
 `<=.qseg`<-function(qseg, code){
   if(!exists("quick_worker",envir = .GlobalEnv ,inherits = F)){
@@ -424,7 +424,7 @@ get_qsegmodel<-function(){
 #' model.
 #' @param  qsegmodel a list which has the same structure as the return value of get_qsegmodel
 #' @seealso \code{\link{qseg}} \code{\link{worker}} 
-#' @author Qin Wenfeng 
+#' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @examples 
 #' \donttest{
 #' qseg <= "This is test"

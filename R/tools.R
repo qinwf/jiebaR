@@ -22,10 +22,9 @@ ShowDictPath<-function(){
 #' Edit the default user dictionary. 
 #' @references  The ictclas speech tag : \url{http://t.cn/8FdDD3I}
 #' @details 
-#' There are three column in the dictionary
-#' . The first column is the word, the second column is the frequency
-#' of words. The third column is speech tag using labels compatible
-#'  with ictclas.
+#' There are three column in the dictionary. The first column is the word, 
+#' and the second column is the frequency of words. The third column is 
+#' speech tag using labels compatible with ictclas.
 #' 
 #' @author Qin Wenfeng 
 #' @export

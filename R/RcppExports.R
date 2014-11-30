@@ -2,9 +2,9 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @title Files encoding detection
-#' @description The function detect the encoding of input files encoding.
+#' @description The function detect the encoding of input files.
 #' @param file A file path.
-#' @return The encoding of file.
+#' @return The encoding of file
 #' @author Wu Yongwei, Qin wenfeng
 #' @references \url{https://github.com/adah1972/tellenc}
 #' @export

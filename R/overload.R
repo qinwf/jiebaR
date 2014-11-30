@@ -74,12 +74,12 @@ print.inv<-function(x, ...){
 #' @export
 `<=.tagger`<-function(jiebar, code){
   if(file.exists(code) && jiebar$write == T) {
-    tag(code, jiebar)
+    tagging(code, jiebar)
     xx <- NA
     class(xx) = "inv"
     return(xx)
   }
-  else return(tag(code, jiebar))
+  else return(tagging(code, jiebar))
 }
 
 #' Distance symbol

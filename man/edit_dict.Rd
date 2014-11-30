@@ -12,10 +12,9 @@ EditDict()
 Edit the default user dictionary.
 }
 \details{
-There are three column in the dictionary
-. The first column is the word, the second column is the frequency
-of words. The third column is speech tag using labels compatible
- with ictclas.
+There are three column in the dictionary. The first column is the word,
+and the second column is the frequency of words. The third column is
+speech tag using labels compatible with ictclas.
 }
 \author{
 Qin Wenfeng

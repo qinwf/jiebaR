@@ -9,10 +9,10 @@ filecoding(file)
 \item{file}{A file path.}
 }
 \value{
-The encoding of file.
+The encoding of file
 }
 \description{
-The function detect the encoding of input files encoding.
+The function detect the encoding of input files.
 }
 \author{
 Wu Yongwei, Qin wenfeng

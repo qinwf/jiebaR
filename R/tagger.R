@@ -21,7 +21,7 @@
 #' }
 #' @author Qin Wenfeng
 #' @export
-tag<- function(code, jiebar) {
+tagging<- function(code, jiebar) {
   stopifnot("tagger" %in% class(jiebar))
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
@@ -54,6 +54,15 @@ tag<- function(code, jiebar) {
          FILESMODE = FILESMODE)
   }
 }
+
+#' @rdname tagging
+#' @export
+tag <- function(code, jiebar){
+  warning("The tag() function is deprecated for shiny package
+          . Please tagging() instead.")
+  tagging(code, jiebar)
+}
+  
 
 tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE) {
   

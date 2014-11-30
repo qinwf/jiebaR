@@ -43,7 +43,7 @@ get_qsegmodel()
 }
 }
 \author{
-Qin Wenfeng
+Qin Wenfeng <\url{http://qinwenfeng.com}>
 }
 \seealso{
 \code{\link{set_qsegmodel}} \code{\link{worker}}
