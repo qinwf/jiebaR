@@ -27,10 +27,14 @@ IDFPATH<-NULL
 #' @export
 STOPPATH<-NULL
 
+TIMESTAMP<-NULL
+
 .onLoad <- function(libname, pkgname) {
 #     if (.Platform$OS.type == "windows") {
 #       Sys.setlocale( locale = "English")
 #     }
+  
+    assign(x = "TIMESTAMP",  as.numeric(Sys.time()),asNamespace('jiebaR'))
   
     assign(x = "DICTPATH", file.path(find.package("jiebaR"),"dict","jieba.dict.utf8"),asNamespace('jiebaR'))
     assign(x = "HMMPATH",  file.path(find.package("jiebaR"),"dict","hmm_model.utf8"),asNamespace('jiebaR'))

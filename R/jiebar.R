@@ -158,46 +158,46 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
   switch(type, 
            mp      = {
            worker  = new(mpseg, dict, user)
-           private = list(dict = dict,user = user)
+           private = list(dict = dict,user = user, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
            class(result) <- c("jiebar","segment","mpseg")
          }, 
          
            mix     = {
            worker  = new(mixseg, dict, hmm, user)
-           private = list(dict = dict,hmm = hmm,user = user)
+           private = list(dict = dict,hmm = hmm,user = user, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
            class(result) <- c("jiebar","segment","mixseg")
          },
            hmm     = {
            worker  = new(hmmseg, hmm)
-           private = list(hmm = hmm)
+           private = list(hmm = hmm, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
            class(result) <- c("jiebar","segment","hmmseg")
          },
            query   = {
            worker  = new(queryseg, dict,hmm,qmax)
-           private = list(dict = dict,hmm = hmm,max_word_lenght = qmax)
+           private = list(dict = dict,hmm = hmm,max_word_lenght = qmax, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
            
            class(result) <- c("jiebar","segment","queryseg")
          },
           simhash  = {
            worker  = new(sim, dict,hmm,idf,stop_word)
-           private = list(dict=dict,hmm=hmm,idf=idf,stop_word=stop_word)
+           private = list(dict=dict,hmm=hmm,idf=idf,stop_word=stop_word, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
            class(result) <- c("jiebar","nonsegment","simhash")
            result$topn = topn
          },
          keywords  = {
            worker  =  new(keyword,topn, dict,hmm,idf,stop_word)
-           private = list(top_n_word=topn,dict=dict,hmm=hmm,idf=idf,stop_word=stop_word)
+           private = list(top_n_word=topn,dict=dict,hmm=hmm,idf=idf,stop_word=stop_word, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
            class(result) <- c("jiebar","nonsegment","keywords")
          },
            tag     = {
            worker  =  new(tagger, dict,hmm,user)
-           private = list(dict=dict,hmm=hmm,user=user)
+           private = list(dict=dict,hmm=hmm,user=user, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
            class(result) <- c("jiebar","nonsegment","tagger")         
          })

@@ -33,9 +33,10 @@
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @export
 `<=.qseg`<-function(qseg, code){
-  if(!exists("quick_worker",envir = .GlobalEnv ,inherits = F)){
+  if(!exists("quick_worker",envir = .GlobalEnv ,inherits = F) || 
+       .GlobalEnv$quick_worker$PrivateVarible$timestamp != TIMESTAMP){
     
-    if(exists("qseg",envir = .GlobalEnv,inherits = FALSE )) 
+    if(exists("qseg",envir = .GlobalEnv,inherits = FALSE ) ) 
       rm("qseg",envir = .GlobalEnv)
     
     modelpath  = file.path(find.package("jiebaR"),"dict","model.rda")
@@ -49,7 +50,7 @@
     
     createquickworker(quickparam)
     setactive()
-  }
+  } 
   if("segment" %in% class(.GlobalEnv$quick_worker)){
     
     if(file.exists(code) && .GlobalEnv$quick_worker$write == T) {

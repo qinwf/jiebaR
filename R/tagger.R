@@ -23,6 +23,9 @@
 #' @export
 tagging<- function(code, jiebar) {
   stopifnot("tagger" %in% class(jiebar))
+  if(jiebar$PrivateVarible$timestamp != TIMESTAMP){
+    stop("Please create a new worker after jiebaR is reloaded.")
+  }
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   
@@ -58,8 +61,7 @@ tagging<- function(code, jiebar) {
 #' @rdname tagging
 #' @export
 tag <- function(code, jiebar){
-  warning("The tag() function is deprecated for shiny package
-          . Please tagging() instead.")
+  warning("The tag() function is deprecated for shiny package. Please tagging() instead.")
   tagging(code, jiebar)
 }
   
