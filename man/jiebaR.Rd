@@ -21,7 +21,8 @@ accuracy.
 \donttest{
 words = "hello world"
 test1 = worker()
-test1 <= words}
+test1 <= words
+}
 
 \dontrun{
 test <= "./temp.txt"
@@ -46,8 +47,8 @@ simhasher = worker("simhash", topn = 1)
 simhasher <= words
 distance("hello world" , "hello world!" , simhasher)
 
+show_dictpath()
 }
-ShowDictPath()
 }
 \author{
 Qin Wenfeng <\url{http://qinwenfeng.com}>

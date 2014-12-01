@@ -14,7 +14,7 @@
 qseg
 }
 \arguments{
-\item{qseg}{a qseg object.}
+\item{qseg}{a qseg object}
 
 \item{code}{a string}
 }

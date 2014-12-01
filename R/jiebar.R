@@ -8,25 +8,22 @@
 #' @param type The type of jiebaR workers including \code{mix}, \code{mp}, \code{hmm}, 
 #'   \code{query}, \code{tag}, \code{simhash}, and \code{keywords}.
 #'   
-#' @param dict A path to main dictionary, default value is \code{
-#'   DICTPATH}, and the value is used for \code{mix}, \code{mp}, \code{query},
+#' @param dict A path to main dictionary, default value is \code{DICTPATH},
+#'  and the value is used for \code{mix}, \code{mp}, \code{query},
 #'  \code{tag}, \code{simhash} and \code{keywords} workers.
 #'  
-#' @param hmm A path to Hidden Markov Model, default value is \code{
-#'   HMMPATH}, and the value is used for \code{mix}, \code{hmm}, \code{query}, 
-#'   \code{tag}, \code{simhash} and \code{keywords} workers.
+#' @param hmm A path to Hidden Markov Model, default value is \code{HMMPATH}, 
+#' and the value is used for \code{mix}, \code{hmm}, \code{query}, 
+#'  \code{tag}, \code{simhash} and \code{keywords} workers.
 #'   
-#' @param user A path to user dictionary, default value is \code{
-#'   USERPATH}, and the value is used for \code{mix}, 
-#'   \code{tag} and \code{mp} workers.
+#' @param user A path to user dictionary, default value is \code{USERPATH},
+#'  and the value is used for \code{mix}, \code{tag} and \code{mp} workers.
 #'
-#' @param idf A path to inverse document frequency, default value is \code{
-#'   IDFPATH}, and the value is used for 
-#'   \code{simhash} and \code{keywords} workers.
+#' @param idf A path to inverse document frequency, default value is \code{IDFPATH},
+#'  and the value is used for \code{simhash} and \code{keywords} workers.
 #'   
-#' @param stop_word A path to stop word dictionary, default value is \code{
-#'   STOPPATH}, and the value is used for 
-#'   \code{simhash} and \code{keywords} workers.
+#' @param stop_word A path to stop word dictionary, default value is \code{STOPPATH},
+#'  and the value is used for \code{simhash} and \code{keywords} workers.
 #'   
 #' @param write Whether to write the output to a file, or return 
 #'   a the result in a object, when the input is a file path. The 

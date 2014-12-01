@@ -19,7 +19,8 @@
 #' \donttest{
 #' words = "hello world"
 #' test1 = worker()
-#' test1 <= words}
+#' test1 <= words
+#' }
 #' 
 #' \dontrun{
 #' test <= "./temp.txt"
@@ -44,6 +45,7 @@
 #' simhasher <= words
 #' distance("hello world" , "hello world!" , simhasher)
 #' 
+#' show_dictpath()
 #' }
-#' ShowDictPath()
+#' 
 NULL 
