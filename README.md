@@ -17,9 +17,10 @@ Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](
 + 可以通过[Rpy2]，[jvmr]等被其他语言调用。
 + 基于MIT协议。
 
-## GitHub 版更新 v0.2.1
+## CRAN 版更新 v0.3
 
 + 2X 分词速度
++ 新的`[`分词运算符
 + 快速模式
 + 修正特定环境下的编码转换问题
 
@@ -130,9 +131,9 @@ mixseg$detect = F
 可以自定义用户词库，推荐使用[深蓝词库转换]构建分词词库，它可以快速地将搜狗细胞词库等输入法词库转换为jiebaR的词库格式。
 
 ```r
-ShowDictPath()  ### 显示词典路径
-EditDict()      ### 编辑用户词典
-?EditDict()     ### 打开帮助系统
+show_dictpath()  ### 显示词典路径
+edit_dict()      ### 编辑用户词典
+?edit_dict()     ### 打开帮助系统
 ```
 
 ### 快速模式

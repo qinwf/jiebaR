@@ -1,12 +1,12 @@
-Changes in Version 0.2.1 (2014-12-01)
+Changes in Version 0.3 (2014-12-01)
 =====================================
 
    o 2X segmentation speed
    o Quick Mode
-   o portable string utility function
-
+   o A new `[` symbol to do segmentation
+   o Portable string utility function
 
 Changes in Version 0.2 (2014-11-23)
 =====================================
 
-   o first version released on CRAN
+   o First release on CRAN.
