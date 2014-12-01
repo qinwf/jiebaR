@@ -77,6 +77,10 @@
 
 #' @rdname less-than-equals-.qseg
 #' @export
+`[.qseg`<- `<=.qseg`
+
+#' @rdname less-than-equals-.qseg
+#' @export
 qseg = new.env()
 
 class(qseg) = "qseg"

@@ -2,11 +2,14 @@
 \docType{data}
 \name{<=.qseg}
 \alias{<=.qseg}
+\alias{[.qseg}
 \alias{qseg}
 \title{Quick mode symbol}
 \format{qseg an environment}
 \usage{
 \method{<=}{qseg}(qseg, code)
+
+\method{[}{qseg}(qseg, code)
 
 qseg
 }
