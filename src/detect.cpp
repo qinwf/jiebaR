@@ -294,11 +294,11 @@ static const char *check_ucs_bom(const unsigned char *const buffer)
     size_t pattern_len;
   } patterns[] =
     {
-    { "ucs-4",      "\x00\x00\xFE\xFF",     4 },
-    { "ucs-4le",    "\xFF\xFE\x00\x00",     4 },
-    { "utf-8",      "\xEF\xBB\xBF",         3 },
-    { "utf-16",     "\xFE\xFF",             2 },
-    { "utf-16le",   "\xFF\xFE",             2 },
+    { "UCS-4",      "\x00\x00\xFE\xFF",     4 },
+    { "UCS-4LE",    "\xFF\xFE\x00\x00",     4 },
+    { "UTF-8",      "\xEF\xBB\xBF",         3 },
+    { "UTF-16",     "\xFE\xFF",             2 },
+    { "UTF-16LE",   "\xFF\xFE",             2 },
     { NULL,         NULL,                   0 }
     };
   for (size_t i = 0; patterns[i].name; ++i)
