@@ -145,13 +145,13 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
   }
   jiebapath <- find.package("jiebaR")
   if(!file.exists(file.path(jiebapath,"dict","jieba.dict.utf8"))){
-    unzip(file.path(jiebapath,"dict","jieba.dict.zip"),exdir =file.path( jiebapath,"dict") )
+    try(unzip(file.path(jiebapath,"dict","jieba.dict.zip"),exdir =file.path( jiebapath,"dict") ) )
   }
   if(!file.exists(file.path(jiebapath,"dict","hmm_model.utf8"))){
-    unzip(file.path(jiebapath,"dict","hmm_model.zip"),exdir =file.path( jiebapath,"dict") )
+    try(unzip(file.path(jiebapath,"dict","hmm_model.zip"),exdir =file.path( jiebapath,"dict") ) )
   }
   if(!file.exists(file.path(jiebapath,"dict","idf.utf8"))){
-    unzip(file.path(jiebapath,"dict","idf.zip"),exdir =file.path( jiebapath,"dict") )
+    try(unzip(file.path(jiebapath,"dict","idf.zip"),exdir =file.path( jiebapath,"dict") ) )
   }
   result = new.env(parent = emptyenv())
   
