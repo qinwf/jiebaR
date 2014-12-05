@@ -131,10 +131,17 @@ mixseg$detect = F
 可以自定义用户词库，推荐使用[深蓝词库转换]构建分词词库，它可以快速地将搜狗细胞词库等输入法词库转换为jiebaR的词库格式。
 
 ```r
-show_dictpath()  ### 显示词典路径
-edit_dict()      ### 编辑用户词典
-?edit_dict()     ### 打开帮助系统
+show_dictpath()     ### 显示词典路径
+edit_dict("user")   ### 编辑用户词典
+?edit_dict()        ### 打开帮助系统
 ```
+
+系统词典共有三列，第一列为词项，第二列为词频，第三列为词性标记。
+
+用户词典有两列，第一列为词项，第二列为词性标记。用户词库默认词频为系统词库中的最大词频，如需自定义词频率，可将新词添加入系统词库中。
+
+词典中的词性标记采用ictclas的标记方法。
+
 
 ### 快速模式
 
@@ -375,10 +382,17 @@ cutter$detect = F
 Users can specify their own custom dictionary to be included in the jiebaR default dictionary. jiebaR is able to identify new words, but adding your own new words can ensure a higher accuracy. [imewlconverter] is a good tools for dictionary construction.
 
 ```r
-ShowDictPath()  ### Show path
-EditDict()      ### Edit user dictionary
-?EditDict()     ### For more information
+show_dictpath()  ### Show path
+edit_dict()      ### Edit user dictionary
+?edit_dict()     ### For more information
 ```
+
+There are three column in the system dictionary. The first column is the word, and the second column is the frequency of word. The third column is 
+speech tag using labels compatible with ictclas.
+ 
+There are two column in the user dictionary. The first column is the word, 
+and the second column is speech tag using labels compatible with ictclas.
+Frequency of every word in the user dictionary will be the maximum number of the system dictionary. If you want to provide the frequency for a new word, you can put it in the system dictionary.
 
 ### Speech Tagging
 Speech Tagging function `<=.tagger` or `tag` uses speech tagging worker to cut word and tags each word after segmentation, using labels compatible with ictclas.  `dict` `hmm` and `user` should be provided when initializing `jiebaR` worker.

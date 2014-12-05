@@ -4,17 +4,27 @@
 \alias{edit_dict}
 \title{Edit default user dictionary}
 \usage{
-edit_dict()
+edit_dict(name = "user")
 
-EditDict()
+EditDict(name = "user")
+}
+\arguments{
+\item{name}{the name of dictionary including \code{user}, \code{system},
+\code{stop_word}.}
 }
 \description{
 Edit the default user dictionary.
 }
 \details{
-There are three column in the dictionary. The first column is the word,
-and the second column is the frequency of words. The third column is
+There are three column in the system dictionary. The first column is the word,
+and the second column is the frequency of word. The third column is
 speech tag using labels compatible with ictclas.
+
+There are two column in the user dictionary. The first column is the word,
+and the second column is speech tag using labels compatible with ictclas.
+Frequency of every word in the user dictionary will be the maximum number of
+the system dictionary. If you want to provide the frequency of a new word,
+you can put it in the system dictionary.
 }
 \author{
 Qin Wenfeng

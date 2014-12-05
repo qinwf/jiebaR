@@ -22,14 +22,35 @@ ShowDictPath<-function(){
 #' Edit the default user dictionary. 
 #' @references  The ictclas speech tag : \url{http://t.cn/8FdDD3I}
 #' @details 
-#' There are three column in the dictionary. The first column is the word, 
-#' and the second column is the frequency of words. The third column is 
+#' There are three column in the system dictionary. The first column is the word, 
+#' and the second column is the frequency of word. The third column is 
 #' speech tag using labels compatible with ictclas.
 #' 
+#' There are two column in the user dictionary. The first column is the word, 
+#' and the second column is speech tag using labels compatible with ictclas.
+#' Frequency of every word in the user dictionary will be the maximum number of 
+#' the system dictionary. If you want to provide the frequency of a new word,
+#' you can put it in the system dictionary.
+#' 
+#' @param name the name of dictionary including \code{user}, \code{system},
+#' \code{stop_word}.
 #' @author Qin Wenfeng 
 #' @export
-edit_dict<-function(){
-  file.show(file.path(path.package("jiebaR"),"dict","user.dict.utf8"))
+edit_dict<-function(name = "user"){
+  if(!(name %in% c("user","system","stop_word"))){
+    stop("Unkown name type")
+  }
+  dictname = switch(name,
+                    user   =  "user.dict.utf8",
+                    
+                    system = {
+                      warning("Open system dictionary will take a long time")
+                      "jieba.dict.utf8"
+                    },
+                    
+                    stop_word = "stop_words.utf8"
+  )
+  file.show(file.path(path.package("jiebaR"),"dict",dictname))
   if (.Platform$OS.type == "windows") {
     warning("You should save the dictionary without BOM on Windows")
   }
@@ -37,10 +58,8 @@ edit_dict<-function(){
 
 #' @rdname edit_dict
 #' @export
-EditDict<-function(){
-  file.show(file.path(path.package("jiebaR"),"dict","user.dict.utf8"))
+EditDict<-function(name = "user"){
+  edit_dict(name)
   warning("EditDict was deprecated. Please use edit_dict() instead.")
-  if (.Platform$OS.type == "windows") {
-    warning("You should save the dictionary without BOM on Windows")
-  }
+  
 }
