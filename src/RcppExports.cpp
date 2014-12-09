@@ -199,6 +199,25 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// key_ptr
+XPtr<keyword> key_ptr(const unsigned int& n, const CharacterVector& dict, const CharacterVector& model, const CharacterVector& idf, const CharacterVector& stop);
+RcppExport SEXP jiebaR_key_ptr(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< const unsigned int& >::type n(nSEXP );
+        Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP );
+        Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP );
+        Rcpp::traits::input_parameter< const CharacterVector& >::type idf(idfSEXP );
+        Rcpp::traits::input_parameter< const CharacterVector& >::type stop(stopSEXP );
+        XPtr<keyword> __result = key_ptr(n, dict, model, idf, stop);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // key_tag
 CharacterVector key_tag(const CharacterVector& x, XPtr<keyword> cutter);
 RcppExport SEXP jiebaR_key_tag(SEXP xSEXP, SEXP cutterSEXP) {

@@ -56,6 +56,10 @@ tag_file <- function(x, cutter) {
     .Call('jiebaR_tag_file', PACKAGE = 'jiebaR', x, cutter)
 }
 
+key_ptr <- function(n, dict, model, idf, stop) {
+    .Call('jiebaR_key_ptr', PACKAGE = 'jiebaR', n, dict, model, idf, stop)
+}
+
 key_tag <- function(x, cutter) {
     .Call('jiebaR_key_tag', PACKAGE = 'jiebaR', x, cutter)
 }

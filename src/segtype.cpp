@@ -75,6 +75,7 @@ CharacterVector tag_file(const CharacterVector& x, XPtr<tagger> cutter){
 
 /////// keyword
 
+// [[Rcpp::export]]
 XPtr<keyword> key_ptr(const unsigned int& n, const CharacterVector& dict,
                       const CharacterVector& model, const CharacterVector& idf,
                       const CharacterVector& stop){
