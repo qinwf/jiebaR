@@ -66,9 +66,9 @@ simhashl <- function(code, jiebar, encoding) {
 simhashw <- function(code, jiebar) {
   
   if (jiebar$symbol == F) {
-    code <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", code)
+    code <- gsub("[^\u2e80-\ufe4fa-zA-Z0-9]", " ", code)
   } 
-  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
+#  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
   
   result <- jiebar$worker$simhash(code,jiebar$topn)
   
@@ -77,6 +77,7 @@ simhashw <- function(code, jiebar) {
   }
   result
 } 
+
 #' Hamming distance of words
 #' 
 #' The function uses Simhash worker to do keyword extraction and find 
@@ -147,7 +148,7 @@ distancel <- function(code, jiebar, encoding) {
         tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
       } 
       if (jiebar$symbol == F) {
-        tmp.lines <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", tmp.lines)
+        tmp.lines <- gsub("[^\u2e80-\ufe4fa-zA-Z0-9]", " ", tmp.lines)
       } 
       tmp.lines <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", tmp.lines))
       

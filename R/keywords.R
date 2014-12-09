@@ -69,9 +69,9 @@ keyl <- function(code, jiebar, encoding) {
 keyw <- function(code, jiebar) {
   
   if (jiebar$symbol == F) {
-    code <- gsub("[^\u4e00-\u9fa5a-zA-Z0-9]", " ", code)
+    code <- gsub("[^\u2e80-\ufe4fa-zA-Z0-9]", " ", code)
   } 
-  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
+  # code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
 
     result <- jiebar$worker$tag(code)
   
