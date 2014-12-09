@@ -150,9 +150,9 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
 #  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
   
   if(FILESMODE==T ){
-    result <- jiebar$worker$file(code)
+    result <- tag_file(code, jiebar$worker)
   } else{
-    result <- jiebar$worker$tag(code)
+    result <- tag_tag(code, jiebar$worker)
   }
   
   if (symbol == F && FILESMODE  ==F) {

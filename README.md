@@ -17,12 +17,9 @@ Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](
 + 可以通过[Rpy2]，[jvmr]等被其他语言调用。
 + 基于MIT协议。
 
-## CRAN 版更新 v0.3
+## GitHub 版更新 v0.3.1
 
-+ 2X 分词速度
-+ 新的`[`分词运算符
-+ 快速模式
-+ 修正特定环境下的编码转换问题
++ 测试分支，重构C++部分代码，移除Rcpp Modules使用，加快包加载速度和函数调用速度。
 
 ## 安装
 

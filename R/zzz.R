@@ -1,6 +1,5 @@
 ##' @useDynLib jiebaR
 ##' @import Rcpp
-##' @import methods
 NULL 
 
 #' The path of dictionary
@@ -44,17 +43,17 @@ TIMESTAMP<-NULL
 
 }
 
-setLoadAction(
-  function(ns){ 
-    loadModule("mod_mpseg", TRUE)
-    loadModule("mod_mixseg", TRUE)
-    loadModule("mod_query", TRUE)
-    loadModule("mod_hmmseg", TRUE)
-    loadModule("mod_tag", TRUE)
-    loadModule("mod_key", TRUE)
-    loadModule("mod_sim", TRUE)
-    ###Loading DICTPATH when package loaded.    
-   })
+# setLoadAction(
+#   function(ns){ 
+# #     loadModule("mod_mpseg", TRUE)
+# #     loadModule("mod_mixseg", TRUE)
+# #     loadModule("mod_query", TRUE)
+# #     loadModule("mod_hmmseg", TRUE)
+# #     loadModule("mod_tag", TRUE)
+# #     loadModule("mod_key", TRUE)
+# #     loadModule("mod_sim", TRUE)
+#     ###Loading DICTPATH when package loaded.    
+#    })
 
 .onDetach<- function(libpath) {
   #     if (.Platform$OS.type == "windows") {

@@ -70,7 +70,7 @@ simhashw <- function(code, jiebar) {
   } 
 #  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
   
-  result <- jiebar$worker$simhash(code,jiebar$topn)
+  result <- sim_sim(code, jiebar$topn, jiebar$worker)
   
   if (.Platform$OS.type == "windows") {
     Encoding(result$keyword) <- "UTF-8"
@@ -126,7 +126,7 @@ distance <- function(codel,coder,jiebar){
       coder<-enc2utf8(coder)
     }
   }
-  result <- jiebar$worker$distance(codel,coder,jiebar$topn)
+  result <- sim_distance(codel, coder, jiebar$topn, jiebar$worker)
   if (.Platform$OS.type == "windows") {
     Encoding(result$rhs) <- "UTF-8"
     Encoding(result$lhs) <- "UTF-8"

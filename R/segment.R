@@ -146,7 +146,12 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
     code <- gsub("[^\u2e80-\ufe4fa-zA-Z0-9]", " ", code)
   } 
 #  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
-  result <- jiebar$worker$cut(code)
+  result <- switch(class(jiebar)[3],
+                   mixseg = mix_cut(code, jiebar$worker),
+                   mpseg = mp_cut(code, jiebar$worker),
+                   hmmseg = hmm_cut(code, jiebar$worker),
+                   queryseg = query_cut(code, jiebar$worker)
+                   )
   if (symbol == F) {
     result = result[ result != " "]
   }
