@@ -6,4 +6,4 @@
 ^.*\.txt$
 ^.*\.dat$
 ^appveyor\.yml$
-^test-all\.R$
+tests/testthat/test-all\.R
