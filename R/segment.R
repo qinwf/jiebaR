@@ -143,7 +143,7 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
 cutw <- function(code, jiebar,  symbol, FILESMODE) {
   
   if (symbol == F) {
-    code <- gsub("[^\u2e80-\ufe4fa-zA-Z0-9]", " ", code)
+    code <- gsub("[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]", " ", code)
   } 
 #  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
   result <- switch(class(jiebar)[3],
