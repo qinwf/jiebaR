@@ -7,7 +7,7 @@ Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](
 ## 特性
 
 + 支持 Windows，Linux，Mac 操作系统。
-+ 通过Rcpp Modules实现同时加载多个分词系统,可以分别使用不同的分词模式和词库。
++ 通过 Rcpp 实现同时加载多个分词系统,可以分别使用不同的分词模式和词库。
 + 支持多种分词模式、中文姓名识别、关键词提取、词性标注以及文本Simhash相似度比较等功能。
 + 支持加载自定义用户词库，设置词频、词性。
 + 同时支持简体中文、繁体中文分词。
@@ -19,7 +19,8 @@ Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](
 
 ## GitHub 版更新 v0.3.1
 
-+ 测试分支，重构C++部分代码，移除Rcpp Modules使用，加快包加载速度和函数调用速度。
++ 重构C++部分代码，移除Rcpp Modules，加快包加载速度和函数调用速度。
++ 优化筛选标点符号的正则表达式，现可识别生僻汉字。
 
 ## 安装
 
@@ -271,7 +272,7 @@ types of segmentation modes: Maximum Probability, Hidden Markov Model, Query Seg
 ## Features
 
 + Support Windows, Linux,and Mac.
-+ Using Rcpp Modules to load different segmentation worker at the same time.
++ Using Rcpp to load different segmentation worker at the same time.
 + Support Chinese text segmentation, keyword extraction, speech tagging and simhash computation.
 + Custom dictionary path.
 + Support simplified Chinese and traditional Chinese.
