@@ -18,13 +18,11 @@ env:
 
 before_install:
   - echo "options(repos = c(CRAN='http://cran.r-project.org'))" >> ~/.Rprofile
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  - curl -OL http://raw.github.com/wertion/r-travis-mac/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
 
 install:
-  - ./travis-tool.sh install_aptget r-cran-runit
-  - ./travis-tool.sh install_r Rcpp
   - ./travis-tool.sh install_deps
 #  - ./travis-tool.sh install_r RcppArmadillo 
 #  - ./travis-tool.sh install_github eddelbuettel/bh
