@@ -15,16 +15,6 @@ using namespace Rcpp;
 namespace CppJieba
 {
 
-struct SegmentChar
-{
-    uint16_t uniCh;
-    DagType dag;
-    const DictUnit *pInfo;
-    double weight;
-    size_t nextPos;
-    SegmentChar(): uniCh(0), pInfo(NULL), weight(0.0), nextPos(0)
-    {}
-};
 
 class MPSegment: public SegmentBase
 {
@@ -83,24 +73,13 @@ public:
         {
             return false;
         }
-        vector<SegmentChar> segmentChars(end - begin);
+        vector<SegmentChar> segmentChars;
 
-        //calc DAG
-        for (size_t i = 0; i < segmentChars.size(); i ++)
-        {
-            segmentChars[i].uniCh = *(begin + i);
-            segmentChars[i].dag.clear();
-            segmentChars[i].dag.push_back(std::pair<size_t, const DictUnit*>(i, NULL));
-            _dictTrie.find(begin + i, end, segmentChars[i].dag, i);
-        }
+        _dictTrie.find(begin, end, segmentChars);
 
         _calcDP(segmentChars);
 
-        if (!_cut(segmentChars, res))
-        {
-          Rcout<<"_cut failed."<<std::endl;
-            return false;
-        }
+        _cut(segmentChars, res);
 
         return true;
     }
@@ -110,24 +89,25 @@ public:
     }
 
 private:
-    void _calcDP(vector<SegmentChar> &SegmentChars) const
+    void _calcDP(vector<SegmentChar>& segmentChars) const
     {
         size_t nextPos;
         const DictUnit *p;
         double val;
 
-        for (int i = SegmentChars.size() - 1; i >= 0; i--)
+        for(ssize_t i = segmentChars.size() - 1; i >= 0; i--)
         {
-            SegmentChars[i].pInfo = NULL;
-            SegmentChars[i].weight = MIN_DOUBLE;
-            for (DagType::const_iterator it = SegmentChars[i].dag.begin(); it != SegmentChars[i].dag.end(); it++)
-            {
+          segmentChars[i].pInfo = NULL;
+          segmentChars[i].weight = MIN_DOUBLE;
+          assert(!segmentChars[i].dag.empty());
+          for(DagType::const_iterator it = segmentChars[i].dag.begin(); it != segmentChars[i].dag.end(); it++)
+          {
                 nextPos = it->first;
-                p = it->second;
+              p = it->second;
                 val = 0.0;
-                if (nextPos + 1 < SegmentChars.size())
+                if (nextPos + 1 < segmentChars.size())
                 {
-                    val += SegmentChars[nextPos + 1].weight;
+                    val += segmentChars[nextPos + 1].weight;
                 }
 
                 if (p)
@@ -138,16 +118,15 @@ private:
                 {
                     val += _dictTrie.getMinWeight();
                 }
-                if (val > SegmentChars[i].weight)
+                if (val > segmentChars[i].weight)
                 {
-                    SegmentChars[i].pInfo = p;
-                    SegmentChars[i].weight = val;
+                    segmentChars[i].pInfo = p;
+                    segmentChars[i].weight = val;
                 }
             }
         }
     }
-    bool _cut(const vector<SegmentChar> &segmentChars, vector<Unicode> &res)const
-    {
+        void _cut(const vector<SegmentChar>& segmentChars, vector<Unicode>& res) const    {
         size_t i = 0;
         while (i < segmentChars.size())
         {
@@ -163,7 +142,7 @@ private:
                 i++;
             }
         }
-        return true;
+
     }
 
 
