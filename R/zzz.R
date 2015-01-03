@@ -1,5 +1,6 @@
 ##' @useDynLib jiebaR
 ##' @import Rcpp
+##' @import jiebaRD
 NULL 
 
 #' The path of dictionary
