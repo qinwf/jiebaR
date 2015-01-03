@@ -14,7 +14,7 @@
 #' 
 #' @format qseg an environment
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' qseg <= "This is test"
 #' qseg <= "This is the second test"
 #' }
@@ -438,7 +438,7 @@ get_qsegmodel<-function(){
 #' @seealso \code{\link{qseg}} \code{\link{worker}} 
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' qseg <= "This is test"
 #' qseg <= "This is the second test"
 #' }

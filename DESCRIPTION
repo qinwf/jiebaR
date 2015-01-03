@@ -3,8 +3,8 @@ Type: Package
 Title: Chinese Text Segmentation
 Description: Chinese text segmentation, keyword extraction and speech tagging
     For R.
-Version: 0.3.1
-Date: 2014-12-07
+Version: 0.4
+Date: 2015-01-02
 Author: Qin Wenfeng, and the authors of CppJieba for the included version of
     CppJieba
 Maintainer: Qin Wenfeng <mail@qinwenfeng.com>

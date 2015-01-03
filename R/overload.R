@@ -11,7 +11,7 @@ print.inv<-function(x, ...){
 #' @param code   A Chinese sentence or the path of a text file. 
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' words = "hello world"
 #' test1 = worker()
 #' test1 <= words}
@@ -37,7 +37,7 @@ print.inv<-function(x, ...){
 #' @param code   A Chinese sentence or the path of a text file. 
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' words = "hello world"
 #' test1 = worker("keywords",topn=1)
 #' test1 <= words}
@@ -57,7 +57,7 @@ print.inv<-function(x, ...){
 #' @param code   A Chinese sentence or the path of a text file. 
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' words = "hello world"
 #' test1 = worker("simhash",topn=1)
 #' test1 <= words}
@@ -77,7 +77,7 @@ print.inv<-function(x, ...){
 #' @param code   A Chinese sentence or the path of a text file. 
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' words = "hello world"
 #' test1 = worker("tag")
 #' test1 <= words}

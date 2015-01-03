@@ -12,7 +12,7 @@
 #' @param jiebar jiebaR Worker
 #' @references  The ictclas speech tag : \url{http://t.cn/8FdDD3I}
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' words = "hello world"
 #' 
 #' ### Speech Tagging 

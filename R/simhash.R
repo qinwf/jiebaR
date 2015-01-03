@@ -12,7 +12,7 @@
 #' @references MS Charikar - Similarity Estimation Techniques from Rounding Algorithms
 #' @author Qin Wenfeng
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' ### Simhash
 #' words = "hello world"
 #' simhasher = worker("simhash",topn=1)
@@ -91,7 +91,7 @@ simhashw <- function(code, jiebar) {
 #' @seealso \code{\link{worker}} 
 #' @references \url{http://en.wikipedia.org/wiki/Hamming_distance}
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' ### Simhash
 #' words = "hello world"
 #' simhasher = worker("simhash", topn = 1)

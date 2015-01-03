@@ -13,7 +13,7 @@
 #' @references \url{http://en.wikipedia.org/wiki/Tf-idf}
 #' @author Qin Wenfeng
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #' ### Keyword Extraction
 #' keys = worker("keywords", topn = 1)
 #' keys <= "words of fun"}
