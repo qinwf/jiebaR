@@ -38,6 +38,7 @@ library("jiebaR")
 
 ```r
 library(devtools)
+install_github("qinwf/jiebaRD")
 install_github("qinwf/jiebaR")
 library("jiebaR")
 ```
