@@ -13,6 +13,7 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
+  - travis-tool.sh github_package qinwf/jiebaRD
   - travis-tool.sh install_deps
 
 test_script:

@@ -140,7 +140,7 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
   if(!any(type == c("mix","mp","hmm","query","simhash","keywords","tag"))){
     stop("Unkown worker type")
   }
-  jiebapath <- find.package("jiebaR")
+  jiebapath <- find.package("jiebaRD")
   if(!file.exists(file.path(jiebapath,"dict","jieba.dict.utf8"))){
     try(unzip(file.path(jiebapath,"dict","jieba.dict.zip"),exdir =file.path( jiebapath,"dict") ) )
   }

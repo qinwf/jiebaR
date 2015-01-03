@@ -10,7 +10,7 @@ Author: Qin Wenfeng, and the authors of CppJieba for the included version of
 Maintainer: Qin Wenfeng <mail@qinwenfeng.com>
 License: MIT + file LICENSE
 Depends:
-    R (>= 3.1)
+    R (>= 3.1), jiebaRD
 Imports:
     Rcpp
 LinkingTo: Rcpp

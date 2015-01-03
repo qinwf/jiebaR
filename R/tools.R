@@ -7,13 +7,13 @@
 #' 
 #' @export
 show_dictpath<-function(){
-  print(file.path(path.package("jiebaR"),"dict"))
+  print(file.path(path.package("jiebaRD"),"dict"))
 }
 
 #' @rdname show_dictpath
 #' @export
 ShowDictPath<-function(){
-  print(file.path(path.package("jiebaR"),"dict"))
+  print(file.path(path.package("jiebaRD"),"dict"))
   warning("ShowDictPath() was deprecated. Please use show_dictpath() instead.")
 }
 
@@ -50,7 +50,7 @@ edit_dict<-function(name = "user"){
                     
                     stop_word = "stop_words.utf8"
   )
-  file.show(file.path(path.package("jiebaR"),"dict",dictname))
+  file.show(file.path(path.package("jiebaRD"),"dict",dictname))
   if (.Platform$OS.type == "windows") {
     warning("You should save the dictionary without BOM on Windows")
   }

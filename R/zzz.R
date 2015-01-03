@@ -35,11 +35,11 @@ TIMESTAMP<-NULL
   
     assign(x = "TIMESTAMP",  as.numeric(Sys.time()),asNamespace('jiebaR'))
   
-    assign(x = "DICTPATH", file.path(find.package("jiebaR"),"dict","jieba.dict.utf8"),asNamespace('jiebaR'))
-    assign(x = "HMMPATH",  file.path(find.package("jiebaR"),"dict","hmm_model.utf8"),asNamespace('jiebaR'))
-    assign(x = "USERPATH", file.path(find.package("jiebaR"),"dict","user.dict.utf8"),asNamespace('jiebaR'))
-    assign(x = "STOPPATH", file.path(find.package("jiebaR"),"dict","stop_words.utf8"),asNamespace('jiebaR'))
-    assign(x = "IDFPATH",  file.path(find.package("jiebaR"),"dict","idf.utf8"),asNamespace('jiebaR'))
+    assign(x = "DICTPATH", file.path(find.package("jiebaRD"),"dict","jieba.dict.utf8"),asNamespace('jiebaR'))
+    assign(x = "HMMPATH",  file.path(find.package("jiebaRD"),"dict","hmm_model.utf8"),asNamespace('jiebaR'))
+    assign(x = "USERPATH", file.path(find.package("jiebaRD"),"dict","user.dict.utf8"),asNamespace('jiebaR'))
+    assign(x = "STOPPATH", file.path(find.package("jiebaRD"),"dict","stop_words.utf8"),asNamespace('jiebaR'))
+    assign(x = "IDFPATH",  file.path(find.package("jiebaRD"),"dict","idf.utf8"),asNamespace('jiebaR'))
 
 }
 

@@ -3,6 +3,7 @@ Changes in Version 0.4 (2015-01-03)
 
    o Remove Rcpp Modules
    o Better symbol filter in segmentation
+   o Separate data files to jiebaRD package
 
 Changes in Version 0.3 (2014-12-01)
 =====================================

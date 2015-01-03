@@ -19,10 +19,11 @@ Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](
 + 可以通过[Rpy2]，[jvmr]等被其他语言调用。
 + 基于MIT协议。
 
-## GitHub 版更新 v0.3.1
+## 更新 v0.4
 
 + 重构C++部分代码，移除Rcpp Modules，加快包加载速度和函数调用速度。
 + 优化筛选标点符号的正则表达式，现可识别生僻汉字。
++ 遵守 CRAN 的要求，分离大文件到 jiebaRD 包
 
 ## 安装
 
