@@ -96,7 +96,7 @@ public:
     for(Unicode::const_iterator it = begin; it != end; it++)
     {// build automation
       if(!ptNode){
-        stop(" Trie.hpp : line 99");
+        stop(" Trie.hpp : line 99 (bad dictionary file)");
       }
       if(NULL == ptNode->next || ptNode->next->end() == (citer = ptNode->next->find(*it)))
       {
@@ -122,7 +122,7 @@ public:
       Unicode::value_type ch = *(begin + i);
       res[i].uniCh = ch;
       if(!res[i].dag.empty()){
-        stop(" Trie.hpp : line 125");
+        stop(" Trie.hpp : line 125 (bad dictionary file)");
       }
       res[i].dag.push_back(pair<vector<Unicode >::size_type, const DictUnit* >(i, NULL));
       bool flag = false;
@@ -167,7 +167,7 @@ public:
           }
           temp = temp->fail;
           if(!temp){
-            stop(" Trie.hpp : line 170");
+            stop(" Trie.hpp : line 170 (bad dictionary file)");
           }
         }
       }
@@ -184,7 +184,7 @@ public:
     for(Unicode::const_iterator itr = begin; itr != end ; itr++)
     {
       if(!ptNode){
-        stop("Trie.hpp : line 187");
+        stop("Trie.hpp : line 187 (bad dictionary file)");
       }
       if(NULL == ptNode->next || ptNode->next->end() == (citer = ptNode->next->find(*itr)))
       {
@@ -210,11 +210,11 @@ private:
   {
     queue<TrieNode*> que;
     if(!(_root->ptValue == NULL)){
-      stop("_root->ptValue != NULL Trie.hpp : line 213");
+      stop("_root->ptValue != NULL Trie.hpp : line 213 (bad dictionary file)");
     }
     
     if(!(_root->next)){
-      stop("Trie.hpp : line 217");
+      stop("Trie.hpp : line 217 (bad dictionary file)");
     }
 
     _root->fail = NULL;
