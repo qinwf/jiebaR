@@ -1,8 +1,8 @@
 # jiebaR
 
-Win : [![Build status](https://ci.appveyor.com/api/projects/status/k8swxpkue1caiiwi/branch/master?svg=true)](https://ci.appveyor.com/project/qinwf53234/jiebar/branch/master)　DOI : [![DOI](https://zenodo.org/badge/8525/qinwf/jiebaR.svg)](http://dx.doi.org/10.5281/zenodo.13729)
-
 Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](https://travis-ci.org/qinwf/jiebaR)　Mac : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=osx)](https://travis-ci.org/qinwf/jiebaR)　
+
+Win : [![Build status](https://ci.appveyor.com/api/projects/status/k8swxpkue1caiiwi/branch/master?svg=true)](https://ci.appveyor.com/project/qinwf53234/jiebar/branch/master)　DOI : [![DOI](https://zenodo.org/badge/8525/qinwf/jiebaR.svg)](http://dx.doi.org/10.5281/zenodo.13729)
 
 ["结巴"中文分词]的R语言版本，支持最大概率法（Maximum Probability），隐式马尔科夫模型（Hidden Markov Model），索引模型（QuerySegment），混合模型（MixSegment），共四种分词模式，同时有词性标注，关键词提取，文本Simhash相似度比较等功能。项目使用了[Rcpp]和[CppJieba]进行开发。
 
@@ -21,7 +21,7 @@ Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](
 + 可以通过[Rpy2]，[jvmr]等被其他语言调用。
 + 基于MIT协议。
 
-## GitHub 版更新 v0.4.1
+## GitHub 开发版更新 v0.4.1
 
 1. 增加过滤分词结果的方法 `filter_segment()`，类似于关键词提取中使用的停止词功能。
 
@@ -53,7 +53,7 @@ install.packages("jiebaR")
 library("jiebaR")
 ```
 
-同时还可以通过Github安装[开发版],建议使用 gcc >= 4.6 编译包：
+同时还可以通过Github安装[开发版]，建议使用 gcc >= 4.6 编译，Windows需要安装 [Rtools](http://cran.r-project.org/bin/windows/Rtools/) ：
 
 ```r
 library(devtools)
@@ -79,8 +79,8 @@ mixseg = worker()
 
 mixseg <= "江州市长江大桥参加了长江大桥的通车仪式"  ### <= 分词运算符
 
-## 相当于 segment( "江州市长江大桥参加了长江大桥的通车仪式" , mixseg )
-
+## 相当于 segment( "江州市长江大桥参加了长江大桥的通车仪式" , mixseg ) 
+## 或者 mixseg["江州市长江大桥参加了长江大桥的通车仪式"]
 ```
 
 ```r
