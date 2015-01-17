@@ -21,11 +21,28 @@ Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](
 + 可以通过[Rpy2]，[jvmr]等被其他语言调用。
 + 基于MIT协议。
 
-## CRAN 版更新 v0.4
+## GitHub 版更新 v0.4.1
 
-+ 重构C++部分代码，移除Rcpp Modules，加快包加载速度和函数调用速度。
-+ 优化筛选标点符号的正则表达式，现可识别生僻汉字。
-+ 遵守 CRAN 的要求，分离大文件到 jiebaRD 包
+1. 增加过滤分词结果的方法 `filter_segment()`,类似于关键词提取中使用的停止词功能。
+
+```r
+cutter = worker()
+result_segment = cutter["我是测试文本，用于测试过滤分词效果。"]
+result_segment
+```
+
+```r
+[1] "我"   "是"   "测试" "文本" "用于" "测试" "过滤" "分词" "效果"
+```
+
+```r
+filter_words = c("我","你","它","大家")
+filter_segment(result_segment,filter_words)
+```
+
+```r
+[1] "是"   "测试" "文本" "用于" "测试" "过滤" "分词" "效果"
+```
 
 ## 安装
 
