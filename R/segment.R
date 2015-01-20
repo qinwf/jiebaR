@@ -41,22 +41,26 @@ segment <- function(code, jiebar) {
   if(jiebar$PrivateVarible$timestamp != TIMESTAMP){
     stop("Please create a new worker after jiebaR is reloaded.")
   }
-  if (!is.character(code) || length(code) != 1) 
+  if (!is.character(code))
     stop("Argument 'code' must be an string.")
   
-  if (file.exists(code)) {
+  if (file.exists(code[1])){
+    if(length(code) > 1){
+      warning("In file mode, only the first element will be processed.")
+    }
     if(is.null(jiebar$output)){
-      basenames <- gsub("\\.[^\\.]*$", "", code)
-      extnames  <- gsub(basenames, "", code, fixed = TRUE)
+      basenames <- gsub("\\.[^\\.]*$", "", code[1])
+      extnames  <- gsub(basenames, "", code[1], fixed = TRUE)
       output    <- paste(basenames, ".segment", as.numeric(Sys.time()), extnames, sep = "")
     } else {
       output<-jiebar$output
     }
     encoding<-jiebar$encoding
-    if(jiebar$detect==T)  encoding<-filecoding(code)
+    if(jiebar$detect==T)  encoding<-filecoding(code[1])
     FILESMODE <- T
-    cutl(code = code, jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
+    res = cutl(code = code[1], jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
          output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE)
+    return(res)
   } else {
     if (.Platform$OS.type == "windows") {
       code<-enc2utf8(code)
@@ -85,18 +89,37 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
       while (nlines == lines) {
         tmp.lines <- readLines(input.r, n = lines, encoding = encoding)
         nlines <- length(tmp.lines)
-        tmp.lines <- paste(tmp.lines, collapse = " ")
+        if(jiebar$bylines == FALSE){
+          tmp.lines <- paste(tmp.lines, collapse = " ")
+        }
         if (nlines > 0) {
           if (encoding != "UTF-8") {
             tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
           }
+          
           out.lines <- cutw(code = tmp.lines, jiebar = jiebar, 
                             symbol = symbol, FILESMODE = FILESMODE)
           
           if (.Platform$OS.type == "windows") {
-            writeBin(charToRaw(paste(out.lines, collapse = " ")), output.w)
+            if(jiebar$bylines == TRUE){
+              lines_of_output <- length(out.lines)
+              for(num in 1:lines_of_output){
+                writeBin(charToRaw(paste(out.lines[[num]], collapse = " ")), output.w)
+                writeBin(charToRaw("\n"), output.w)
+              }
+            } else {
+              writeBin(charToRaw(paste(out.lines, collapse = " ")), output.w)
+            }
           } else {
-            writeLines(paste(out.lines, collapse = " "), output.w)
+            if(jiebar$bylines == TRUE){
+              lines_of_output <- length(out.lines)
+              for(num in 1:lines_of_output){
+                writeLines(paste(out.lines[[num]], collapse = " "), output.w)
+                writeLines("\n", output.w)
+              }
+            } else {
+              writeLines(paste(out.lines, collapse = " "), output.w)
+            }
           }
           
         } 
@@ -118,7 +141,9 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
       while (nlines == lines) {
         tmp.lines <- readLines(input.r, n = lines, encoding = encoding)
         nlines <- length(tmp.lines)
-        tmp.lines <- paste(tmp.lines, collapse = " ")
+        if(jiebar$bylines == FALSE){
+          tmp.lines <- paste(tmp.lines, collapse = " ")
+        }
         if (nlines > 0) {
           if (encoding != "UTF-8") {
             tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
@@ -127,9 +152,9 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
                             symbol = symbol, FILESMODE = FILESMODE)
           
           result<-c(result,out.lines)
-
-        } 
-      } 
+          
+        }
+      }
     }
     , finally = {
       try(close(input.r), silent = TRUE)
@@ -145,19 +170,44 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
   
   if (symbol == F) {
     code <- gsub("[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]", " ", code)
-  } 
-#  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
+  }
+  #  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
+  
+  if(jiebar$bylines == FALSE){
+    result = engine_cut(code,jiebar)
+    if (symbol == F) {
+      result = result[ result != " "]
+    }
+    if (.Platform$OS.type == "windows") {
+      Encoding(result)<-"UTF-8"
+    }
+  } else {
+    result = list()
+    length_of_input = length(code)
+    for( num in 1:length_of_input){
+      tmp_result = engine_cut(code[num],jiebar)
+      if (symbol == F) {
+        tmp_result = tmp_result[ tmp_result != " "]
+      }
+      if (.Platform$OS.type == "windows") {
+        Encoding(tmp_result)<-"UTF-8"
+      }
+      result = c(result, list(tmp_result))
+    }
+  }
+  
+  return(result)
+}
+
+engine_cut <- function(code,jiebar){
+  if(length(code) > 1){
+    code <- paste(code, collapse = " ")
+  }
   result <- switch(class(jiebar)[3],
                    mixseg = mix_cut(code, jiebar$worker),
                    mpseg = mp_cut(code, jiebar$worker),
                    hmmseg = hmm_cut(code, jiebar$worker),
                    queryseg = query_cut(code, jiebar$worker)
-                   )
-  if (symbol == F) {
-    result = result[ result != " "]
-  }
-  if (.Platform$OS.type == "windows") {
-    Encoding(result)<-"UTF-8"}
+  )
   return(result)
-} 
-
+}

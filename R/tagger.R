@@ -26,27 +26,30 @@ tagging<- function(code, jiebar) {
   if(jiebar$PrivateVarible$timestamp != TIMESTAMP){
     stop("Please create a new worker after jiebaR is reloaded.")
   }
-  if (!is.character(code) || length(code) != 1) 
+  if (!is.character(code)) 
     stop("Argument 'code' must be an string.")
   
-  if (file.exists(code)) {
-    
+  if (file.exists(code[1])) {
+    if(length(code) > 1){
+      warning("In file mode, only the first element will be processed.")
+    }
     encoding<-jiebar$encoding
     
     if(is.null(jiebar$output)){
-      basenames <- gsub("\\.[^\\.]*$", "", code)
-      extnames  <- gsub(basenames, "", code, fixed = TRUE)
+      basenames <- gsub("\\.[^\\.]*$", "", code[1])
+      extnames  <- gsub(basenames, "", code[1], fixed = TRUE)
       output    <- paste(basenames, ".segment", as.numeric(Sys.time()), extnames, sep = "")
     }  else {
       output<-jiebar$output
     }
     
-    if(jiebar$detect==T)  encoding<-filecoding(code)
+    if(jiebar$detect==T)  encoding<-filecoding(code[1])
     
     FILESMODE <- T
     
-    tagl(code = code, jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
+    res = tagl(code = code, jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
          output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE)
+    return(res)
   } else {
     if (.Platform$OS.type == "windows") {
       code<-enc2utf8(code)
@@ -85,18 +88,41 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
       while (nlines == lines) {
         tmp.lines <- readLines(input.r, n = lines, encoding = encoding)
         nlines <- length(tmp.lines)
-        tmp.lines <- paste(tmp.lines, collapse = " ")
+        if(jiebar$bylines == FALSE){
+          tmp.lines <- paste(tmp.lines, collapse = " ")
+        }
         if (nlines > 0) {
           if (encoding != "UTF-8") {
             tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
           }
           out.lines <- tagw(code = tmp.lines, jiebar = jiebar, 
                             symbol = symbol, FILESMODE = FILESMODE)
-          out.lines<-gsub("\\s x\\s","",paste(out.lines, collapse = " "))
+
           if (.Platform$OS.type == "windows") {
-            writeBin(charToRaw(out.lines), output.w)
+            
+            if(jiebar$bylines == TRUE){
+              lines_of_output <- length(out.lines)
+              for(num in 1:lines_of_output){
+                out.lines[[num]]<-gsub("\\s x\\s","",paste(out.lines[[num]], collapse = " "))
+                writeBin(charToRaw(paste(out.lines[[num]], collapse = " ")), output.w)
+                writeBin(charToRaw("\n"), output.w)
+              }
+            } else {
+              out.lines<-gsub("\\s x\\s","",paste(out.lines, collapse = " "))
+              writeBin(charToRaw(paste(out.lines, collapse = " ")), output.w)
+            }
           } else {
-            writeLines(out.lines, output.w)
+            if(jiebar$bylines == TRUE){
+              lines_of_output <- length(out.lines)
+              for(num in 1:lines_of_output){
+                out.lines[[num]]<-gsub("\\s x\\s","",paste(out.lines[[num]], collapse = " "))
+                writeLines(paste(out.lines[[num]], collapse = " "), output.w)
+                writeLines("\n", output.w)
+              }
+            } else {
+              out.lines<-gsub("\\s x\\s","",paste(out.lines, collapse = " "))
+              writeLines(paste(out.lines, collapse = " "), output.w)
+            }
           }
           
         } 
@@ -119,7 +145,9 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
       while (nlines == lines) {
         tmp.lines <- readLines(input.r, n = lines, encoding = encoding)
         nlines <- length(tmp.lines)
-        tmp.lines <- paste(tmp.lines, collapse = " ")
+        if(jiebar$bylines == FALSE){
+          tmp.lines <- paste(tmp.lines, collapse = " ")
+        }
         if (nlines > 0) {
           if (encoding != "UTF-8") {
             tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
@@ -148,21 +176,42 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
   if (symbol == F) {
     code <- gsub("[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]", " ", code)
   } 
-#  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
-  
-  if(FILESMODE==T ){
-    result <- tag_file(code, jiebar$worker)
+  #  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
+  if(jiebar$bylines == FALSE){
+    if(length(code) > 1){
+      code <- paste(code, collapse = " ")
+    }
+    if(FILESMODE==T ){
+      result <- tag_file(code, jiebar$worker)
+    } else{
+      result <- tag_tag(code, jiebar$worker)
+    }
+    if (symbol == F && FILESMODE  ==F) {
+      result = result[ result != " "]
+    }
+    
+    if (.Platform$OS.type == "windows") {
+      Encoding(result)<-"UTF-8"
+    }
   } else{
-    result <- tag_tag(code, jiebar$worker)
+    
+    result = list()
+    length_of_input = length(code)
+    for(num in 1:length_of_input){
+      if(FILESMODE==T ){
+        tmp_result <- tag_file(code[num], jiebar$worker)
+      } else{
+        tmp_result <- tag_tag(code[num], jiebar$worker)
+      }
+      if (symbol == F && FILESMODE  ==F) {
+        tmp_result = tmp_result[ tmp_result != " "]
+      }
+      
+      if (.Platform$OS.type == "windows") {
+        Encoding(tmp_result)<-"UTF-8"
+      }
+      result = c(result,list(tmp_result))
+    }
   }
-  
-  if (symbol == F && FILESMODE  ==F) {
-    result = result[ result != " "]
-  }
-  
-  if (.Platform$OS.type == "windows") {
-    Encoding(result)<-"UTF-8"
-  }
-  
   result
-} 
+}

@@ -7,3 +7,4 @@
 ^.*\.dat$
 ^appveyor\.yml$
 tests/testthat/test-all\.R
+tests/testthat/test-bylines\.R
