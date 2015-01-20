@@ -7,7 +7,7 @@
 worker(type = "mix", dict = DICTPATH, hmm = HMMPATH, user = USERPATH,
   idf = IDFPATH, stop_word = STOPPATH, write = T, qmax = 20, topn = 5,
   encoding = "UTF-8", detect = T, symbol = F, lines = 1e+05,
-  output = NULL)
+  output = NULL, bylines = F)
 }
 \arguments{
 \item{type}{The type of jiebaR workers including \code{mix}, \code{mp}, \code{hmm},
@@ -59,6 +59,8 @@ and the value is used for \code{mix}, \code{hmm}, \code{query},
 \item{output}{A path to the output file, and default worker will
   generate file name by system time stamp, the value
   is used for segmentation and speech tagging  workers.}
+
+\item{bylines}{return the result by the lines of input files}
 }
 \value{
 This function returns an environment containing segmentation

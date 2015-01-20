@@ -55,6 +55,8 @@
 #'   generate file name by system time stamp, the value 
 #'   is used for segmentation and speech tagging  workers. 
 #'   
+#' @param bylines return the result by the lines of input files
+#'   
 #' @return  This function returns an environment containing segmentation 
 #' settings and worker. Public settings can be modified and got 
 #' using \code{$}.
@@ -135,7 +137,7 @@
 worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH, 
                    user = USERPATH, idf = IDFPATH, stop_word = STOPPATH, write = T,
                    qmax = 20, topn = 5, encoding = "UTF-8", detect = T, symbol = F,
-                   lines = 1e+05, output = NULL) 
+                   lines = 1e+05, output = NULL, bylines = F) 
 { 
   if(!any(type == c("mix","mp","hmm","query","simhash","keywords","tag"))){
     stop("Unkown worker type")
@@ -156,46 +158,46 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
            mp      = {
            worker  = mp_ptr(dict, user)
            private = list(dict = dict,user = user, timestamp = TIMESTAMP)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","segment","mpseg")
          }, 
          
            mix     = {
            worker  = mix_ptr(dict, hmm, user)
            private = list(dict = dict,hmm = hmm,user = user, timestamp = TIMESTAMP)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","segment","mixseg")
          },
            hmm     = {
            worker  = hmm_ptr(hmm)
            private = list(hmm = hmm, timestamp = TIMESTAMP)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","segment","hmmseg")
          },
            query   = {
            worker  = query_ptr(dict,hmm,qmax)
            private = list(dict = dict,hmm = hmm,max_word_lenght = qmax, timestamp = TIMESTAMP)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            
            class(result) <- c("jiebar","segment","queryseg")
          },
           simhash  = {
            worker  = sim_ptr(dict,hmm,idf,stop_word)
            private = list(dict=dict,hmm=hmm,idf=idf,stop_word=stop_word, timestamp = TIMESTAMP)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","nonsegment","simhash")
            result$topn = topn
          },
          keywords  = {
            worker  =  key_ptr(topn, dict,hmm,idf,stop_word)
            private = list(top_n_word=topn,dict=dict,hmm=hmm,idf=idf,stop_word=stop_word, timestamp = TIMESTAMP)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","nonsegment","keywords")
          },
            tag     = {
            worker  =  tag_ptr(dict,hmm,user)
            private = list(dict=dict,hmm=hmm,user=user, timestamp = TIMESTAMP)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,result)
+           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","nonsegment","tagger")         
          })
   result
@@ -203,7 +205,7 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
 
 
 
-assignjieba<-function(worker,detect,encoding,symbol,lines,output,write,private,result){
+assignjieba<-function(worker,detect,encoding,symbol,lines,output,write,private,bylines,result){
   assign(x = "worker",value = worker,envir = result)
   assign(x = "detect",value = detect,envir = result)
   assign(x = "symbol",value = symbol,envir = result)
@@ -212,5 +214,5 @@ assignjieba<-function(worker,detect,encoding,symbol,lines,output,write,private,r
   assign(x = "write",value = write,envir = result)
   assign(x = "PrivateVarible",value = private,envir = result)
   assign(x = "encoding",value = encoding, envir=result)
-  
+  assign(X = "bylines",value = bylines, envir=result)
 }
