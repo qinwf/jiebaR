@@ -214,5 +214,5 @@ assignjieba<-function(worker,detect,encoding,symbol,lines,output,write,private,b
   assign(x = "write",value = write,envir = result)
   assign(x = "PrivateVarible",value = private,envir = result)
   assign(x = "encoding",value = encoding, envir=result)
-  assign(X = "bylines",value = bylines, envir=result)
+  assign(x = "bylines",value = bylines, envir=result)
 }
