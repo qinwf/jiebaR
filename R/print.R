@@ -17,7 +17,7 @@ print.hmmseg<-function(x,...){
   cat("Max Read Lines  :  ");cat(x$lines);cat("\n");cat("\n")
   cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(x$PrivateVarible)
-  cat("$detect $encoding $symbol $output $write $lines can be reset.\n")
+  cat("$detect $encoding $symbol $output $write $lines $bylines can be reset.\n")
 }
 
 #' @rdname print.hmmseg
@@ -33,7 +33,7 @@ print.queryseg<-function(x,...){
   cat("Max Read Lines  :  ");cat(x$lines);cat("\n");cat("\n")
   cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(x$PrivateVarible)
-  cat("$detect $encoding $symbol $output $write $lines can be reset.\n")
+  cat("$detect $encoding $symbol $output $write $lines $bylines can be reset.\n")
 }
 
 #' @rdname print.hmmseg
@@ -74,7 +74,7 @@ print.tagger<-function(x,...){
   cat("Max Read Lines  :  ");cat(x$lines);cat("\n");cat("\n")
   cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(x$PrivateVarible)
-  cat("$detect $encoding $symbol $output $write $lines can be reset.\n")
+  cat("$detect $encoding $symbol $output $write $lines $bylines can be reset.\n")
 }
 
 #' @rdname print.hmmseg
@@ -90,7 +90,7 @@ print.mixseg<-function(x,...){
   cat("Max Read Lines  :  ");cat(x$lines);cat("\n");cat("\n")
   cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(x$PrivateVarible)
-  cat("$detect $encoding $symbol $output $write $lines can be reset.\n")
+  cat("$detect $encoding $symbol $output $write $lines $bylines can be reset.\n")
 }
 
 #' @rdname print.hmmseg
@@ -106,7 +106,7 @@ print.mpseg<-function(x,...){
   cat("Max Read Lines  :  ");cat(x$lines);cat("\n");cat("\n")
   cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(x$PrivateVarible)
-  cat("$detect $encoding $symbol $output $write $lines can be reset.\n")
+  cat("$detect $encoding $symbol $output $write $lines $bylines can be reset.\n")
 }
 
 #' @export
