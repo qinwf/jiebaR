@@ -60,7 +60,11 @@ segment <- function(code, jiebar) {
     FILESMODE <- T
     res = cutl(code = code[1], jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
          output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE)
-    return(res)
+    if(jiebar$write == TRUE) {
+      return(output) 
+    } else{
+      return(res)
+    }
   } else {
     if (.Platform$OS.type == "windows") {
       code<-enc2utf8(code)

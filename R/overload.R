@@ -17,13 +17,14 @@ print.inv<-function(x, ...){
 #' test1 <= words}
 #' @export
 `<=.segment`<-function(jiebar, code){
-  if(file.exists(code) && jiebar$write == T) {
-    segment(code,jiebar)
-    xx<-NA
-    class(xx) = "inv"
-    return(xx)
-  }
-  else return(segment(code, jiebar))
+#   if(jiebar$write == T) {
+#     segment(code,jiebar)
+#     xx<-NA
+#     class(xx) = "inv"
+#     return(xx)
+#   }
+#   else 
+    return(segment(code, jiebar))
 }
 
 #' @rdname less-than-equals-.segment
@@ -83,13 +84,14 @@ print.inv<-function(x, ...){
 #' test1 <= words}
 #' @export
 `<=.tagger`<-function(jiebar, code){
-  if(file.exists(code) && jiebar$write == T) {
-    tagging(code, jiebar)
-    xx <- NA
-    class(xx) = "inv"
-    return(xx)
-  }
-  else return(tagging(code, jiebar))
+#   if(file.exists(code) && jiebar$write == T) {
+#     tagging(code, jiebar)
+#     xx <- NA
+#     class(xx) = "inv"
+#     return(xx)
+#   }
+#   else 
+    return(tagging(code, jiebar))
 }
 
 #' @rdname less-than-equals-.tagger
