@@ -215,6 +215,22 @@ public:
     extractor.extract(test_lines, words, topN);
     return wrap(words);
   }
+  
+  CharacterVector keys(vector<string>& test_lines)
+  {
+    vector<pair<string, double> > res;
+    extractor.keys(test_lines, res, topN);
+    unsigned int it;
+    CharacterVector m(res.size());
+    CharacterVector atb(res.size());
+    for (it = 0; it != res.size(); it++)
+    {
+      m[it] = res[it].first;
+      atb[it] = itos(res[it].second);
+    }
+    m.attr("names") = atb;
+    return wrap(m);
+  }
 };
 
 

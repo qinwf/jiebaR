@@ -2,9 +2,12 @@
 % Please edit documentation in R/keywords.R
 \name{keywords}
 \alias{keywords}
+\alias{vector_keywords}
 \title{Keyword extraction}
 \usage{
 keywords(code, jiebar)
+
+vector_keywords(code, jiebar)
 }
 \arguments{
 \item{code}{A Chinese sentence or the path of a text file.}

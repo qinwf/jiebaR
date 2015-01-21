@@ -68,6 +68,10 @@ key_cut <- function(x, cutter) {
     .Call('jiebaR_key_cut', PACKAGE = 'jiebaR', x, cutter)
 }
 
+key_keys <- function(x, cutter) {
+    .Call('jiebaR_key_keys', PACKAGE = 'jiebaR', x, cutter)
+}
+
 sim_ptr <- function(dict, model, idf, stop) {
     .Call('jiebaR_sim_ptr', PACKAGE = 'jiebaR', dict, model, idf, stop)
 }

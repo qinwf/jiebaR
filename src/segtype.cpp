@@ -92,6 +92,11 @@ CharacterVector key_cut(const CharacterVector& x, XPtr<keyword> cutter){
   return wrap(cutter->cut(x));
 }
 
+// [[Rcpp::export]]
+CharacterVector key_keys(vector<string>& x, XPtr<keyword> cutter){
+  return wrap(cutter->keys(x));
+}
+
 /////// simhash
 
 // [[Rcpp::export]]
