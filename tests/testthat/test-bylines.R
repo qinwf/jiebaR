@@ -27,5 +27,14 @@ skip_on_cran({
     )
   })
   file.remove("test.out")
+  cutter = worker("tag",bylines = TRUE)
+  cutter$write = FALSE
+  test_that("bylines tag words input", {
+    expect_identical(  cutter["bylines.utf8"],
+                       list(structure(c("这是", "一个", "分行", "测试", "文本"), .Names = c("x", "m", "v", "vn", "n")), 
+                            structure(c("用于", "测试", "分行", "的", "输出", "结果"), .Names = c("v", "vn", "v", "uj", "v", "n"))
+                            )
+    )
+  })
 })
 
