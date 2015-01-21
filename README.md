@@ -97,6 +97,12 @@ cutter["files.path"]
 [1] "用于" "测试" "分行"   "的" "输出" "结果" 
 ```
 
+```r
+# 按行写入文件
+cutter$write = TRUE
+cutter$bylines = TRUE
+```
+
 三、可以使用 `vector_keywords` 对一个文本向量提取关键词。
 
 ```r
