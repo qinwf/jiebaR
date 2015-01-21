@@ -186,8 +186,9 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
       Encoding(result)<-"UTF-8"
     }
   } else {
-    result = list()
+
     length_of_input = length(code)
+    result = vector("list", length_of_input)
     for( num in 1:length_of_input){
       tmp_result = engine_cut(code[num],jiebar)
       if (symbol == F) {
@@ -196,7 +197,7 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
       if (.Platform$OS.type == "windows") {
         Encoding(tmp_result)<-"UTF-8"
       }
-      result = c(result, list(tmp_result))
+      result[[num]] = tmp_result
     }
   }
   
