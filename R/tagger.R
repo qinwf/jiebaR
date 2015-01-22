@@ -134,7 +134,7 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
       
     })
     OUT <- TRUE
-    cat(paste("Output file: ", output, "\n"))
+    # cat(paste("Output file: ", output, "\n"))
     return(output) 
     
   } else{
