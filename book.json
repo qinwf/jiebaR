@@ -1,0 +1,15 @@
+{
+    "plugins": [
+    "ga",
+    "richquotes",
+    "mermaid"
+    ],
+    "pluginsConfig": {
+        "ga" : {
+            "token": "UA-58841928-1"
+        },
+        "richquotes" : {
+            "todos" : true
+        }
+    }
+}

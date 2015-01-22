@@ -1,0 +1,6 @@
+_book/
+log/
+docs/
+local/
+output/
+*.local.*
