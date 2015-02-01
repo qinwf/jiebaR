@@ -28,7 +28,7 @@ simhash <- function(code, jiebar) {
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   
-  if (file.exists(code)) {
+  if (file.exists(code) && jiebar$write != "NOFILE") {
     encoding <- jiebar$encoding
     if(jiebar$detect == T)  encoding<-filecoding(code)
     simhashl(code = code, jiebar = jiebar, encoding = encoding)
@@ -118,7 +118,7 @@ distance <- function(codel,coder,jiebar){
       codel<-enc2utf8(codel)
     }
   }
-  if (file.exists(coder)) {
+  if (file.exists(coder) && jiebar$write != "NOFILE") {
     if(jiebar$detect == T)  encoding <- filecoding(coder)
     coder <- distancel(coder,jiebar,encoding)
   } else{

@@ -26,7 +26,7 @@ keywords <- function(code, jiebar) {
   if (!is.character(code) || length(code) != 1) 
     stop("Argument 'code' must be an string.")
   
-  if (file.exists(code)) {
+  if (file.exists(code) && jiebar$write != "NOFILE") {
     encoding <- jiebar$encoding
     
     if(jiebar$detect == T)  encoding <- filecoding(code)

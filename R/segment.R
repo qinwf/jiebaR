@@ -44,7 +44,7 @@ segment <- function(code, jiebar) {
   if (!is.character(code))
     stop("Argument 'code' must be an string.")
   
-  if (file.exists(code[1])){
+  if (file.exists(code[1]) && jiebar$write != "NOFILE"){
     if(length(code) > 1){
       warning("In file mode, only the first element will be processed.")
     }
