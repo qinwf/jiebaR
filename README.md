@@ -43,6 +43,14 @@ library("jiebaR")
 
 [jiebaR 使用指南](http://qinwenfeng.com/jiebaR/) ：http://qinwenfeng.com/jiebaR/
 
+## 问题
+
+使用中遇到的任何问题，都可以：
+
++ 访问[jiebaR 使用指南](http://qinwenfeng.com/jiebaR/) ：http://qinwenfeng.com/jiebaR/，并可在文档内评论
++ 发送邮件至用户邮件列表　[jiebaR@googlegroups.com](mailto:jiebaR@googlegroups.com)
++ 访问　https://groups.google.com/d/forum/jiebaR
++ 在 [GitHub](https://github.com/qinwf/jiebaR) 提交 issues。　
 
 # jiebaR
 
