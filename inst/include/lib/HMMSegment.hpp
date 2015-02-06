@@ -108,11 +108,19 @@ private:
     // sequential letters rule
     Unicode::const_iterator _sequentialLetterRule(Unicode::const_iterator begin, Unicode::const_iterator end) const
     {
-        Unicode::value_type x;
+        Unicode::value_type x = *begin;
+        if (('a' <= x && x <= 'z') || ('A' <= x && x <= 'Z'))
+        {
+            begin ++;
+        }
+        else
+        {
+            return begin;
+        }
         while (begin != end)
         {
             x = *begin;
-            if (('a' <= x && x <= 'z') || ('A' <= x && x <= 'Z'))
+            if (('a' <= x && x <= 'z') || ('A' <= x && x <= 'Z')  || ('0' <= x && x <= '9'))
             {
                 begin ++;
             }
