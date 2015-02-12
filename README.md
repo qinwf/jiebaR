@@ -87,7 +87,7 @@ install.packages("jiebaR")
 
 ["结巴"中文分词]:https://github.com/fxsjy/jieba
 [Rcpp]:https://github.com/RcppCore/Rcpp
-[Cppjieba]:https://github.com/aszxqw/cppjieba
+[Cppjieba]:https://github.com/yanyiwu/cppjieba
 [Rtools]:http://mirrors.xmu.edu.cn/CRAN/bin/windows/Rtools
 [深蓝词库转换]:https://github.com/studyzy/imewlconverter
 [开发版]:https://ci.appveyor.com/project/qinwf53234/jiebar/branch/master/artifacts
