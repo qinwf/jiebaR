@@ -10,312 +10,236 @@ using namespace Rcpp;
 CharacterVector filecoding(CharacterVector file);
 RcppExport SEXP jiebaR_filecoding(SEXP fileSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< CharacterVector >::type file(fileSEXP );
-        CharacterVector __result = filecoding(file);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type file(fileSEXP);
+    __result = Rcpp::wrap(filecoding(file));
+    return __result;
 END_RCPP
 }
 // mp_ptr
 XPtr<mpseg> mp_ptr(const CharacterVector& dict, const CharacterVector& user);
 RcppExport SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type user(userSEXP );
-        XPtr<mpseg> __result = mp_ptr(dict, user);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type user(userSEXP);
+    __result = Rcpp::wrap(mp_ptr(dict, user));
+    return __result;
 END_RCPP
 }
 // mp_cut
 CharacterVector mp_cut(const CharacterVector& x, XPtr<mpseg> cutter);
 RcppExport SEXP jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP );
-        Rcpp::traits::input_parameter< XPtr<mpseg> >::type cutter(cutterSEXP );
-        CharacterVector __result = mp_cut(x, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtr<mpseg> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(mp_cut(x, cutter));
+    return __result;
 END_RCPP
 }
 // mix_ptr
 XPtr<mixseg> mix_ptr(const CharacterVector& dict, const CharacterVector& model, const CharacterVector& user);
 RcppExport SEXP jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type user(userSEXP );
-        XPtr<mixseg> __result = mix_ptr(dict, model, user);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type user(userSEXP);
+    __result = Rcpp::wrap(mix_ptr(dict, model, user));
+    return __result;
 END_RCPP
 }
 // mix_cut
 CharacterVector mix_cut(const CharacterVector& x, XPtr<mixseg> cutter);
 RcppExport SEXP jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP );
-        Rcpp::traits::input_parameter< XPtr<mixseg> >::type cutter(cutterSEXP );
-        CharacterVector __result = mix_cut(x, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtr<mixseg> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(mix_cut(x, cutter));
+    return __result;
 END_RCPP
 }
 // query_ptr
 XPtr<queryseg> query_ptr(const CharacterVector& dict, const CharacterVector& model, const int& n);
 RcppExport SEXP jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP );
-        Rcpp::traits::input_parameter< const int& >::type n(nSEXP );
-        XPtr<queryseg> __result = query_ptr(dict, model, n);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP);
+    Rcpp::traits::input_parameter< const int& >::type n(nSEXP);
+    __result = Rcpp::wrap(query_ptr(dict, model, n));
+    return __result;
 END_RCPP
 }
 // query_cut
 CharacterVector query_cut(const CharacterVector& x, XPtr<queryseg> cutter);
 RcppExport SEXP jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP );
-        Rcpp::traits::input_parameter< XPtr<queryseg> >::type cutter(cutterSEXP );
-        CharacterVector __result = query_cut(x, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtr<queryseg> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(query_cut(x, cutter));
+    return __result;
 END_RCPP
 }
 // hmm_ptr
 XPtr<hmmseg> hmm_ptr(const CharacterVector& model);
 RcppExport SEXP jiebaR_hmm_ptr(SEXP modelSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP );
-        XPtr<hmmseg> __result = hmm_ptr(model);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP);
+    __result = Rcpp::wrap(hmm_ptr(model));
+    return __result;
 END_RCPP
 }
 // hmm_cut
 CharacterVector hmm_cut(const CharacterVector& x, XPtr<hmmseg> cutter);
 RcppExport SEXP jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP );
-        Rcpp::traits::input_parameter< XPtr<hmmseg> >::type cutter(cutterSEXP );
-        CharacterVector __result = hmm_cut(x, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtr<hmmseg> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(hmm_cut(x, cutter));
+    return __result;
 END_RCPP
 }
 // tag_ptr
 XPtr<tagger> tag_ptr(const CharacterVector& dict, const CharacterVector& model, const CharacterVector& user);
 RcppExport SEXP jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type user(userSEXP );
-        XPtr<tagger> __result = tag_ptr(dict, model, user);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type user(userSEXP);
+    __result = Rcpp::wrap(tag_ptr(dict, model, user));
+    return __result;
 END_RCPP
 }
 // tag_tag
 CharacterVector tag_tag(const CharacterVector& x, XPtr<tagger> cutter);
 RcppExport SEXP jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP );
-        Rcpp::traits::input_parameter< XPtr<tagger> >::type cutter(cutterSEXP );
-        CharacterVector __result = tag_tag(x, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtr<tagger> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(tag_tag(x, cutter));
+    return __result;
 END_RCPP
 }
 // tag_file
 CharacterVector tag_file(const CharacterVector& x, XPtr<tagger> cutter);
 RcppExport SEXP jiebaR_tag_file(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP );
-        Rcpp::traits::input_parameter< XPtr<tagger> >::type cutter(cutterSEXP );
-        CharacterVector __result = tag_file(x, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtr<tagger> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(tag_file(x, cutter));
+    return __result;
 END_RCPP
 }
 // key_ptr
 XPtr<keyword> key_ptr(const unsigned int& n, const CharacterVector& dict, const CharacterVector& model, const CharacterVector& idf, const CharacterVector& stop);
 RcppExport SEXP jiebaR_key_ptr(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const unsigned int& >::type n(nSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type idf(idfSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type stop(stopSEXP );
-        XPtr<keyword> __result = key_ptr(n, dict, model, idf, stop);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const unsigned int& >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type idf(idfSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type stop(stopSEXP);
+    __result = Rcpp::wrap(key_ptr(n, dict, model, idf, stop));
+    return __result;
 END_RCPP
 }
 // key_tag
 CharacterVector key_tag(const CharacterVector& x, XPtr<keyword> cutter);
 RcppExport SEXP jiebaR_key_tag(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP );
-        Rcpp::traits::input_parameter< XPtr<keyword> >::type cutter(cutterSEXP );
-        CharacterVector __result = key_tag(x, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtr<keyword> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(key_tag(x, cutter));
+    return __result;
 END_RCPP
 }
 // key_cut
 CharacterVector key_cut(const CharacterVector& x, XPtr<keyword> cutter);
 RcppExport SEXP jiebaR_key_cut(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP );
-        Rcpp::traits::input_parameter< XPtr<keyword> >::type cutter(cutterSEXP );
-        CharacterVector __result = key_cut(x, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtr<keyword> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(key_cut(x, cutter));
+    return __result;
 END_RCPP
 }
 // key_keys
 CharacterVector key_keys(vector<string>& x, XPtr<keyword> cutter);
 RcppExport SEXP jiebaR_key_keys(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< vector<string>& >::type x(xSEXP );
-        Rcpp::traits::input_parameter< XPtr<keyword> >::type cutter(cutterSEXP );
-        CharacterVector __result = key_keys(x, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< vector<string>& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< XPtr<keyword> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(key_keys(x, cutter));
+    return __result;
 END_RCPP
 }
 // sim_ptr
 XPtr<sim> sim_ptr(const CharacterVector& dict, const CharacterVector& model, const CharacterVector& idf, const CharacterVector& stop);
 RcppExport SEXP jiebaR_sim_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type idf(idfSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type stop(stopSEXP );
-        XPtr<sim> __result = sim_ptr(dict, model, idf, stop);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type idf(idfSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type stop(stopSEXP);
+    __result = Rcpp::wrap(sim_ptr(dict, model, idf, stop));
+    return __result;
 END_RCPP
 }
 // sim_sim
 List sim_sim(const CharacterVector& code, const int& topn, XPtr<sim> cutter);
 RcppExport SEXP jiebaR_sim_sim(SEXP codeSEXP, SEXP topnSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type code(codeSEXP );
-        Rcpp::traits::input_parameter< const int& >::type topn(topnSEXP );
-        Rcpp::traits::input_parameter< XPtr<sim> >::type cutter(cutterSEXP );
-        List __result = sim_sim(code, topn, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type code(codeSEXP);
+    Rcpp::traits::input_parameter< const int& >::type topn(topnSEXP);
+    Rcpp::traits::input_parameter< XPtr<sim> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(sim_sim(code, topn, cutter));
+    return __result;
 END_RCPP
 }
 // sim_distance
 List sim_distance(const CharacterVector& lhs, const CharacterVector& rhs, const int& topn, XPtr<sim> cutter);
 RcppExport SEXP jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const CharacterVector& >::type lhs(lhsSEXP );
-        Rcpp::traits::input_parameter< const CharacterVector& >::type rhs(rhsSEXP );
-        Rcpp::traits::input_parameter< const int& >::type topn(topnSEXP );
-        Rcpp::traits::input_parameter< XPtr<sim> >::type cutter(cutterSEXP );
-        List __result = sim_distance(lhs, rhs, topn, cutter);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type lhs(lhsSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type rhs(rhsSEXP);
+    Rcpp::traits::input_parameter< const int& >::type topn(topnSEXP);
+    Rcpp::traits::input_parameter< XPtr<sim> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(sim_distance(lhs, rhs, topn, cutter));
+    return __result;
 END_RCPP
 }
