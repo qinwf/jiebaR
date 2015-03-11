@@ -17,6 +17,16 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// get_hardware_concurrency
+unsigned int get_hardware_concurrency();
+RcppExport SEXP jiebaR_get_hardware_concurrency() {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    __result = Rcpp::wrap(get_hardware_concurrency());
+    return __result;
+END_RCPP
+}
 // mp_ptr
 XPtr<mpseg> mp_ptr(const CharacterVector& dict, const CharacterVector& user);
 RcppExport SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP) {

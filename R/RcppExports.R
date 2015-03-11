@@ -12,6 +12,15 @@ filecoding <- function(file) {
     .Call('jiebaR_filecoding', PACKAGE = 'jiebaR', file)
 }
 
+#' @title Get number of concurrent threads
+#' @description Get number of concurrent threads supported by the implementation in C++11.
+#' @return number of concurrent threads
+#' @references \url{http://en.cppreference.com/w/cpp/thread/thread/hardware_concurrency}
+#' @export
+get_hardware_concurrency <- function() {
+    .Call('jiebaR_get_hardware_concurrency', PACKAGE = 'jiebaR')
+}
+
 mp_ptr <- function(dict, user) {
     .Call('jiebaR_mp_ptr', PACKAGE = 'jiebaR', dict, user)
 }

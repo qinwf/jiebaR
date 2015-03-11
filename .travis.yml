@@ -1,10 +1,4 @@
-# Sample .travis.yml for R projects.
-#
-# See the r-travis repo and its wiki 
-#   https://github.com/craigcitro/r-travis/wiki
-#   https://github.com/eddelbuettel/r-travis/
-
-language: c
+language: cpp
 
 env:
   global:
@@ -14,14 +8,21 @@ env:
   matrix:
     - _R_CHECK_CRAN_INCOMING_=FALSE
     - R_BUILD_ARGS=" " R_CHECK_ARGS="--as-cran" BOOTSTRAP_LATEX="1" _R_CHECK_CRAN_INCOMING_=TRUE BOOTSTRAP_PANDOC="1"
-    - BOOTSTRAP_UBSAN=TRUE
+    - BOOTSTRAP_UBSAN=FALSE
 
 
+    
 before_install:
-  - echo "options(repos = c(CRAN='http://cran.r-project.org'))" >> ~/.Rprofile
   - curl -OL http://raw.github.com/qinwf/r-travis/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
+  - ./travis-tool.sh github_package hadley/testthat
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install g++-4.9     
+  - mkdir ~/.R
+  - echo -e "CC=gcc-4.9 -std=gnu99\nCXX=g++-4.9 -std=c++11\nnCXX1X=g++-4.9\nCXXFLAGS=-g -O3\nCXX1XFLAGS=-g -O3\nCFLAGS=-g -O3\n" > ~/.R/Makevars
+  - echo "options(repos = c(CRAN='http://cran.r-project.org'))" >> ~/.Rprofile
 
 install:
   - ./travis-tool.sh github_package qinwf/jiebaRD
