@@ -39,9 +39,11 @@ install_github("qinwf/jiebaR")
 library("jiebaR")
 ```
 
-## 使用指南
+## 使用指南 与 演示
 
-[jiebaR 使用指南](http://qinwenfeng.com/jiebaR/) ：http://qinwenfeng.com/jiebaR/
+[使用指南](http://qinwenfeng.com/jiebaR/) ：http://qinwenfeng.com/jiebaR/
+
+[Shiny 演示](https://qinwf.shinyapps.io/jiebaR-shiny/) ：https://qinwf.shinyapps.io/jiebaR-shiny/
 
 ## 问题
 
