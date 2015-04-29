@@ -1,3 +1,15 @@
+Changes in Version 0.5 (2015-04-29)
+=====================================
+
+   o Fix: edit_dict() on Mac
+   o New function: filter_segment() to filter segmentation result
+   o New function: vector_keywords() to extract keywords from a string
+   o Enhancement: Segmentation support: Vector input => List output
+   o Enhancement: Segmentation support: Input by lines => Output by lines
+   o Enhancement: Add option write = "NOFILE"
+   o Enhancement: New rules for "English word + Numbers"
+   o Update documentation
+
 Changes in Version 0.4 (2015-01-03)
 =====================================
 
