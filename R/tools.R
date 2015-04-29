@@ -50,9 +50,11 @@ edit_dict<-function(name = "user"){
                     
                     stop_word = "stop_words.utf8"
   )
-  file.show(file.path(path.package("jiebaRD"),"dict",dictname))
   if (.Platform$OS.type == "windows") {
+    file.show(file.path(path.package("jiebaRD"),"dict",dictname))
     warning("You should save the dictionary without BOM on Windows")
+  } else{
+    file.edit(file.path(path.package("jiebaRD"),"dict",dictname))
   }
 }
 
