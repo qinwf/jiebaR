@@ -20,7 +20,7 @@ ShowDictPath<-function(){
 #' Edit default user dictionary
 #' 
 #' Edit the default user dictionary. 
-#' @references  The ictclas speech tag : \url{http://t.cn/8FdDD3I}
+#' @references  The ictclas speech tag : \url{http://t.cn/RAEj7e1}
 #' @details 
 #' There are three column in the system dictionary. The first column is the word, 
 #' and the second column is the frequency of word. The third column is 

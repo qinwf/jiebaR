@@ -10,7 +10,7 @@
 #' @seealso \code{\link{<=.tagger}} \code{\link{worker}} 
 #' @param code a Chinese sentence or the path of a text file
 #' @param jiebar jiebaR Worker
-#' @references  The ictclas speech tag : \url{http://t.cn/8FdDD3I}
+#' @references  The ictclas speech tag : \url{http://t.cn/RAEj7e1}
 #' @examples 
 #' \dontrun{
 #' words = "hello world"

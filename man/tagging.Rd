@@ -37,7 +37,7 @@ tagger <= words
 Qin Wenfeng
 }
 \references{
-The ictclas speech tag : \url{http://t.cn/8FdDD3I}
+The ictclas speech tag : \url{http://t.cn/RAEj7e1}
 }
 \seealso{
 \code{\link{<=.tagger}} \code{\link{worker}}
