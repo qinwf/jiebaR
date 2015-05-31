@@ -38,7 +38,8 @@ tagging<- function(code, jiebar) {
     if(is.null(jiebar$output)){
       basenames <- gsub("\\.[^\\.]*$", "", code[1])
       extnames  <- gsub(basenames, "", code[1], fixed = TRUE)
-      output    <- paste(basenames, ".segment", as.numeric(Sys.time()), extnames, sep = "")
+      times_char = gsub(" |:","_",as.character(Sys.time()))
+      output    <- paste(basenames, ".segment.", times_char , extnames, sep = "")
     }  else {
       output<-jiebar$output
     }
