@@ -4,6 +4,7 @@ Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](
 
 ["结巴"中文分词]的R语言版本，支持最大概率法（Maximum Probability），隐式马尔科夫模型（Hidden Markov Model），索引模型（QuerySegment），混合模型（MixSegment），共四种分词模式，同时有词性标注，关键词提取，文本Simhash相似度比较等功能。项目使用了[Rcpp]和[CppJieba]进行开发。
 
+细胞词库转换可以使用 [cidian](https://github.com/qinwf/cidian) 包 ：https://github.com/qinwf/cidian/
 
 你还可以试试支持中文编程的 Julia 分词 [Jieba.jl](https://github.com/qinwf/Jieba.jl)。
 
@@ -44,6 +45,8 @@ library("jiebaR")
 [使用指南](http://qinwenfeng.com/jiebaR/) ：http://qinwenfeng.com/jiebaR/
 
 [Shiny 演示](https://qinwf.shinyapps.io/jiebaR-shiny/) ：https://qinwf.shinyapps.io/jiebaR-shiny/
+
+[细胞词库转换](https://github.com/qinwf/cidian) ：https://github.com/qinwf/cidian/
 
 ## 问题
 
