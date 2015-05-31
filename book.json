@@ -1,16 +1,12 @@
 {
+    "gitbook": ">1.x.x",
     "plugins": [
     "ga",
-    "richquotes",
-    "mermaid",
     "disqus"
     ],
     "pluginsConfig": {
         "ga" : {
             "token": "UA-58841928-1"
-        },
-        "richquotes" : {
-            "todos" : true
         },
         "disqus": {
             "shortName": "qinwenfeng"

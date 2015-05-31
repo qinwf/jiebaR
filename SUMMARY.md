@@ -19,3 +19,4 @@
 * [转换词库](trans/README.md)
 * [常见问题](faq/README.md)
     * [关于tm包](faq/tm.md)
+    * [警告信息](faq/warnings.md)

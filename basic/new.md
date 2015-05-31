@@ -1,4 +1,4 @@
-## GitHub v0.4.2
+## CRAN V0.5
 
 一、 增加过滤分词结果的方法 `filter_segment()`，类似于关键词提取中使用的停止词功能。
 
@@ -100,4 +100,15 @@ vector_keywords(c("今天","天气","真的","十分","不错","的","感觉"),k
 ```r
 6.45994 6.18823 5.64148 5.63374 4.99212 
  "天气"  "不错"  "感觉"  "真的"  "今天" 
+```
+
+四、增加 `write = "NOFILE"` 选项，不检查文件路径。
+
+```r
+cutter = worker(write = "NOFILE",symbol = TRUE)
+cutter["./test.txt"] # 目录下有test.txt 文件
+```
+
+```r
+[1] "."    "/"    "test" "."    "txt" 
 ```
