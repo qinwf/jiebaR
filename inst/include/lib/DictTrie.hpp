@@ -146,7 +146,9 @@ private:
             split(line, buf, " ");
             if (!(buf.size() >= 1))
             {
-                stop("buf.size()<1  DictTrie.hpp : 158 (bad dictionary file)");
+                warning("buf.size()<1  DictTrie.hpp : 158 (bad dictionary file)\n");
+                Rprintf( "line: %d\n" lineno+1);
+                continue; 
             }
             if (!TransCode::decode(buf[0], nodeInfo.word))
             {
@@ -181,7 +183,8 @@ private:
             {
                 Rcpp::Rcout << "Dict line: " << lineno << std::endl;
                 Rcpp::Rcout << "Word column: " << buf.size() << std::endl;
-                Rcpp::stop("buf.size() != DICT_COLUMN_NUM");
+                Rcpp::warning("buf.size() != DICT_COLUMN_NUM");
+                continue;
             }
             if (!TransCode::decode(buf[0], nodeInfo.word))
             {
