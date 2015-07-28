@@ -147,7 +147,7 @@ private:
             if (!(buf.size() >= 1))
             {
                 warning("buf.size()<1  DictTrie.hpp : 158 (bad dictionary file)\n");
-                Rprintf( "line: %d\n" lineno+1);
+                Rprintf( "line: %d\n" ,lineno+1);
                 continue; 
             }
             if (!TransCode::decode(buf[0], nodeInfo.word))
