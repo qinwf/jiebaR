@@ -1,0 +1,58 @@
+#include <Rdefines.h>
+#include <R_ext/Rdynload.h>
+#include <R_ext/Visibility.h>
+#include <jiebaRAPI.h>
+
+static R_CallMethodDef callMethods[] = {
+    { "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    , 1 },
+    { "jiebaR_mp_ptr",      (DL_FUNC) &jiebaR_mp_ptr        , 2 },
+    { "jiebaR_mp_cut",      (DL_FUNC) &jiebaR_mp_cut        , 2 },
+    { "jiebaR_mix_ptr",     (DL_FUNC) &jiebaR_mix_ptr       , 3 },
+    { "jiebaR_mix_cut",     (DL_FUNC) &jiebaR_mix_cut       , 2 },
+    { "jiebaR_query_ptr",   (DL_FUNC) &jiebaR_query_ptr     , 3 },
+    { "jiebaR_query_cut",   (DL_FUNC) &jiebaR_query_cut     , 2 },
+    { "jiebaR_hmm_ptr",     (DL_FUNC) &jiebaR_hmm_ptr       , 1 },
+    { "jiebaR_hmm_cut",     (DL_FUNC) &jiebaR_hmm_cut       , 2 },
+    { "jiebaR_tag_ptr",     (DL_FUNC) &jiebaR_tag_ptr       , 3 },
+    { "jiebaR_tag_tag",     (DL_FUNC) &jiebaR_tag_tag       , 2 },
+    { "jiebaR_tag_file",    (DL_FUNC) &jiebaR_tag_file      , 2 },
+    { "jiebaR_key_ptr",     (DL_FUNC) &jiebaR_key_ptr       , 5 },
+    { "jiebaR_key_tag",     (DL_FUNC) &jiebaR_key_tag       , 2 },
+    { "jiebaR_key_cut",     (DL_FUNC) &jiebaR_key_cut       , 2 },
+    { "jiebaR_key_keys",    (DL_FUNC) &jiebaR_key_keys      , 2 },
+    { "jiebaR_sim_ptr",     (DL_FUNC) &jiebaR_sim_ptr       , 4 },
+    { "jiebaR_sim_sim",     (DL_FUNC) &jiebaR_sim_sim       , 3 },
+    { "jiebaR_sim_distance",(DL_FUNC) &jiebaR_sim_distance  , 4 },
+    { NULL, NULL, 0 }
+};
+
+void attribute_visible R_init_jiebaR(DllInfo *info) {
+
+    R_RegisterCCallable("jiebaR", "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    );
+    R_RegisterCCallable("jiebaR", "jiebaR_mp_ptr",      (DL_FUNC) &jiebaR_mp_ptr        );
+    R_RegisterCCallable("jiebaR", "jiebaR_mp_cut",      (DL_FUNC) &jiebaR_mp_cut        );
+    R_RegisterCCallable("jiebaR", "jiebaR_mix_ptr",     (DL_FUNC) &jiebaR_mix_ptr       );
+    R_RegisterCCallable("jiebaR", "jiebaR_mix_cut",     (DL_FUNC) &jiebaR_mix_cut       );
+    R_RegisterCCallable("jiebaR", "jiebaR_query_ptr",   (DL_FUNC) &jiebaR_query_ptr     );
+    R_RegisterCCallable("jiebaR", "jiebaR_query_cut",   (DL_FUNC) &jiebaR_query_cut     );
+    R_RegisterCCallable("jiebaR", "jiebaR_hmm_ptr",     (DL_FUNC) &jiebaR_hmm_ptr       );
+    R_RegisterCCallable("jiebaR", "jiebaR_hmm_cut",     (DL_FUNC) &jiebaR_hmm_cut       );
+    R_RegisterCCallable("jiebaR", "jiebaR_tag_ptr",     (DL_FUNC) &jiebaR_tag_ptr       );
+    R_RegisterCCallable("jiebaR", "jiebaR_tag_tag",     (DL_FUNC) &jiebaR_tag_tag       );
+    R_RegisterCCallable("jiebaR", "jiebaR_tag_file",    (DL_FUNC) &jiebaR_tag_file      );
+    R_RegisterCCallable("jiebaR", "jiebaR_key_ptr",     (DL_FUNC) &jiebaR_key_ptr       );
+    R_RegisterCCallable("jiebaR", "jiebaR_key_tag",     (DL_FUNC) &jiebaR_key_tag       );
+    R_RegisterCCallable("jiebaR", "jiebaR_key_cut",     (DL_FUNC) &jiebaR_key_cut       );
+    R_RegisterCCallable("jiebaR", "jiebaR_key_keys",    (DL_FUNC) &jiebaR_key_keys      );
+    R_RegisterCCallable("jiebaR", "jiebaR_sim_ptr",     (DL_FUNC) &jiebaR_sim_ptr       );
+    R_RegisterCCallable("jiebaR", "jiebaR_sim_sim",     (DL_FUNC) &jiebaR_sim_sim       );
+    R_RegisterCCallable("jiebaR", "jiebaR_sim_distance",(DL_FUNC) &jiebaR_sim_distance  );
+
+    R_registerRoutines(info,
+                       NULL,            /* slot for .C */
+                       callMethods,     /* slot for .Call */
+                       NULL,            /* slot for .Fortran */
+                       NULL);           /* slot for .External */
+
+    R_useDynamicSymbols(info, FALSE);    /* controls visibility */
+}
