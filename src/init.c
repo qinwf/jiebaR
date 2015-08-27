@@ -1,7 +1,43 @@
 #include <Rdefines.h>
 #include <R_ext/Rdynload.h>
-#include <R_ext/Visibility.h>
-#include <jiebaRAPI.h>
+
+SEXP jiebaR_filecoding(SEXP fileSEXP);
+
+SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP); 
+
+SEXP jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP);
+
+SEXP jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP);
+
+SEXP jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP);
+
+SEXP jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP);
+
+SEXP jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP);
+
+SEXP jiebaR_hmm_ptr(SEXP modelSEXP);
+
+SEXP jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP);
+
+SEXP jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP);
+
+SEXP jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP);
+
+SEXP jiebaR_tag_file(SEXP xSEXP, SEXP cutterSEXP);
+
+SEXP jiebaR_key_ptr(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP);
+
+SEXP jiebaR_key_tag(SEXP xSEXP, SEXP cutterSEXP);
+
+SEXP jiebaR_key_cut(SEXP xSEXP, SEXP cutterSEXP);
+
+SEXP jiebaR_key_keys(SEXP xSEXP, SEXP cutterSEXP);
+
+SEXP jiebaR_sim_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP);
+
+SEXP jiebaR_sim_sim(SEXP codeSEXP, SEXP topnSEXP, SEXP cutterSEXP);
+
+SEXP jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnSEXP, SEXP cutterSEXP);
 
 static R_CallMethodDef callMethods[] = {
     { "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    , 1 },
@@ -26,8 +62,16 @@ static R_CallMethodDef callMethods[] = {
     { NULL, NULL, 0 }
 };
 
-void attribute_visible R_init_jiebaR(DllInfo *info) {
-
+void R_init_jiebaR(DllInfo *info) {
+  
+    R_registerRoutines(info,
+                       NULL,            /* slot for .C */
+                       callMethods,     /* slot for .Call */
+                       NULL,            /* slot for .Fortran */
+                       NULL);           /* slot for .External */
+    
+    R_useDynamicSymbols(info, TRUE);
+    
     R_RegisterCCallable("jiebaR", "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    );
     R_RegisterCCallable("jiebaR", "jiebaR_mp_ptr",      (DL_FUNC) &jiebaR_mp_ptr        );
     R_RegisterCCallable("jiebaR", "jiebaR_mp_cut",      (DL_FUNC) &jiebaR_mp_cut        );
@@ -48,11 +92,5 @@ void attribute_visible R_init_jiebaR(DllInfo *info) {
     R_RegisterCCallable("jiebaR", "jiebaR_sim_sim",     (DL_FUNC) &jiebaR_sim_sim       );
     R_RegisterCCallable("jiebaR", "jiebaR_sim_distance",(DL_FUNC) &jiebaR_sim_distance  );
 
-    R_registerRoutines(info,
-                       NULL,            /* slot for .C */
-                       callMethods,     /* slot for .Call */
-                       NULL,            /* slot for .Fortran */
-                       NULL);           /* slot for .External */
 
-    R_useDynamicSymbols(info, FALSE);    /* controls visibility */
 }

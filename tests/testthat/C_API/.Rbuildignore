@@ -1,7 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-tests/testthat/C_API/\.Rbuildignore$
-tests/testthat/CPP_API/\.Rbuildignore$
 ^packrat/
 ^\.travis\.yml$
 ^\.dat$
