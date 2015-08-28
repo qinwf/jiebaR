@@ -17,6 +17,19 @@
 extern "C" {
 #endif
 
+/**
+ *  ********** 	all text input should be UTF-8 encoding string**************
+ *  For windows platform, the string output of C++ to be printed by R should have Encoding() setted first
+ *  			 
+ */
+
+
+
+/**
+ * [jiebaR_filecoding description]
+ * @param  fileSEXP a file path
+ * @return          a string about encoding
+ */
 SEXP attribute_hidden jiebaR_filecoding(SEXP fileSEXP){
 	static SEXP(*f)(SEXP) = NULL;
     if (!f) {
@@ -25,6 +38,12 @@ SEXP attribute_hidden jiebaR_filecoding(SEXP fileSEXP){
     return f(fileSEXP);
 };
 
+/**
+ * [jiebaR_mp_ptr description]
+ * @param  dictSEXP a file path
+ * @param  userSEXP a file path
+ * @return          a mp worker ptr
+ */
 SEXP attribute_hidden jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP){
 	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -33,6 +52,12 @@ SEXP attribute_hidden jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP){
     return f(dictSEXP,userSEXP);
 }; 
 
+/**
+ * [jiebaR_mp_cut description]
+ * @param  xSEXP      a string in R, only the first element will be used
+ * @param  cutterSEXP a mp ptr, warning no checking for ptr type in runtime
+ * @return            [description]
+ */
 SEXP attribute_hidden jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -41,6 +66,13 @@ SEXP attribute_hidden jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 };
 
+/**
+ * [jiebaR_mix_ptr description]
+ * @param  dictSEXP  a file path
+ * @param  modelSEXP a file path
+ * @param  userSEXP  a file path
+ * @return           a mix ptr
+ */
 SEXP attribute_hidden jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP){
 	static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -49,6 +81,12 @@ SEXP attribute_hidden jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEX
     return f(dictSEXP, modelSEXP, userSEXP);
 };
 
+/**
+ * [jiebaR_mix_cut description]
+ * @param  xSEXP      a string in R, only the first element will be used
+ * @param  cutterSEXP a mix ptr, warning no checking for ptr type in runtime
+ * @return            [description]
+ */
 SEXP attribute_hidden jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -57,6 +95,13 @@ SEXP attribute_hidden jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 };
 
+/**
+ * [jiebaR_query_ptr description]
+ * @param  dictSEXP  a file path
+ * @param  modelSEXP a file path
+ * @param  nSEXP     numbers of query length
+ * @return           a query ptr
+ */
 SEXP attribute_hidden jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP){
 	static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -65,6 +110,12 @@ SEXP attribute_hidden jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP
     return f(dictSEXP, modelSEXP, nSEXP);
 };
 
+/**
+ * [jiebaR_query_cut description]
+ * @param  xSEXP      a string in R, only the first element will be used
+ * @param  cutterSEXP a query ptr, warning no checking for ptr type in runtime
+ * @return            [description]
+ */
 SEXP attribute_hidden jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -73,6 +124,11 @@ SEXP attribute_hidden jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 };
 
+/**
+ * [jiebaR_hmm_ptr description]
+ * @param  modelSEXP a file path
+ * @return           a hmm ptr
+ */
 SEXP attribute_hidden jiebaR_hmm_ptr(SEXP modelSEXP){
 	static SEXP(*f)(SEXP) = NULL;
     if (!f) {
@@ -81,6 +137,12 @@ SEXP attribute_hidden jiebaR_hmm_ptr(SEXP modelSEXP){
     return f(modelSEXP);
 };
 
+/**
+ * [jiebaR_hmm_cut description]
+ * @param  xSEXP      a string in R, only the first element will be used
+ * @param  cutterSEXP a hmm ptr, warning no checking for ptr type in runtime
+ * @return            [description]
+ */
 SEXP attribute_hidden jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -89,6 +151,13 @@ SEXP attribute_hidden jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 };
 
+/**
+ * [jiebaR_tag_ptr description]
+ * @param  dictSEXP  a file path
+ * @param  modelSEXP a file path
+ * @param  userSEXP  a file path
+ * @return           a tag ptr
+ */
 SEXP attribute_hidden jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP){
 	static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -97,6 +166,12 @@ SEXP attribute_hidden jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEX
     return f(dictSEXP, modelSEXP, userSEXP);
 };
 
+/**
+ * [jiebaR_tag_tag description]
+ * @param  xSEXP      a string in R, only the first element will be used
+ * @param  cutterSEXP a tag ptr, warning no checking for ptr type in runtime
+ * @return            a vector with attributte
+ */
 SEXP attribute_hidden jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -104,6 +179,13 @@ SEXP attribute_hidden jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP){
     }
     return f(xSEXP,cutterSEXP);
 };
+
+/**
+ * [jiebaR_tag_file description]
+ * @param  xSEXP      a string in R, only the first element will be used
+ * @param  cutterSEXP a tag ptr, warning no checking for ptr type in runtime
+ * @return            a vector without attributte
+ */
 SEXP attribute_hidden jiebaR_tag_file(SEXP xSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -112,6 +194,15 @@ SEXP attribute_hidden jiebaR_tag_file(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 };
 
+/**
+ * [jiebaR_key_ptr description]
+ * @param  nSEXP     numbers of keywords
+ * @param  dictSEXP  a file path
+ * @param  modelSEXP a file path
+ * @param  idfSEXP   a file path
+ * @param  stopSEXP  a file path
+ * @return           a key ptr
+ */
 SEXP attribute_hidden jiebaR_key_ptr(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP){
 	static SEXP(*f)(SEXP,SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -120,6 +211,12 @@ SEXP attribute_hidden jiebaR_key_ptr(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, 
     return f(nSEXP, dictSEXP, modelSEXP, idfSEXP, stopSEXP);
 };
 
+/**
+ * [jiebaR_key_tag description]
+ * @param  xSEXP      a string in R, only the first element will be used
+ * @param  cutterSEXP a key ptr, warning no checking for ptr type in runtime
+ * @return            a vector with attributte
+ */
 SEXP attribute_hidden jiebaR_key_tag(SEXP xSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -128,6 +225,12 @@ SEXP attribute_hidden jiebaR_key_tag(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 };
 
+/**
+ * [jiebaR_key_cut description]
+ * @param  xSEXP      a string in R, only the first element will be used
+ * @param  cutterSEXP a key ptr, warning no checking for ptr type in runtime
+ * @return            a vector only with keywords
+ */
 SEXP attribute_hidden jiebaR_key_cut(SEXP xSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -136,6 +239,12 @@ SEXP attribute_hidden jiebaR_key_cut(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 };
 
+/**
+ * [jiebaR_key_keys description]
+ * @param  xSEXP      a string in R, only the first element will be used
+ * @param  cutterSEXP a key ptr, warning no checking for ptr type in runtime
+ * @return            a vector only with keywords
+ */
 SEXP attribute_hidden jiebaR_key_keys(SEXP xSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -144,6 +253,14 @@ SEXP attribute_hidden jiebaR_key_keys(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 };
 
+/**
+ * [jiebaR_sim_ptr description]
+ * @param  dictSEXP  a file path
+ * @param  modelSEXP a file path
+ * @param  idfSEXP   a file path
+ * @param  stopSEXP  a file path
+ * @return           a sim ptr
+ */
 SEXP attribute_hidden jiebaR_sim_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP){
 	static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -152,6 +269,13 @@ SEXP attribute_hidden jiebaR_sim_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP
     return f(dictSEXP, modelSEXP, idfSEXP, stopSEXP);
 };
 
+/**
+ * [jiebaR_sim_sim description]
+ * @param  codeSEXP   a string in R, only the first element will be used
+ * @param  topnSEXP   numbers of keywords
+ * @param  cutterSEXP a sim ptr
+ * @return            a R list of result
+ */
 SEXP attribute_hidden jiebaR_sim_sim(SEXP codeSEXP, SEXP topnSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -160,6 +284,14 @@ SEXP attribute_hidden jiebaR_sim_sim(SEXP codeSEXP, SEXP topnSEXP, SEXP cutterSE
     return f(codeSEXP, topnSEXP, cutterSEXP);
 };
 
+/**
+ * [jiebaR_sim_distance description]
+ * @param  lhsSEXP    a string in R, only the first element will be used
+ * @param  rhsSEXP    a string in R, only the first element will be used
+ * @param  topnSEXP   numbers of keywords
+ * @param  cutterSEXP a sim ptr
+ * @return            a R list of result
+ */
 SEXP attribute_hidden jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnSEXP, SEXP cutterSEXP){
 	static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
