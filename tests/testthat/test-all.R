@@ -27,11 +27,25 @@ test_that("segmentation", {
                                                              "2.81755")))
 })
 
+cutter = worker()
+
 test_that("segmentation", {
-  cutter = worker()
+
   result_segment = cutter["我是测试文本，用于测试过滤分词效果。"]
   filter_words = c("我","你","它","大家")
   expect_identical( {filter_segment(result_segment,filter_words)},
-                    c("是", "测试", "文本", "用于", "测试", "过滤", "分词", "效果")
+                    c("是", "测试", "文本", "用于", "测试", "过滤",
+                      "分词", "效果")
+  )
+})
+
+test_that("filter_words", {
+  result_segment = list(cutter["我是测试文本，用于测试过滤分词效果。"],
+                        cutter["测试文本，用于测试过滤分词效果。"])
+  filter_words = c("我","你","它","大家","测","是")
+  expect_identical( {filter_segment(result_segment,filter_words)},
+                    list(c("测试", "文本", "用于", "测试", 
+                           "过滤", "分词", "效果"), c("测试", "文本",
+                            "用于", "测试", "过滤", "分词", "效果"))
   )
 })
