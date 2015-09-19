@@ -109,8 +109,17 @@ print.mpseg<-function(x,...){
   cat("$detect $encoding $symbol $output $write $lines $bylines can be reset.\n")
 }
 
+#' @rdname print.hmmseg
 #' @export
 print.qseg<-function(x,...){
   if(exists("quick_worker",envir = .GlobalEnv,inherits = F ))
      print(.GlobalEnv$quick_worker)
+}
+
+#' @rdname print.hmmseg
+#' @export
+print.stopword_list<-function(x,...){
+  cat("[1] ")
+  cat(paste(head(x,n = 5),collapse = ", "))
+  cat(", ...\n")
 }

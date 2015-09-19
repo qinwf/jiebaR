@@ -23,7 +23,7 @@
 #'  and the value is used for \code{simhash} and \code{keywords} workers.
 #'   
 #' @param stop_word A path to stop word dictionary, default value is \code{STOPPATH},
-#'  and the value is used for \code{simhash} and \code{keywords} workers.
+#'  and the value is used for \code{simhash}, \code{keywords} and \code{segment} workers. Encoding of this file is checked by \code{filecoding}, and it is better to use UTF-8 encoding. For \code{segment} workers, the default \code{STOPPATH} will not be used, so you should provide another file path.
 #'   
 #' @param write Whether to write the output to a file, or return 
 #'   a the result in a object, when the input is a file path. The 
@@ -153,30 +153,30 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
     try(unzip(file.path(jiebapath,"dict","idf.zip"),exdir =file.path( jiebapath,"dict") ) )
   }
   result = new.env(parent = emptyenv())
-  
+  stop2 = if(stop_word==STOPPATH) NULL else stop_word
   switch(type, 
            mp      = {
            worker  = mp_ptr(dict, user)
-           private = list(dict = dict,user = user, timestamp = TIMESTAMP)
+           private = list(dict = dict,user = user, stop_word= stop2, loaded_stop_words = if(!is.null(stop2)) read_stop_words(stop2) else NULL, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","segment","mpseg")
          }, 
          
            mix     = {
            worker  = mix_ptr(dict, hmm, user)
-           private = list(dict = dict,hmm = hmm,user = user, timestamp = TIMESTAMP)
+           private = list(dict = dict,hmm = hmm,user = user, stop_word= stop2, loaded_stop_words = if(!is.null(stop2)) read_stop_words(stop2) else NULL, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","segment","mixseg")
          },
            hmm     = {
            worker  = hmm_ptr(hmm)
-           private = list(hmm = hmm, timestamp = TIMESTAMP)
+           private = list(hmm = hmm, stop_word= stop2, loaded_stop_words = if(!is.null(stop2)) read_stop_words(stop2) else NULL, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","segment","hmmseg")
          },
            query   = {
            worker  = query_ptr(dict,hmm,qmax)
-           private = list(dict = dict,hmm = hmm,max_word_lenght = qmax, timestamp = TIMESTAMP)
+           private = list(dict = dict,hmm = hmm,max_word_lenght = qmax, stop_word= stop2, loaded_stop_words = if(!is.null(stop2)) read_stop_words(stop2) else NULL, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            
            class(result) <- c("jiebar","segment","queryseg")
@@ -216,3 +216,13 @@ assignjieba<-function(worker,detect,encoding,symbol,lines,output,write,private,b
   assign(x = "encoding",value = encoding, envir=result)
   assign(x = "bylines",value = bylines, envir=result)
 }
+
+read_stop_words<- function(filepath){
+  if(!file.exists(filepath)){
+    stop("There is no such file for stopwords.")
+  }
+  res = readLines(filepath,encoding = filecoding(filepath))
+  class(res) <- "stopword_list"
+  res
+}
+

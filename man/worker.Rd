@@ -28,7 +28,7 @@ and the value is used for \code{mix}, \code{hmm}, \code{query},
  and the value is used for \code{simhash} and \code{keywords} workers.}
 
 \item{stop_word}{A path to stop word dictionary, default value is \code{STOPPATH},
- and the value is used for \code{simhash} and \code{keywords} workers.}
+ and the value is used for \code{simhash}, \code{keywords} and \code{segment} workers. Encoding of this file is checked by \code{filecoding}, and it is better to use UTF-8 encoding. For \code{segment} workers, the default \code{STOPPATH} will not be used, so you should provide another file path.}
 
 \item{write}{Whether to write the output to a file, or return
   a the result in a object, when the input is a file path. The

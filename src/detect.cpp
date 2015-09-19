@@ -607,8 +607,7 @@ CharacterVector filecoding(CharacterVector file){
   }
   else
   {
-    Rcout<<"Can not detect, use UTF-8 instead."<<endl;
+    Rcpp::warning("filcoding(): can not detect encoding, so use UTF-8 as default.");
     return  CharacterVector::create("UTF-8");
-    
   }
 }
