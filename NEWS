@@ -1,3 +1,10 @@
+Changes in Version 0.6
+=====================================
+
+   o Add: C API
+   o Fix: filter_segment() may occasionally remove words
+   o Enhencement: filter_segment() now can handle list of vectors of words.
+
 Changes in Version 0.5 (2015-04-29)
 =====================================
 
