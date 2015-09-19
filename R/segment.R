@@ -201,7 +201,9 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
       result[[num]] = tmp_result
     }
   }
-  
+  if(!is.null(jiebar$PrivateVarible$loaded_stop_words)){
+    result = filter_segment(result,jiebar$PrivateVarible$loaded_stop_words)
+  }
   return(result)
 }
 
