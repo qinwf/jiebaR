@@ -104,7 +104,7 @@ setactive<-function(){
       )} else {
 
         if(!any(v == c("mix","mp","hmm","query","simhash","keywords","tag"))){
-          stop("Unkown worker type")
+          stop("Unknown worker type")
         }
         
         modelpath  = file.path(find.package("jiebaR"),"model","model.rda")
