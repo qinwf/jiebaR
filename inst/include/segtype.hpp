@@ -140,13 +140,15 @@ public:
     const char *const test_lines = x[0];
     vector<pair<string, string> > res;
     taggerseg.tag(test_lines, res);
-    unsigned int it;
+    //unsigned int it;
     CharacterVector m(res.size());
     CharacterVector atb(res.size());
-    for (it = 0; it != res.size(); it++)
+    CharacterVector::iterator m_it = m.begin();
+    CharacterVector::iterator atb_it = atb.begin();
+    for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
     {
-      m[it] = res[it].first;
-      atb[it] = res[it].second;
+      *m_it = (*it).first; m_it++;
+      *atb_it = (*it).second; atb_it++;
     }
     m.attr("names") = atb;
     return wrap(m);
@@ -157,13 +159,13 @@ public:
     const char *const test_lines = x[0];
     vector<pair<string, string> > res;
     taggerseg.tag(test_lines, res);
-    unsigned int it;
+    //unsigned int it;
     vector<string> m;
     m.reserve(res.size()*2);
-    for (it = 0; it != res.size()*2; it=it+2)
+    for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
     {
-      m.push_back(res[it/2].first);
-      m.push_back(res[it/2].second);
+      m.push_back((*it).first);
+      m.push_back((*it).second);
     }
     
     return wrap(m);
