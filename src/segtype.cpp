@@ -5,8 +5,8 @@ using namespace CppJieba;
 /////// mpseg
 
 // [[Rcpp::export]]
-XPtr<mpseg> mp_ptr(const CharacterVector& dict, const CharacterVector& user){
-  return( XPtr<mpseg>(new mpseg(dict, user))) ;
+XPtr<mpseg> mp_ptr(const CharacterVector& dict, const CharacterVector& user,const Nullable<CharacterVector>& stop){
+  return( XPtr<mpseg>(new mpseg(dict, user, stop))) ;
 }
 
 
@@ -19,8 +19,8 @@ CharacterVector mp_cut(const CharacterVector& x, XPtr<mpseg> cutter){
 
 // [[Rcpp::export]]
 XPtr<mixseg> mix_ptr(const CharacterVector& dict, const CharacterVector& model,
-                     const CharacterVector& user){
-  return( XPtr<mixseg>(new mixseg(dict, model, user))) ;
+                     const CharacterVector& user,const Nullable<CharacterVector>& stop){
+  return( XPtr<mixseg>(new mixseg(dict, model, user, stop))) ;
 }
 
 // [[Rcpp::export]]
@@ -32,8 +32,8 @@ CharacterVector mix_cut(const CharacterVector& x, XPtr<mixseg> cutter){
 
 // [[Rcpp::export]]
 XPtr<queryseg> query_ptr(const CharacterVector& dict, const CharacterVector& model,
-                         const int& n){
-  return( XPtr<queryseg>(new queryseg(dict, model, n))) ;
+                         const int& n,const Nullable<CharacterVector>& stop){
+  return( XPtr<queryseg>(new queryseg(dict, model, n,stop))) ;
 }
 
 // [[Rcpp::export]]
@@ -44,9 +44,9 @@ CharacterVector query_cut(const CharacterVector& x, XPtr<queryseg> cutter){
 /////// hmmseg
 
 // [[Rcpp::export]]
-XPtr<hmmseg> hmm_ptr(const CharacterVector& model){
+XPtr<hmmseg> hmm_ptr(const CharacterVector& model,const Nullable<CharacterVector>& stop){
   const char *const model_path = model[0];
-  return( XPtr<hmmseg>(new hmmseg(model_path))) ;
+  return( XPtr<hmmseg>(new hmmseg(model_path,stop))) ;
 }
 
 // [[Rcpp::export]]

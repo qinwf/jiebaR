@@ -154,29 +154,41 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
   }
   result = new.env(parent = emptyenv())
   stop2 = if(stop_word==STOPPATH) NULL else stop_word
+  
+  if(!is.null(stop2)){
+    if(!file.exists(stop2)){
+      stop("There is no such file for stop words.")
+    }
+    encodings = suppressWarnings(filecoding(stop2))
+    if(encodings!="UTF-8"){
+      cat("Encoding of stop words file: ",encodings,"\n")
+      stop("stop words file should be UTF-8 encoding.")
+    }
+  }
+  
   switch(type, 
            mp      = {
-           worker  = mp_ptr(dict, user)
-           private = list(dict = dict,user = user, stop_word= stop2, loaded_stop_words = if(!is.null(stop2)) read_stop_words(stop2) else NULL, timestamp = TIMESTAMP)
+           worker  = mp_ptr(dict, user,stop2)
+           private = list(dict = dict,user = user, stop_word= stop2, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","segment","mpseg")
          }, 
          
            mix     = {
-           worker  = mix_ptr(dict, hmm, user)
-           private = list(dict = dict,hmm = hmm,user = user, stop_word= stop2, loaded_stop_words = if(!is.null(stop2)) read_stop_words(stop2) else NULL, timestamp = TIMESTAMP)
+           worker  = mix_ptr(dict, hmm, user,stop2)
+           private = list(dict = dict,hmm = hmm,user = user, stop_word= stop2, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","segment","mixseg")
          },
            hmm     = {
-           worker  = hmm_ptr(hmm)
-           private = list(hmm = hmm, stop_word= stop2, loaded_stop_words = if(!is.null(stop2)) read_stop_words(stop2) else NULL, timestamp = TIMESTAMP)
+           worker  = hmm_ptr(hmm,stop2)
+           private = list(hmm = hmm, stop_word= stop2, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","segment","hmmseg")
          },
            query   = {
-           worker  = query_ptr(dict,hmm,qmax)
-           private = list(dict = dict,hmm = hmm,max_word_lenght = qmax, stop_word= stop2, loaded_stop_words = if(!is.null(stop2)) read_stop_words(stop2) else NULL, timestamp = TIMESTAMP)
+           worker  = query_ptr(dict,hmm,qmax,stop2)
+           private = list(dict = dict,hmm = hmm,max_word_lenght = qmax, stop_word= stop2, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            
            class(result) <- c("jiebar","segment","queryseg")

@@ -33,15 +33,51 @@ inline string int64tos(uint64_t i)  // convert int to string
     return s.str();
 }
 
+inline void _loadStopWordDict(const string &filePath,unordered_set<string>& _stopWords)
+{
+    ifstream ifs(filePath.c_str());
+    if (!ifs)
+    {
+        stop("Open Failed Stop Word Dict segtype.hpp : 40 ");
+    }
+    string line ;
+    while (getline(ifs, line))
+    {
+        _stopWords.insert(line);
+    }
+    if (!(_stopWords.size()))
+    {
+        stop("_stopWords.size() == 0  segtype.hpp : 51 ");
+    }
+
+}
+
+inline void filter_stopwords(vector<string>& res,const vector<string>& words,const unordered_set<string>& stopWords){
+	for(vector<string>::const_iterator it= words.begin();it != words.end(); it++){
+        if (stopWords.end() == stopWords.find(*it))
+        {
+            res.push_back(*it);
+        }
+	}
+}
+
 class mpseg
 {
 public:
   const char *const dict_path;
   const char *const user_path;
+  
+  unordered_set<string> stopWords;
   MPSegment mpsegment;
-  mpseg(CharacterVector dict, CharacterVector user) :
-    dict_path(dict[0]), user_path(user[0]), mpsegment(dict_path, user_path)
+
+  mpseg(CharacterVector dict, CharacterVector user,Nullable<CharacterVector> stop) :
+    dict_path(dict[0]), user_path(user[0]), stopWords(unordered_set<string>()), mpsegment(dict_path, user_path)
   {
+  	 if(!stop.isNull()){
+  	    CharacterVector stop_value = stop.get();
+  	 	  const char *const stop_path = stop_value[0];
+  	 	  _loadStopWordDict(stop_path,stopWords);
+  	 }
   }
   ~mpseg() {};
   
@@ -50,7 +86,16 @@ public:
     const char *const test_lines = x[0];
     vector<string> words;
     mpsegment.cut(test_lines, words);
-    return wrap(words);
+
+    if(stopWords.size()==0){
+    	return wrap(words);
+    } else{
+    	vector<string> res;
+		res.reserve(words.size());
+		filter_stopwords(res, words,stopWords);
+    	return wrap(res);
+    }
+
   }
 };
 
@@ -61,10 +106,17 @@ public:
   const char *const dict_path;
   const char *const model_path;
   const char *const user_path;
+
+  unordered_set<string> stopWords;
   MixSegment mixsegment;
-  mixseg(CharacterVector dict, CharacterVector model, CharacterVector user) :
-    dict_path(dict[0]), model_path(model[0]), user_path(user[0]), mixsegment(dict_path, model_path, user_path)
+  mixseg(CharacterVector dict, CharacterVector model, CharacterVector user,Nullable<CharacterVector> stop) :
+    dict_path(dict[0]), model_path(model[0]), user_path(user[0]), stopWords(unordered_set<string>()), mixsegment(dict_path, model_path, user_path)
   {
+  	  if(!stop.isNull()){
+  	    CharacterVector stop_value = stop.get();
+  	 	  const char *const stop_path = stop_value[0];
+  	 	  _loadStopWordDict(stop_path,stopWords);
+  	 }
   }
   ~mixseg() {};
   
@@ -73,7 +125,14 @@ public:
     const char *const test_lines = x[0];
     vector<string> words;
     mixsegment.cut(test_lines, words);
-    return wrap(words);
+    if(stopWords.size()==0){
+    	return wrap(words);
+    } else{
+    	vector<string> res;
+		res.reserve(words.size());
+		filter_stopwords(res, words,stopWords);
+    	return wrap(res);
+    }
   }
 };
 
@@ -83,10 +142,17 @@ class queryseg
 public:
   const char *const dict_path;
   const char *const model_path;
+
+  unordered_set<string> stopWords;
   QuerySegment querysegment;
-  queryseg(CharacterVector dict, CharacterVector model, int n) :
-    dict_path(dict[0]), model_path(model[0]), querysegment(dict_path, model_path, n)
+  queryseg(CharacterVector dict, CharacterVector model, int n,Nullable<CharacterVector> stop) :
+    dict_path(dict[0]), model_path(model[0]), stopWords(unordered_set<string>()), querysegment(dict_path, model_path, n)
   {
+  	  if(!stop.isNull()){
+  	    CharacterVector stop_value = stop.get();
+  	 	  const char *const stop_path = stop_value[0];
+  	 	  _loadStopWordDict(stop_path,stopWords);
+  	 }
   }
   ~queryseg() {};
   
@@ -95,7 +161,14 @@ public:
     const char *const test_lines = x[0];
     vector<string> words;
     querysegment.cut(test_lines, words);
-    return wrap(words);
+    if(stopWords.size()==0){
+    	return wrap(words);
+    } else{
+    	vector<string> res;
+		res.reserve(words.size());
+		filter_stopwords(res, words,stopWords);
+    	return wrap(res);
+    }
   }
 };
 
@@ -104,10 +177,17 @@ class hmmseg
 {
 public:
   const char *const model_path;
+
+  unordered_set<string> stopWords;
   HMMSegment hmmsegment;
-  hmmseg(CharacterVector model) :
-    model_path(model[0]), hmmsegment(model_path)
+  hmmseg(CharacterVector model,Nullable<CharacterVector> stop) :
+    model_path(model[0]), stopWords(unordered_set<string>()), hmmsegment(model_path)
   {
+  	  if(!stop.isNull()){
+  	    CharacterVector stop_value = stop.get();
+  	 	  const char *const stop_path = stop_value[0];
+  	 	  _loadStopWordDict(stop_path,stopWords);
+  	 }
   }
   ~hmmseg() {};
   
@@ -116,7 +196,14 @@ public:
     const char *const test_lines = x[0];
     vector<string> words;
     hmmsegment.cut(test_lines, words);
-    return wrap(words);
+    if(stopWords.size()==0){
+    	return wrap(words);
+    } else{
+    	vector<string> res;
+		res.reserve(words.size());
+		filter_stopwords(res, words,stopWords);
+    	return wrap(res);
+    }
   }
 };
 

@@ -3,19 +3,19 @@
 
 SEXP jiebaR_filecoding(SEXP fileSEXP);
 
-SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP); 
+SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP, SEXP stopSEXP); 
 
 SEXP jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP);
 
-SEXP jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP);
+SEXP jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP);
 
 SEXP jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP);
 
-SEXP jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP);
+SEXP jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP, SEXP stopSEXP);
 
 SEXP jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP);
 
-SEXP jiebaR_hmm_ptr(SEXP modelSEXP);
+SEXP jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP);
 
 SEXP jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP);
 
@@ -41,13 +41,13 @@ SEXP jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnSEXP, SEXP cutterS
 
 static R_CallMethodDef callMethods[] = {
     { "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    , 1 },
-    { "jiebaR_mp_ptr",      (DL_FUNC) &jiebaR_mp_ptr        , 2 },
+    { "jiebaR_mp_ptr",      (DL_FUNC) &jiebaR_mp_ptr        , 3 },
     { "jiebaR_mp_cut",      (DL_FUNC) &jiebaR_mp_cut        , 2 },
-    { "jiebaR_mix_ptr",     (DL_FUNC) &jiebaR_mix_ptr       , 3 },
+    { "jiebaR_mix_ptr",     (DL_FUNC) &jiebaR_mix_ptr       , 4 },
     { "jiebaR_mix_cut",     (DL_FUNC) &jiebaR_mix_cut       , 2 },
-    { "jiebaR_query_ptr",   (DL_FUNC) &jiebaR_query_ptr     , 3 },
+    { "jiebaR_query_ptr",   (DL_FUNC) &jiebaR_query_ptr     , 4 },
     { "jiebaR_query_cut",   (DL_FUNC) &jiebaR_query_cut     , 2 },
-    { "jiebaR_hmm_ptr",     (DL_FUNC) &jiebaR_hmm_ptr       , 1 },
+    { "jiebaR_hmm_ptr",     (DL_FUNC) &jiebaR_hmm_ptr       , 2 },
     { "jiebaR_hmm_cut",     (DL_FUNC) &jiebaR_hmm_cut       , 2 },
     { "jiebaR_tag_ptr",     (DL_FUNC) &jiebaR_tag_ptr       , 3 },
     { "jiebaR_tag_tag",     (DL_FUNC) &jiebaR_tag_tag       , 2 },

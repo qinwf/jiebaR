@@ -205,9 +205,9 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
     }
   }
 
-  if(!is.null(jiebar$PrivateVarible$loaded_stop_words)){
-    result = filter_segment(result,jiebar$PrivateVarible$loaded_stop_words)
-  }
+  # if(!is.null(jiebar$PrivateVarible$loaded_stop_words)){
+  #   result = filter_segment(result,jiebar$PrivateVarible$loaded_stop_words)
+  # }
   return(result)
 }
 

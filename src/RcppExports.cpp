@@ -18,14 +18,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // mp_ptr
-XPtr<mpseg> mp_ptr(const CharacterVector& dict, const CharacterVector& user);
-RcppExport SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP) {
+XPtr<mpseg> mp_ptr(const CharacterVector& dict, const CharacterVector& user, const Nullable<CharacterVector>& stop);
+RcppExport SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP, SEXP stopSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type user(userSEXP);
-    __result = Rcpp::wrap(mp_ptr(dict, user));
+    Rcpp::traits::input_parameter< const Nullable<CharacterVector>& >::type stop(stopSEXP);
+    __result = Rcpp::wrap(mp_ptr(dict, user, stop));
     return __result;
 END_RCPP
 }
@@ -42,15 +43,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // mix_ptr
-XPtr<mixseg> mix_ptr(const CharacterVector& dict, const CharacterVector& model, const CharacterVector& user);
-RcppExport SEXP jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP) {
+XPtr<mixseg> mix_ptr(const CharacterVector& dict, const CharacterVector& model, const CharacterVector& user, const Nullable<CharacterVector>& stop);
+RcppExport SEXP jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type user(userSEXP);
-    __result = Rcpp::wrap(mix_ptr(dict, model, user));
+    Rcpp::traits::input_parameter< const Nullable<CharacterVector>& >::type stop(stopSEXP);
+    __result = Rcpp::wrap(mix_ptr(dict, model, user, stop));
     return __result;
 END_RCPP
 }
@@ -67,15 +69,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // query_ptr
-XPtr<queryseg> query_ptr(const CharacterVector& dict, const CharacterVector& model, const int& n);
-RcppExport SEXP jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP) {
+XPtr<queryseg> query_ptr(const CharacterVector& dict, const CharacterVector& model, const int& n, const Nullable<CharacterVector>& stop);
+RcppExport SEXP jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP, SEXP stopSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP);
     Rcpp::traits::input_parameter< const int& >::type n(nSEXP);
-    __result = Rcpp::wrap(query_ptr(dict, model, n));
+    Rcpp::traits::input_parameter< const Nullable<CharacterVector>& >::type stop(stopSEXP);
+    __result = Rcpp::wrap(query_ptr(dict, model, n, stop));
     return __result;
 END_RCPP
 }
@@ -92,13 +95,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // hmm_ptr
-XPtr<hmmseg> hmm_ptr(const CharacterVector& model);
-RcppExport SEXP jiebaR_hmm_ptr(SEXP modelSEXP) {
+XPtr<hmmseg> hmm_ptr(const CharacterVector& model, const Nullable<CharacterVector>& stop);
+RcppExport SEXP jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP);
-    __result = Rcpp::wrap(hmm_ptr(model));
+    Rcpp::traits::input_parameter< const Nullable<CharacterVector>& >::type stop(stopSEXP);
+    __result = Rcpp::wrap(hmm_ptr(model, stop));
     return __result;
 END_RCPP
 }

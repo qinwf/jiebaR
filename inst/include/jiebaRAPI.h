@@ -44,12 +44,12 @@ SEXP attribute_hidden jiebaR_filecoding(SEXP fileSEXP){
  * @param  userSEXP a file path
  * @return          a mp worker ptr
  */
-SEXP attribute_hidden jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP){
-	static SEXP(*f)(SEXP,SEXP) = NULL;
+SEXP attribute_hidden jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP,SEXP stopSEXP){
+	static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
     if (!f) {
-        f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_mp_ptr");
+        f = (SEXP(*)(SEXP,SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_mp_ptr");
     }
-    return f(dictSEXP,userSEXP);
+    return f(dictSEXP,userSEXP,stopSEXP);
 }; 
 
 /**
@@ -73,12 +73,12 @@ SEXP attribute_hidden jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP){
  * @param  userSEXP  a file path
  * @return           a mix ptr
  */
-SEXP attribute_hidden jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP){
-	static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
+SEXP attribute_hidden jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP){
+	static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
-        f = (SEXP(*)(SEXP,SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_mix_ptr");
+        f = (SEXP(*)(SEXP,SEXP,SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_mix_ptr");
     }
-    return f(dictSEXP, modelSEXP, userSEXP);
+    return f(dictSEXP, modelSEXP, userSEXP, stopSEXP);
 };
 
 /**
@@ -102,12 +102,12 @@ SEXP attribute_hidden jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP){
  * @param  nSEXP     numbers of query length
  * @return           a query ptr
  */
-SEXP attribute_hidden jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP){
-	static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
+SEXP attribute_hidden jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP, SEXP stopSEXP){
+	static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
-        f = (SEXP(*)(SEXP,SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_query_ptr");
+        f = (SEXP(*)(SEXP,SEXP,SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_query_ptr");
     }
-    return f(dictSEXP, modelSEXP, nSEXP);
+    return f(dictSEXP, modelSEXP, nSEXP, stopSEXP);
 };
 
 /**
@@ -129,12 +129,12 @@ SEXP attribute_hidden jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP){
  * @param  modelSEXP a file path
  * @return           a hmm ptr
  */
-SEXP attribute_hidden jiebaR_hmm_ptr(SEXP modelSEXP){
-	static SEXP(*f)(SEXP) = NULL;
+SEXP attribute_hidden jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP){
+	static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
-        f = (SEXP(*)(SEXP)) R_GetCCallable("jiebaR", "jiebaR_hmm_ptr");
+        f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_hmm_ptr");
     }
-    return f(modelSEXP);
+    return f(modelSEXP, stopSEXP);
 };
 
 /**
