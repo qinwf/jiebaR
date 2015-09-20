@@ -2,19 +2,19 @@
 
 SEXP jiebaR_filecoding(SEXP fileSEXP);
 
-SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP); 
+SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP, SEXP stopSEXP); 
 
 SEXP jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP);
 
-SEXP jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP);
+SEXP jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP);
 
 SEXP jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP);
 
-SEXP jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP);
+SEXP jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP, SEXP stopSEXP);
 
 SEXP jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP);
 
-SEXP jiebaR_hmm_ptr(SEXP modelSEXP);
+SEXP jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP);
 
 SEXP jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP);
 
