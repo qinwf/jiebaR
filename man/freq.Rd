@@ -15,6 +15,9 @@ The frequency of words
 \description{
 This function returns the frequency of words
 }
+\examples{
+freq(c("a","a","c"))
+}
 \author{
 Qin wenfeng
 }

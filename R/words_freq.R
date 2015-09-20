@@ -3,6 +3,8 @@
 #' @param x a vector of words
 #' @return The frequency of words
 #' @author Qin wenfeng
+#' @examples 
+#' freq(c("a","a","c"))
 #' @export
 freq <- function(x){
   if("character" %in% class(x) != TRUE){
