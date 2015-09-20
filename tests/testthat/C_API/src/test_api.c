@@ -18,7 +18,7 @@ SEXP jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP);
 
 SEXP jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP);
 
-SEXP jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP);
+SEXP jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP);
 
 SEXP jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP);
 

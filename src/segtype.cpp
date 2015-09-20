@@ -59,8 +59,8 @@ CharacterVector hmm_cut(const CharacterVector& x, XPtr<hmmseg> cutter){
 
 // [[Rcpp::export]]
 XPtr<tagger> tag_ptr(const CharacterVector& dict, const CharacterVector& model,
-                     const CharacterVector& user){
-  return( XPtr<tagger>(new tagger(dict, model, user))) ;
+                     const CharacterVector& user,  const Nullable<CharacterVector>& stop){
+  return( XPtr<tagger>(new tagger(dict, model, user, stop))) ;
 }
 
 // [[Rcpp::export]]

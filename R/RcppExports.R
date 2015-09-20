@@ -44,8 +44,8 @@ hmm_cut <- function(x, cutter) {
     .Call('jiebaR_hmm_cut', PACKAGE = 'jiebaR', x, cutter)
 }
 
-tag_ptr <- function(dict, model, user) {
-    .Call('jiebaR_tag_ptr', PACKAGE = 'jiebaR', dict, model, user)
+tag_ptr <- function(dict, model, user, stop) {
+    .Call('jiebaR_tag_ptr', PACKAGE = 'jiebaR', dict, model, user, stop)
 }
 
 tag_tag <- function(x, cutter) {

@@ -215,10 +215,17 @@ public:
   const char *const dict_path;
   const char *const model_path;
   const char *const user_path;
+
+  unordered_set<string> stopWords;
   PosTagger  taggerseg;
-  tagger(CharacterVector dict, CharacterVector model, CharacterVector user) :
-    dict_path(dict[0]), model_path(model[0]), user_path(user[0]), taggerseg(dict_path, model_path, user_path)
+  tagger(CharacterVector dict, CharacterVector model, CharacterVector user,Nullable<CharacterVector> stop) :
+    dict_path(dict[0]), model_path(model[0]), user_path(user[0]), stopWords(unordered_set<string>()), taggerseg(dict_path, model_path, user_path)
   {
+  	  	  if(!stop.isNull()){
+  	    CharacterVector stop_value = stop.get();
+  	 	  const char *const stop_path = stop_value[0];
+  	 	  _loadStopWordDict(stop_path,stopWords);
+  	 }
   }
   ~tagger() {};
   
@@ -228,17 +235,35 @@ public:
     vector<pair<string, string> > res;
     taggerseg.tag(test_lines, res);
     //unsigned int it;
-    CharacterVector m(res.size());
-    CharacterVector atb(res.size());
-    CharacterVector::iterator m_it = m.begin();
-    CharacterVector::iterator atb_it = atb.begin();
-    for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
-    {
-      *m_it = (*it).first; m_it++;
-      *atb_it = (*it).second; atb_it++;
+    vector<string> m;
+    m.reserve(res.size());
+    vector<string> atb;
+    atb.reserve(res.size());
+
+    if(stopWords.size()>0){
+        for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
+	    {
+	      
+			if (stopWords.end() == stopWords.find((*it).first))
+			{
+	        	m.push_back((*it).first);
+	        	atb.push_back((*it).second);
+			}
+
+	    }	
+    } else {
+    	for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
+	    {
+	        	m.push_back((*it).first);
+	        	atb.push_back((*it).second);
+	    }
     }
-    m.attr("names") = atb;
-    return wrap(m);
+
+    CharacterVector m_cv(m.begin(),m.end());
+    CharacterVector atb_cv(atb.begin(),atb.end()); 
+    m_cv.attr("names") = atb_cv;
+
+    return wrap(m_cv);
   }
   
   CharacterVector file(CharacterVector x)
@@ -249,11 +274,26 @@ public:
     //unsigned int it;
     vector<string> m;
     m.reserve(res.size()*2);
-    for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
-    {
-      m.push_back((*it).first);
-      m.push_back((*it).second);
+
+    if(stopWords.size()>0){
+    	for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
+	    {
+	      
+			if (stopWords.end() == stopWords.find((*it).first))
+			{
+			      m.push_back((*it).first);
+			      m.push_back((*it).second);
+			}
+
+	    }
+    }else{
+    	for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
+	    {
+			m.push_back((*it).first);
+			m.push_back((*it).second);
+	    }
     }
+
     
     return wrap(m);
   }

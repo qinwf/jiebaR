@@ -119,15 +119,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // tag_ptr
-XPtr<tagger> tag_ptr(const CharacterVector& dict, const CharacterVector& model, const CharacterVector& user);
-RcppExport SEXP jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP) {
+XPtr<tagger> tag_ptr(const CharacterVector& dict, const CharacterVector& model, const CharacterVector& user, const Nullable<CharacterVector>& stop);
+RcppExport SEXP jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const CharacterVector& >::type dict(dictSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type model(modelSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type user(userSEXP);
-    __result = Rcpp::wrap(tag_ptr(dict, model, user));
+    Rcpp::traits::input_parameter< const Nullable<CharacterVector>& >::type stop(stopSEXP);
+    __result = Rcpp::wrap(tag_ptr(dict, model, user, stop));
     return __result;
 END_RCPP
 }

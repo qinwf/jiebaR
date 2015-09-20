@@ -158,12 +158,12 @@ SEXP attribute_hidden jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP){
  * @param  userSEXP  a file path
  * @return           a tag ptr
  */
-SEXP attribute_hidden jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP){
-	static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
+SEXP attribute_hidden jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP){
+	static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
-        f = (SEXP(*)(SEXP,SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_tag_ptr");
+        f = (SEXP(*)(SEXP,SEXP,SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_tag_ptr");
     }
-    return f(dictSEXP, modelSEXP, userSEXP);
+    return f(dictSEXP, modelSEXP, userSEXP, stopSEXP);
 };
 
 /**

@@ -207,8 +207,8 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
            class(result) <- c("jiebar","nonsegment","keywords")
          },
            tag     = {
-           worker  =  tag_ptr(dict,hmm,user)
-           private = list(dict=dict,hmm=hmm,user=user, timestamp = TIMESTAMP)
+           worker  =  tag_ptr(dict,hmm,user,stop2)
+           private = list(dict=dict,hmm=hmm,user=user,stop_word=stop2, timestamp = TIMESTAMP)
            assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
            class(result) <- c("jiebar","nonsegment","tagger")         
          })

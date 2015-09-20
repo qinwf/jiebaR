@@ -19,7 +19,7 @@ SEXP jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP);
 
 SEXP jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP);
 
-SEXP jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP);
+SEXP jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP);
 
 SEXP jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP);
 
@@ -49,7 +49,7 @@ static R_CallMethodDef callMethods[] = {
     { "jiebaR_query_cut",   (DL_FUNC) &jiebaR_query_cut     , 2 },
     { "jiebaR_hmm_ptr",     (DL_FUNC) &jiebaR_hmm_ptr       , 2 },
     { "jiebaR_hmm_cut",     (DL_FUNC) &jiebaR_hmm_cut       , 2 },
-    { "jiebaR_tag_ptr",     (DL_FUNC) &jiebaR_tag_ptr       , 3 },
+    { "jiebaR_tag_ptr",     (DL_FUNC) &jiebaR_tag_ptr       , 4 },
     { "jiebaR_tag_tag",     (DL_FUNC) &jiebaR_tag_tag       , 2 },
     { "jiebaR_tag_file",    (DL_FUNC) &jiebaR_tag_file      , 2 },
     { "jiebaR_key_ptr",     (DL_FUNC) &jiebaR_key_ptr       , 5 },
