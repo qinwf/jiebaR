@@ -1,5 +1,5 @@
 #' @title The frequency of words
-#' @description The function return the frequency of words
+#' @description This function returns the frequency of words
 #' @param x a vector of words
 #' @return The frequency of words
 #' @author Qin wenfeng

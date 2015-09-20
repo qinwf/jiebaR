@@ -13,7 +13,7 @@ freq(x)
 The frequency of words
 }
 \description{
-The function return the frequency of words
+This function returns the frequency of words
 }
 \author{
 Qin wenfeng
