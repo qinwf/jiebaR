@@ -84,3 +84,7 @@ sim_distance <- function(lhs, rhs, topn, cutter) {
     .Call('jiebaR_sim_distance', PACKAGE = 'jiebaR', lhs, rhs, topn, cutter)
 }
 
+words_freq <- function(x) {
+    .Call('jiebaR_words_freq', PACKAGE = 'jiebaR', x)
+}
+

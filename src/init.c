@@ -39,6 +39,8 @@ SEXP jiebaR_sim_sim(SEXP codeSEXP, SEXP topnSEXP, SEXP cutterSEXP);
 
 SEXP jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnSEXP, SEXP cutterSEXP);
 
+SEXP jiebaR_words_freq(SEXP x);
+
 static R_CallMethodDef callMethods[] = {
     { "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    , 1 },
     { "jiebaR_mp_ptr",      (DL_FUNC) &jiebaR_mp_ptr        , 3 },
@@ -59,6 +61,7 @@ static R_CallMethodDef callMethods[] = {
     { "jiebaR_sim_ptr",     (DL_FUNC) &jiebaR_sim_ptr       , 4 },
     { "jiebaR_sim_sim",     (DL_FUNC) &jiebaR_sim_sim       , 3 },
     { "jiebaR_sim_distance",(DL_FUNC) &jiebaR_sim_distance  , 4 },
+    { "jiebaR_words_freq"  ,(DL_FUNC) &jiebaR_words_freq    , 1 },  
     { NULL, NULL, 0 }
 };
 
@@ -91,6 +94,6 @@ void R_init_jiebaR(DllInfo *info) {
     R_RegisterCCallable("jiebaR", "jiebaR_sim_ptr",     (DL_FUNC) &jiebaR_sim_ptr       );
     R_RegisterCCallable("jiebaR", "jiebaR_sim_sim",     (DL_FUNC) &jiebaR_sim_sim       );
     R_RegisterCCallable("jiebaR", "jiebaR_sim_distance",(DL_FUNC) &jiebaR_sim_distance  );
-
+    R_RegisterCCallable("jiebaR", "jiebaR_words_freq",  (DL_FUNC) &jiebaR_words_freq    );
 
 }

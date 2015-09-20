@@ -248,3 +248,14 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// words_freq
+IntegerVector words_freq(const CharacterVector& x);
+RcppExport SEXP jiebaR_words_freq(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    __result = Rcpp::wrap(words_freq(x));
+    return __result;
+END_RCPP
+}
