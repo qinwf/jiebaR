@@ -198,14 +198,17 @@ public:
     const char *const test_lines = x[0];
     vector<pair<string, double> > res;
     extractor.extract(test_lines, res, topN);
-    unsigned int it;
+    //unsigned int it;
     CharacterVector m(res.size());
     CharacterVector atb(res.size());
-    for (it = 0; it != res.size(); it++)
+    CharacterVector::iterator m_it = m.begin();
+    CharacterVector::iterator atb_it = atb.begin();
+    for (vector<pair<string, double> >::iterator it = res.begin(); it != res.end(); it++)
     {
-      m[it] = res[it].first;
-      atb[it] = itos(res[it].second);
+      *m_it = (*it).first; m_it++;
+      *atb_it = itos((*it).second); atb_it++;
     }
+
     m.attr("names") = atb;
     return wrap(m);
   }
@@ -222,13 +225,15 @@ public:
   {
     vector<pair<string, double> > res;
     extractor.keys(test_lines, res, topN);
-    unsigned int it;
+    //unsigned int it;
     CharacterVector m(res.size());
     CharacterVector atb(res.size());
-    for (it = 0; it != res.size(); it++)
+    CharacterVector::iterator m_it = m.begin();
+    CharacterVector::iterator atb_it = atb.begin();
+    for (vector<pair<string, double> >::iterator it = res.begin(); it != res.end(); it++)
     {
-      m[it] = res[it].first;
-      atb[it] = itos(res[it].second);
+      *m_it = (*it).first; m_it++;
+      *atb_it = itos((*it).second); atb_it++;
     }
     m.attr("names") = atb;
     return wrap(m);
