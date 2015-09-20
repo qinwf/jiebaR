@@ -265,11 +265,13 @@ public:
     hash.make(code_path, topn, hashres, lhsword);
     CharacterVector lhsm(lhsword.size());
     CharacterVector lhsatb(lhsword.size());
-    unsigned int it;
-    for (it = 0; it != lhsword.size(); it++)
+    //unsigned int it;
+    CharacterVector::iterator lhsm_it = lhsm.begin();
+    CharacterVector::iterator lhsatb_it = lhsatb.begin();
+    for (vector<pair<string, double> >::iterator it = lhsword.begin(); it != lhsword.end(); it++)
     {
-      lhsm[it] = lhsword[it].first;
-      lhsatb[it] = itos(lhsword[it].second);
+      *lhsm_it = (*it).first; lhsm_it++;
+      *lhsatb_it = itos((*it).second); lhsatb_it++;
     }
     lhsm.attr("names") = lhsatb;
     CharacterVector hashvec;
@@ -290,22 +292,27 @@ public:
     hash.make(rhs_path, topn, rhsres, rhsword);
     CharacterVector lhsm(lhsword.size());
     CharacterVector lhsatb(lhsword.size());
-    unsigned int it;
-    for (it = 0; it != lhsword.size(); it++)
+    //unsigned int it;
+    CharacterVector::iterator lhsm_it = lhsm.begin();
+    CharacterVector::iterator lhsatb_it = lhsatb.begin();
+    for (vector<pair<string, double> >::iterator it = lhsword.begin(); it != lhsword.end(); it++)
     {
-      lhsm[it] = lhsword[it].first;
-      lhsatb[it] = itos(lhsword[it].second);
+      *lhsm_it = (*it).first; lhsm_it++;
+      *lhsatb_it = itos((*it).second); lhsatb_it++;
     }
     lhsm.attr("names") = lhsatb;
     
     CharacterVector rhsm(rhsword.size());
     CharacterVector rhsatb(rhsword.size());
-    for (it = 0; it != rhsword.size(); it++)
+    CharacterVector::iterator rhsm_it = rhsm.begin();
+    CharacterVector::iterator rhsatb_it = rhsatb.begin();
+    for (vector<pair<string, double> >::iterator it = rhsword.begin(); it != rhsword.end(); it++)
     {
-      rhsm[it] = rhsword[it].first;
-      rhsatb[it] = itos(rhsword[it].second);
+      *rhsm_it = (*it).first; rhsm_it++;
+      *rhsatb_it = itos((*it).second); rhsatb_it++;
     }
     rhsm.attr("names") = rhsatb;
+
     CharacterVector hashvec;
     hashvec.push_back(int64tos(hash.distances(lhsres, rhsres)));
     return List::create( Named("distance") = hashvec,
