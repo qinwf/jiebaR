@@ -9,7 +9,6 @@
 \alias{print.qseg}
 \alias{print.queryseg}
 \alias{print.simhash}
-\alias{print.stopword_list}
 \alias{print.tagger}
 \title{Print worker settings}
 \usage{
@@ -30,8 +29,6 @@
 \method{print}{mpseg}(x, ...)
 
 \method{print}{qseg}(x, ...)
-
-\method{print}{stopword_list}(x, ...)
 }
 \arguments{
 \item{x}{The jiebaR Worker.}

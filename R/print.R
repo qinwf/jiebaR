@@ -116,10 +116,10 @@ print.qseg<-function(x,...){
      print(.GlobalEnv$quick_worker)
 }
 
-#' @rdname print.hmmseg
-#' @export
-print.stopword_list<-function(x,...){
-  cat("[1] ")
-  cat(paste(head(x,n = 5),collapse = ", "))
-  cat(", ...\n")
-}
+# #' @rdname print.hmmseg
+# #' @export
+# print.stopword_list<-function(x,...){
+#   cat("[1] ")
+#   cat(paste(head(x,n = 5),collapse = ", "))
+#   cat(", ...\n")
+# }
