@@ -51,20 +51,20 @@ namespace CppJieba
                 
                 Unicode::const_iterator left = unicode.begin();
                 Unicode::const_iterator right;
-                
-                for(right = unicode.begin(); right != unicode.end(); right++)
-                {
-                    if(isIn(_specialSymbols, *right))
-                    {
-                        if(left != right)
-                        {
-                            cut(left, right, res);
-                        }
-                        res.resize(res.size() + 1);
-                        TransCode::encode(right, right + 1, res.back());
-                        left = right + 1;
-                    }
-                }
+                right = unicode.end();
+//                 for(right = unicode.begin(); right != unicode.end(); right++)
+//                 {
+//                     if(isIn(_specialSymbols, *right))
+//                     {
+//                         if(left != right)
+//                         {
+//                             cut(left, right, res);
+//                         }
+//                         res.resize(res.size() + 1);
+//                         TransCode::encode(right, right + 1, res.back());
+//                         left = right + 1;
+//                     }
+//                 }
                 if(left != right)
                 {
                     cut(left, right, res);
