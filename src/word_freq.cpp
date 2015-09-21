@@ -1,5 +1,4 @@
 #include <Rcpp.h>
-#include <unordered_map>
 
 using namespace Rcpp;
 using namespace std;
@@ -16,14 +15,15 @@ using namespace std;
 
 // [[Rcpp::export]]
 IntegerVector words_freq(const CharacterVector& x) {
-  unordered_map< string, unsigned int > m;
+  RCPP_UNORDERED_MAP< string, unsigned int > m;
   CharacterVector::const_iterator it = x.begin();
   for(;it != x.end();it++){
     string r = as<string>(*it);
-    if(m.find(r)==m.end()){
+    RCPP_UNORDERED_MAP< string, unsigned int >::iterator m_it = m.find(r);
+    if(m_it==m.end()){
       m[r]=1;
     }else{
-      m[r]=m[r]+1;
+      (*m_it).second=(*m_it).second+1;
     }
 
   }
