@@ -160,9 +160,9 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
       stop("There is no such file for stop words.")
     }
     encodings = suppressWarnings(filecoding(stop2))
-    if(encodings!="UTF-8"){
+    if(encodings != "UTF-8" && encodings != "binary"){
       cat("Encoding of stop words file: ",encodings,"\n")
-      stop("stop words file should be UTF-8 encoding.")
+      warning("stop words file should be UTF-8 encoding.")
     }
   }
   
