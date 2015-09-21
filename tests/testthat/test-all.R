@@ -48,4 +48,7 @@ test_that("filter_words", {
                            "过滤", "分词", "效果"), c("测试", "文本",
                             "用于", "测试", "过滤", "分词", "效果"))
   )
+  expect_identical({freq(c("测试", "测试", "文本"))},structure(list(char = c("文本", "测试"), freq = c(1, 2)), .Names = c("char", 
+                                                                                                                "freq"), row.names = c(NA, -2L), class = "data.frame"))
 })
+

@@ -10,10 +10,16 @@ freq <- function(x){
   if("character" %in% class(x) != TRUE){
     stop("Please give me a character vector.")
   }
+  if(Encoding(x)=="unknown" && .Platform$OS.type=="windows"){
+    x=enc2utf8(x)
+  }
+  
   res = words_freq(x)
   s = data.frame(char=attr(res,"names"),freq=as.numeric(res),stringsAsFactors = F)
+  
   if(.Platform$OS.type=="windows"){
     Encoding(s$char) = "UTF-8"
   }
+  
   return(s)
 }
