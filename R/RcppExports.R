@@ -20,6 +20,22 @@ mp_cut <- function(x, cutter) {
     .Call('jiebaR_mp_cut', PACKAGE = 'jiebaR', x, cutter)
 }
 
+mix_cut_async <- function(x, cutter) {
+    .Call('jiebaR_mix_cut_async', PACKAGE = 'jiebaR', x, cutter)
+}
+
+hmm_cut_async <- function(x, cutter) {
+    .Call('jiebaR_hmm_cut_async', PACKAGE = 'jiebaR', x, cutter)
+}
+
+query_cut_async <- function(x, cutter) {
+    .Call('jiebaR_query_cut_async', PACKAGE = 'jiebaR', x, cutter)
+}
+
+mp_cut_async <- function(x, cutter) {
+    .Call('jiebaR_mp_cut_async', PACKAGE = 'jiebaR', x, cutter)
+}
+
 mix_ptr <- function(dict, model, user, stop) {
     .Call('jiebaR_mix_ptr', PACKAGE = 'jiebaR', dict, model, user, stop)
 }

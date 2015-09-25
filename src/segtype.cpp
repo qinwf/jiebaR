@@ -15,6 +15,29 @@ CharacterVector mp_cut(const CharacterVector& x, XPtr<mpseg> cutter){
   return wrap(cutter->cut(x));
 }
 
+
+///////// async
+
+// [[Rcpp::export]]
+List mix_cut_async(CharacterVector x, XPtr<mixseg> cutter){
+  return wrap(cutter->cut_async(x));
+}
+
+// [[Rcpp::export]]
+List hmm_cut_async(CharacterVector x, XPtr<hmmseg> cutter){
+  return wrap(cutter->cut_async(x));
+}
+
+// [[Rcpp::export]]
+List query_cut_async(CharacterVector x, XPtr<queryseg> cutter){
+  return wrap(cutter->cut_async(x));
+}
+
+// [[Rcpp::export]]
+List mp_cut_async(CharacterVector x, XPtr<mpseg> cutter){
+  return wrap(cutter->cut_async(x));
+}
+
 /////// mixseg
 
 // [[Rcpp::export]]

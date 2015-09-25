@@ -6,6 +6,10 @@
 #include <cstdlib>
 #include <cstdio>
 #include <sstream>
+#if(__cplusplus >= 201103L) 
+#include <algorithm>
+#endif
+
 #include "lib/MixSegment.hpp"
 #include "lib/MPSegment.hpp"
 #include "lib/HMMSegment.hpp"
@@ -15,6 +19,13 @@
 
 #include <Rcpp.h>
 
+#if(__cplusplus >= 201103L)  && !defined(__SUNPRO_CC)
+
+#define _UES_ASYNC_
+
+#include <future>
+
+#endif
 
 using namespace Rcpp;
 using namespace CppJieba;
@@ -68,10 +79,10 @@ public:
   const char *const user_path;
   
   unordered_set<string> stopWords;
-  MPSegment mpsegment;
+  MPSegment cutter;
 
   mpseg(CharacterVector dict, CharacterVector user,Nullable<CharacterVector> stop) :
-    dict_path(dict[0]), user_path(user[0]), stopWords(unordered_set<string>()), mpsegment(dict_path, user_path)
+    dict_path(dict[0]), user_path(user[0]), stopWords(unordered_set<string>()), cutter(dict_path, user_path)
   {
   	 if(!stop.isNull()){
   	    CharacterVector stop_value = stop.get();
@@ -85,20 +96,78 @@ public:
   {
     const char *const test_lines = x[0];
     vector<string> words;
-    mpsegment.cut(test_lines, words);
+    cutter.cut(test_lines, words);
 
     if(stopWords.size()==0){
     	return wrap(words);
     } else{
     	vector<string> res;
-		res.reserve(words.size());
-		filter_stopwords(res, words,stopWords);
+		  res.reserve(words.size());
+		  filter_stopwords(res, words,stopWords);
     	return wrap(res);
     }
 
   }
-};
+  
+  List cut_async(CharacterVector x)
+  {
 
+    CharacterVector::iterator it= x.begin();
+    vector<vector<string>> res_word;
+    res_word.reserve(x.size());
+    
+    #ifdef _UES_ASYNC_
+      vector<future<vector<string> > > v;
+
+      for(;it!=x.end();it++){
+        const char *const test_lines = *it;
+        v.push_back( async(launch::async,[this,test_lines]{
+          vector<string> words;
+          cutter.cut(test_lines, words);
+          if(stopWords.size()==0){
+            return(words);
+          }else{
+            vector<string> res;
+            res.reserve(words.size());
+            filter_stopwords(res, words,stopWords);
+            return(res);
+          }
+          
+          }) );
+      }
+      
+      vector<future<vector<string> > >::iterator it_v = v.begin();
+      for(;it_v!=v.end();it_v++){
+        res_word.push_back((*it_v).get());
+      }
+      
+    #else
+
+      for(;it!=x.end();it++){
+
+        const char *const test_lines = *it;
+        vector<string> words;
+        cutter.cut(test_lines, words);
+        
+        // stop words
+        if(stopWords.size()==0){
+          res_word.push_back(words);
+        }else{
+          vector<string> res;
+          res.reserve(words.size());
+          filter_stopwords(res, words,stopWords);
+          res_word.push_back(res);
+        }
+        
+      }
+      
+    #endif
+
+      return wrap(res_word);
+
+  }
+  
+};
 
 class mixseg
 {
@@ -108,9 +177,9 @@ public:
   const char *const user_path;
 
   unordered_set<string> stopWords;
-  MixSegment mixsegment;
+  MixSegment cutter;
   mixseg(CharacterVector dict, CharacterVector model, CharacterVector user,Nullable<CharacterVector> stop) :
-    dict_path(dict[0]), model_path(model[0]), user_path(user[0]), stopWords(unordered_set<string>()), mixsegment(dict_path, model_path, user_path)
+    dict_path(dict[0]), model_path(model[0]), user_path(user[0]), stopWords(unordered_set<string>()), cutter(dict_path, model_path, user_path)
   {
   	  if(!stop.isNull()){
   	    CharacterVector stop_value = stop.get();
@@ -124,7 +193,7 @@ public:
   {
     const char *const test_lines = x[0];
     vector<string> words;
-    mixsegment.cut(test_lines, words);
+    cutter.cut(test_lines, words);
     if(stopWords.size()==0){
     	return wrap(words);
     } else{
@@ -133,6 +202,64 @@ public:
 		filter_stopwords(res, words,stopWords);
     	return wrap(res);
     }
+  }
+  
+  List cut_async(CharacterVector x)
+  {
+    
+    CharacterVector::iterator it= x.begin();
+    vector<vector<string>> res_word;
+    res_word.reserve(x.size());
+    
+#ifdef _UES_ASYNC_
+    vector<future<vector<string> > > v;
+    
+    for(;it!=x.end();it++){
+      const char *const test_lines = *it;
+      v.push_back( async(launch::async,[this,test_lines]{
+        vector<string> words;
+        cutter.cut(test_lines, words);
+        if(stopWords.size()==0){
+          return(words);
+        }else{
+          vector<string> res;
+          res.reserve(words.size());
+          filter_stopwords(res, words,stopWords);
+          return(res);
+        }
+        
+      }) );
+    }
+    
+    vector<future<vector<string> > >::iterator it_v = v.begin();
+    for(;it_v!=v.end();it_v++){
+      res_word.push_back((*it_v).get());
+    }
+    
+#else
+    
+    for(;it!=x.end();it++){
+      
+      const char *const test_lines = *it;
+      vector<string> words;
+      cutter.cut(test_lines, words);
+      
+      // stop words
+      if(stopWords.size()==0){
+        res_word.push_back(words);
+      }else{
+        vector<string> res;
+        res.reserve(words.size());
+        filter_stopwords(res, words,stopWords);
+        res_word.push_back(res);
+      }
+      
+    }
+    
+#endif
+    
+    return wrap(res_word);
+    
   }
 };
 
@@ -144,9 +271,9 @@ public:
   const char *const model_path;
 
   unordered_set<string> stopWords;
-  QuerySegment querysegment;
+  QuerySegment cutter;
   queryseg(CharacterVector dict, CharacterVector model, int n,Nullable<CharacterVector> stop) :
-    dict_path(dict[0]), model_path(model[0]), stopWords(unordered_set<string>()), querysegment(dict_path, model_path, n)
+    dict_path(dict[0]), model_path(model[0]), stopWords(unordered_set<string>()), cutter(dict_path, model_path, n)
   {
   	  if(!stop.isNull()){
   	    CharacterVector stop_value = stop.get();
@@ -160,7 +287,7 @@ public:
   {
     const char *const test_lines = x[0];
     vector<string> words;
-    querysegment.cut(test_lines, words);
+    cutter.cut(test_lines, words);
     if(stopWords.size()==0){
     	return wrap(words);
     } else{
@@ -170,6 +297,65 @@ public:
     	return wrap(res);
     }
   }
+  
+  List cut_async(CharacterVector x)
+  {
+    
+    CharacterVector::iterator it= x.begin();
+    vector<vector<string>> res_word;
+    res_word.reserve(x.size());
+    
+#ifdef _UES_ASYNC_
+    vector<future<vector<string> > > v;
+    
+    for(;it!=x.end();it++){
+      const char *const test_lines = *it;
+      v.push_back( async(launch::async,[this,test_lines]{
+        vector<string> words;
+        cutter.cut(test_lines, words);
+        if(stopWords.size()==0){
+          return(words);
+        }else{
+          vector<string> res;
+          res.reserve(words.size());
+          filter_stopwords(res, words,stopWords);
+          return(res);
+        }
+        
+      }) );
+    }
+    
+    vector<future<vector<string> > >::iterator it_v = v.begin();
+    for(;it_v!=v.end();it_v++){
+      res_word.push_back((*it_v).get());
+    }
+    
+#else
+    
+    for(;it!=x.end();it++){
+      
+      const char *const test_lines = *it;
+      vector<string> words;
+      cutter.cut(test_lines, words);
+      
+      // stop words
+      if(stopWords.size()==0){
+        res_word.push_back(words);
+      }else{
+        vector<string> res;
+        res.reserve(words.size());
+        filter_stopwords(res, words,stopWords);
+        res_word.push_back(res);
+      }
+      
+    }
+    
+#endif
+    
+    return wrap(res_word);
+    
+  }  
+  
 };
 
 
@@ -179,9 +365,9 @@ public:
   const char *const model_path;
 
   unordered_set<string> stopWords;
-  HMMSegment hmmsegment;
+  HMMSegment cutter;
   hmmseg(CharacterVector model,Nullable<CharacterVector> stop) :
-    model_path(model[0]), stopWords(unordered_set<string>()), hmmsegment(model_path)
+    model_path(model[0]), stopWords(unordered_set<string>()), cutter(model_path)
   {
   	  if(!stop.isNull()){
   	    CharacterVector stop_value = stop.get();
@@ -195,7 +381,7 @@ public:
   {
     const char *const test_lines = x[0];
     vector<string> words;
-    hmmsegment.cut(test_lines, words);
+    cutter.cut(test_lines, words);
     if(stopWords.size()==0){
     	return wrap(words);
     } else{
@@ -204,6 +390,64 @@ public:
 		filter_stopwords(res, words,stopWords);
     	return wrap(res);
     }
+  }
+  
+  List cut_async(CharacterVector x)
+  {
+    
+    CharacterVector::iterator it= x.begin();
+    vector<vector<string>> res_word;
+    res_word.reserve(x.size());
+    
+#ifdef _UES_ASYNC_
+    vector<future<vector<string> > > v;
+    
+    for(;it!=x.end();it++){
+      const char *const test_lines = *it;
+      v.push_back( async(launch::async,[this,test_lines]{
+        vector<string> words;
+        cutter.cut(test_lines, words);
+        if(stopWords.size()==0){
+          return(words);
+        }else{
+          vector<string> res;
+          res.reserve(words.size());
+          filter_stopwords(res, words,stopWords);
+          return(res);
+        }
+        
+      }) );
+    }
+    
+    vector<future<vector<string> > >::iterator it_v = v.begin();
+    for(;it_v!=v.end();it_v++){
+      res_word.push_back((*it_v).get());
+    }
+    
+#else
+    
+    for(;it!=x.end();it++){
+      
+      const char *const test_lines = *it;
+      vector<string> words;
+      cutter.cut(test_lines, words);
+      
+      // stop words
+      if(stopWords.size()==0){
+        res_word.push_back(words);
+      }else{
+        vector<string> res;
+        res.reserve(words.size());
+        filter_stopwords(res, words,stopWords);
+        res_word.push_back(res);
+      }
+      
+    }
+    
+#endif
+    
+    return wrap(res_word);
+    
   }
 };
 

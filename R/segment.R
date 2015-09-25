@@ -188,20 +188,17 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
   } else {
 
     length_of_input = length(code)
-    result = vector("list", length_of_input)
+    result = engine_cut_async(code,jiebar)
     for( num in 1:length_of_input){
-      tmp_result = engine_cut(code[num],jiebar)
       if (symbol == F) {
-        tmp_result = tmp_result[ tmp_result != " "]
+        temp = result[[num]]
+        temp = temp[ temp != " "]
+        temp = grep("(*UCP)^[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]*$", temp, perl = TRUE,value = TRUE,invert = T)
+        result[[num]] = temp
       }
       if (.Platform$OS.type == "windows") {
-        Encoding(tmp_result)<-"UTF-8"
+        Encoding(result[[num]])<-"UTF-8"
       }
-      if (symbol == F) {
-        tmp_result <- grep("(*UCP)^[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]*$", tmp_result, perl = TRUE,value = TRUE,invert = T)
-      }
-      #  code <- gsub("^\\s+|\\s+$", "", gsub("\\s+", " ", code))
-      result[[num]] = tmp_result
     }
   }
 
@@ -220,6 +217,17 @@ engine_cut <- function(code,jiebar){
                    mpseg = mp_cut(code, jiebar$worker),
                    hmmseg = hmm_cut(code, jiebar$worker),
                    queryseg = query_cut(code, jiebar$worker)
+  )
+  return(result)
+}
+
+engine_cut_async <- function(code,jiebar){
+
+  result <- switch(class(jiebar)[3],
+                   mixseg = mix_cut_async(code, jiebar$worker),
+                   mpseg = mp_cut_async(code, jiebar$worker),
+                   hmmseg = hmm_cut_async(code, jiebar$worker),
+                   queryseg = query_cut_async(code, jiebar$worker)
   )
   return(result)
 }
