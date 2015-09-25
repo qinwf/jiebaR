@@ -189,15 +189,10 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
 
     length_of_input = length(code)
     result = engine_cut_async(code,jiebar)
-    for( num in 1:length_of_input){
-      if (symbol == F) {
-        temp = result[[num]]
-        temp = temp[ temp != " "]
-        temp = grep("(*UCP)^[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]*$", temp, perl = TRUE,value = TRUE,invert = T)
-        result[[num]] = temp
-      }
-      if (.Platform$OS.type == "windows") {
-        Encoding(result[[num]])<-"UTF-8"
+    if (symbol == F  ) {
+      for( num in 1:length_of_input){
+        temp =result[[num]]
+        result[[num]] = grep("(*UCP)^[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]*$", temp[ temp!= " "], perl = TRUE,value = TRUE,invert = T)
       }
     }
   }

@@ -31,60 +31,60 @@ BEGIN_RCPP
 END_RCPP
 }
 // mp_cut
-CharacterVector mp_cut(const CharacterVector& x, XPtr<mpseg> cutter);
+CharacterVector mp_cut(CharacterVector& x, XPtr<mpseg> cutter);
 RcppExport SEXP jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< XPtr<mpseg> >::type cutter(cutterSEXP);
     __result = Rcpp::wrap(mp_cut(x, cutter));
     return __result;
 END_RCPP
 }
 // mix_cut_async
-List mix_cut_async(CharacterVector x, XPtr<mixseg> cutter);
+SEXP mix_cut_async(CharacterVector& x, XPtr<mixseg> cutter);
 RcppExport SEXP jiebaR_mix_cut_async(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< XPtr<mixseg> >::type cutter(cutterSEXP);
     __result = Rcpp::wrap(mix_cut_async(x, cutter));
     return __result;
 END_RCPP
 }
 // hmm_cut_async
-List hmm_cut_async(CharacterVector x, XPtr<hmmseg> cutter);
+List hmm_cut_async(CharacterVector& x, XPtr<hmmseg> cutter);
 RcppExport SEXP jiebaR_hmm_cut_async(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< XPtr<hmmseg> >::type cutter(cutterSEXP);
     __result = Rcpp::wrap(hmm_cut_async(x, cutter));
     return __result;
 END_RCPP
 }
 // query_cut_async
-List query_cut_async(CharacterVector x, XPtr<queryseg> cutter);
+List query_cut_async(CharacterVector& x, XPtr<queryseg> cutter);
 RcppExport SEXP jiebaR_query_cut_async(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< XPtr<queryseg> >::type cutter(cutterSEXP);
     __result = Rcpp::wrap(query_cut_async(x, cutter));
     return __result;
 END_RCPP
 }
 // mp_cut_async
-List mp_cut_async(CharacterVector x, XPtr<mpseg> cutter);
+List mp_cut_async(CharacterVector& x, XPtr<mpseg> cutter);
 RcppExport SEXP jiebaR_mp_cut_async(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< XPtr<mpseg> >::type cutter(cutterSEXP);
     __result = Rcpp::wrap(mp_cut_async(x, cutter));
     return __result;
@@ -105,12 +105,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // mix_cut
-CharacterVector mix_cut(const CharacterVector& x, XPtr<mixseg> cutter);
+CharacterVector mix_cut(CharacterVector& x, XPtr<mixseg> cutter);
 RcppExport SEXP jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< XPtr<mixseg> >::type cutter(cutterSEXP);
     __result = Rcpp::wrap(mix_cut(x, cutter));
     return __result;
@@ -131,12 +131,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // query_cut
-CharacterVector query_cut(const CharacterVector& x, XPtr<queryseg> cutter);
+CharacterVector query_cut(CharacterVector& x, XPtr<queryseg> cutter);
 RcppExport SEXP jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< XPtr<queryseg> >::type cutter(cutterSEXP);
     __result = Rcpp::wrap(query_cut(x, cutter));
     return __result;
@@ -155,12 +155,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // hmm_cut
-CharacterVector hmm_cut(const CharacterVector& x, XPtr<hmmseg> cutter);
+CharacterVector hmm_cut(CharacterVector& x, XPtr<hmmseg> cutter);
 RcppExport SEXP jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
     Rcpp::traits::input_parameter< XPtr<hmmseg> >::type cutter(cutterSEXP);
     __result = Rcpp::wrap(hmm_cut(x, cutter));
     return __result;

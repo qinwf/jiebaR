@@ -11,7 +11,7 @@ XPtr<mpseg> mp_ptr(const CharacterVector& dict, const CharacterVector& user,cons
 
 
 // [[Rcpp::export]]
-CharacterVector mp_cut(const CharacterVector& x, XPtr<mpseg> cutter){
+CharacterVector mp_cut(CharacterVector& x, XPtr<mpseg> cutter){
   return wrap(cutter->cut(x));
 }
 
@@ -19,22 +19,22 @@ CharacterVector mp_cut(const CharacterVector& x, XPtr<mpseg> cutter){
 ///////// async
 
 // [[Rcpp::export]]
-List mix_cut_async(CharacterVector x, XPtr<mixseg> cutter){
+SEXP mix_cut_async(CharacterVector& x, XPtr<mixseg> cutter){
+  return cutter->cut_async(x);
+}
+
+// [[Rcpp::export]]
+List hmm_cut_async(CharacterVector& x, XPtr<hmmseg> cutter){
   return wrap(cutter->cut_async(x));
 }
 
 // [[Rcpp::export]]
-List hmm_cut_async(CharacterVector x, XPtr<hmmseg> cutter){
+List query_cut_async(CharacterVector& x, XPtr<queryseg> cutter){
   return wrap(cutter->cut_async(x));
 }
 
 // [[Rcpp::export]]
-List query_cut_async(CharacterVector x, XPtr<queryseg> cutter){
-  return wrap(cutter->cut_async(x));
-}
-
-// [[Rcpp::export]]
-List mp_cut_async(CharacterVector x, XPtr<mpseg> cutter){
+List mp_cut_async(CharacterVector& x, XPtr<mpseg> cutter){
   return wrap(cutter->cut_async(x));
 }
 
@@ -47,7 +47,7 @@ XPtr<mixseg> mix_ptr(const CharacterVector& dict, const CharacterVector& model,
 }
 
 // [[Rcpp::export]]
-CharacterVector mix_cut(const CharacterVector& x, XPtr<mixseg> cutter){
+CharacterVector mix_cut(CharacterVector& x, XPtr<mixseg> cutter){
   return wrap(cutter->cut(x));
 }
 
@@ -60,7 +60,7 @@ XPtr<queryseg> query_ptr(const CharacterVector& dict, const CharacterVector& mod
 }
 
 // [[Rcpp::export]]
-CharacterVector query_cut(const CharacterVector& x, XPtr<queryseg> cutter){
+CharacterVector query_cut(CharacterVector& x, XPtr<queryseg> cutter){
   return wrap(cutter->cut(x));
 }
 
@@ -73,7 +73,7 @@ XPtr<hmmseg> hmm_ptr(const CharacterVector& model,const Nullable<CharacterVector
 }
 
 // [[Rcpp::export]]
-CharacterVector hmm_cut(const CharacterVector& x, XPtr<hmmseg> cutter){
+CharacterVector hmm_cut(CharacterVector& x, XPtr<hmmseg> cutter){
   return wrap(cutter->cut(x));
 }
 

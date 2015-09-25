@@ -92,7 +92,7 @@ public:
   }
   ~mpseg() {};
   
-  CharacterVector cut(CharacterVector x)
+  CharacterVector cut(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<string> words;
@@ -109,7 +109,7 @@ public:
 
   }
   
-  List cut_async(CharacterVector x)
+  List cut_async(CharacterVector& x)
   {
 
     CharacterVector::iterator it= x.begin();
@@ -118,7 +118,7 @@ public:
     
     #ifdef _UES_ASYNC_
       vector<future<vector<string> > > v;
-
+      v.reserve(x.size());
       for(;it!=x.end();it++){
         const char *const test_lines = *it;
         v.push_back( async(launch::async,[this,test_lines]{
@@ -162,8 +162,22 @@ public:
       }
       
     #endif
-
-      return wrap(res_word);
+      List st = wrap(res_word);
+      SEXP final = wrap(st);
+      
+      for(int i=0 ;i!=x.size();i++){
+        SEXP te = VECTOR_ELT(final, i);
+        R_xlen_t j,n;
+        PROTECT(te);
+        n = XLENGTH(te);
+        for(j=0;j!=n;j++){
+          SEXP tmp = STRING_ELT(te, j);
+          if(tmp == NA_STRING) continue;
+          SET_STRING_ELT(te, j, Rf_mkCharLenCE(CHAR(tmp), LENGTH(tmp), CE_UTF8));
+        }
+        UNPROTECT(1);
+      }
+      return final;
 
   }
   
@@ -189,7 +203,7 @@ public:
   }
   ~mixseg() {};
   
-  CharacterVector cut(CharacterVector x)
+  CharacterVector cut(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<string> words;
@@ -204,7 +218,7 @@ public:
     }
   }
   
-  List cut_async(CharacterVector x)
+  SEXP cut_async(CharacterVector& x)
   {
     
     CharacterVector::iterator it= x.begin();
@@ -213,7 +227,7 @@ public:
     
 #ifdef _UES_ASYNC_
     vector<future<vector<string> > > v;
-    
+    v.reserve(x.size());
     for(;it!=x.end();it++){
       const char *const test_lines = *it;
       v.push_back( async(launch::async,[this,test_lines]{
@@ -257,9 +271,22 @@ public:
     }
     
 #endif
+    List st = wrap(res_word);
+    SEXP final = wrap(st);
     
-    return wrap(res_word);
-    
+    for(int i=0 ;i!=x.size();i++){
+      SEXP te = VECTOR_ELT(final, i);
+      R_xlen_t j,n;
+      PROTECT(te);
+      n = XLENGTH(te);
+      for(j=0;j!=n;j++){
+        SEXP tmp = STRING_ELT(te, j);
+        if(tmp == NA_STRING) continue;
+        SET_STRING_ELT(te, j, Rf_mkCharLenCE(CHAR(tmp), LENGTH(tmp), CE_UTF8));
+      }
+      UNPROTECT(1);
+    }
+    return final;
   }
 };
 
@@ -283,7 +310,7 @@ public:
   }
   ~queryseg() {};
   
-  CharacterVector cut(CharacterVector x)
+  CharacterVector cut(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<string> words;
@@ -298,7 +325,7 @@ public:
     }
   }
   
-  List cut_async(CharacterVector x)
+  List cut_async(CharacterVector& x)
   {
     
     CharacterVector::iterator it= x.begin();
@@ -307,7 +334,7 @@ public:
     
 #ifdef _UES_ASYNC_
     vector<future<vector<string> > > v;
-    
+    v.reserve(x.size());
     for(;it!=x.end();it++){
       const char *const test_lines = *it;
       v.push_back( async(launch::async,[this,test_lines]{
@@ -352,8 +379,22 @@ public:
     
 #endif
     
-    return wrap(res_word);
+    List st = wrap(res_word);
+    SEXP final = wrap(st);
     
+    for(int i=0 ;i!=x.size();i++){
+      SEXP te = VECTOR_ELT(final, i);
+      R_xlen_t j,n;
+      PROTECT(te);
+      n = XLENGTH(te);
+      for(j=0;j!=n;j++){
+        SEXP tmp = STRING_ELT(te, j);
+        if(tmp == NA_STRING) continue;
+        SET_STRING_ELT(te, j, Rf_mkCharLenCE(CHAR(tmp), LENGTH(tmp), CE_UTF8));
+      }
+      UNPROTECT(1);
+    }
+    return final;
   }  
   
 };
@@ -377,7 +418,7 @@ public:
   }
   ~hmmseg() {};
   
-  CharacterVector cut(CharacterVector x)
+  CharacterVector cut(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<string> words;
@@ -392,7 +433,7 @@ public:
     }
   }
   
-  List cut_async(CharacterVector x)
+  List cut_async(CharacterVector& x)
   {
     
     CharacterVector::iterator it= x.begin();
@@ -401,7 +442,7 @@ public:
     
 #ifdef _UES_ASYNC_
     vector<future<vector<string> > > v;
-    
+    v.reserve(x.size());
     for(;it!=x.end();it++){
       const char *const test_lines = *it;
       v.push_back( async(launch::async,[this,test_lines]{
@@ -445,8 +486,22 @@ public:
     }
     
 #endif
+    List st = wrap(res_word);
+    SEXP final = wrap(st);
     
-    return wrap(res_word);
+    for(int i=0 ;i!=x.size();i++){
+      SEXP te = VECTOR_ELT(final, i);
+      R_xlen_t j,n;
+      PROTECT(te);
+      n = XLENGTH(te);
+      for(j=0;j!=n;j++){
+        SEXP tmp = STRING_ELT(te, j);
+        if(tmp == NA_STRING) continue;
+        SET_STRING_ELT(te, j, Rf_mkCharLenCE(CHAR(tmp), LENGTH(tmp), CE_UTF8));
+      }
+      UNPROTECT(1);
+    }
+    return final;
     
   }
 };
