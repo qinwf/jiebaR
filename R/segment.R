@@ -176,14 +176,11 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
 
   if(jiebar$bylines == FALSE){
     result = engine_cut(code,jiebar)
-    if (symbol == F) {
-      result = result[ result != " "]
-    }
     if (.Platform$OS.type == "windows") {
       Encoding(result)<-"UTF-8"
     }
     if (symbol == F) {
-      result <- grep("(*UCP)^[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]*$", result, perl = TRUE,value = TRUE,invert = T)
+      result <- grep("(*UCP)^([^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]|\\s)*$", result, perl = TRUE,value = TRUE,invert = T)
     }
   } else {
 
@@ -191,8 +188,7 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
     result = engine_cut_async(code,jiebar)
     if (symbol == F  ) {
       for( num in 1:length_of_input){
-        temp =result[[num]]
-        result[[num]] = grep("(*UCP)^[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]*$", temp[ temp!= " "], perl = TRUE,value = TRUE,invert = T)
+        result[[num]] = grep("(*UCP)^([^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]|\\s)*$", result[[num]], perl = TRUE,value = TRUE,invert = T)
       }
     }
   }
