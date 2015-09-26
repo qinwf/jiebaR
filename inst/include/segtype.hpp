@@ -72,136 +72,18 @@ inline void filter_stopwords(vector<string>& res,const vector<string>& words,con
 	}
 }
 
-class mpseg
-{
+
+template <class T> class Seg {
 public:
-  const char *const dict_path;
-  const char *const user_path;
-  
   unordered_set<string> stopWords;
-  MPSegment cutter;
-
-  mpseg(CharacterVector dict, CharacterVector user,Nullable<CharacterVector> stop) :
-    dict_path(dict[0]), user_path(user[0]), stopWords(unordered_set<string>()), cutter(dict_path, user_path)
-  {
-  	 if(!stop.isNull()){
-  	    CharacterVector stop_value = stop.get();
-  	 	  const char *const stop_path = stop_value[0];
-  	 	  _loadStopWordDict(stop_path,stopWords);
-  	 }
-  }
-  ~mpseg() {};
+  T cutter;
   
-  CharacterVector cut(CharacterVector& x)
-  {
-    const char *const test_lines = x[0];
-    vector<string> words;
-    cutter.cut(test_lines, words);
-
-    if(stopWords.size()==0){
-    	return wrap(words);
-    } else{
-    	vector<string> res;
-		  res.reserve(words.size());
-		  filter_stopwords(res, words,stopWords);
-    	return wrap(res);
-    }
-
-  }
-  
-  List cut_async(CharacterVector& x)
-  {
-
-    CharacterVector::iterator it= x.begin();
-    vector<vector<string>> res_word;
-    res_word.reserve(x.size());
-    
-    #ifdef _UES_ASYNC_
-      vector<future<vector<string> > > v;
-      v.reserve(x.size());
-      for(;it!=x.end();it++){
-        const char *const test_lines = *it;
-        v.push_back( async(launch::async,[this,test_lines]{
-          vector<string> words;
-          cutter.cut(test_lines, words);
-          if(stopWords.size()==0){
-            return(words);
-          }else{
-            vector<string> res;
-            res.reserve(words.size());
-            filter_stopwords(res, words,stopWords);
-            return(res);
-          }
-          
-          }) );
-      }
-      
-      vector<future<vector<string> > >::iterator it_v = v.begin();
-      for(;it_v!=v.end();it_v++){
-        res_word.push_back((*it_v).get());
-      }
-      
-    #else
-
-      for(;it!=x.end();it++){
-
-        const char *const test_lines = *it;
-        vector<string> words;
-        cutter.cut(test_lines, words);
-        
-        // stop words
-        if(stopWords.size()==0){
-          res_word.push_back(words);
-        }else{
-          vector<string> res;
-          res.reserve(words.size());
-          filter_stopwords(res, words,stopWords);
-          res_word.push_back(res);
-        }
-        
-      }
-      
-    #endif
-      List st = wrap(res_word);
-      SEXP final = wrap(st);
-      
-      for(int i=0 ;i!=x.size();i++){
-        SEXP te = VECTOR_ELT(final, i);
-        R_xlen_t j,n;
-        PROTECT(te);
-        n = XLENGTH(te);
-        for(j=0;j!=n;j++){
-          SEXP tmp = STRING_ELT(te, j);
-          if(tmp == NA_STRING) continue;
-          SET_STRING_ELT(te, j, Rf_mkCharLenCE(CHAR(tmp), LENGTH(tmp), CE_UTF8));
-        }
-        UNPROTECT(1);
-      }
-      return final;
-
-  }
-  
-};
-
-class mixseg
-{
-public:
-  const char *const dict_path;
-  const char *const model_path;
-  const char *const user_path;
-
-  unordered_set<string> stopWords;
-  MixSegment cutter;
-  mixseg(CharacterVector dict, CharacterVector model, CharacterVector user,Nullable<CharacterVector> stop) :
-    dict_path(dict[0]), model_path(model[0]), user_path(user[0]), stopWords(unordered_set<string>()), cutter(dict_path, model_path, user_path)
-  {
-  	  if(!stop.isNull()){
-  	    CharacterVector stop_value = stop.get();
-  	 	  const char *const stop_path = stop_value[0];
-  	 	  _loadStopWordDict(stop_path,stopWords);
-  	 }
-  }
-  ~mixseg() {};
+  Seg() = delete;
+  Seg(CharacterVector dict, CharacterVector model, CharacterVector user,Nullable<CharacterVector> stop);
+  Seg(CharacterVector dict, CharacterVector user,Nullable<CharacterVector> stop);
+  Seg(CharacterVector dict, CharacterVector model, int n,Nullable<CharacterVector> stop);
+  Seg(CharacterVector model,Nullable<CharacterVector> stop);
+  ~Seg(){};
   
   CharacterVector cut(CharacterVector& x)
   {
@@ -209,12 +91,12 @@ public:
     vector<string> words;
     cutter.cut(test_lines, words);
     if(stopWords.size()==0){
-    	return wrap(words);
+      return wrap(words);
     } else{
-    	vector<string> res;
-		res.reserve(words.size());
-		filter_stopwords(res, words,stopWords);
-    	return wrap(res);
+      vector<string> res;
+      res.reserve(words.size());
+      filter_stopwords(res, words,stopWords);
+      return wrap(res);
     }
   }
   
@@ -288,222 +170,7 @@ public:
     }
     return final;
   }
-};
-
-
-class queryseg
-{
-public:
-  const char *const dict_path;
-  const char *const model_path;
-
-  unordered_set<string> stopWords;
-  QuerySegment cutter;
-  queryseg(CharacterVector dict, CharacterVector model, int n,Nullable<CharacterVector> stop) :
-    dict_path(dict[0]), model_path(model[0]), stopWords(unordered_set<string>()), cutter(dict_path, model_path, n)
-  {
-  	  if(!stop.isNull()){
-  	    CharacterVector stop_value = stop.get();
-  	 	  const char *const stop_path = stop_value[0];
-  	 	  _loadStopWordDict(stop_path,stopWords);
-  	 }
-  }
-  ~queryseg() {};
   
-  CharacterVector cut(CharacterVector& x)
-  {
-    const char *const test_lines = x[0];
-    vector<string> words;
-    cutter.cut(test_lines, words);
-    if(stopWords.size()==0){
-    	return wrap(words);
-    } else{
-    	vector<string> res;
-		res.reserve(words.size());
-		filter_stopwords(res, words,stopWords);
-    	return wrap(res);
-    }
-  }
-  
-  List cut_async(CharacterVector& x)
-  {
-    
-    CharacterVector::iterator it= x.begin();
-    vector<vector<string>> res_word;
-    res_word.reserve(x.size());
-    
-#ifdef _UES_ASYNC_
-    vector<future<vector<string> > > v;
-    v.reserve(x.size());
-    for(;it!=x.end();it++){
-      const char *const test_lines = *it;
-      v.push_back( async(launch::async,[this,test_lines]{
-        vector<string> words;
-        cutter.cut(test_lines, words);
-        if(stopWords.size()==0){
-          return(words);
-        }else{
-          vector<string> res;
-          res.reserve(words.size());
-          filter_stopwords(res, words,stopWords);
-          return(res);
-        }
-        
-      }) );
-    }
-    
-    vector<future<vector<string> > >::iterator it_v = v.begin();
-    for(;it_v!=v.end();it_v++){
-      res_word.push_back((*it_v).get());
-    }
-    
-#else
-    
-    for(;it!=x.end();it++){
-      
-      const char *const test_lines = *it;
-      vector<string> words;
-      cutter.cut(test_lines, words);
-      
-      // stop words
-      if(stopWords.size()==0){
-        res_word.push_back(words);
-      }else{
-        vector<string> res;
-        res.reserve(words.size());
-        filter_stopwords(res, words,stopWords);
-        res_word.push_back(res);
-      }
-      
-    }
-    
-#endif
-    
-    List st = wrap(res_word);
-    SEXP final = wrap(st);
-    
-    for(int i=0 ;i!=x.size();i++){
-      SEXP te = VECTOR_ELT(final, i);
-      R_xlen_t j,n;
-      PROTECT(te);
-      n = XLENGTH(te);
-      for(j=0;j!=n;j++){
-        SEXP tmp = STRING_ELT(te, j);
-        if(tmp == NA_STRING) continue;
-        SET_STRING_ELT(te, j, Rf_mkCharLenCE(CHAR(tmp), LENGTH(tmp), CE_UTF8));
-      }
-      UNPROTECT(1);
-    }
-    return final;
-  }  
-  
-};
-
-
-class hmmseg
-{
-public:
-  const char *const model_path;
-
-  unordered_set<string> stopWords;
-  HMMSegment cutter;
-  hmmseg(CharacterVector model,Nullable<CharacterVector> stop) :
-    model_path(model[0]), stopWords(unordered_set<string>()), cutter(model_path)
-  {
-  	  if(!stop.isNull()){
-  	    CharacterVector stop_value = stop.get();
-  	 	  const char *const stop_path = stop_value[0];
-  	 	  _loadStopWordDict(stop_path,stopWords);
-  	 }
-  }
-  ~hmmseg() {};
-  
-  CharacterVector cut(CharacterVector& x)
-  {
-    const char *const test_lines = x[0];
-    vector<string> words;
-    cutter.cut(test_lines, words);
-    if(stopWords.size()==0){
-    	return wrap(words);
-    } else{
-    	vector<string> res;
-		res.reserve(words.size());
-		filter_stopwords(res, words,stopWords);
-    	return wrap(res);
-    }
-  }
-  
-  List cut_async(CharacterVector& x)
-  {
-    
-    CharacterVector::iterator it= x.begin();
-    vector<vector<string>> res_word;
-    res_word.reserve(x.size());
-    
-#ifdef _UES_ASYNC_
-    vector<future<vector<string> > > v;
-    v.reserve(x.size());
-    for(;it!=x.end();it++){
-      const char *const test_lines = *it;
-      v.push_back( async(launch::async,[this,test_lines]{
-        vector<string> words;
-        cutter.cut(test_lines, words);
-        if(stopWords.size()==0){
-          return(words);
-        }else{
-          vector<string> res;
-          res.reserve(words.size());
-          filter_stopwords(res, words,stopWords);
-          return(res);
-        }
-        
-      }) );
-    }
-    
-    vector<future<vector<string> > >::iterator it_v = v.begin();
-    for(;it_v!=v.end();it_v++){
-      res_word.push_back((*it_v).get());
-    }
-    
-#else
-    
-    for(;it!=x.end();it++){
-      
-      const char *const test_lines = *it;
-      vector<string> words;
-      cutter.cut(test_lines, words);
-      
-      // stop words
-      if(stopWords.size()==0){
-        res_word.push_back(words);
-      }else{
-        vector<string> res;
-        res.reserve(words.size());
-        filter_stopwords(res, words,stopWords);
-        res_word.push_back(res);
-      }
-      
-    }
-    
-#endif
-    List st = wrap(res_word);
-    SEXP final = wrap(st);
-    
-    for(int i=0 ;i!=x.size();i++){
-      SEXP te = VECTOR_ELT(final, i);
-      R_xlen_t j,n;
-      PROTECT(te);
-      n = XLENGTH(te);
-      for(j=0;j!=n;j++){
-        SEXP tmp = STRING_ELT(te, j);
-        if(tmp == NA_STRING) continue;
-        SET_STRING_ELT(te, j, Rf_mkCharLenCE(CHAR(tmp), LENGTH(tmp), CE_UTF8));
-      }
-      UNPROTECT(1);
-    }
-    return final;
-    
-  }
 };
 
 
