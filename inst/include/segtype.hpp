@@ -61,148 +61,30 @@ inline void filter_stopwords(vector<string>& res,const vector<string>& words,con
 	}
 }
 
-class mpseg
-{
+template <class T> class Seg {
 public:
-  const char *const dict_path;
-  const char *const user_path;
-  
   unordered_set<string> stopWords;
-  MPSegment mpsegment;
-
-  mpseg(CharacterVector dict, CharacterVector user,Nullable<CharacterVector> stop) :
-    dict_path(dict[0]), user_path(user[0]), stopWords(unordered_set<string>()), mpsegment(dict_path, user_path)
-  {
-  	 if(!stop.isNull()){
-  	    CharacterVector stop_value = stop.get();
-  	 	  const char *const stop_path = stop_value[0];
-  	 	  _loadStopWordDict(stop_path,stopWords);
-  	 }
-  }
-  ~mpseg() {};
+  T cutter;
   
-  CharacterVector cut(CharacterVector x)
+  Seg() = delete;
+  Seg(CharacterVector& dict, CharacterVector& model, CharacterVector& user,Nullable<CharacterVector> stop);
+  Seg(CharacterVector& dict, CharacterVector& user,Nullable<CharacterVector> stop);
+  Seg(CharacterVector& dict, CharacterVector& model, int n,Nullable<CharacterVector> stop);
+  Seg(CharacterVector& model,Nullable<CharacterVector> stop);
+  ~Seg(){};
+  
+  CharacterVector cut(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<string> words;
-    mpsegment.cut(test_lines, words);
-
+    cutter.cut(test_lines, words);
     if(stopWords.size()==0){
-    	return wrap(words);
+      return wrap(words);
     } else{
-    	vector<string> res;
-		res.reserve(words.size());
-		filter_stopwords(res, words,stopWords);
-    	return wrap(res);
-    }
-
-  }
-};
-
-
-class mixseg
-{
-public:
-  const char *const dict_path;
-  const char *const model_path;
-  const char *const user_path;
-
-  unordered_set<string> stopWords;
-  MixSegment mixsegment;
-  mixseg(CharacterVector dict, CharacterVector model, CharacterVector user,Nullable<CharacterVector> stop) :
-    dict_path(dict[0]), model_path(model[0]), user_path(user[0]), stopWords(unordered_set<string>()), mixsegment(dict_path, model_path, user_path)
-  {
-  	  if(!stop.isNull()){
-  	    CharacterVector stop_value = stop.get();
-  	 	  const char *const stop_path = stop_value[0];
-  	 	  _loadStopWordDict(stop_path,stopWords);
-  	 }
-  }
-  ~mixseg() {};
-  
-  CharacterVector cut(CharacterVector x)
-  {
-    const char *const test_lines = x[0];
-    vector<string> words;
-    mixsegment.cut(test_lines, words);
-    if(stopWords.size()==0){
-    	return wrap(words);
-    } else{
-    	vector<string> res;
-		res.reserve(words.size());
-		filter_stopwords(res, words,stopWords);
-    	return wrap(res);
-    }
-  }
-};
-
-
-class queryseg
-{
-public:
-  const char *const dict_path;
-  const char *const model_path;
-
-  unordered_set<string> stopWords;
-  QuerySegment querysegment;
-  queryseg(CharacterVector dict, CharacterVector model, int n,Nullable<CharacterVector> stop) :
-    dict_path(dict[0]), model_path(model[0]), stopWords(unordered_set<string>()), querysegment(dict_path, model_path, n)
-  {
-  	  if(!stop.isNull()){
-  	    CharacterVector stop_value = stop.get();
-  	 	  const char *const stop_path = stop_value[0];
-  	 	  _loadStopWordDict(stop_path,stopWords);
-  	 }
-  }
-  ~queryseg() {};
-  
-  CharacterVector cut(CharacterVector x)
-  {
-    const char *const test_lines = x[0];
-    vector<string> words;
-    querysegment.cut(test_lines, words);
-    if(stopWords.size()==0){
-    	return wrap(words);
-    } else{
-    	vector<string> res;
-		res.reserve(words.size());
-		filter_stopwords(res, words,stopWords);
-    	return wrap(res);
-    }
-  }
-};
-
-
-class hmmseg
-{
-public:
-  const char *const model_path;
-
-  unordered_set<string> stopWords;
-  HMMSegment hmmsegment;
-  hmmseg(CharacterVector model,Nullable<CharacterVector> stop) :
-    model_path(model[0]), stopWords(unordered_set<string>()), hmmsegment(model_path)
-  {
-  	  if(!stop.isNull()){
-  	    CharacterVector stop_value = stop.get();
-  	 	  const char *const stop_path = stop_value[0];
-  	 	  _loadStopWordDict(stop_path,stopWords);
-  	 }
-  }
-  ~hmmseg() {};
-  
-  CharacterVector cut(CharacterVector x)
-  {
-    const char *const test_lines = x[0];
-    vector<string> words;
-    hmmsegment.cut(test_lines, words);
-    if(stopWords.size()==0){
-    	return wrap(words);
-    } else{
-    	vector<string> res;
-		res.reserve(words.size());
-		filter_stopwords(res, words,stopWords);
-    	return wrap(res);
+      vector<string> res;
+      res.reserve(words.size());
+      filter_stopwords(res, words,stopWords);
+      return wrap(res);
     }
   }
 };
@@ -229,7 +111,7 @@ public:
   }
   ~tagger() {};
   
-  CharacterVector tag(CharacterVector x)
+  CharacterVector tag(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<pair<string, string> > res;
@@ -266,7 +148,7 @@ public:
     return wrap(m_cv);
   }
   
-  CharacterVector file(CharacterVector x)
+  CharacterVector file(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<pair<string, string> > res;
@@ -320,7 +202,7 @@ public:
   }
   ~keyword() {};
   
-  CharacterVector tag(CharacterVector x)
+  CharacterVector tag(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<pair<string, double> > res;
@@ -340,7 +222,7 @@ public:
     return wrap(m);
   }
   
-  CharacterVector cut(CharacterVector x)
+  CharacterVector cut(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<string> words;
@@ -384,7 +266,7 @@ public:
   idf_path(idf[0]), hash(dict_path, model_path, idf_path, stop_path) {}
   ~sim() {};
   
-  List simhash(CharacterVector code, int topn)
+  List simhash(CharacterVector& code, int topn)
   {
     const char *const code_path = code[0];
     vector<pair<string, double> > lhsword;
@@ -407,7 +289,7 @@ public:
                          Named("keyword") = lhsm);
   }
   
-  List distance(CharacterVector lhs, CharacterVector rhs, int topn)
+  List distance(CharacterVector& lhs, CharacterVector& rhs, int topn)
   {
     uint64_t lhsres;
     uint64_t rhsres;
