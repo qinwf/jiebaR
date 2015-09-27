@@ -10,7 +10,7 @@ freq <- function(x){
   if("character" %in% class(x) != TRUE){
     stop("Please give me a character vector.")
   }
-  if(Encoding(x)=="unknown" && .Platform$OS.type=="windows"){
+  if(.Platform$OS.type=="windows"){
     x=enc2utf8(x)
   }
   
