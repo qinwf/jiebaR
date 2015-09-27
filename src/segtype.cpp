@@ -12,12 +12,8 @@ template<> Seg<MixSegment>::Seg(CharacterVector& dict, CharacterVector& model, C
     _loadStopWordDict(stop_path,stopWords);
   }
 }
-template<> Seg<MixSegment>::Seg(CharacterVector& dict, CharacterVector& user,Nullable<CharacterVector> stop) = delete;
-template<> Seg<MixSegment>::Seg(CharacterVector& dict, CharacterVector& model, int n,Nullable<CharacterVector> stop) = delete;
-template<> Seg<MixSegment>::Seg(CharacterVector& model,Nullable<CharacterVector> stop) = delete;
 
 ///MP
-template<> Seg<MPSegment>::Seg(CharacterVector& dict, CharacterVector& model, CharacterVector& user,Nullable<CharacterVector> stop) =delete;
 template<> Seg<MPSegment>::Seg(CharacterVector& dict, CharacterVector& user,Nullable<CharacterVector> stop): stopWords(unordered_set<string>()), cutter(as<string>(dict),as<string>(user)){
     if(!stop.isNull()){
     CharacterVector stop_value = stop.get();
@@ -25,12 +21,8 @@ template<> Seg<MPSegment>::Seg(CharacterVector& dict, CharacterVector& user,Null
     _loadStopWordDict(stop_path,stopWords);
   }
 }
-template<> Seg<MPSegment>::Seg(CharacterVector& dict, CharacterVector& model, int n,Nullable<CharacterVector> stop) = delete;
-template<> Seg<MPSegment>::Seg(CharacterVector& model,Nullable<CharacterVector> stop) = delete;
 
 ///qu
-template<> Seg<QuerySegment>::Seg(CharacterVector& dict, CharacterVector& model, CharacterVector& user,Nullable<CharacterVector> stop) =delete;
-template<> Seg<QuerySegment>::Seg(CharacterVector& dict, CharacterVector& user,Nullable<CharacterVector> stop) = delete;
 template<> Seg<QuerySegment>::Seg(CharacterVector& dict, CharacterVector& model, int n,Nullable<CharacterVector> stop) : stopWords(unordered_set<string>()), cutter(as<string>(dict),as<string>(model),n){
     if(!stop.isNull()){
       CharacterVector stop_value = stop.get();
@@ -38,12 +30,8 @@ template<> Seg<QuerySegment>::Seg(CharacterVector& dict, CharacterVector& model,
       _loadStopWordDict(stop_path,stopWords);
   }
 };
-template<> Seg<QuerySegment>::Seg(CharacterVector& model,Nullable<CharacterVector> stop) = delete;
 
 ///hmm
-template<> Seg<HMMSegment>::Seg(CharacterVector& dict, CharacterVector& model, CharacterVector& user,Nullable<CharacterVector> stop) =delete;
-template<> Seg<HMMSegment>::Seg(CharacterVector& dict, CharacterVector& user,Nullable<CharacterVector> stop) = delete;
-template<> Seg<HMMSegment>::Seg(CharacterVector& dict, CharacterVector& model, int n,Nullable<CharacterVector> stop) = delete;
 template<> Seg<HMMSegment>::Seg(CharacterVector& model,Nullable<CharacterVector> stop):stopWords(unordered_set<string>()), cutter(as<string>(model)){
     if(!stop.isNull()){
       CharacterVector stop_value = stop.get();
