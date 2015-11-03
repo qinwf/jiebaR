@@ -1,7 +1,7 @@
 ##' @useDynLib jiebaR
 ##' @import Rcpp
 ##' @import jiebaRD
-##' @importFrom utils file.edit unzip
+##' @importFrom utils file.edit unzip write.table
 NULL
 
 #' The path of dictionary
