@@ -16,6 +16,9 @@ get_tuple = function(x,size=2,dataframe=T){
     res = get_tuple_vector(x,size)
   }
   if(inherits(x,"list")){
+    if(.Platform$OS.type=="windows"){
+      x = lapply(x,enc2utf8)
+    }
     res = get_tuple_list(x,size)
   }
   if(.Platform$OS.type=="windows"){
