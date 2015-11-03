@@ -17,6 +17,42 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// get_idf_cpp
+List get_idf_cpp(List x, Nullable<CharacterVector> stop_);
+RcppExport SEXP jiebaR_get_idf_cpp(SEXP xSEXP, SEXP stop_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Nullable<CharacterVector> >::type stop_(stop_SEXP);
+    __result = Rcpp::wrap(get_idf_cpp(x, stop_));
+    return __result;
+END_RCPP
+}
+// get_tuple_list
+List get_tuple_list(ListOf<CharacterVector> x, unsigned int step);
+RcppExport SEXP jiebaR_get_tuple_list(SEXP xSEXP, SEXP stepSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< ListOf<CharacterVector> >::type x(xSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type step(stepSEXP);
+    __result = Rcpp::wrap(get_tuple_list(x, step));
+    return __result;
+END_RCPP
+}
+// get_tuple_vector
+List get_tuple_vector(CharacterVector& x, unsigned int step);
+RcppExport SEXP jiebaR_get_tuple_vector(SEXP xSEXP, SEXP stepSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type step(stepSEXP);
+    __result = Rcpp::wrap(get_tuple_vector(x, step));
+    return __result;
+END_RCPP
+}
 // mp_ptr
 XPtr<Seg<MPSegment>> mp_ptr(CharacterVector& dict, CharacterVector& user, Nullable<CharacterVector>& stop);
 RcppExport SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP, SEXP stopSEXP) {

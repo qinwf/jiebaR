@@ -12,6 +12,18 @@ filecoding <- function(file) {
     .Call('jiebaR_filecoding', PACKAGE = 'jiebaR', file)
 }
 
+get_idf_cpp <- function(x, stop_) {
+    .Call('jiebaR_get_idf_cpp', PACKAGE = 'jiebaR', x, stop_)
+}
+
+get_tuple_list <- function(x, step) {
+    .Call('jiebaR_get_tuple_list', PACKAGE = 'jiebaR', x, step)
+}
+
+get_tuple_vector <- function(x, step) {
+    .Call('jiebaR_get_tuple_vector', PACKAGE = 'jiebaR', x, step)
+}
+
 mp_ptr <- function(dict, user, stop) {
     .Call('jiebaR_mp_ptr', PACKAGE = 'jiebaR', dict, user, stop)
 }
