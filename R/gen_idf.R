@@ -8,6 +8,9 @@
 #' @export
 get_idf = function(x,stop_word=STOPPATH,path=NULL){
   stopifnot(class(x)=="list")
+  if(.Platform$OS.type=="windows"){
+    x = lapply(x,enc2utf8)
+  }
   res = get_idf_cpp(x,stop_word)
   df = data.frame(name = names(res),count = log(length(x) / unlist(res,use.names = F) +1),stringsAsFactors = F)
   
