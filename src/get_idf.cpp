@@ -30,23 +30,45 @@ List get_idf_cpp(List x,Nullable<CharacterVector> stop_) {
     auto tmp = as<CharacterVector>(*it);
     inner_find(tmp,m,dis);
   }
-  RCPP_UNORDERED_MAP< string,unsigned int > res;
+
+
   
+  vector<string> sts;
+  vector<double> stn;
+  sts.reserve(m.size());
+  stn.reserve(m.size());
   
   unordered_set<string> st;
+
+  double xsize = x.size();
   
   if(!stop_.isNull()){
     CharacterVector stop_value = stop_.get();
     const char *const stop_path = stop_value[0];
     _loadStopWordDict(stop_path,st);
     for(auto its= m.begin();its!=m.end();its++){
-      if(st.find((*its).first) ==st.end()) res[(*its).first] = (*its).second.second;
+      if(st.find((*its).first) ==st.end()){
+        sts.push_back((*its).first);
+        stn.push_back( log(xsize / (*its).second.second) );
+      }
     }
-    return wrap(res);
+
+  }else{
+    for(auto its= m.begin();its!=m.end();its++){
+      sts.push_back((*its).first);
+      stn.push_back((*its).second.second);
+    }
   }
   
-  for(auto its= m.begin();its!=m.end();its++){
-    res[(*its).first] = (*its).second.second;
+  vector<string> row_names;
+  row_names.reserve(sts.size());
+  for (unsigned int i = 0; i < sts.size(); ++i) {
+    row_names.emplace_back(int64tos(i));
   }
-  return wrap(res);
+  
+  List res = List::create(_["name"] = wrap(sts),_["count"] = wrap(stn));
+  res.attr("row.names") = row_names;
+  res.attr("names") = CharacterVector::create("name","count");
+  res.attr("class") = "data.frame";
+  return res;
 }
