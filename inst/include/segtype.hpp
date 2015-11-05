@@ -289,6 +289,28 @@ public:
                          Named("keyword") = lhsm);
   }
   
+  List simhash_fromvec(vector<string>& code, int topn)
+  {
+    vector<pair<string, double> > lhsword;
+    uint64_t hashres;
+    hash.make_fromvec(code, topn, hashres, lhsword);
+    CharacterVector lhsm(lhsword.size());
+    CharacterVector lhsatb(lhsword.size());
+    //unsigned int it;
+    CharacterVector::iterator lhsm_it = lhsm.begin();
+    CharacterVector::iterator lhsatb_it = lhsatb.begin();
+    for (vector<pair<string, double> >::iterator it = lhsword.begin(); it != lhsword.end(); it++)
+    {
+      *lhsm_it = (*it).first; lhsm_it++;
+      *lhsatb_it = itos((*it).second); lhsatb_it++;
+    }
+    lhsm.attr("names") = lhsatb;
+    CharacterVector hashvec;
+    hashvec.push_back(int64tos(hashres));
+    return List::create( Named("simhash") = hashvec,
+                         Named("keyword") = lhsm);
+  }
+
   List distance(CharacterVector& lhs, CharacterVector& rhs, int topn)
   {
     uint64_t lhsres;
@@ -331,7 +353,46 @@ public:
     
   }
   
-  
+  List distance_fromvec(vector<string>& lhs_path , vector<string>& rhs_path, int topn)
+  {
+    uint64_t lhsres;
+    uint64_t rhsres;
+    vector<pair<string, double> > lhsword;
+    vector<pair<string, double> > rhsword;
+
+    hash.make_fromvec(lhs_path, topn, lhsres, lhsword);
+    hash.make_fromvec(rhs_path, topn, rhsres, rhsword);
+    CharacterVector lhsm(lhsword.size());
+    CharacterVector lhsatb(lhsword.size());
+    //unsigned int it;
+    CharacterVector::iterator lhsm_it = lhsm.begin();
+    CharacterVector::iterator lhsatb_it = lhsatb.begin();
+    for (vector<pair<string, double> >::iterator it = lhsword.begin(); it != lhsword.end(); it++)
+    {
+      *lhsm_it = (*it).first; lhsm_it++;
+      *lhsatb_it = itos((*it).second); lhsatb_it++;
+    }
+    lhsm.attr("names") = lhsatb;
+    
+    CharacterVector rhsm(rhsword.size());
+    CharacterVector rhsatb(rhsword.size());
+    CharacterVector::iterator rhsm_it = rhsm.begin();
+    CharacterVector::iterator rhsatb_it = rhsatb.begin();
+    for (vector<pair<string, double> >::iterator it = rhsword.begin(); it != rhsword.end(); it++)
+    {
+      *rhsm_it = (*it).first; rhsm_it++;
+      *rhsatb_it = itos((*it).second); rhsatb_it++;
+    }
+    rhsm.attr("names") = rhsatb;
+
+    CharacterVector hashvec;
+    hashvec.push_back(int64tos(hash.distances(lhsres, rhsres)));
+    return List::create( Named("distance") = hashvec,
+                              Named("lhs") = lhsm,
+                              Named("rhs") = rhsm
+    );
+    
+  }
 };
 
 

@@ -146,10 +146,20 @@ XPtr<sim> sim_ptr(CharacterVector& dict, CharacterVector& model,
 List sim_sim(CharacterVector& code, int& topn, XPtr<sim> cutter){
   return cutter->simhash(code,topn);
 }
+
+// [[Rcpp::export]]
+List sim_vec(vector<string>& code, int& topn, XPtr<sim> cutter){
+  return cutter->simhash_fromvec(code,topn);
+}
   
   
 // [[Rcpp::export]]
 List sim_distance(CharacterVector& lhs, CharacterVector& rhs,
                   int& topn, XPtr<sim> cutter){
   return cutter->distance(lhs, rhs, topn);
+}
+
+// [[Rcpp::export]]
+List sim_distance_vec(vector<string>& lcode,vector<string>& rcode, int& topn, XPtr<sim> cutter){
+  return cutter->distance_fromvec(lcode,rcode,topn);
 }

@@ -78,6 +78,31 @@ simhashw <- function(code, jiebar) {
   result
 } 
 
+
+#' @rdname simhash
+#' @export
+#' 
+vector_simhash <- function(code,jiebar){
+  stopifnot("simhash" %in% class(jiebar))
+  if(jiebar$PrivateVarible$timestamp != TIMESTAMP){
+    stop("Please create a new worker after jiebaR is reloaded.")
+  }
+  if (!is.character(code)) 
+    stop("Argument 'code' must be an string.")
+  if (.Platform$OS.type == "windows") {
+    code = enc2utf8(code)
+  }
+  result = sim_vec(code,jiebar$topn,jiebar$worker)
+  if (.Platform$OS.type == "windows") {
+    Encoding(result$keyword) <- "UTF-8"
+  }
+  result
+}
+
+
+
+
+
 #' Hamming distance of words
 #' 
 #' The function uses Simhash worker to do keyword extraction and find 
@@ -158,3 +183,26 @@ distancel <- function(code, jiebar, encoding) {
     try(close(input.r), silent = TRUE)
   })
 }
+
+#' @rdname distance
+#' @export
+#' 
+vector_distance <- function(codel,coder,jiebar){
+  stopifnot("simhash" %in% class(jiebar))
+  if(jiebar$PrivateVarible$timestamp != TIMESTAMP){
+    stop("Please create a new worker after jiebaR is reloaded.")
+  }
+  if (!is.character(codel) ||!is.character(coder)) 
+    stop("Argument 'code' must be an string.")
+  if (.Platform$OS.type == "windows") {
+    codel = enc2utf8(codel)
+    coder = enc2utf8(coder)
+  }
+  result =  sim_distance_vec(codel,coder,jiebar$topn,jiebar$worker)
+  if (.Platform$OS.type == "windows") {
+    Encoding(result$lhs) <- "UTF-8"
+    Encoding(result$rhs) <- "UTF-8"
+  }
+  result
+}
+

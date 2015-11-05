@@ -92,8 +92,16 @@ sim_sim <- function(code, topn, cutter) {
     .Call('jiebaR_sim_sim', PACKAGE = 'jiebaR', code, topn, cutter)
 }
 
+sim_vec <- function(code, topn, cutter) {
+    .Call('jiebaR_sim_vec', PACKAGE = 'jiebaR', code, topn, cutter)
+}
+
 sim_distance <- function(lhs, rhs, topn, cutter) {
     .Call('jiebaR_sim_distance', PACKAGE = 'jiebaR', lhs, rhs, topn, cutter)
+}
+
+sim_distance_vec <- function(lcode, rcode, topn, cutter) {
+    .Call('jiebaR_sim_distance_vec', PACKAGE = 'jiebaR', lcode, rcode, topn, cutter)
 }
 
 words_freq <- function(x) {

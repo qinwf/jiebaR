@@ -270,6 +270,19 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// sim_vec
+List sim_vec(vector<string>& code, int& topn, XPtr<sim> cutter);
+RcppExport SEXP jiebaR_sim_vec(SEXP codeSEXP, SEXP topnSEXP, SEXP cutterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< vector<string>& >::type code(codeSEXP);
+    Rcpp::traits::input_parameter< int& >::type topn(topnSEXP);
+    Rcpp::traits::input_parameter< XPtr<sim> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(sim_vec(code, topn, cutter));
+    return __result;
+END_RCPP
+}
 // sim_distance
 List sim_distance(CharacterVector& lhs, CharacterVector& rhs, int& topn, XPtr<sim> cutter);
 RcppExport SEXP jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnSEXP, SEXP cutterSEXP) {
@@ -281,6 +294,20 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int& >::type topn(topnSEXP);
     Rcpp::traits::input_parameter< XPtr<sim> >::type cutter(cutterSEXP);
     __result = Rcpp::wrap(sim_distance(lhs, rhs, topn, cutter));
+    return __result;
+END_RCPP
+}
+// sim_distance_vec
+List sim_distance_vec(vector<string>& lcode, vector<string>& rcode, int& topn, XPtr<sim> cutter);
+RcppExport SEXP jiebaR_sim_distance_vec(SEXP lcodeSEXP, SEXP rcodeSEXP, SEXP topnSEXP, SEXP cutterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< vector<string>& >::type lcode(lcodeSEXP);
+    Rcpp::traits::input_parameter< vector<string>& >::type rcode(rcodeSEXP);
+    Rcpp::traits::input_parameter< int& >::type topn(topnSEXP);
+    Rcpp::traits::input_parameter< XPtr<sim> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(sim_distance_vec(lcode, rcode, topn, cutter));
     return __result;
 END_RCPP
 }

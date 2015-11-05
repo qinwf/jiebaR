@@ -2,9 +2,12 @@
 % Please edit documentation in R/simhash.R
 \name{distance}
 \alias{distance}
+\alias{vector_distance}
 \title{Hamming distance of words}
 \usage{
 distance(codel, coder, jiebar)
+
+vector_distance(codel, coder, jiebar)
 }
 \arguments{
 \item{codel}{a Chinese sentence or the path of a text file}

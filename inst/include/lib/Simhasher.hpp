@@ -23,6 +23,10 @@ namespace Simhash
             {
                 return _extractor.extract(text, res, topN);
             }
+            bool extract_keys(vector<string>& text, vector<pair<string,double> > & res, size_t topN) const
+            {
+                return _extractor.keys(text, res, topN);
+            }
             bool make(const string& text, size_t topN, vector<pair<uint64_t, double> >& res, vector<pair<string, double> >& wordweights) const
             {
                 
@@ -70,7 +74,54 @@ namespace Simhash
                 
                 return true;
             }
-            
+            //added port jiebaR
+            bool make_fromvec_key(vector<string>& text, size_t topN, vector<pair<uint64_t, double> >& res, vector<pair<string, double> >& wordweights) const
+            {
+                
+                if(!extract_keys(text, wordweights, topN))
+                {
+                  Rcout<<"extract failed."<<std::endl;
+
+                    return false;
+                }
+                res.resize(wordweights.size());
+                for(size_t i = 0; i < res.size(); i++)
+                {
+                    res[i].first = _hasher(wordweights[i].first.c_str(), wordweights[i].first.size(), 0);
+                    res[i].second = wordweights[i].second;
+                }
+
+                return true;
+            }
+            //added port jiebaR
+            bool make_fromvec(vector<string>& text, size_t topN, uint64_t& v64,vector<pair<string, double> >& wordweights) const
+            {
+                vector<pair<uint64_t, double> > hashvalues;
+                if(!make_fromvec_key(text, topN, hashvalues,wordweights))
+                {
+                    return false;
+                }
+                vector<double> weights(BITS_LENGTH, 0.0);
+                const uint64_t u64_1(1);
+                for(size_t i = 0; i < hashvalues.size(); i++)
+                {
+                    for(size_t j = 0; j < BITS_LENGTH; j++)
+                    {
+                        weights [j] += (((u64_1 << j) & hashvalues[i].first) ? 1: -1) * hashvalues[i].second;
+                    }
+                }
+
+                v64 = 0;
+                for(size_t j = 0; j < BITS_LENGTH; j++)
+                {
+                    if(weights[j] > 0.0)
+                    {
+                        v64 |= (u64_1 << j);
+                    }
+                }
+                
+                return true;
+            }
             static bool isEqual(uint64_t lhs, uint64_t rhs, unsigned short n = 3)
             {
                 unsigned short cnt = 0;

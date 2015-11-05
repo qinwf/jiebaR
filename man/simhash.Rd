@@ -2,9 +2,12 @@
 % Please edit documentation in R/simhash.R
 \name{simhash}
 \alias{simhash}
+\alias{vector_simhash}
 \title{Simhash computation}
 \usage{
 simhash(code, jiebar)
+
+vector_simhash(code, jiebar)
 }
 \arguments{
 \item{code}{A Chinese sentence or the path of a text file.}
