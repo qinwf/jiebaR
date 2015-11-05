@@ -311,6 +311,17 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// u64tobin
+CharacterVector u64tobin(CharacterVector& x);
+RcppExport SEXP jiebaR_u64tobin(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
+    __result = Rcpp::wrap(u64tobin(x));
+    return __result;
+END_RCPP
+}
 // words_freq
 IntegerVector words_freq(const CharacterVector& x);
 RcppExport SEXP jiebaR_words_freq(SEXP xSEXP) {

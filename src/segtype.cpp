@@ -163,3 +163,11 @@ List sim_distance(CharacterVector& lhs, CharacterVector& rhs,
 List sim_distance_vec(vector<string>& lcode,vector<string>& rcode, int& topn, XPtr<sim> cutter){
   return cutter->distance_fromvec(lcode,rcode,topn);
 }
+
+// [[Rcpp::export]]
+CharacterVector u64tobin(CharacterVector& x){
+  string res;
+  uint64_t todo = atoi(as<string>(x[0]).c_str());
+  Simhash::Simhasher::toBinaryString(todo,res);
+  return wrap(res);
+}

@@ -104,6 +104,10 @@ sim_distance_vec <- function(lcode, rcode, topn, cutter) {
     .Call('jiebaR_sim_distance_vec', PACKAGE = 'jiebaR', lcode, rcode, topn, cutter)
 }
 
+u64tobin <- function(x) {
+    .Call('jiebaR_u64tobin', PACKAGE = 'jiebaR', x)
+}
+
 words_freq <- function(x) {
     .Call('jiebaR_words_freq', PACKAGE = 'jiebaR', x)
 }
