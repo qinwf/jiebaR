@@ -1,8 +1,8 @@
 #ifndef __JIEBARAPI_H__
 #define __JIEBARAPI_H__
 
-#include <R.h>
-#include <Rinternals.h>
+// #include <R.h>
+// #include <Rinternals.h>
 
 #include <stddef.h>
 #include <R_ext/Rdynload.h>

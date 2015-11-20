@@ -1,3 +1,6 @@
+#include <R.h>
+#include <Rinternals.h>
+
 #include "jiebaRAPI.h"
 
 SEXP jiebaR_filecoding(SEXP fileSEXP);
