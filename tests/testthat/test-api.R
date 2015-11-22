@@ -2,6 +2,10 @@ context("C_API tests")
 library(devtools)
 library(testthat)
 
+library(jiebaR)
+cc = worker()
+invisible(cc["unzip"])
+
 test_that("C_API",{
   install("./C_API")
   expect_true(!any(as.data.frame(test("./C_API"))[["error"]]) )
