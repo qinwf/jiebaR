@@ -1,4 +1,5 @@
 #include <R.h>
+#define R_NO_REMAP
 #include <Rinternals.h>
 
 #include "jiebaRAPI.h"
