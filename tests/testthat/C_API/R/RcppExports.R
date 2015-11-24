@@ -9,78 +9,78 @@
 #' @references \url{https://github.com/adah1972/tellenc}
 #' @export
 filecoding <- function(file) {
-    .Call('jiebaR_filecoding', PACKAGE = 'jiebaRapi', file)
+    .Call('api_jiebaR_filecoding', PACKAGE = 'jiebaRapi', file)
 }
 
 mp_ptr <- function(dict, user, stop) {
-  .Call('jiebaR_mp_ptr', PACKAGE = 'jiebaRapi', dict, user,stop)
+    .Call('api_jiebaR_mp_ptr', PACKAGE = 'jiebaRapi', dict, user,stop)
 }
 
 mp_cut <- function(x, cutter) {
-  .Call('jiebaR_mp_cut', PACKAGE = 'jiebaRapi', x, cutter)
+    .Call('api_jiebaR_mp_cut', PACKAGE = 'jiebaRapi', x, cutter)
 }
 
 mix_ptr <- function(dict, model, user, stop) {
-  .Call('jiebaR_mix_ptr', PACKAGE = 'jiebaRapi', dict, model, user, stop)
+    .Call('api_jiebaR_mix_ptr', PACKAGE = 'jiebaRapi', dict, model, user, stop)
 }
 
 mix_cut <- function(x, cutter) {
-  .Call('jiebaR_mix_cut', PACKAGE = 'jiebaRapi', x, cutter)
+    .Call('api_jiebaR_mix_cut', PACKAGE = 'jiebaRapi', x, cutter)
 }
 
 query_ptr <- function(dict, model, n, stop) {
-  .Call('jiebaR_query_ptr', PACKAGE = 'jiebaRapi', dict, model, n, stop)
+    .Call('api_jiebaR_query_ptr', PACKAGE = 'jiebaRapi', dict, model, n, stop)
 }
 
 query_cut <- function(x, cutter) {
-  .Call('jiebaR_query_cut', PACKAGE = 'jiebaRapi', x, cutter)
+    .Call('api_jiebaR_query_cut', PACKAGE = 'jiebaRapi', x, cutter)
 }
 
 hmm_ptr <- function(model, stop) {
-  .Call('jiebaR_hmm_ptr', PACKAGE = 'jiebaRapi', model,stop)
+    .Call('api_jiebaR_hmm_ptr', PACKAGE = 'jiebaRapi', model,stop)
 }
 
 hmm_cut <- function(x, cutter) {
-  .Call('jiebaR_hmm_cut', PACKAGE = 'jiebaRapi', x, cutter)
+    .Call('api_jiebaR_hmm_cut', PACKAGE = 'jiebaRapi', x, cutter)
 }
 
 tag_ptr <- function(dict, model, user, stop) {
-  .Call('jiebaR_tag_ptr', PACKAGE = 'jiebaRapi', dict, model, user,stop)
+    .Call('api_jiebaR_tag_ptr', PACKAGE = 'jiebaRapi', dict, model, user,stop)
 }
 
 tag_tag <- function(x, cutter) {
-  .Call('jiebaR_tag_tag', PACKAGE = 'jiebaRapi', x, cutter)
+    .Call('api_jiebaR_tag_tag', PACKAGE = 'jiebaRapi', x, cutter)
 }
 
 tag_file <- function(x, cutter) {
-  .Call('jiebaR_tag_file', PACKAGE = 'jiebaRapi', x, cutter)
+    .Call('api_jiebaR_tag_file', PACKAGE = 'jiebaRapi', x, cutter)
 }
 
 key_ptr <- function(n, dict, model, idf, stop) {
-  .Call('jiebaR_key_ptr', PACKAGE = 'jiebaRapi', n, dict, model, idf, stop)
+    .Call('api_jiebaR_key_ptr', PACKAGE = 'jiebaRapi', n, dict, model, idf, stop)
 }
 
 key_tag <- function(x, cutter) {
-  .Call('jiebaR_key_tag', PACKAGE = 'jiebaRapi', x, cutter)
+    .Call('api_jiebaR_key_tag', PACKAGE = 'jiebaRapi', x, cutter)
 }
 
 key_cut <- function(x, cutter) {
-  .Call('jiebaR_key_cut', PACKAGE = 'jiebaRapi', x, cutter)
+    .Call('api_jiebaR_key_cut', PACKAGE = 'jiebaRapi', x, cutter)
 }
 
 key_keys <- function(x, cutter) {
-  .Call('jiebaR_key_keys', PACKAGE = 'jiebaRapi', x, cutter)
+    .Call('api_jiebaR_key_keys', PACKAGE = 'jiebaRapi', x, cutter)
 }
 
 sim_ptr <- function(dict, model, idf, stop) {
-  .Call('jiebaR_sim_ptr', PACKAGE = 'jiebaRapi', dict, model, idf, stop)
+    .Call('api_jiebaR_sim_ptr', PACKAGE = 'jiebaRapi', dict, model, idf, stop)
 }
 
 sim_sim <- function(code, topn, cutter) {
-  .Call('jiebaR_sim_sim', PACKAGE = 'jiebaRapi', code, topn, cutter)
+    .Call('api_jiebaR_sim_sim', PACKAGE = 'jiebaRapi', code, topn, cutter)
 }
 
 sim_distance <- function(lhs, rhs, topn, cutter) {
-  .Call('jiebaR_sim_distance', PACKAGE = 'jiebaRapi', lhs, rhs, topn, cutter)
+    .Call('api_jiebaR_sim_distance', PACKAGE = 'jiebaRapi', lhs, rhs, topn, cutter)
 }
 
