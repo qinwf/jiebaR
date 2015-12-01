@@ -6,6 +6,8 @@
 
 language: c
 
+sudo: true
+
 env:
   global:
     - PKG_CFLAGS="-I../inst/include -DLOGGER_LEVEL=LL_WARN"
