@@ -6,6 +6,10 @@
 
 language: c
 
+os:
+  - linux
+  - osx
+
 sudo: true
 
 env:
@@ -13,25 +17,32 @@ env:
     - PKG_CFLAGS="-I../inst/include -DLOGGER_LEVEL=LL_WARN"
     - R_BUILD_ARGS="--no-build-vignettes --no-manual"
     - R_CHECK_ARGS="--no-vignettes --no-manual"
+    - OS=$(uname -s)
   matrix:
     - _R_CHECK_CRAN_INCOMING_=FALSE
     - R_BUILD_ARGS=" " R_CHECK_ARGS="--as-cran" BOOTSTRAP_LATEX="1" _R_CHECK_CRAN_INCOMING_=TRUE BOOTSTRAP_PANDOC="1"
 
 before_install:
   - echo "options(repos = c(CRAN='http://cran.r-project.org'))" >> ~/.Rprofile
-  - curl -OL http://raw.github.com/qinwf/r-travis/master/scripts/travis-tool.sh
+  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
 
 install:
   - ./travis-tool.sh install_deps
 
+before_script:
+  - ./travis-tool.sh dump_sysinfo
+  
 script: 
   - ./travis-tool.sh run_tests
 
 after_failure:
   - ./travis-tool.sh dump_logs
 
+after_success:
+  - ./travis-tool.sh dump_logs
+  
 notifications:
   email:
     on_success: change
