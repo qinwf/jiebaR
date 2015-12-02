@@ -12,7 +12,7 @@ os:
 
 osx_image: xcode7.1
 
-sudo: true
+# sudo: true
 
 env:
   global:
