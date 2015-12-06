@@ -11,8 +11,8 @@ License: MIT + file LICENSE
 Depends:
     R (>= 3.1),jiebaRD
 Imports:
-  jiebaR
-LinkingTo: jiebaR
+    Rcpp, jiebaR
+LinkingTo:  Rcpp, jiebaR
 Suggests:
     knitr,testthat,devtools
 URL: https://github.com/qinwf/jiebaR/

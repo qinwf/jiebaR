@@ -1,5 +1,8 @@
 context("CPP API")
 
+#unzip
+cc = worker()
+
 test_that("hmm cpp api",{
   cutter = jiebaRapi:::hmm_ptr(jiebaR::HMMPATH,NULL)
   expect_equal(jiebaRapi:::hmm_cut("this is test",cutter),c("this", " ", "is", " ", "test"))

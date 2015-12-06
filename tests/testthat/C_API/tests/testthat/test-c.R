@@ -1,5 +1,7 @@
 context("C API")
 
+#unzip
+cc = worker()
 
 test_that("hmm c api",{
   cutter = jiebaRapi:::hmm_ptr(jiebaR::HMMPATH,NULL)
