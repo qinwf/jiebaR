@@ -1,9 +1,20 @@
+Changes in Version 0.7
+=====================================
+
+   o Add: tobin() to transform simhash to binary format.
+   o Add: vector_simhash() vector_distance() to extract simhash or compute  Hamming distance from the result of segmentation.
+   o Add: get_tuple() to get tuple from segmentation result.
+   o Add: get_idf() to generate IDF dict.
+   o Fix: C API now work with Clang on Mac 10.11.
+   o Enhencement: Update tests for C API.
+   o Warning: Next version will update internal CppJieba version and tag(), EditDict(), ShowDictPath() will be remove.
+
 Changes in Version 0.6
 =====================================
 
-   o Add: C API
-   o Add: freq() to count word frequency
-   o Fix: filter_segment() may occasionally remove words
+   o Add: C API.
+   o Add: freq() to count word frequency.
+   o Fix: filter_segment() may occasionally remove words.
    o Enhencement: filter_segment() now can handle list of vectors of words.
    o Enhencement: segmentation worker now can remove stop words. The default STOPPATH is not used by default for segmentation worker. 
    o Enhencement: when symbol = F, 2010-10-13, 10.2 can be identified.
@@ -11,29 +22,29 @@ Changes in Version 0.6
 Changes in Version 0.5 (2015-04-29)
 =====================================
 
-   o Fix: edit_dict() on Mac
-   o New function: filter_segment() to filter segmentation result
-   o New function: vector_keywords() to extract keywords from a string
-   o Enhancement: Segmentation support: Vector input => List output
-   o Enhancement: Segmentation support: Input by lines => Output by lines
-   o Enhancement: Add option write = "NOFILE"
-   o Enhancement: New rules for "English word + Numbers"
-   o Update documentation
+   o Fix: edit_dict() on Mac.
+   o New function: filter_segment() to filter segmentation result.
+   o New function: vector_keywords() to extract keywords from a string.
+   o Enhancement: Segmentation support: Vector input => List output.
+   o Enhancement: Segmentation support: Input by lines => Output by lines.
+   o Enhancement: Add option write = "NOFILE".
+   o Enhancement: New rules for "English word + Numbers".
+   o Update documentation.
 
 Changes in Version 0.4 (2015-01-03)
 =====================================
 
-   o Remove Rcpp Modules
-   o Better symbol filter in segmentation
-   o Separate data files to jiebaRD package
+   o Remove Rcpp Modules.
+   o Better symbol filter in segmentation.
+   o Separate data files to jiebaRD package.
 
 Changes in Version 0.3 (2014-12-01)
 =====================================
 
-   o 2X segmentation speed
-   o Quick Mode
-   o A new `[` symbol to do segmentation
-   o Portable string utility function
+   o 2X segmentation speed.
+   o Quick Mode.
+   o A new `[` symbol to do segmentation.
+   o Portable string utility function.
 
 Changes in Version 0.2 (2014-11-23)
 =====================================
