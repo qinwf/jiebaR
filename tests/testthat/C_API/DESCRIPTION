@@ -14,7 +14,7 @@ Imports:
     Rcpp, jiebaR
 LinkingTo:  Rcpp, jiebaR
 Suggests:
-    knitr,testthat,devtools
+    knitr,testthat
 URL: https://github.com/qinwf/jiebaR/
 BugReports: https://github.com/qinwf/jiebaR/issues
 VignetteBuilder: knitr
