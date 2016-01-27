@@ -1,125 +1,91 @@
 #ifndef CPPJIEBA_MIXSEGMENT_H
 #define CPPJIEBA_MIXSEGMENT_H
 
+
 #include <cassert>
 #include "MPSegment.hpp"
 #include "HMMSegment.hpp"
-#include "Limonp/StringUtil.hpp"
-#include "Rcpp.h"
-using namespace Rcpp;
-namespace CppJieba
-{
-    class MixSegment: public SegmentBase
-    {
-        private:
-            MPSegment _mpSeg;
-            HMMSegment _hmmSeg;
-        public:
-            MixSegment(){};
-            MixSegment(const string& mpSegDict, const string& hmmSegDict, const string& userDict = "")
-            {
-                LIMONP_CHECK(init(mpSegDict, hmmSegDict, userDict));
-            }
-            virtual ~MixSegment(){}
-        public:
-            bool init(const string& mpSegDict, const string& hmmSegDict, const string& userDict = "")
-            {
-                LIMONP_CHECK(_mpSeg.init(mpSegDict, userDict));
-                LIMONP_CHECK(_hmmSeg.init(hmmSegDict));
-                // LogInfo("MixSegment init(%s, %s)", mpSegDict.c_str(), hmmSegDict.c_str());
-                return true;
-            }
-        public:
-            using SegmentBase::cut;
-        public:
-            virtual bool cut(Unicode::const_iterator begin, Unicode::const_iterator end, vector<Unicode>& res) const
-            {
-                vector<Unicode> words;
-                words.reserve(end - begin);
-                if(!_mpSeg.cut(begin, end, words))
-                {
-                  Rcout<<"mpSeg cutDAG failed."<<std::endl;
-                
-                    return false;
-                }
+#include "limonp/StringUtil.hpp"
 
-                vector<Unicode> hmmRes;
-                hmmRes.reserve(end - begin);
-                Unicode piece;
-                piece.reserve(end - begin);
-                for (size_t i = 0, j = 0; i < words.size(); i++)
-                {
-                    //if mp get a word, it's ok, put it into result
-                    if (1 != words[i].size() || (words[i].size() == 1 && _mpSeg.isUserDictSingleChineseWord(words[i][0])))
-                    {
-                        res.push_back(words[i]);
-                        continue;
-                    }
+namespace cppjieba {
+class MixSegment: public SegmentBase {
+ public:
+  MixSegment(const string& mpSegDict, const string& hmmSegDict, 
+        const string& userDict = "") 
+    : mpSeg_(mpSegDict, userDict), 
+      hmmSeg_(hmmSegDict) {
+  }
+  MixSegment(const DictTrie* dictTrie, const HMMModel* model) 
+    : mpSeg_(dictTrie), hmmSeg_(model) {
+  }
+  ~MixSegment() {
+  }
 
-                    // if mp get a single one and it is not in userdict, collect it in sequence
-                    j = i;
-                    while (j < words.size() && 1 == words[j].size() && !_mpSeg.isUserDictSingleChineseWord(words[j][0]))
-                    {
-                        piece.push_back(words[j][0]);
-                        j++;
-                    }
+  void Cut(const string& sentence, vector<string>& words, bool hmm = true) const {
+    PreFilter pre_filter(symbols_, sentence);
+    PreFilter::Range range;
+    vector<Unicode> uwords;
+    uwords.reserve(sentence.size());
+    while (pre_filter.HasNext()) {
+      range = pre_filter.Next();
+      Cut(range.begin, range.end, uwords, hmm);
+    }
+    TransCode::Encode(uwords, words);
+  }
 
-                    // cut the sequence with hmm
-                    if (!_hmmSeg.cut(piece.begin(), piece.end(), hmmRes))
-                    {
-                      Rcout<<"_hmmSeg cut failed."<<std::endl;
-            
-                        return false;
-                    }
+  void Cut(Unicode::const_iterator begin, Unicode::const_iterator end, vector<Unicode>& res, bool hmm) const {
+    if (!hmm) {
+      mpSeg_.Cut(begin, end, res);
+      return;
+    }
+    vector<Unicode> words;
+    words.reserve(end - begin);
+    mpSeg_.Cut(begin, end, words);
 
-                    //put hmm result to result
-                    for (size_t k = 0; k < hmmRes.size(); k++)
-                    {
-                        res.push_back(hmmRes[k]);
-                    }
+    vector<Unicode> hmmRes;
+    hmmRes.reserve(end - begin);
+    Unicode piece;
+    piece.reserve(end - begin);
+    for (size_t i = 0, j = 0; i < words.size(); i++) {
+      //if mp Get a word, it's ok, put it into result
+      if (1 != words[i].size() || (words[i].size() == 1 && mpSeg_.IsUserDictSingleChineseWord(words[i][0]))) {
+        res.push_back(words[i]);
+        continue;
+      }
 
-                    //clear tmp vars
-                    piece.clear();
-                    hmmRes.clear();
+      // if mp Get a single one and it is not in userdict, collect it in sequence
+      j = i;
+      while (j < words.size() && 1 == words[j].size() && !mpSeg_.IsUserDictSingleChineseWord(words[j][0])) {
+        piece.push_back(words[j][0]);
+        j++;
+      }
 
-                    //let i jump over this piece
-                    i = j - 1;
-                }
-                return true;
-            }
+      // Cut the sequence with hmm
+      hmmSeg_.Cut(piece.begin(), piece.end(), hmmRes);
 
-            virtual bool cut(Unicode::const_iterator begin, Unicode::const_iterator end, vector<string>& res)const
-            {
-                if(begin == end)
-                {
-                    return false;
-                }
+      //put hmm result to result
+      for (size_t k = 0; k < hmmRes.size(); k++) {
+        res.push_back(hmmRes[k]);
+      }
 
-                vector<Unicode> uRes;
-                uRes.reserve(end - begin);
-                if (!cut(begin, end, uRes))
-                {
-                    return false;
-                }
+      //clear tmp vars
+      piece.clear();
+      hmmRes.clear();
 
-                size_t offset = res.size();
-                res.resize(res.size() + uRes.size());
-                for(size_t i = 0; i < uRes.size(); i ++, offset++)
-                {
-                    if(!TransCode::encode(uRes[i], res[offset]))
-                    {
-                      Rcout<<"encode failed."<<std::endl;
-                  
-                    }
-                }
-                return true;
-            }
+      //let i jump over this piece
+      i = j - 1;
+    }
+  }
 
-            const DictTrie* getDictTrie() const 
-            {
-                return _mpSeg.getDictTrie();
-            }
-    };
-}
+  const DictTrie* GetDictTrie() const {
+    return mpSeg_.GetDictTrie();
+  }
+ private:
+  MPSegment mpSeg_;
+  HMMSegment hmmSeg_;
+
+}; // class MixSegment
+
+} // namespace cppjieba
 
 #endif
