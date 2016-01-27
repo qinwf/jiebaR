@@ -4,7 +4,7 @@
 \alias{worker}
 \title{Initialize jiebaR worker}
 \usage{
-worker(type = "mix", dict = DICTPATH, hmm = HMMPATH, user = USERPATH,
+worker(type = "jieba", dict = DICTPATH, hmm = HMMPATH, user = USERPATH,
   idf = IDFPATH, stop_word = STOPPATH, write = T, qmax = 20, topn = 5,
   encoding = "UTF-8", detect = T, symbol = F, lines = 1e+05,
   output = NULL, bylines = F)

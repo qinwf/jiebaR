@@ -22,7 +22,7 @@
 #' @author Qin Wenfeng
 #' @export
 tagging<- function(code, jiebar) {
-  stopifnot("tagger" %in% class(jiebar))
+  stopifnot("tagger" %in% class(jiebar)||class(jiebar)[3]=="jieba")
   if(jiebar$PrivateVarible$timestamp != TIMESTAMP){
     stop("Please create a new worker after jiebaR is reloaded.")
   }
@@ -183,9 +183,19 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
       code <- paste(code, collapse = " ")
     }
     if(FILESMODE==T ){
-      result <- tag_file(code, jiebar$worker)
+      
+      if(class(jiebar)[3]=="jieba"){
+        result <- jiebaclass_tag_file(code,jiebar$worker)
+      }else{
+        result <- tag_file(code, jiebar$worker)
+      }
+      
     } else{
-      result <- tag_tag(code, jiebar$worker)
+      if(class(jiebar)[3]=="jieba"){
+        result <- jiebaclass_tag_tag(code,jiebar$worker)
+      }else{
+        result <- tag_tag(code, jiebar$worker)
+      }
     }
     if (symbol == F && FILESMODE  ==F) {
       result = result[ result != " "]
@@ -204,9 +214,19 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
     
     for(num in 1:length_of_input){
       if(FILESMODE==T ){
-        tmp_result <- tag_file(code[num], jiebar$worker)
+        if(class(jiebar)[3]=="jieba"){
+          result <- jiebaclass_tag_file(code,jiebar$worker)
+        }else{
+          result <- tag_file(code, jiebar$worker)
+        }
+        
       } else{
-        tmp_result <- tag_tag(code[num], jiebar$worker)
+        
+        if(class(jiebar)[3]=="jieba"){
+          result <- jiebaclass_tag_tag(code,jiebar$worker)
+        }else{
+          result <- tag_tag(code, jiebar$worker)
+        }
       }
       if (symbol == F && FILESMODE  ==F) {
         tmp_result = tmp_result[ tmp_result != " "]

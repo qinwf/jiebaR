@@ -37,12 +37,12 @@ void get_tuple_void(CharacterVector& x,unsigned int step,RCPP_UNORDERED_MAP< str
 }
 
 // [[Rcpp::export]]
-List get_tuple_list(ListOf<CharacterVector> x,unsigned int step) {
+List get_tuple_list(ListOf<CharacterVector> x,R_xlen_t step) {
   RCPP_UNORDERED_MAP< string, unsigned int > res;
   for(ListOf<CharacterVector>::iterator it = x.begin();it != x.end();it++){
-    for(unsigned int cnt=2;cnt<=step;cnt++){
+    for(R_xlen_t cnt=2;cnt<=step;cnt++){
       CharacterVector tmp = as<CharacterVector>(*it);
-      if(tmp.size()<=cnt) continue;
+      if(tmp.size()<= cnt) continue;
       get_tuple_void(tmp,cnt,res);
     }
   }
@@ -50,9 +50,9 @@ List get_tuple_list(ListOf<CharacterVector> x,unsigned int step) {
 }
 
 // [[Rcpp::export]]
-List get_tuple_vector(CharacterVector& x,unsigned int step) {
+List get_tuple_vector(CharacterVector& x,R_xlen_t step) {
   RCPP_UNORDERED_MAP< string, unsigned int > res;
-  for(unsigned int cnt=2;cnt<=step;cnt++){
+  for(R_xlen_t cnt=2;cnt<=step;cnt++){
     get_tuple_void(x,cnt,res);
   }
   return wrap(res);

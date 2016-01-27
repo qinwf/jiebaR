@@ -134,12 +134,12 @@
 #' 
 #' @author Qin Wenfeng 
 #' @export
-worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH, 
+worker <- function(type = "jieba", dict = DICTPATH, hmm = HMMPATH, 
                    user = USERPATH, idf = IDFPATH, stop_word = STOPPATH, write = T,
                    qmax = 20, topn = 5, encoding = "UTF-8", detect = T, symbol = F,
                    lines = 1e+05, output = NULL, bylines = F) 
 { 
-  if(!any(type == c("mix","mp","hmm","query","simhash","keywords","tag"))){
+  if(!any(type == c("jieba","mix","mp","hmm","query","simhash","keywords","tag"))){
     stop("Unkown worker type")
   }
   jiebapath <- find.package("jiebaRD")
@@ -167,6 +167,16 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
   }
   
   switch(type, 
+           # jieba for segmentation
+           jieba = {
+             worker  = jiebaclass_ptr(dict, hmm, user,stop2)
+             private = list(dict = dict,user = user, stop_word= stop2, timestamp = TIMESTAMP)
+             assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
+             result$max_word_length = qmax
+             result$default = "mix"
+             class(result) <- c("jiebar","segment","jieba")
+           },
+           # old methods
            mp      = {
            worker  = mp_ptr(dict, user,stop2)
            private = list(dict = dict,user = user, stop_word= stop2, timestamp = TIMESTAMP)

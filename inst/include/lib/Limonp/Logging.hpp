@@ -8,6 +8,8 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <Rcpp.h>
+
 #ifdef LOG
 #error "LOG has been defined already"
 #endif // LOG
@@ -57,9 +59,9 @@ class Logger {
        return;
      }
 #endif
-    std::cerr << stream_.str() << std::endl;
+    // Rcpp::Rcerr << stream_.str() << std::endl;
     if (level_ == LL_FATAL) {
-      abort();
+      Rcpp::stop(stream_.str());
     }
   }
 

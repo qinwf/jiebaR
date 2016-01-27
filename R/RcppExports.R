@@ -24,52 +24,60 @@ get_tuple_vector <- function(x, step) {
     .Call('jiebaR_get_tuple_vector', PACKAGE = 'jiebaR', x, step)
 }
 
-mp_ptr <- function(dict, user, stop) {
-    .Call('jiebaR_mp_ptr', PACKAGE = 'jiebaR', dict, user, stop)
+jiebaclass_ptr <- function(dict, model, user, stop) {
+    .Call('jiebaR_jiebaclass_ptr', PACKAGE = 'jiebaR', dict, model, user, stop)
 }
 
-mp_cut <- function(x, cutter) {
-    .Call('jiebaR_mp_cut', PACKAGE = 'jiebaR', x, cutter)
+jiebaclass_mix_cut <- function(x, cutter) {
+    .Call('jiebaR_jiebaclass_mix_cut', PACKAGE = 'jiebaR', x, cutter)
 }
 
-mix_ptr <- function(dict, model, user, stop) {
-    .Call('jiebaR_mix_ptr', PACKAGE = 'jiebaR', dict, model, user, stop)
+jiebaclass_mp_cut <- function(x, num, cutter) {
+    .Call('jiebaR_jiebaclass_mp_cut', PACKAGE = 'jiebaR', x, num, cutter)
 }
 
-mix_cut <- function(x, cutter) {
-    .Call('jiebaR_mix_cut', PACKAGE = 'jiebaR', x, cutter)
+jiebaclass_hmm_cut <- function(x, cutter) {
+    .Call('jiebaR_jiebaclass_hmm_cut', PACKAGE = 'jiebaR', x, cutter)
 }
 
-query_ptr <- function(dict, model, n, stop) {
-    .Call('jiebaR_query_ptr', PACKAGE = 'jiebaR', dict, model, n, stop)
+jiebaclass_full_cut <- function(x, cutter) {
+    .Call('jiebaR_jiebaclass_full_cut', PACKAGE = 'jiebaR', x, cutter)
 }
 
-query_cut <- function(x, cutter) {
-    .Call('jiebaR_query_cut', PACKAGE = 'jiebaR', x, cutter)
+jiebaclass_query_cut <- function(x, cutter) {
+    .Call('jiebaR_jiebaclass_query_cut', PACKAGE = 'jiebaR', x, cutter)
 }
 
-hmm_ptr <- function(model, stop) {
-    .Call('jiebaR_hmm_ptr', PACKAGE = 'jiebaR', model, stop)
+jiebaclass_level_cut <- function(x, cutter) {
+    .Call('jiebaR_jiebaclass_level_cut', PACKAGE = 'jiebaR', x, cutter)
 }
 
-hmm_cut <- function(x, cutter) {
-    .Call('jiebaR_hmm_cut', PACKAGE = 'jiebaR', x, cutter)
+jiebaclass_level_cut_pair <- function(x, cutter) {
+    .Call('jiebaR_jiebaclass_level_cut_pair', PACKAGE = 'jiebaR', x, cutter)
 }
 
-tag_ptr <- function(dict, model, user, stop) {
-    .Call('jiebaR_tag_ptr', PACKAGE = 'jiebaR', dict, model, user, stop)
+jiebaclass_tag_tag <- function(x, cutter) {
+    .Call('jiebaR_jiebaclass_tag_tag', PACKAGE = 'jiebaR', x, cutter)
 }
 
-tag_tag <- function(x, cutter) {
-    .Call('jiebaR_tag_tag', PACKAGE = 'jiebaR', x, cutter)
+jiebaclass_tag_file <- function(x, cutter) {
+    .Call('jiebaR_jiebaclass_tag_file', PACKAGE = 'jiebaR', x, cutter)
 }
 
-tag_file <- function(x, cutter) {
-    .Call('jiebaR_tag_file', PACKAGE = 'jiebaR', x, cutter)
+set_query_threshold <- function(num, cutter) {
+    .Call('jiebaR_set_query_threshold', PACKAGE = 'jiebaR', num, cutter)
 }
 
-key_ptr <- function(n, dict, model, idf, stop) {
-    .Call('jiebaR_key_ptr', PACKAGE = 'jiebaR', n, dict, model, idf, stop)
+add_user_word <- function(x, tag, cutter) {
+    .Call('jiebaR_add_user_word', PACKAGE = 'jiebaR', x, tag, cutter)
+}
+
+get_loc <- function(word, cutter) {
+    .Call('jiebaR_get_loc', PACKAGE = 'jiebaR', word, cutter)
+}
+
+key_ptr <- function(n, dict, model, idf, stop, user) {
+    .Call('jiebaR_key_ptr', PACKAGE = 'jiebaR', n, dict, model, idf, stop, user)
 }
 
 key_tag <- function(x, cutter) {
@@ -84,8 +92,8 @@ key_keys <- function(x, cutter) {
     .Call('jiebaR_key_keys', PACKAGE = 'jiebaR', x, cutter)
 }
 
-sim_ptr <- function(dict, model, idf, stop) {
-    .Call('jiebaR_sim_ptr', PACKAGE = 'jiebaR', dict, model, idf, stop)
+sim_ptr <- function(dict, model, idf, stop, user) {
+    .Call('jiebaR_sim_ptr', PACKAGE = 'jiebaR', dict, model, idf, stop, user)
 }
 
 sim_sim <- function(code, topn, cutter) {

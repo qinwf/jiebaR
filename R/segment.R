@@ -215,11 +215,26 @@ engine_cut <- function(code,jiebar){
   if(length(code) > 1){
     code <- paste(code, collapse = " ")
   }
+  ty = c("mix","hmm","query","full","level","mp")
+  if(class(jiebar)[3]=="jieba" && !(jiebar$default %in% ty)){
+    stop(paste("cutter default should be one of these:",paste(ty,collapse = " ")))
+  }
   result <- switch(class(jiebar)[3],
                    mixseg = mix_cut(code, jiebar$worker),
                    mpseg = mp_cut(code, jiebar$worker),
                    hmmseg = hmm_cut(code, jiebar$worker),
-                   queryseg = query_cut(code, jiebar$worker)
+                   queryseg = query_cut(code, jiebar$worker),
+                   jieba = switch (jiebar$default,
+                     mix = jiebaclass_mix_cut(code, jiebar$worker),
+                     mp  = jiebaclass_mp_cut(code,jiebar$max_word_length,jiebar$worker),
+                     hmm = jiebaclass_hmm_cut(code,jiebar$worker),
+                     level = jiebaclass_level_cut(code,jiebar$worker),
+                     query = jiebaclass_query_cut(code,jiebar$worker),
+                     full  = jiebaclass_full_cut(code,jiebar$worker),
+                     tag   = jiebaclass_tag_tag(code,jiebar$worker),
+                     tag_file = jiebaclass_tag_file(code,jiebar$worker),
+                     level_pair = jiebaclass_level_cut_pair(code,jiebar$worker)
+                   )
   )
   return(result)
 }

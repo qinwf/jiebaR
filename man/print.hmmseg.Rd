@@ -3,6 +3,7 @@
 \name{print.inv}
 \alias{print.hmmseg}
 \alias{print.inv}
+\alias{print.jieba}
 \alias{print.keywords}
 \alias{print.mixseg}
 \alias{print.mpseg}
@@ -27,6 +28,8 @@
 \method{print}{mixseg}(x, ...)
 
 \method{print}{mpseg}(x, ...)
+
+\method{print}{jieba}(x, ...)
 
 \method{print}{qseg}(x, ...)
 }

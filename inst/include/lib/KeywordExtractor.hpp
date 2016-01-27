@@ -84,6 +84,41 @@ class KeywordExtractor {
     keywords.resize(topN);
     return true;
   }
+    /// Added part
+  bool Vector_Extract(vector<string>& words, vector<pair<string, double> > &keywords, size_t topN) const
+  {
+
+    map<string, double> wordmap;
+    for (vector<string>::iterator iter = words.begin(); iter != words.end(); iter++) {
+      if (IsSingleWord(*iter)) {
+        continue;
+      }
+      wordmap[*iter] += 1.0;
+    }
+
+    for (map<string, double>::iterator itr = wordmap.begin(); itr != wordmap.end(); ) {
+      if (stopWords_.end() != stopWords_.find(itr->first)) {
+        wordmap.erase(itr++);
+        continue;
+      }
+
+      unordered_map<string, double>::const_iterator cit = idfMap_.find(itr->first);
+      if (cit != idfMap_.end()) {
+        itr->second *= cit->second;
+      } else {
+        itr->second *= idfAverage_;
+      }
+      itr ++;
+    }
+
+    keywords.clear();
+    std::copy(wordmap.begin(), wordmap.end(), std::inserter(keywords, keywords.begin()));
+    topN = min(topN, keywords.size());
+    partial_sort(keywords.begin(), keywords.begin() + topN, keywords.end(), Compare);
+    keywords.resize(topN);
+    return true;
+  }
+  
  private:
   void LoadIdfDict(const string& idfPath) {
     ifstream ifs(idfPath.c_str());

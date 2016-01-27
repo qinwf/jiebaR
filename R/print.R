@@ -111,6 +111,24 @@ print.mpseg<-function(x,...){
 
 #' @rdname print.hmmseg
 #' @export
+print.jieba<-function(x,...){
+  cat("Worker Type:  Jieba Segment\n"); cat("\n")
+  cat("Default Method  :  "); cat(x$default);cat("\n")
+  cat("Detect Encoding :  "); cat(x$detect);cat("\n")
+  cat("Default Encoding:  "); cat(x$encoding);cat("\n")
+  cat("Keep Symbols    :  ");cat(x$symbol);cat("\n")
+  cat("Output Path     :  ");cat(x$output);cat("\n")
+  cat("Write File      :  ");cat(x$write);cat("\n")
+  cat("By Lines        :  ");cat(x$bylines);cat("\n")
+  cat("Max Word Length :  ");cat(x$max_word_length);cat("\n")
+  cat("Max Read Lines  :  ");cat(x$lines);cat("\n");cat("\n")
+  cat("Fixed Model Components:  ");cat("\n");cat("\n")
+  print(x$PrivateVarible)
+  cat("$default $max_word_length $detect $encoding $symbol $output $write $lines $bylines can be reset.\n")
+}
+
+#' @rdname print.hmmseg
+#' @export
 print.qseg<-function(x,...){
   if(exists("quick_worker",envir = .GlobalEnv,inherits = F ))
      print(.GlobalEnv$quick_worker)
