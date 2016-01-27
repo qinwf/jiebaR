@@ -1,2 +1,3 @@
 ## We want C++11 as it gets us 'long long' as well
 CXX_STD = CXX11
+PKG_CFLAGS = -std=c99

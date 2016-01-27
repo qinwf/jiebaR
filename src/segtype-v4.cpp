@@ -1,4 +1,4 @@
-#include <jiebaR.h>
+#include "../inst/include/jiebaR.h"
 using namespace Rcpp;
 //using namespace cppjieba;
 

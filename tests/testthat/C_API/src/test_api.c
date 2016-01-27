@@ -58,7 +58,7 @@ DLLFUN(jiebaR_key_keys,DLLARG(SEXP xSEXP, SEXP cutterSEXP),xSEXP, cutterSEXP)
 // SEXP jiebaR_tag_file(SEXP xSEXP, SEXP cutterSEXP);
 
 // SEXP jiebaR_key_ptr(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP);
-DLLFUN(jiebaR_key_ptr,DLLARG(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP),nSEXP,dictSEXP,modelSEXP,idfSEXP,stopSEXP)
+DLLFUN(jiebaR_key_ptr,DLLARG(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP, SEXP userSEXP),nSEXP,dictSEXP,modelSEXP,idfSEXP,stopSEXP,userSEXP)
 
 
 // SEXP jiebaR_key_tag(SEXP xSEXP, SEXP cutterSEXP);
@@ -68,7 +68,7 @@ DLLFUN(jiebaR_key_ptr,DLLARG(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idf
 // SEXP jiebaR_key_keys(SEXP xSEXP, SEXP cutterSEXP);
 
 // SEXP jiebaR_sim_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP);
-DLLFUN(jiebaR_sim_ptr,DLLARG(SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP),dictSEXP,modelSEXP,idfSEXP,stopSEXP)
+DLLFUN(jiebaR_sim_ptr,DLLARG(SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP, SEXP userSEXP),dictSEXP,modelSEXP,idfSEXP,stopSEXP,userSEXP)
 
 // SEXP jiebaR_sim_sim(SEXP codeSEXP, SEXP topnSEXP, SEXP cutterSEXP);
 DLLFUN(jiebaR_sim_sim,DLLARG(SEXP codeSEXP, SEXP topnSEXP, SEXP cutterSEXP),codeSEXP,topnSEXP,cutterSEXP)
@@ -92,8 +92,8 @@ static R_CallMethodDef callMethods[] = {
   REG_DEF(jiebaR_key_tag,2) 
   REG_DEF(jiebaR_key_cut,2) 
   REG_DEF(jiebaR_key_keys,2)
-  REG_DEF(jiebaR_key_ptr,5)
-  REG_DEF(jiebaR_sim_ptr,4)
+  REG_DEF(jiebaR_key_ptr,6)
+  REG_DEF(jiebaR_sim_ptr,5)
   REG_DEF(jiebaR_sim_sim,3)
   REG_DEF(jiebaR_sim_distance,4)
   //{ "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    , 1 },

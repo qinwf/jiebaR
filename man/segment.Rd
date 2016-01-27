@@ -4,12 +4,14 @@
 \alias{segment}
 \title{Chinese text segmentation function}
 \usage{
-segment(code, jiebar)
+segment(code, jiebar, mod = NULL)
 }
 \arguments{
 \item{code}{A Chinese sentence or the path of a text file.}
 
 \item{jiebar}{jiebaR Worker.}
+
+\item{mod}{change default result type, value can be "mix","hmm","query","full","level", or "mp"}
 }
 \description{
 The function uses initialized engines for words segmentation. You 
