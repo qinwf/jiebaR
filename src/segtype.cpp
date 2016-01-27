@@ -29,7 +29,7 @@ template<> Seg<QuerySegment>::Seg(CharacterVector& dict, CharacterVector& model,
       const char *const stop_path = stop_value[0];
       _loadStopWordDict(stop_path,stopWords);
   }
-};
+}
 
 ///hmm
 template<> Seg<HMMSegment>::Seg(CharacterVector& model,Nullable<CharacterVector> stop):stopWords(unordered_set<string>()), cutter(as<string>(model)){
@@ -38,7 +38,7 @@ template<> Seg<HMMSegment>::Seg(CharacterVector& model,Nullable<CharacterVector>
       const char *const stop_path = stop_value[0];
       _loadStopWordDict(stop_path,stopWords);
     }
-};
+}
 
 
 
