@@ -1,7 +1,7 @@
 #ifndef SIMHASH_SIMHASHER_HPP
 #define SIMHASH_SIMHASHER_HPP
 
-#include "Limonp/Logging.hpp"
+#include "limonp/Logging.hpp"
 #include "KeywordExtractor.hpp"
 #include "hashes/jenkins.h"
 #include <Rcpp.h>
