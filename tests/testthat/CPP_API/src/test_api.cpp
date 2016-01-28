@@ -14,6 +14,7 @@
 
 #define REG(__FUN__) R_RegisterCCallable( STR(api_##__FUN__), #__FUN__, (DL_FUNC)& api_##__FUN__ );
 
+extern "C" {
 // SEXP jiebaR_filecoding(SEXP fileSEXP);
 // SEXP api_jiebaR_filecoding(SEXP fileSEXP){ return jiebaR_filecoding(fileSEXP);}
 DLLFUN(jiebaR_filecoding,DLLARG(SEXP fileSEXP),fileSEXP)
@@ -76,57 +77,59 @@ DLLFUN(jiebaR_sim_sim,DLLARG(SEXP codeSEXP, SEXP topnSEXP, SEXP cutterSEXP),code
 // SEXP jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnSEXP, SEXP cutterSEXP);
 DLLFUN(jiebaR_sim_distance,DLLARG(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnSEXP, SEXP cutterSEXP),lhsSEXP,rhsSEXP,topnSEXP,cutterSEXP)
 
-static R_CallMethodDef callMethods[] = {
-  REG_DEF(jiebaR_filecoding,1)
-  REG_DEF(jiebaR_mp_ptr,3)
-  REG_DEF(jiebaR_mp_cut,2)
-  REG_DEF(jiebaR_mix_cut,2)
-  REG_DEF(jiebaR_hmm_cut,2)
-  REG_DEF(jiebaR_query_cut,2)
-  REG_DEF(jiebaR_mix_ptr,4)
-  REG_DEF(jiebaR_query_ptr,4)
-  REG_DEF(jiebaR_hmm_ptr,2)
-  REG_DEF(jiebaR_tag_ptr,4)
-  REG_DEF(jiebaR_tag_tag,2)
-  REG_DEF(jiebaR_tag_file,2)
-  REG_DEF(jiebaR_key_tag,2) 
-  REG_DEF(jiebaR_key_cut,2) 
-  REG_DEF(jiebaR_key_keys,2)
-  REG_DEF(jiebaR_key_ptr,6)
-  REG_DEF(jiebaR_sim_ptr,5)
-  REG_DEF(jiebaR_sim_sim,3)
-  REG_DEF(jiebaR_sim_distance,4)
-  //{ "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    , 1 },
- { NULL, NULL, 0 }
-};
-
-
-extern "C" void R_init_jiebaRapi( DllInfo* info ){
-  R_registerRoutines(info,
-                     NULL,            /* slot for .C */
-                     callMethods,     /* slot for .Call */
-                     NULL,            /* slot for .Fortran */
-                     NULL);           /* slot for .External */
-  
-  R_useDynamicSymbols(info, TRUE);
-  
-  REG(jiebaR_filecoding)
-  REG(jiebaR_mp_ptr)
-  REG(jiebaR_mp_cut)
-  REG(jiebaR_mix_cut)
-  REG(jiebaR_hmm_cut)
-  REG(jiebaR_query_cut)
-  REG(jiebaR_mix_ptr)
-  REG(jiebaR_query_ptr)
-  REG(jiebaR_hmm_ptr)
-  REG(jiebaR_tag_ptr)
-  REG(jiebaR_tag_tag)
-  REG(jiebaR_tag_file)
-  REG(jiebaR_key_tag)
-  REG(jiebaR_key_cut)
-  REG(jiebaR_key_keys)
-  REG(jiebaR_key_ptr)
-  REG(jiebaR_sim_ptr)
-  REG(jiebaR_sim_sim)
-  REG(jiebaR_sim_distance)
-}
+}  
+  // 
+// static R_CallMethodDef callMethods[] = {
+//   REG_DEF(jiebaR_filecoding,1)
+//   REG_DEF(jiebaR_mp_ptr,3)
+//   REG_DEF(jiebaR_mp_cut,2)
+//   REG_DEF(jiebaR_mix_cut,2)
+//   REG_DEF(jiebaR_hmm_cut,2)
+//   REG_DEF(jiebaR_query_cut,2)
+//   REG_DEF(jiebaR_mix_ptr,4)
+//   REG_DEF(jiebaR_query_ptr,4)
+//   REG_DEF(jiebaR_hmm_ptr,2)
+//   REG_DEF(jiebaR_tag_ptr,4)
+//   REG_DEF(jiebaR_tag_tag,2)
+//   REG_DEF(jiebaR_tag_file,2)
+//   REG_DEF(jiebaR_key_tag,2)
+//   REG_DEF(jiebaR_key_cut,2)
+//   REG_DEF(jiebaR_key_keys,2)
+//   REG_DEF(jiebaR_key_ptr,6)
+//   REG_DEF(jiebaR_sim_ptr,5)
+//   REG_DEF(jiebaR_sim_sim,3)
+//   REG_DEF(jiebaR_sim_distance,4)
+//   //{ "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    , 1 },
+//  { NULL, NULL, 0 }
+// };
+// 
+// 
+// extern "C" void R_init_jiebaRapi( DllInfo* info ){
+//   R_registerRoutines(info,
+//                      NULL,            /* slot for .C */
+//                      callMethods,     /* slot for .Call */
+//                      NULL,            /* slot for .Fortran */
+//                      NULL);           /* slot for .External */
+// 
+//   R_useDynamicSymbols(info, TRUE);
+// 
+//   REG(jiebaR_filecoding)
+//   REG(jiebaR_mp_ptr)
+//   REG(jiebaR_mp_cut)
+//   REG(jiebaR_mix_cut)
+//   REG(jiebaR_hmm_cut)
+//   REG(jiebaR_query_cut)
+//   REG(jiebaR_mix_ptr)
+//   REG(jiebaR_query_ptr)
+//   REG(jiebaR_hmm_ptr)
+//   REG(jiebaR_tag_ptr)
+//   REG(jiebaR_tag_tag)
+//   REG(jiebaR_tag_file)
+//   REG(jiebaR_key_tag)
+//   REG(jiebaR_key_cut)
+//   REG(jiebaR_key_keys)
+//   REG(jiebaR_key_ptr)
+//   REG(jiebaR_sim_ptr)
+//   REG(jiebaR_sim_sim)
+//   REG(jiebaR_sim_distance)
+// }
