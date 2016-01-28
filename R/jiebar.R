@@ -134,12 +134,12 @@
 #' 
 #' @author Qin Wenfeng 
 #' @export
-worker <- function(type = "jieba", dict = DICTPATH, hmm = HMMPATH, 
+worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH, 
                    user = USERPATH, idf = IDFPATH, stop_word = STOPPATH, write = T,
                    qmax = 20, topn = 5, encoding = "UTF-8", detect = T, symbol = F,
                    lines = 1e+05, output = NULL, bylines = F) 
 { 
-  if(!any(type == c("jieba","mix","mp","hmm","query","simhash","keywords","tag"))){
+  if(!any(type == c("mix","mp","hmm","query","simhash","keywords","tag","full","level","level_pair"))){
     stop("Unkown worker type")
   }
   jiebapath <- find.package("jiebaRD")
@@ -171,75 +171,33 @@ worker <- function(type = "jieba", dict = DICTPATH, hmm = HMMPATH,
       warning("stop words file should be UTF-8 encoding.")
     }
   }
+  if(type %in% c("mix","query","hmm","mp","tag","full","level","level_pair")){
+    worker  = jiebaclass_ptr(dict, hmm, user,stop2)
+    private = list(dict = dict,user = user, stop_word= stop2, timestamp = TIMESTAMP)
+    assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
+    result$max_word_length = qmax
+    result$default = type
+    class(result) <- c("jiebar","segment","jieba")
+    return(result)
+  }
   
-  switch(type, 
-           # jieba for segmentation
-           jieba = {
-             worker  = jiebaclass_ptr(dict, hmm, user,stop2)
-             private = list(dict = dict,user = user, stop_word= stop2, timestamp = TIMESTAMP)
-             assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
-             result$max_word_length = qmax
-             result$default = "mix"
-             class(result) <- c("jiebar","segment","jieba")
-             return(result)
-           },
-           # old methods
-           mp      = {
-           res = worker(type = "jieba",
-                    dict = dict, 
-                    user = user,
-                    stop_word = stop_word)
-           res$default = "mp"
-           return(res)
-         }, 
-         
-           mix     = {
-           return(worker(type = "jieba",
-                         dict = dict,
-                         hmm = hmm,
-                         user = user,
-                         stop_word = stop_word))
-         },
-           hmm     = {
-             res = worker(type = "jieba",
-                          hmm = hmm,
-                          stop_word = stop_word)
-             res$default = "hmm"
-             return(res)
-         },
-           query   = {
-             res = worker(type = "jieba",
-                          dict = dict,
-                          hmm = hmm,
-                          qmax = qmax,
-                          stop_word = stop_word)
-             res$default = "query"
-           return(res)
-         },
-          simhash  = {
-           worker  = sim_ptr(dict,hmm,idf,stop_word,user)
-           private = list(dict=dict,hmm=hmm, user = user, idf=idf,stop_word=stop_word, timestamp = TIMESTAMP)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
-           class(result) <- c("jiebar","nonsegment","simhash")
-           result$topn = topn
-           return(result)
-         },
-         keywords  = {
-           worker  =  key_ptr(topn, dict,hmm,idf,stop_word,user)
-           private = list(top_n_word=topn,dict=dict,hmm=hmm,user=user,idf=idf,stop_word=stop_word, timestamp = TIMESTAMP)
-           assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
-           class(result) <- c("jiebar","nonsegment","keywords")
-           return(result)
-         },
-           tag     = {
-             res = worker(type = "jieba",
-                          dict = dict,
-                          hmm = hmm,
-                          user = user,
-                          stop_word = stop_word)
-             res$default = "tag"
-             return(res)
-         })
+  if(type == "simhash"){
+    worker  = sim_ptr(dict,hmm,idf,stop_word,user)
+    private = list(dict=dict,hmm=hmm, user = user, idf=idf,stop_word=stop_word, timestamp = TIMESTAMP)
+    assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
+    class(result) <- c("jiebar","nonsegment","simhash")
+    result$topn = topn
+    return(result)
+  }
+  
+  if(type == "keywords"){
+    worker  =  key_ptr(topn, dict,hmm,idf,stop_word,user)
+    private = list(top_n_word=topn,dict=dict,hmm=hmm,user=user,idf=idf,stop_word=stop_word, timestamp = TIMESTAMP)
+    assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
+    class(result) <- c("jiebar","nonsegment","keywords")
+    return(result)
+  }
+
 }
 
 

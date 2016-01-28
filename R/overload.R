@@ -1,4 +1,4 @@
-#' @rdname print.hmmseg
+#' @rdname print.jieba
 #' @export
 print.inv<-function(x, ...){
   invisible()
