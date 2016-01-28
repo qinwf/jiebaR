@@ -56,58 +56,58 @@ SEXP jiebaR_get_loc(SEXP word, SEXP cutter);
 SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP, SEXP stopSEXP){
   Rf_warning("jiebaR_mp_ptr has been removed, please used jiebaR_jiebaclass_ptr");
   return R_NilValue;
-}; 
+}
 
 SEXP jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP){
   Rf_warning("jiebaR_mp_cut has been removed, please used jiebaR_jiebaclass_mp_cut");
   return R_NilValue;
-};
+}
 
 SEXP jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP){
   Rf_warning("jiebaR_mix_ptr has been removed, please used jiebaR_jiebaclass_ptr");
   return jiebaR_jiebaclass_ptr(dictSEXP, modelSEXP, userSEXP, stopSEXP);
-};
+}
 
 SEXP jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP){
   Rf_warning("jiebaR_mix_cut has been removed, please used jiebaR_jiebaclass_mix_cut");
   return jiebaR_jiebaclass_mix_cut(xSEXP, cutterSEXP);
-};
+}
 
 
 SEXP jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP, SEXP stopSEXP){
   Rf_warning("jiebaR_query_ptr has been removed, please used jiebaR_jiebaclass_ptr");
   return R_NilValue;
-};
+}
 
 SEXP jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP){
   Rf_warning("jiebaR_query_cut has been removed, please used jiebaR_jiebaclass_query_cut");
   return R_NilValue;
-};
+}
 
 SEXP jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP){
   Rf_warning("jiebaR_hmm_ptr has been removed, please used jiebaR_jiebaclass_ptr");
   return R_NilValue;
-};
+}
 
 SEXP jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP){
   Rf_warning("jiebaR_hmm_cut has been removed, please used jiebaR_jiebaclass_hmm_cut");
   return R_NilValue;
-};
+}
 
 SEXP jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP){
   Rf_warning("jiebaR_mix_ptr has been removed, please used jiebaR_jiebaclass_ptr");
   return jiebaR_jiebaclass_ptr(dictSEXP, modelSEXP, userSEXP, stopSEXP);
-};
+}
 
 SEXP jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP){
   Rf_warning("jiebaR_tag_tag has been removed, please used jiebaR_jiebaclass_tag_tag");
   return jiebaR_jiebaclass_tag_tag(xSEXP, cutterSEXP);
-};
+}
 
 SEXP jiebaR_tag_file(SEXP xSEXP, SEXP cutterSEXP){
   Rf_warning("jiebaR_tag_file has been removed, please used jiebaR_jiebaclass_tag_file");
   return jiebaR_jiebaclass_tag_file(xSEXP, cutterSEXP);
-};
+}
 
 #define _RC(__FUN__, __NUMS__) { #__FUN__, (DL_FUNC) & __FUN__  , __NUMS__},
 
