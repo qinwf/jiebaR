@@ -300,6 +300,118 @@ SEXP attribute_hidden jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnS
     return f(lhsSEXP, rhsSEXP, topnSEXP, cutterSEXP);
 }
 
+  
+// v4 new
+
+SEXP attribute_hidden jiebaR_jiebaclass_ptr(SEXP dict, SEXP model, SEXP user,SEXP stop){
+    static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP,SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_ptr");
+    }
+    return f(dict, model, user,stop);
+}
+
+SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
+  static SEXP(*f)(SEXP,SEXP) = NULL;
+  if (!f) {
+    f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_mix_cut");
+  }
+  return f(x, cutter);
+}
+  
+  SEXP attribute_hidden jiebaR_jiebaclass_mp_cut(SEXP x, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_mp_cut");
+    }
+    return f(x, cutter);
+  }
+  
+  SEXP attribute_hidden jiebaR_jiebaclass_hmm_cut(SEXP x, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_hmm_cut");
+    }
+    return f(x, cutter);
+  }
+  
+  SEXP attribute_hidden jiebaR_jiebaclass_query_cut(SEXP x, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_query_cut");
+    }
+    return f(x, cutter);
+  }
+  SEXP attribute_hidden jiebaR_jiebaclass_full_cut(SEXP x, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_full_cut");
+    }
+    return f(x, cutter);
+  }
+  SEXP attribute_hidden jiebaR_jiebaclass_level_cut(SEXP x, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_level_cut");
+    }
+    return f(x, cutter);
+  }
+  SEXP attribute_hidden jiebaR_jiebaclass_level_cut_pair(SEXP x, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_level_cut_pair");
+    }
+    return f(x, cutter);
+  }
+  
+  SEXP attribute_hidden jiebaR_jiebaclass_tag_tag(SEXP x, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_tag_tag");
+    }
+    return f(x, cutter);
+  }
+  SEXP attribute_hidden jiebaR_jiebaclass_tag_file(SEXP x, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_tag_file");
+    }
+    return f(x, cutter);
+  }
+  SEXP attribute_hidden jiebaR_set_query_threshold(SEXP num, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_set_query_threshold");
+    }
+    return f(num, cutter);
+  }
+
+  SEXP attribute_hidden jiebaR_add_user_word(SEXP x,SEXP tag, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_add_user_word");
+    }
+    return f(x, tag, cutter);
+  }
+  
+  SEXP attribute_hidden jiebaR_u64tobin(SEXP x){
+    static SEXP(*f)(SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP)) R_GetCCallable("jiebaR", "jiebaR_u64tobin");
+    }
+    return f(x);
+  }
+  
+  SEXP attribute_hidden jiebaR_get_loc(SEXP word, SEXP cutter){
+    static SEXP(*f)(SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_get_loc");
+    }
+    return f(word, cutter);
+  }
+
+
+
 
 #ifdef __cplusplus
 }
