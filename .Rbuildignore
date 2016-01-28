@@ -10,3 +10,5 @@ tests/testthat/CPP_API/\.Rbuildignore$
 ^appveyor\.yml$
 tests/testthat/test-all\.R
 tests/testthat/test-bylines\.R
+^bylines\.utf8$
+

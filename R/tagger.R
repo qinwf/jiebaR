@@ -204,7 +204,7 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
     
     for(num in 1:length_of_input){
       if(FILESMODE==T ){
-          tmp_result <- tag_file(code[num], jiebar$worker)
+          tmp_result <- jiebaclass_tag_file(code[num], jiebar$worker)
         
       } else{
           tmp_result <- jiebaclass_tag_tag(code[num],jiebar$worker)

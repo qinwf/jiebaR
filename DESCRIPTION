@@ -3,8 +3,8 @@ Type: Package
 Title: Chinese Text Segmentation
 Description: Chinese text segmentation, keyword extraction and speech tagging
     For R.
-Version: 0.7
-Date: 2015-12-6
+Version: 0.7.1
+Date: 2015-1-28
 Author: Qin Wenfeng, and the authors of CppJieba for the included version of
     CppJieba
 Maintainer: Qin Wenfeng <mail@qinwenfeng.com>
@@ -16,7 +16,7 @@ Imports:
     Rcpp (>= 0.12.1)
 LinkingTo: Rcpp (>= 0.12.1)
 Suggests:
-    knitr,testthat,devtools,rmarkdown
+    knitr,testthat,devtools,rmarkdown,roxygen2
 URL: https://github.com/qinwf/jiebaR/
 BugReports: https://github.com/qinwf/jiebaR/issues
 VignetteBuilder: knitr
