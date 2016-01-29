@@ -59,7 +59,7 @@ class Logger {
        return;
      }
 #endif
-    // Rcpp::Rcerr << stream_.str() << std::endl;
+    Rcpp::Rcerr << stream_.str() << std::endl;
     if (level_ == LL_FATAL) {
       Rcpp::stop(stream_.str());
     }
