@@ -33,12 +33,16 @@
 #' @author Qin Wenfeng
 #' @param code A Chinese sentence or the path of a text file. 
 #' @param jiebar jiebaR Worker.
+#' @param mod change default result type, value can be "mix","hmm","query","full","level", or "mp"
 #' @seealso  \code{\link{<=.segment}} \code{\link{worker}} 
 #' 
 #' @export
-segment <- function(code, jiebar) {
+segment <- function(code, jiebar,mod = NULL) {
   stopifnot("segment" %in% class(jiebar))
-  if(jiebar$PrivateVarible$timestamp != TIMESTAMP){
+
+  if ( jiebar$default == "tag" || identical(mod, "tag"))  return( tagging(code, jiebar) )
+  
+  if ( jiebar$PrivateVarible$timestamp != TIMESTAMP) {
     stop("Please create a new worker after jiebaR is reloaded.")
   }
   if (!is.character(code))
@@ -60,7 +64,7 @@ segment <- function(code, jiebar) {
     if(jiebar$detect==T)  encoding<-filecoding(code[1])
     FILESMODE <- T
     res = cutl(code = code[1], jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
-         output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE)
+         output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE, mod = mod)
     if(jiebar$write == TRUE) {
       return(output) 
     } else{
@@ -72,12 +76,12 @@ segment <- function(code, jiebar) {
     }
     FILESMODE <- F
     cutw(code = code, jiebar=jiebar,symbol=jiebar$symbol, 
-         FILESMODE = FILESMODE)
+         FILESMODE = FILESMODE, mod = mod)
   }
   
 }
 
-cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE) {
+cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE, mod) {
   
   nlines <- lines
   input.r <- file(code, open = "r")
@@ -103,7 +107,7 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
           }
           
           out.lines <- cutw(code = tmp.lines, jiebar = jiebar, 
-                            symbol = symbol, FILESMODE = FILESMODE)
+                            symbol = symbol, FILESMODE = FILESMODE, mod = mod)
           
           if (.Platform$OS.type == "windows") {
             if(jiebar$bylines == TRUE){
@@ -154,7 +158,7 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
             tmp.lines <- iconv(tmp.lines,encoding , "UTF-8")
           }
           out.lines <- cutw(code = tmp.lines, jiebar = jiebar, 
-                            symbol = symbol, FILESMODE = FILESMODE)
+                            symbol = symbol, FILESMODE = FILESMODE, mod = mod)
           
           result<-c(result,out.lines)
           
@@ -171,11 +175,11 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
 }
 
 
-cutw <- function(code, jiebar,  symbol, FILESMODE) {
+cutw <- function(code, jiebar,  symbol, FILESMODE, mod) {
   
 
   if(jiebar$bylines == FALSE){
-    result = engine_cut(code,jiebar)
+    result = engine_cut(code,jiebar,mod)
     if (symbol == F) {
       result = result[ result != " "]
     }
@@ -190,7 +194,7 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
     length_of_input = length(code)
     result = vector("list", length_of_input)
     for( num in 1:length_of_input){
-      tmp_result = engine_cut(code[num],jiebar)
+      tmp_result = engine_cut(code[num],jiebar,mod)
       if (symbol == F) {
         tmp_result = tmp_result[ tmp_result != " "]
       }
@@ -211,15 +215,29 @@ cutw <- function(code, jiebar,  symbol, FILESMODE) {
   return(result)
 }
 
-engine_cut <- function(code,jiebar){
+engine_cut <- function(code,jiebar, mod){
   if(length(code) > 1){
     code <- paste(code, collapse = " ")
   }
-  result <- switch(class(jiebar)[3],
-                   mixseg = mix_cut(code, jiebar$worker),
-                   mpseg = mp_cut(code, jiebar$worker),
-                   hmmseg = hmm_cut(code, jiebar$worker),
-                   queryseg = query_cut(code, jiebar$worker)
-  )
+  ty = c("mix","hmm","query","full","level","mp","level_pair")
+  if(!(jiebar$default %in% ty) ||
+      (!is.null(mod) && !(mod %in% ty) ) 
+     )
+    {
+    stop(paste("cutter default should be one of these:",paste(ty,collapse = " ")))
+  }
+  
+  if (is.null(mod)) types = jiebar$default
+  else types = mod
+  
+  result <- switch(types,
+                     mix = jiebaclass_mix_cut(code, jiebar$worker),
+                     mp  = jiebaclass_mp_cut(code,jiebar$max_word_length,jiebar$worker),
+                     hmm = jiebaclass_hmm_cut(code,jiebar$worker),
+                     level = jiebaclass_level_cut(code,jiebar$worker),
+                     query = jiebaclass_query_cut(code,jiebar$worker),
+                     full  = jiebaclass_full_cut(code,jiebar$worker),
+                     level_pair = jiebaclass_level_cut_pair(code,jiebar$worker)
+                   )
   return(result)
 }

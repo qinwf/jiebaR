@@ -1,39 +1,33 @@
 #ifndef SIMHASH_SIMHASHER_HPP
 #define SIMHASH_SIMHASHER_HPP
 
+#include "limonp/Logging.hpp"
 #include "KeywordExtractor.hpp"
 #include "hashes/jenkins.h"
-#include "Rcpp.h"
-using namespace Rcpp;
+#include <Rcpp.h>
 namespace Simhash
 {
-    using namespace CppJieba;
-    class Simhasher: public NonCopyable
+    using namespace cppjieba;
+    class Simhasher
     {
         private:
             enum{BITS_LENGTH = 64};
             jenkins _hasher;
             KeywordExtractor _extractor;
         public:
-            Simhasher(const string& dictPath, const string& modelPath, const string& idfPath, const string& stopWords): _extractor(dictPath, modelPath, idfPath, stopWords)
+            Simhasher(const string& dictPath, const string& modelPath, const string& idfPath, const string& stopWords, const string& userPath): _extractor(dictPath, modelPath, idfPath, stopWords, userPath)
             {}
             ~Simhasher(){};
-        public:
+
             bool extract(const string& text, vector<pair<string,double> > & res, size_t topN) const
             {
-                return _extractor.extract(text, res, topN);
-            }
-            bool extract_keys(vector<string>& text, vector<pair<string,double> > & res, size_t topN) const
-            {
-                return _extractor.keys(text, res, topN);
+                return _extractor.Extract(text, res, topN);
             }
             bool make(const string& text, size_t topN, vector<pair<uint64_t, double> >& res, vector<pair<string, double> >& wordweights) const
             {
-                
                 if(!extract(text, wordweights, topN))
                 {
-                  Rcout<<"extract failed."<<std::endl;
-
+                    LOG(ERROR) << " extract fail.";
                     return false;
                 }
                 res.resize(wordweights.size());
@@ -74,14 +68,18 @@ namespace Simhash
                 
                 return true;
             }
-            //added port jiebaR
+            
+            bool extract_keys(vector<string>& text, vector<pair<string,double> > & res, size_t topN) const
+            {
+                return _extractor.Vector_Extract(text, res, topN);
+            }
+
             bool make_fromvec_key(vector<string>& text, size_t topN, vector<pair<uint64_t, double> >& res, vector<pair<string, double> >& wordweights) const
             {
                 
                 if(!extract_keys(text, wordweights, topN))
                 {
-                  Rcout<<"extract failed."<<std::endl;
-
+                    Rcpp::Rcout<<"extract failed."<<std::endl;
                     return false;
                 }
                 res.resize(wordweights.size());
@@ -93,12 +91,12 @@ namespace Simhash
 
                 return true;
             }
-            //added port jiebaR
             bool make_fromvec(vector<string>& text, size_t topN, uint64_t& v64,vector<pair<string, double> >& wordweights) const
             {
                 vector<pair<uint64_t, double> > hashvalues;
                 if(!make_fromvec_key(text, topN, hashvalues,wordweights))
                 {
+                    Rcpp::stop("extract failed.");
                     return false;
                 }
                 vector<double> weights(BITS_LENGTH, 0.0);
@@ -121,6 +119,7 @@ namespace Simhash
                 }
                 
                 return true;
+
             }
             static bool isEqual(uint64_t lhs, uint64_t rhs, unsigned short n = 3)
             {
@@ -163,17 +162,16 @@ namespace Simhash
             }
             static uint64_t distances(uint64_t lhs, uint64_t rhs)
             {
-                uint64_t cnt = 0;
-                lhs ^= rhs;
-                while(lhs != 0)
-                {
-                    lhs &= lhs - 1;
-                    cnt++;
-                }
-                
-                return cnt;
+              uint64_t cnt = 0;
+              lhs ^= rhs;
+              while(lhs != 0)
+              {
+                lhs &= lhs - 1;
+                cnt++;
+              }
+              
+              return cnt;
             }
-
     };
 }
 

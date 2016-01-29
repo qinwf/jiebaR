@@ -1,23 +1,19 @@
-#ifndef _SEGTYPE_HPP_
-#define _SEGTYPE_HPP_
+#ifndef _SEGTYPEV4_HPP_
+#define _SEGTYPEV4_HPP_
 
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
 #include <cstdio>
 #include <sstream>
-#include "lib/MixSegment.hpp"
-#include "lib/MPSegment.hpp"
-#include "lib/HMMSegment.hpp"
-#include "lib/QuerySegment.hpp"
-#include "lib/PosTagger.hpp"
+#include "lib/Jieba.hpp"
+#include "lib/KeywordExtractor.hpp"
 #include "lib/Simhasher.hpp"
 
 #include <Rcpp.h>
 
-
 using namespace Rcpp;
-using namespace CppJieba;
+using namespace cppjieba;
 
 inline string itos(double i)  // convert int to string
 {
@@ -53,133 +49,210 @@ inline void _loadStopWordDict(const string &filePath,unordered_set<string>& _sto
 }
 
 inline void filter_stopwords(vector<string>& res,const vector<string>& words,const unordered_set<string>& stopWords){
-	for(vector<string>::const_iterator it= words.begin();it != words.end(); it++){
+  for(vector<string>::const_iterator it= words.begin();it != words.end(); it++){
         if (stopWords.end() == stopWords.find(*it))
         {
             res.push_back(*it);
         }
-	}
+  }
 }
 
-template <class T> class Seg {
-public:
-  unordered_set<string> stopWords;
-  T cutter;
-  
-  Seg() = delete;
-  Seg(CharacterVector& dict, CharacterVector& model, CharacterVector& user,Nullable<CharacterVector> stop);
-  Seg(CharacterVector& dict, CharacterVector& user,Nullable<CharacterVector> stop);
-  Seg(CharacterVector& dict, CharacterVector& model, int n,Nullable<CharacterVector> stop);
-  Seg(CharacterVector& model,Nullable<CharacterVector> stop);
-  ~Seg(){};
-  
-  CharacterVector cut(CharacterVector& x)
-  {
-    const char *const test_lines = x[0];
-    vector<string> words;
-    cutter.cut(test_lines, words);
+
+inline void filter(const unordered_set<string>& stopWords, vector<string>& words){
     if(stopWords.size()==0){
-      return wrap(words);
+      return;
     } else{
       vector<string> res;
       res.reserve(words.size());
       filter_stopwords(res, words,stopWords);
-      return wrap(res);
+      words.swap(res);
     }
-  }
-};
+}
 
-
-//////////keyword
-class tagger
-{
+class JiebaClass {
 public:
-  const char *const dict_path;
-  const char *const model_path;
-  const char *const user_path;
-
   unordered_set<string> stopWords;
-  PosTagger  taggerseg;
-  tagger(CharacterVector dict, CharacterVector model, CharacterVector user,Nullable<CharacterVector> stop) :
-    dict_path(dict[0]), model_path(model[0]), user_path(user[0]), stopWords(unordered_set<string>()), taggerseg(dict_path, model_path, user_path)
-  {
-  	  	  if(!stop.isNull()){
-  	    CharacterVector stop_value = stop.get();
-  	 	  const char *const stop_path = stop_value[0];
-  	 	  _loadStopWordDict(stop_path,stopWords);
-  	 }
-  }
-  ~tagger() {};
+  cppjieba::Jieba cutter;
   
-  CharacterVector tag(CharacterVector& x)
+  JiebaClass() = delete;
+  JiebaClass(string& dict, string& model, string& user,Nullable<CharacterVector> stop)
+  : cutter(dict, model, user){
+    if(!stop.isNull()){
+      CharacterVector stop_value = stop.get();
+      const char *const stop_path = stop_value[0];
+      _loadStopWordDict(stop_path,stopWords);
+    }
+  };
+
+  ~JiebaClass(){};
+  
+  CharacterVector cut_mix(CharacterVector& x)
+  {
+    const char *const test_lines = x[0];
+    vector<string> words;
+    cutter.Cut(test_lines, words);
+	  filter(stopWords,words);
+	  return wrap(words);
+  }
+  CharacterVector cut_full(CharacterVector& x)
+  {
+    const char *const test_lines = x[0];
+    vector<string> words;
+    cutter.CutAll(test_lines, words);
+    filter(stopWords,words);
+    return wrap(words);
+  }
+  CharacterVector cut_query(CharacterVector& x)
+  {
+    const char *const test_lines = x[0];
+    vector<string> words;
+    cutter.CutForSearch(test_lines, words);
+    filter(stopWords,words);
+    return wrap(words);
+  }
+  CharacterVector cut_hmm(CharacterVector& x)
+  {
+    const char *const test_lines = x[0];
+    vector<string> words;
+    cutter.CutHMM(test_lines, words);
+    filter(stopWords,words);
+    return wrap(words);
+  }
+  CharacterVector cut_level(CharacterVector& x)
+  {
+    const char *const test_lines = x[0];
+    vector<string> words;
+    cutter.CutLevel(test_lines, words);
+    filter(stopWords,words);
+    return wrap(words);
+  }
+  CharacterVector cut_level_pair(CharacterVector& x)
+  {
+    const char *const test_lines = x[0];
+    vector<pair<string, size_t> > res;
+    cutter.CutLevel(test_lines, res);
+    // FIXME
+    // filter(stopWords,words);
+    CharacterVector m(res.size());
+    CharacterVector atb(res.size());
+    CharacterVector::iterator m_it = m.begin();
+    CharacterVector::iterator atb_it = atb.begin();
+    for (vector<pair<string, size_t> >::iterator it = res.begin(); it != res.end(); it++)
+    {
+      *m_it = (*it).first; m_it++;
+      *atb_it = int64tos((*it).second); atb_it++;
+    }
+    m.attr("names") = atb;
+    return wrap(m);
+  }
+  CharacterVector cut_mp(CharacterVector& x,size_t maxlen)
+  {
+    const char *const test_lines = x[0];
+    vector<string> words;
+    cutter.CutSmall(test_lines, words, maxlen);
+    filter(stopWords,words);
+    return wrap(words);
+  }
+  CharacterVector cut_tag_tag(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<pair<string, string> > res;
-    taggerseg.tag(test_lines, res);
+    cutter.Tag(test_lines, res);
     //unsigned int it;
     vector<string> m;
     m.reserve(res.size());
     vector<string> atb;
     atb.reserve(res.size());
-
+    
     if(stopWords.size()>0){
-        for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
-	    {
-	      
-			if (stopWords.end() == stopWords.find((*it).first))
-			{
-	        	m.push_back((*it).first);
-	        	atb.push_back((*it).second);
-			}
-
-	    }	
+      for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
+      {
+        
+        if (stopWords.end() == stopWords.find((*it).first))
+        {
+          m.push_back((*it).first);
+          atb.push_back((*it).second);
+        }
+        
+      }	
     } else {
-    	for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
-	    {
-	        	m.push_back((*it).first);
-	        	atb.push_back((*it).second);
-	    }
+      for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
+      {
+        m.push_back((*it).first);
+        atb.push_back((*it).second);
+      }
     }
-
+    
     CharacterVector m_cv(m.begin(),m.end());
     CharacterVector atb_cv(atb.begin(),atb.end()); 
     m_cv.attr("names") = atb_cv;
-
+    
     return wrap(m_cv);
+    
   }
-  
-  CharacterVector file(CharacterVector& x)
+  CharacterVector cut_tag_file(CharacterVector& x)
   {
     const char *const test_lines = x[0];
     vector<pair<string, string> > res;
-    taggerseg.tag(test_lines, res);
+    cutter.Tag(test_lines, res);
     //unsigned int it;
     vector<string> m;
     m.reserve(res.size()*2);
-
+    
     if(stopWords.size()>0){
-    	for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
-	    {
-	      
-			if (stopWords.end() == stopWords.find((*it).first))
-			{
-			      m.push_back((*it).first);
-			      m.push_back((*it).second);
-			}
-
-	    }
+      for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
+      {
+        
+        if (stopWords.end() == stopWords.find((*it).first))
+        {
+          m.push_back((*it).first);
+          m.push_back((*it).second);
+        }
+        
+      }
     }else{
-    	for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
-	    {
-			m.push_back((*it).first);
-			m.push_back((*it).second);
-	    }
+      for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
+      {
+        m.push_back((*it).first);
+        m.push_back((*it).second);
+      }
     }
-
     
     return wrap(m);
   }
+  SEXP set_query_threshold(size_t len) {
+    cutter.SetQuerySegmentThreshold(len);
+    return wrap(len);
+  }
+  SEXP add_user_word(CharacterVector& word, CharacterVector& tag) {
+    auto it_tag = tag.begin();
+    for(auto it = word.begin();it != word.end();it++){
+      if(cutter.InsertUserWord(as<string>(*it),as<string>(*it_tag))!=1){
+        warning("%s insert fail.\n",as<string>(*it));
+      };
+      it_tag++;
+    }
+    return wrap(LogicalVector(Rboolean::TRUE));
+  }
   
+  // get location
+  List get_loc(vector<string>& word){
+    vector<cppjieba::Jieba::LocWord> res;
+    cutter.Locate(word,res);
+    vector<string> strings;
+    vector<string> begins;
+    vector<string> ends;
+    strings.reserve(word.size());
+    begins.reserve(word.size());
+    ends.reserve(word.size());
+    
+    for(auto it=res.begin(); it!=res.end();it++){
+      strings.push_back(it->word);
+      begins.push_back(int64tos(it->begin));
+      ends.push_back(int64tos(it->end));
+    }
+    return List::create(strings,begins,ends);
+  }
 };
 
 
@@ -187,17 +260,17 @@ class keyword
 {
 public:
   size_t topN;
-  const char *const dict_path;
-  const char *const model_path;
-  const char *const stop_path;
-  const char *const idf_path;
-  
-  
-  
+
   KeywordExtractor extractor;
-  keyword(unsigned int n, CharacterVector dict, CharacterVector model, CharacterVector idf, CharacterVector stop) :
-    topN(n), dict_path(dict[0]), model_path(model[0]), stop_path(stop[0]),
-    idf_path(idf[0]), extractor(dict_path, model_path, idf_path, stop_path)
+  keyword(unsigned int n, 
+          string& dict, 
+          string& model, 
+          string& idf, 
+          string& stop,
+          string& user) :
+    
+    topN(n),
+    extractor(dict, model, idf, stop, user)
   {
   }
   ~keyword() {};
@@ -206,7 +279,7 @@ public:
   {
     const char *const test_lines = x[0];
     vector<pair<string, double> > res;
-    extractor.extract(test_lines, res, topN);
+    extractor.Extract(test_lines, res, topN);
     //unsigned int it;
     CharacterVector m(res.size());
     CharacterVector atb(res.size());
@@ -217,7 +290,7 @@ public:
       *m_it = (*it).first; m_it++;
       *atb_it = itos((*it).second); atb_it++;
     }
-
+    
     m.attr("names") = atb;
     return wrap(m);
   }
@@ -226,14 +299,14 @@ public:
   {
     const char *const test_lines = x[0];
     vector<string> words;
-    extractor.extract(test_lines, words, topN);
+    extractor.Extract(test_lines, words, topN);
     return wrap(words);
   }
   
-  CharacterVector keys(vector<string>& test_lines)
+  CharacterVector vector_keys(vector<string>& test_lines)
   {
     vector<pair<string, double> > res;
-    extractor.keys(test_lines, res, topN);
+    extractor.Vector_Extract(test_lines, res, topN);
     //unsigned int it;
     CharacterVector m(res.size());
     CharacterVector atb(res.size());
@@ -250,28 +323,24 @@ public:
 };
 
 
-
-//////////simhash
-
 class sim
 {
 public:
-  const char *const dict_path;
-  const char *const model_path;
-  const char *const stop_path;
-  const char *const idf_path;
-  
+
   Simhash::Simhasher hash;
-  sim(CharacterVector dict, CharacterVector model, CharacterVector idf, CharacterVector stop) : dict_path(dict[0]), model_path(model[0]), stop_path(stop[0]),
-  idf_path(idf[0]), hash(dict_path, model_path, idf_path, stop_path) {}
+  sim(string& dict, 
+      string& model, 
+      string& idf, 
+      string& stop,
+      string& user) :
+  hash(dict, model, idf, stop, user) {}
   ~sim() {};
   
-  List simhash(CharacterVector& code, int topn)
+  List simhash(string code, size_t topn)
   {
-    const char *const code_path = code[0];
     vector<pair<string, double> > lhsword;
     uint64_t hashres;
-    hash.make(code_path, topn, hashres, lhsword);
+    hash.make(code, topn, hashres, lhsword);
     CharacterVector lhsm(lhsword.size());
     CharacterVector lhsatb(lhsword.size());
     //unsigned int it;
@@ -289,7 +358,7 @@ public:
                          Named("keyword") = lhsm);
   }
   
-  List simhash_fromvec(vector<string>& code, int topn)
+  List simhash_fromvec(vector<string>& code, size_t topn)
   {
     vector<pair<string, double> > lhsword;
     uint64_t hashres;
@@ -311,7 +380,7 @@ public:
                          Named("keyword") = lhsm);
   }
 
-  List distance(CharacterVector& lhs, CharacterVector& rhs, int topn)
+  List distance(CharacterVector& lhs, CharacterVector& rhs, size_t topn)
   {
     uint64_t lhsres;
     uint64_t rhsres;
@@ -353,7 +422,7 @@ public:
     
   }
   
-  List distance_fromvec(vector<string>& lhs_path , vector<string>& rhs_path, int topn)
+  List distance_fromvec(vector<string>& lhs_path , vector<string>& rhs_path, size_t topn)
   {
     uint64_t lhsres;
     uint64_t rhsres;
@@ -394,6 +463,7 @@ public:
     
   }
 };
+
 
 
 #endif

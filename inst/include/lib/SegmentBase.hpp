@@ -1,78 +1,38 @@
 #ifndef CPPJIEBA_SEGMENTBASE_H
 #define CPPJIEBA_SEGMENTBASE_H
 
-#include "TransCode.hpp"
-#include "Limonp/Logger.hpp"
-#include "Limonp/NonCopyable.hpp"
-#include "Limonp/HandyMacro.hpp"
-#include "ISegment.hpp"
+
+#include "limonp/Logging.hpp"
+#include "PreFilter.hpp"
 #include <cassert>
 
 
-namespace CppJieba
-{
-    using namespace Limonp;
+namespace cppjieba {
 
-    //const char* const SPECIAL_CHARS = " \t\n";
-#ifndef CPPJIEBA_GBK
-    const UnicodeValueType SPECIAL_SYMBOL[] = {32u, 9u, 10u, 12290u, 65292u};  
-#else
-    const UnicodeValueType SPECIAL_SYMBOL[] = {32u, 9u, 10u};  
-#endif
+//const char* const SPECIAL_CHARS = " \t\n，。";
+const Rune SPECIAL_SYMBOL[] = {32u, 9u, 10u, 65292u, 12290u};
 
-    class SegmentBase: public ISegment, public NonCopyable
-    {
-        public:
-            SegmentBase(){_loadSpecialSymbols();};
-            virtual ~SegmentBase(){};
-        private:
-            unordered_set<UnicodeValueType> _specialSymbols;
-        private:
-            void _loadSpecialSymbols()
-            {
-                size_t size = sizeof(SPECIAL_SYMBOL)/sizeof(*SPECIAL_SYMBOL);
-                for(size_t i = 0; i < size; i ++)
-                {
-                    _specialSymbols.insert(SPECIAL_SYMBOL[i]);
-                }
-                assert(_specialSymbols.size());
-            }
+using namespace limonp;
 
-        public:
-            virtual bool cut(Unicode::const_iterator begin, Unicode::const_iterator end, vector<string>& res) const = 0;
-            virtual bool cut(const string& str, vector<string>& res) const
-            {
-                res.clear();
+class SegmentBase {
+ public:
+  SegmentBase() {
+    LoadSpecialSymbols();
+  }
+  ~SegmentBase() {
+  }
 
-                Unicode unicode;
-                unicode.reserve(str.size());
+ protected:
+  void LoadSpecialSymbols() {
+    size_t size = sizeof(SPECIAL_SYMBOL)/sizeof(*SPECIAL_SYMBOL);
+    for (size_t i = 0; i < size; i ++) {
+      symbols_.insert(SPECIAL_SYMBOL[i]);
+    }
+    assert(symbols_.size());
+  }
+  unordered_set<Rune> symbols_;
+}; // class SegmentBase
 
-                TransCode::decode(str, unicode);
-                
-                Unicode::const_iterator left = unicode.begin();
-                Unicode::const_iterator right;
-                
-                for(right = unicode.begin(); right != unicode.end(); right++)
-                {
-                    if(isIn(_specialSymbols, *right))
-                    {
-                        if(left != right)
-                        {
-                            cut(left, right, res);
-                        }
-                        res.resize(res.size() + 1);
-                        TransCode::encode(right, right + 1, res.back());
-                        left = right + 1;
-                    }
-                }
-                if(left != right)
-                {
-                    cut(left, right, res);
-                }
-                
-                return true;
-            }
-    };
-}
+} // cppjieba
 
 #endif
