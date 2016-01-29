@@ -140,7 +140,7 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
                    lines = 1e+05, output = NULL, bylines = F) 
 { 
   if(!any(type == c("mix","mp","hmm","query","simhash","keywords","tag","full","level","level_pair"))){
-    stop("Unkown worker type")
+    stop("unknown worker type")
   }
   jiebapath <- find.package("jiebaRD")
   
