@@ -107,25 +107,40 @@ inline std::string& Trim(std::string &s, char x) {
   return LTrim(RTrim(s, x), x);
 }
 
-inline void Split(const string& src, vector<string>& res, const string& pattern, size_t maxsplit = string::npos) {
-  res.clear();
-  size_t Start = 0;
-  size_t end = 0;
-  string sub;
-  while(Start < src.size()) {
-    end = src.find_first_of(pattern, Start);
-    if(string::npos == end || res.size() >= maxsplit) {
-      sub = src.substr(Start);
-      Trim(sub);
-      res.push_back(sub);
-      return;
-    }
-    sub = src.substr(Start, end - Start);
-    Trim(sub);
-    res.push_back(sub);
-    Start = end + 1;
+inline bool Split(const string& src, vector<string>& res, const string& pattern, size_t len = string::npos, size_t offset = 0) {
+  if (src.empty())
+  {
+    return false;
   }
-  return;
+  res.clear();
+  
+  size_t start = 0;
+  size_t end = 0;
+  size_t cnt = 0;
+  while (start < src.size() && res.size() < len)
+  {
+    end = src.find_first_of(pattern, start);
+    if (string::npos == end)
+    {
+      if (cnt >= offset)
+      {
+        res.push_back(src.substr(start));
+      }
+      return true;
+    }
+    //if(end == src.size() - 1)
+    //{
+    //    res.push_back("");
+    //    return true;
+    //}
+    if (cnt >= offset)
+    {
+      res.push_back(src.substr(start, end - start));
+    }
+    cnt ++;
+    start = end + 1;
+  }
+  return true;
 }
 
 inline vector<string> Split(const string& src, const string& pattern, size_t maxsplit = string::npos) {
