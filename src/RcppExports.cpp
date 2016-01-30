@@ -201,18 +201,6 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// get_loc
-List get_loc(vector<string>& word, XPtr<JiebaClass> cutter);
-RcppExport SEXP jiebaR_get_loc(SEXP wordSEXP, SEXP cutterSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< vector<string>& >::type word(wordSEXP);
-    Rcpp::traits::input_parameter< XPtr<JiebaClass> >::type cutter(cutterSEXP);
-    __result = Rcpp::wrap(get_loc(word, cutter));
-    return __result;
-END_RCPP
-}
 // key_ptr
 XPtr<keyword> key_ptr(unsigned int& n, string dict, string model, string idf, string stop, string user);
 RcppExport SEXP jiebaR_key_ptr(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP, SEXP userSEXP) {
@@ -342,6 +330,17 @@ BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< string >::type x(xSEXP);
     __result = Rcpp::wrap(u64tobin(x));
+    return __result;
+END_RCPP
+}
+// get_loc
+List get_loc(vector<string>& word);
+RcppExport SEXP jiebaR_get_loc(SEXP wordSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< vector<string>& >::type word(wordSEXP);
+    __result = Rcpp::wrap(get_loc(word));
     return __result;
 END_RCPP
 }

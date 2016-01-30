@@ -72,10 +72,6 @@ add_user_word <- function(x, tag, cutter) {
     .Call('jiebaR_add_user_word', PACKAGE = 'jiebaR', x, tag, cutter)
 }
 
-get_loc <- function(word, cutter) {
-    .Call('jiebaR_get_loc', PACKAGE = 'jiebaR', word, cutter)
-}
-
 key_ptr <- function(n, dict, model, idf, stop, user) {
     .Call('jiebaR_key_ptr', PACKAGE = 'jiebaR', n, dict, model, idf, stop, user)
 }
@@ -114,6 +110,10 @@ sim_distance_vec <- function(lcode, rcode, topn, cutter) {
 
 u64tobin <- function(x) {
     .Call('jiebaR_u64tobin', PACKAGE = 'jiebaR', x)
+}
+
+get_loc <- function(word) {
+    .Call('jiebaR_get_loc', PACKAGE = 'jiebaR', word)
 }
 
 words_freq <- function(x) {

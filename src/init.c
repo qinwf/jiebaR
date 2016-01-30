@@ -50,7 +50,7 @@ SEXP jiebaR_set_query_threshold(SEXP num, SEXP cutter);
 SEXP jiebaR_add_user_word(SEXP x,SEXP tag, SEXP cutter);
 
 SEXP jiebaR_u64tobin(SEXP x);
-SEXP jiebaR_get_loc(SEXP word, SEXP cutter);
+SEXP jiebaR_get_loc(SEXP word);
   
 // wrap
 SEXP jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP, SEXP stopSEXP){
@@ -148,7 +148,7 @@ static const R_CallMethodDef callMethods[] = {
     _RC(jiebaR_set_query_threshold, 2)
     _RC(jiebaR_add_user_word, 3)
     _RC(jiebaR_u64tobin, 1)
-    _RC(jiebaR_get_loc, 2)
+    _RC(jiebaR_get_loc, 1)
 
 
     { NULL, NULL, 0 }

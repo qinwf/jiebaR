@@ -417,12 +417,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     return f(x);
   }
   
-  SEXP attribute_hidden jiebaR_get_loc(SEXP word, SEXP cutter){
-    static SEXP(*f)(SEXP,SEXP) = NULL;
+  SEXP attribute_hidden jiebaR_get_loc(SEXP word){
+    static SEXP(*f)(SEXP) = NULL;
     if (!f) {
-      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_get_loc");
+      f = (SEXP(*)(SEXP)) R_GetCCallable("jiebaR", "jiebaR_get_loc");
     }
-    return f(word, cutter);
+    return f(word);
   }
 
   
