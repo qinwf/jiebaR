@@ -1,3 +1,29 @@
+Changes in Version 0.8
+=====================================
+
+   o Remove: ShowDictPath() EditDict() tag()
+   o Remove: some C API due to CppJieba V4.4.1 update. 
+
+   o C APIs will not work: jiebaR_mp_ptr jiebaR_mp_cut jiebaR_query_ptr jiebaR_query_cut jiebaR_hmm_ptr jiebaR_hmm_cut. 
+
+   o C APIs will work but give a warning: jiebaR_mix_ptr jiebaR_mix_cut jiebaR_tag_ptr jiebaR_tag_tag jiebaR_tag_file. jiebaR_mix_cut. 
+
+   o C APIs change: jiebaR_key_ptr jiebaR_sim_ptr add user path varible.
+
+   o Add: some C API due to CppJieba V4.4.1 update. 
+
+   jiebaR_jiebaclass_ptr, jiebaR_jiebaclass_mix_cut, jiebaR_jiebaclass_mp_cut, jiebaR_jiebaclass_hmm_cut, jiebaR_jiebaclass_query_cut, jiebaR_jiebaclass_full_cut, jiebaR_jiebaclass_level_cut, jiebaR_jiebaclass_level_cut_pair,  jiebaR_jiebaclass_tag_tag,jiebaR_jiebaclass_tag_file, jiebaR_set_query_threshold, jiebaR_add_user_word, jiebaR_u64tobin, jiebaR_get_loc
+
+   o Add: more type for segmentation, add: full cut, level cut.
+   o Add: default attributte for the type of segmentation.
+   o Add: add user word after worker engine created.
+   o Add: set_query_threshold to update query threshold
+   o Fix: build on GCC 5.3.2 with gnu++14
+   o Fix: build on Clang 3.8 RC
+   o Fix: add roxygen2 as a depenndency for the update of devtools
+
+
+
 Changes in Version 0.7
 =====================================
 
