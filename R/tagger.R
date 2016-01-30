@@ -174,11 +174,12 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
     if(length(code) > 1){
       code <- paste(code, collapse = " ")
     }
-    if(FILESMODE==T ){
+    if(FILESMODE==T && symbol == T){
         result <- jiebaclass_tag_file(code,jiebar$worker)
     } else{
         result <- jiebaclass_tag_tag(code,jiebar$worker)
     }
+    
     if (symbol == F && FILESMODE  ==F) {
       result = result[ result != " "]
     }
@@ -186,31 +187,46 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
     if (.Platform$OS.type == "windows") {
       Encoding(result)<-"UTF-8"
     }
-    if (symbol == F) {
+
+    if(FILESMODE==T && symbol == F){
+      result = grep("(*UCP)^[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]*$", result, perl = TRUE,value = TRUE,invert = T)
+      result = paste(result,names(result),collapse = " ")
+    }
+
+    if (symbol == F && FILESMODE  == F) {
       result <- grep("(*UCP)^[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]*$", result, perl = TRUE,value = TRUE,invert = T)
     }
+
   } else{
     
     length_of_input = length(code)
     result = vector("list", length_of_input)
     
     for(num in 1:length_of_input){
-      if(FILESMODE==T ){
+      if(FILESMODE==T && symbol == T){
           tmp_result <- jiebaclass_tag_file(code[num], jiebar$worker)
         
       } else{
           tmp_result <- jiebaclass_tag_tag(code[num],jiebar$worker)
       }
-      if (symbol == F && FILESMODE  ==F) {
+      
+      if (symbol == F && FILESMODE  == F) {
         tmp_result = tmp_result[ tmp_result != " "]
       }
       
       if (.Platform$OS.type == "windows") {
         Encoding(tmp_result)<-"UTF-8"
       }
-      if (symbol == F) {
+
+      if(FILESMODE==T && symbol == F){
+        tmp_result = grep("(*UCP)^[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]*$", tmp_result, perl = TRUE,value = TRUE,invert = T)
+        tmp_result = paste(tmp_result,names(tmp_result),collapse = " ")
+      }
+
+      if (FILESMODE == F && symbol == F) {
         tmp_result <- grep("(*UCP)^[^\u2e80-\u3000\u3021-\ufe4fa-zA-Z0-9]*$", tmp_result, perl = TRUE,value = TRUE,invert = T)
       }
+      
       result[[num]] = tmp_result
     }
   }
