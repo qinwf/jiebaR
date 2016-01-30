@@ -70,3 +70,21 @@ test_that("new_user_word", {
   expect_identical(segment("我是谁",cc,"tag"),structure("我是谁", .Names = "n"))
 
 })
+
+test_that("vector_", {
+  cc = worker()
+  sims = worker("simhash")
+  res = cc["这是测试文本"]
+  
+  expect_identical(vector_simhash(cc["这是测试文本"],sims), structure(list(simhash = "10122323870055346090", keyword = structure(c("文本", "测试", "这是"), .Names = c("8.94485", "7.14724", "4.29163"))), .Names = c("simhash", "keyword")))
+  
+  sims$topn = 2
+  
+  expect_identical(vector_simhash(cc["这是测试文本"],sims), structure(list(simhash = "10014870797707624170", keyword = structure(c("文本", "测试"), .Names = c("8.94485", "7.14724"))), .Names = c("simhash", "keyword")))
+  
+  expect_identical(vector_distance(cc["测试这个恶"], cc["好玩不好玩"],sims),structure(list(distance = "23", lhs = structure("测试", .Names = "7.14724"), rhs = structure(c("不好玩", "好玩"), .Names = c("11.8212", "9.01033"))), .Names = c("distance", "lhs", "rhs")))
+  
+  keyz = worker("keywords")
+  
+  expect_identical(vector_keywords(cc["测试这个恶好玩不好玩"],keyz),structure(c("不好玩", "好玩", "测试"), .Names = c("11.8212", "9.01033", "7.14724")))
+})
