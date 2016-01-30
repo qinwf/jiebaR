@@ -80,6 +80,10 @@ class Jieba {
   void SetQuerySegmentThreshold(size_t len) {
     query_seg_.SetMaxWordLen(len);
   }
+  // added jiebaR
+  int getQuerySegmentThreshold(size_t len) {
+    return (int) query_seg_.GetMaxWordLen();
+  }
  private:
   DictTrie dict_trie_;
   HMMModel model_;
