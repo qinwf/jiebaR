@@ -224,7 +224,7 @@ public:
     cutter.SetQuerySegmentThreshold(len);
     return wrap(len);
   }
-  SEXP add_user_word(CharacterVector& word, CharacterVector& tag) {
+  LogicalVector add_user_word(CharacterVector& word, CharacterVector& tag) {
     auto it_tag = tag.begin();
     for(auto it = word.begin();it != word.end();it++){
       if(cutter.InsertUserWord(as<string>(*it),as<string>(*it_tag))!=1){
@@ -232,7 +232,7 @@ public:
       };
       it_tag++;
     }
-    return wrap(LogicalVector(Rboolean::TRUE));
+    return wrap(1);
   }
   
   // get location
