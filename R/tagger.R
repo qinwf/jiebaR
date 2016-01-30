@@ -62,14 +62,6 @@ tagging<- function(code, jiebar) {
   }
 }
 
-#' @rdname tagging
-#' @export
-tag <- function(code, jiebar){
-  warning("The tag() function is deprecated for shiny package. Please use tagging() instead.")
-  tagging(code, jiebar)
-}
-  
-
 tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILESMODE) {
   
   nlines <- lines
