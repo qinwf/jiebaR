@@ -11,4 +11,6 @@ tests/testthat/CPP_API/\.Rbuildignore$
 tests/testthat/test-all\.R
 tests/testthat/test-bylines\.R
 ^bylines\.utf8$
-
+^CMakeLists\.txt$
+^cmakebuild/
+^\.idea/
