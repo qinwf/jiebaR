@@ -14,3 +14,4 @@ tests/testthat/test-bylines\.R
 ^CMakeLists\.txt$
 ^cmakebuild/
 ^\.idea/
+^cran-comments\.md$
