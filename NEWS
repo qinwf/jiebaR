@@ -16,8 +16,9 @@ Changes in Version 0.8
 
    o Add: more type for segmentation, add: full cut, level cut.
    o Add: default attributte for the type of segmentation.
-   o Add: add user word after worker engine created.
-   o Add: set_query_threshold to update query threshold
+   o Add: add new user word after worker engine created.
+   o Add: query_threshold to update query threshold
+   o Add: words_locate to locate the positions of words
    o Fix: build on GCC 5.3.2 with gnu++14
    o Fix: build on Clang 3.8 RC
    o Fix: add roxygen2 as a depenndency for the update of devtools
