@@ -23,27 +23,9 @@ extern "C" {
  *               
  */
 
-
-
-/**
- * [jiebaR_filecoding description]
- * @param  fileSEXP a file path
- * @return          a string about encoding
- */
-SEXP attribute_hidden jiebaR_filecoding(SEXP fileSEXP){
-    static SEXP(*f)(SEXP) = NULL;
-    if (!f) {
-        f = (SEXP(*)(SEXP)) R_GetCCallable("jiebaR", "jiebaR_filecoding");
-    }
-    return f(fileSEXP);
-}
-
-/**
- * [jiebaR_mp_ptr description]
- * @param  dictSEXP a file path
- * @param  userSEXP a file path
- * @return          a mp worker ptr
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP,SEXP stopSEXP){
     static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -51,13 +33,9 @@ SEXP attribute_hidden jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP,SEXP stopSEXP){
     }
     return f(dictSEXP,userSEXP,stopSEXP);
 }
-
-/**
- * [jiebaR_mp_cut description]
- * @param  xSEXP      a string in R, only the first element will be used
- * @param  cutterSEXP a mp ptr, warning no checking for ptr type in runtime
- * @return            [description]
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -65,14 +43,9 @@ SEXP attribute_hidden jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP){
     }
     return f(xSEXP,cutterSEXP);
 }
-
-/**
- * [jiebaR_mix_ptr description]
- * @param  dictSEXP  a file path
- * @param  modelSEXP a file path
- * @param  userSEXP  a file path
- * @return           a mix ptr
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP){
     static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -80,13 +53,9 @@ SEXP attribute_hidden jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEX
     }
     return f(dictSEXP, modelSEXP, userSEXP, stopSEXP);
 }
-
-/**
- * [jiebaR_mix_cut description]
- * @param  xSEXP      a string in R, only the first element will be used
- * @param  cutterSEXP a mix ptr, warning no checking for ptr type in runtime
- * @return            [description]
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -94,14 +63,9 @@ SEXP attribute_hidden jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP){
     }
     return f(xSEXP,cutterSEXP);
 }
-
-/**
- * [jiebaR_query_ptr description]
- * @param  dictSEXP  a file path
- * @param  modelSEXP a file path
- * @param  nSEXP     numbers of query length
- * @return           a query ptr
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP, SEXP stopSEXP){
     static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -109,13 +73,9 @@ SEXP attribute_hidden jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP
     }
     return f(dictSEXP, modelSEXP, nSEXP, stopSEXP);
 }
-
-/**
- * [jiebaR_query_cut description]
- * @param  xSEXP      a string in R, only the first element will be used
- * @param  cutterSEXP a query ptr, warning no checking for ptr type in runtime
- * @return            [description]
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -123,12 +83,9 @@ SEXP attribute_hidden jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP){
     }
     return f(xSEXP,cutterSEXP);
 }
-
-/**
- * [jiebaR_hmm_ptr description]
- * @param  modelSEXP a file path
- * @return           a hmm ptr
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -136,13 +93,9 @@ SEXP attribute_hidden jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP){
     }
     return f(modelSEXP, stopSEXP);
 }
-
-/**
- * [jiebaR_hmm_cut description]
- * @param  xSEXP      a string in R, only the first element will be used
- * @param  cutterSEXP a hmm ptr, warning no checking for ptr type in runtime
- * @return            [description]
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -150,14 +103,9 @@ SEXP attribute_hidden jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP){
     }
     return f(xSEXP,cutterSEXP);
 }
-
-/**
- * [jiebaR_tag_ptr description]
- * @param  dictSEXP  a file path
- * @param  modelSEXP a file path
- * @param  userSEXP  a file path
- * @return           a tag ptr
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP){
     static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -165,13 +113,9 @@ SEXP attribute_hidden jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEX
     }
     return f(dictSEXP, modelSEXP, userSEXP, stopSEXP);
 }
-
-/**
- * [jiebaR_tag_tag description]
- * @param  xSEXP      a string in R, only the first element will be used
- * @param  cutterSEXP a tag ptr, warning no checking for ptr type in runtime
- * @return            a vector with attributte
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -179,13 +123,9 @@ SEXP attribute_hidden jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP){
     }
     return f(xSEXP,cutterSEXP);
 }
-
-/**
- * [jiebaR_tag_file description]
- * @param  xSEXP      a string in R, only the first element will be used
- * @param  cutterSEXP a tag ptr, warning no checking for ptr type in runtime
- * @return            a vector without attributte
- */
+  /**
+   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   */
 SEXP attribute_hidden jiebaR_tag_file(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -201,6 +141,7 @@ SEXP attribute_hidden jiebaR_tag_file(SEXP xSEXP, SEXP cutterSEXP){
  * @param  modelSEXP a file path
  * @param  idfSEXP   a file path
  * @param  stopSEXP  a file path
+ * @param  userSEXP  a file path
  * @return           a key ptr
  */
 SEXP attribute_hidden jiebaR_key_ptr(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP, SEXP userSEXP){
@@ -259,6 +200,7 @@ SEXP attribute_hidden jiebaR_key_keys(SEXP xSEXP, SEXP cutterSEXP){
  * @param  modelSEXP a file path
  * @param  idfSEXP   a file path
  * @param  stopSEXP  a file path
+ * @param  userSEXP  a file path
  * @return           a sim ptr
  */
 SEXP attribute_hidden jiebaR_sim_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP,SEXP userSEXP){
@@ -303,6 +245,14 @@ SEXP attribute_hidden jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnS
   
 // v4 new
 
+/**
+  * [jiebaR_mix_ptr description]
+  * @param  dictSEXP  a file path
+  * @param  modelSEXP a file path
+  * @param  userSEXP  a file path
+  * @param  stopSEXP  a file path
+  * @return           a jieba ptr
+  */
 SEXP attribute_hidden jiebaR_jiebaclass_ptr(SEXP dict, SEXP model, SEXP user,SEXP stop){
     static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -310,7 +260,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_ptr(SEXP dict, SEXP model, SEXP user,SEX
     }
     return f(dict, model, user,stop);
 }
-
+  /**
+   * [description]
+   * @param  xSEXP      a string in R, only the first element will be used
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return            a string vector
+   */
 SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
   static SEXP(*f)(SEXP,SEXP) = NULL;
   if (!f) {
@@ -318,7 +273,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
   }
   return f(x, cutter);
 }
-  
+  /**
+   * [description]
+   * @param  xSEXP      a string in R, only the first element will be used
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return            a string vector
+   */
   SEXP attribute_hidden jiebaR_jiebaclass_mp_cut(SEXP x, SEXP cutter){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -326,7 +286,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x, cutter);
   }
-  
+  /**
+   * [description]
+   * @param  xSEXP      a string in R, only the first element will be used
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return            a string vector
+   */
   SEXP attribute_hidden jiebaR_jiebaclass_hmm_cut(SEXP x, SEXP cutter){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -334,7 +299,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x, cutter);
   }
-  
+  /**
+   * [description]
+   * @param  xSEXP      a string in R, only the first element will be used
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return            a string vector
+   */
   SEXP attribute_hidden jiebaR_jiebaclass_query_cut(SEXP x, SEXP cutter){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -342,6 +312,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x, cutter);
   }
+  /**
+   * [description]
+   * @param  xSEXP      a string in R, only the first element will be used
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return            a string vector
+   */
   SEXP attribute_hidden jiebaR_jiebaclass_full_cut(SEXP x, SEXP cutter){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -349,6 +325,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x, cutter);
   }
+  /**
+   * [description]
+   * @param  xSEXP      a string in R, only the first element will be used
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return            a string vector
+   */
   SEXP attribute_hidden jiebaR_jiebaclass_level_cut(SEXP x, SEXP cutter){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -356,6 +338,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x, cutter);
   }
+  /**
+   * [description]
+   * @param  xSEXP      a string in R, only the first element will be used
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return            a string vector with names
+   */
   SEXP attribute_hidden jiebaR_jiebaclass_level_cut_pair(SEXP x, SEXP cutter){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -363,7 +351,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x, cutter);
   }
-  
+  /**
+   * [description]
+   * @param  xSEXP      a string in R, only the first element will be used
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return            a string vector with names
+   */
   SEXP attribute_hidden jiebaR_jiebaclass_tag_tag(SEXP x, SEXP cutter){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -371,6 +364,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x, cutter);
   }
+  /**
+   * [description]
+   * @param  xSEXP      a string in R, only the first element will be used
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return            a string vector
+   */
   SEXP attribute_hidden jiebaR_jiebaclass_tag_file(SEXP x, SEXP cutter){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -378,6 +377,12 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x, cutter);
   }
+  /**
+   * [description]
+   * @param  num      a number
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return          bool TRUE for succuss
+   */
   SEXP attribute_hidden jiebaR_set_query_threshold(SEXP num, SEXP cutter){
     static SEXP(*f)(SEXP,SEXP) = NULL;
     if (!f) {
@@ -385,7 +390,13 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(num, cutter);
   }
-
+  /**
+   * [description]
+   * @param  x      a string
+   * @param tag     a string
+   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
+   * @return        bool
+   */
   SEXP attribute_hidden jiebaR_add_user_word(SEXP x,SEXP tag, SEXP cutter){
     static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -393,7 +404,11 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x, tag, cutter);
   }
-  
+  /**
+   * [description]
+   * @param  x      a string
+   * @return        a string
+   */
   SEXP attribute_hidden jiebaR_u64tobin(SEXP x){
     static SEXP(*f)(SEXP) = NULL;
     if (!f) {
@@ -410,7 +425,20 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     return f(word, cutter);
   }
 
-
+  
+  /**
+   * [jiebaR_filecoding description]
+   * @param  fileSEXP a file path
+   * @return          a string about encoding
+   */
+  SEXP attribute_hidden jiebaR_filecoding(SEXP fileSEXP){
+    static SEXP(*f)(SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP)) R_GetCCallable("jiebaR", "jiebaR_filecoding");
+    }
+    return f(fileSEXP);
+  }
+  
 
 
 #ifdef __cplusplus
