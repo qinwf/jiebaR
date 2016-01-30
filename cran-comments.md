@@ -5,7 +5,7 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note on OS X
+0 errors | 0 warnings | 1 note on OS X and Windows R-devel
 
 * checking CRAN incoming feasibility ... NOTE
 
