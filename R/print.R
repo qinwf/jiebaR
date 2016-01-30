@@ -19,7 +19,7 @@ print.jieba<-function(x,...){
   cat("Max Read Lines  :  ");cat(x$lines);cat("\n");cat("\n")
   cat("Fixed Model Components:  ");cat("\n");cat("\n")
   print(x$PrivateVarible)
-  cat("$default $max_word_length $detect $encoding $symbol $output $write $lines $bylines can be reset.\n")
+  cat("$default $detect $encoding $symbol $output $write $lines $bylines can be reset.\n")
 }
 
 
