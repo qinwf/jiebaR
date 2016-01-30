@@ -21,7 +21,7 @@ Changes in Version 0.8
    o Add: words_locate to locate the positions of words
    o Fix: build on GCC 5.3.2 with gnu++14
    o Fix: build on Clang 3.8 RC
-   o Fix: add roxygen2 as a depenndency for the update of devtools
+   o Fix: add roxygen2 as a dependency for the update of devtools
 
 
 
