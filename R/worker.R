@@ -173,7 +173,7 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
   }
   if(type %in% c("mix","query","hmm","mp","tag","full","level","level_pair")){
     worker  = jiebaclass_ptr(dict, hmm, user,stop2)
-    private = list(dict = dict,user = user, stop_word= stop2, timestamp = TIMESTAMP)
+    private = list(dict = dict,user = user, hmm = hmm, stop_word= stop2, timestamp = TIMESTAMP)
     assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
     result$max_word_length = qmax
     result$default = type
