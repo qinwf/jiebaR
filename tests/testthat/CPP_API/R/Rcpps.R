@@ -84,3 +84,10 @@ sim_distance <- function(lhs, rhs, topn, cutter) {
     .Call('api_jiebaR_sim_distance', PACKAGE = 'jiebaRapi', lhs, rhs, topn, cutter)
 }
 
+jieba_ptr <- function(dict, model, user, stop) {
+  .Call('api_jiebaR_jiebaclass_ptr', PACKAGE = 'jiebaRapi', dict, model, user, stop)
+}
+
+jieba_mix_cut <- function(x, cutter) {
+  .Call('api_jiebaR_jiebaclass_mix_cut', PACKAGE = 'jiebaRapi', x, cutter)
+}

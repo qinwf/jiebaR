@@ -75,3 +75,10 @@ test_that("tag cpp api",{
   
   })
 })
+
+test_that("jieba cpp api",{
+  cutter = jiebaRapi:::jieba_ptr(jiebaR::DICTPATH,jiebaR::HMMPATH,jiebaR::USERPATH,NULL)
+  expect_equal(jiebaRapi:::jieba_mix_cut("this is test",cutter),c("this", " ", "is", " ", "test"))
+  cutter = jiebaRapi:::jieba_ptr(jiebaR::DICTPATH,jiebaR::HMMPATH,jiebaR::USERPATH,jiebaR::STOPPATH)
+  expect_equal(jiebaRapi:::jieba_mix_cut("this is test",cutter),c("test"))
+})

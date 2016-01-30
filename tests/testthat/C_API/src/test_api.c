@@ -76,6 +76,10 @@ DLLFUN(jiebaR_sim_sim,DLLARG(SEXP codeSEXP, SEXP topnSEXP, SEXP cutterSEXP),code
 // SEXP jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnSEXP, SEXP cutterSEXP);
 DLLFUN(jiebaR_sim_distance,DLLARG(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnSEXP, SEXP cutterSEXP),lhsSEXP,rhsSEXP,topnSEXP,cutterSEXP)
 
+  
+DLLFUN(jiebaR_jiebaclass_ptr,DLLARG(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP),dictSEXP, modelSEXP, userSEXP, stopSEXP)
+DLLFUN(jiebaR_jiebaclass_mix_cut,DLLARG(SEXP xSEXP, SEXP cutterSEXP),xSEXP, cutterSEXP)
+
 // static R_CallMethodDef callMethods[] = {
 //   REG_DEF(jiebaR_filecoding,1)
 //   REG_DEF(jiebaR_mp_ptr,3)
