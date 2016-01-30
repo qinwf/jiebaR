@@ -10,13 +10,6 @@ show_dictpath<-function(){
   print(file.path(path.package("jiebaRD"),"dict"))
 }
 
-#' @rdname show_dictpath
-#' @export
-ShowDictPath<-function(){
-  print(file.path(path.package("jiebaRD"),"dict"))
-  warning("ShowDictPath() was deprecated. Please use show_dictpath() instead.")
-}
-
 #' Edit default user dictionary
 #' 
 #' Edit the default user dictionary. 
@@ -56,12 +49,4 @@ edit_dict<-function(name = "user"){
   } else{
     file.edit(file.path(path.package("jiebaRD"),"dict",dictname))
   }
-}
-
-#' @rdname edit_dict
-#' @export
-EditDict<-function(name = "user"){
-  edit_dict(name)
-  warning("EditDict was deprecated. Please use edit_dict() instead.")
-  
 }
