@@ -9,6 +9,17 @@ XPtr<JiebaClass> jiebaclass_ptr(string dict, string model,
 }
 
 // [[Rcpp::export]]
+XPtr<JiebaClass> jiebaclass_ptr_v2(string dict, string model,
+                                string user,Nullable<CharacterVector>& stop, int uw){
+  DictTrie::UserWordWeightOption uw2;
+  if (uw == 1) uw2 = DictTrie::UserWordWeightOption::WordWeightMin;
+  if (uw == 2) uw2 = DictTrie::UserWordWeightOption::WordWeightMedian;
+  if (uw == 3) uw2 = DictTrie::UserWordWeightOption::WordWeightMax;
+  
+  return( XPtr<JiebaClass>(new JiebaClass(dict, model, user, stop, uw2))) ;
+}
+
+// [[Rcpp::export]]
 CharacterVector jiebaclass_mix_cut(CharacterVector& x, XPtr<JiebaClass> cutter){
   return wrap(cutter->cut_mix(x));
 }

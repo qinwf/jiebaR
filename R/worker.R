@@ -40,6 +40,8 @@
 #'   detection is enable, the value of \code{encoding} will be 
 #'   ignore.
 #'   
+#' @param user_weight the weight of the user dict words. "min" "max" or "median".
+#'   
 #' @param detect Whether to detect the encoding of input file 
 #'  using \code{filecoding} function. If encoding 
 #'  detection is enable, the value of \code{encoding} will be 
@@ -137,11 +139,12 @@
 worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH, 
                    user = USERPATH, idf = IDFPATH, stop_word = STOPPATH, write = T,
                    qmax = 20, topn = 5, encoding = "UTF-8", detect = T, symbol = F,
-                   lines = 1e+05, output = NULL, bylines = F) 
+                   lines = 1e+05, output = NULL, bylines = F, user_weight = "median") 
 { 
   if(!any(type == c("mix","mp","hmm","query","simhash","keywords","tag","full","level","level_pair"))){
     stop("unknown worker type")
   }
+  stopifnot(user_weight %in% c("median","min","max"))
   jiebapath <- find.package("jiebaRD")
   
   # unzip files
@@ -171,9 +174,12 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
       warning("stop words file should be UTF-8 encoding.")
     }
   }
+  if(user_weight == "min")    uw=1L
+  if(user_weight == "median") uw=2L
+  if(user_weight == "max")    uw=3L
   if(type %in% c("mix","query","hmm","mp","tag","full","level","level_pair")){
-    worker  = jiebaclass_ptr(dict, hmm, user,stop2)
-    private = list(dict = dict,user = user, hmm = hmm, stop_word= stop2, timestamp = TIMESTAMP)
+    worker  = jiebaclass_ptr_v2(dict, hmm, user,stop2,uw)
+    private = list(dict = dict,user = user, hmm = hmm, stop_word= stop2,user_weight = user_weight, timestamp = TIMESTAMP)
     assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
     result$max_word_length = qmax
     result$default = type
@@ -199,8 +205,6 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
   }
 
 }
-
-
 
 assignjieba<-function(worker,detect,encoding,symbol,lines,output,write,private,bylines,result){
   assign(x = "worker",value = worker,envir = result)

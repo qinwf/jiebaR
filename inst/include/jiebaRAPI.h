@@ -260,6 +260,15 @@ SEXP attribute_hidden jiebaR_jiebaclass_ptr(SEXP dict, SEXP model, SEXP user,SEX
     }
     return f(dict, model, user,stop);
 }
+  
+  
+  SEXP attribute_hidden jiebaR_jiebaclass_ptr_v2(SEXP dict, SEXP model, SEXP user,SEXP stop,SEXP uw){
+    static SEXP(*f)(SEXP,SEXP,SEXP,SEXP,SEXP) = NULL;
+    if (!f) {
+      f = (SEXP(*)(SEXP,SEXP,SEXP,SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_ptr_v2");
+    }
+    return f(dict, model, user,stop, uw);
+  }
   /**
    * [description]
    * @param  xSEXP      a string in R, only the first element will be used

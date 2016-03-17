@@ -35,6 +35,8 @@ List sim_distance_vec(vector<string>& lcode,vector<string>& rcode, size_t topn, 
 
 XPtr<JiebaClass> jiebaclass_ptr(string dict, string model, string user,Nullable<CharacterVector>& stop);
 
+XPtr<JiebaClass> jiebaclass_ptr_v2(string dict, string model, string user,Nullable<CharacterVector>& stop, int uw);
+
 CharacterVector jiebaclass_mix_cut(CharacterVector& x, XPtr<JiebaClass> cutter);
 
 CharacterVector jiebaclass_mp_cut(CharacterVector& x, size_t num,XPtr<JiebaClass> cutter);

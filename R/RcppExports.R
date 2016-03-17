@@ -28,6 +28,10 @@ jiebaclass_ptr <- function(dict, model, user, stop) {
     .Call('jiebaR_jiebaclass_ptr', PACKAGE = 'jiebaR', dict, model, user, stop)
 }
 
+jiebaclass_ptr_v2 <- function(dict, model, user, stop, uw) {
+    .Call('jiebaR_jiebaclass_ptr_v2', PACKAGE = 'jiebaR', dict, model, user, stop, uw)
+}
+
 jiebaclass_mix_cut <- function(x, cutter) {
     .Call('jiebaR_jiebaclass_mix_cut', PACKAGE = 'jiebaR', x, cutter)
 }

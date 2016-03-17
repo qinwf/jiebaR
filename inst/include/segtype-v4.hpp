@@ -75,8 +75,8 @@ public:
   cppjieba::Jieba cutter;
   
   JiebaClass() = delete;
-  JiebaClass(string& dict, string& model, string& user,Nullable<CharacterVector> stop)
-  : cutter(dict, model, user){
+  JiebaClass(string& dict, string& model, string& user,Nullable<CharacterVector> stop, DictTrie::UserWordWeightOption uw = DictTrie::UserWordWeightOption::WordWeightMedian)
+  : cutter(dict, model, user, uw){
     if(!stop.isNull()){
       CharacterVector stop_value = stop.get();
       const char *const stop_path = stop_value[0];

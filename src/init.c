@@ -27,6 +27,10 @@ SEXP jiebaR_words_freq(SEXP x);
 // 
 SEXP jiebaR_jiebaclass_ptr(SEXP dict, SEXP model, SEXP user,SEXP stop);
 
+// 
+SEXP jiebaR_jiebaclass_ptr_v2(SEXP dict, SEXP model, SEXP user,SEXP stop, SEXP uw);
+
+
 SEXP jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter);
 
 SEXP jiebaR_jiebaclass_mp_cut(SEXP x, SEXP num,SEXP cutter);
@@ -136,6 +140,7 @@ static const R_CallMethodDef callMethods[] = {
     { "jiebaR_sim_distance",(DL_FUNC) &jiebaR_sim_distance  , 4 },
     { "jiebaR_words_freq"  ,(DL_FUNC) &jiebaR_words_freq    , 1 },  
     _RC(jiebaR_jiebaclass_ptr, 4)
+    _RC(jiebaR_jiebaclass_ptr_v2, 5)
     _RC(jiebaR_jiebaclass_mix_cut, 2)
     _RC(jiebaR_jiebaclass_mp_cut, 3)
     _RC(jiebaR_jiebaclass_hmm_cut ,2)
@@ -171,6 +176,7 @@ void R_init_jiebaR(DllInfo *info)
   // v4
   // // 
     _RJ(jiebaR_jiebaclass_ptr)
+    _RJ(jiebaR_jiebaclass_ptr_v2)
     _RJ(jiebaR_jiebaclass_mix_cut)
     _RJ(jiebaR_jiebaclass_mp_cut)
     _RJ(jiebaR_jiebaclass_hmm_cut)

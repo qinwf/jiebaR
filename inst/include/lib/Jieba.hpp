@@ -10,8 +10,8 @@ namespace cppjieba {
 
 class Jieba {
  public:
-  Jieba(const string& dict_path, const string& model_path, const string& user_dict_path) 
-    : dict_trie_(dict_path, user_dict_path),
+  Jieba(const string& dict_path, const string& model_path, const string& user_dict_path,DictTrie::UserWordWeightOption user_word_weight_opt = DictTrie::UserWordWeightOption::WordWeightMedian) 
+    : dict_trie_(dict_path, user_dict_path,user_word_weight_opt),
       model_(model_path),
       mp_seg_(&dict_trie_),
       hmm_seg_(&model_),

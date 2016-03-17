@@ -67,6 +67,21 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// jiebaclass_ptr_v2
+XPtr<JiebaClass> jiebaclass_ptr_v2(string dict, string model, string user, Nullable<CharacterVector>& stop, int uw);
+RcppExport SEXP jiebaR_jiebaclass_ptr_v2(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP, SEXP uwSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< string >::type dict(dictSEXP);
+    Rcpp::traits::input_parameter< string >::type model(modelSEXP);
+    Rcpp::traits::input_parameter< string >::type user(userSEXP);
+    Rcpp::traits::input_parameter< Nullable<CharacterVector>& >::type stop(stopSEXP);
+    Rcpp::traits::input_parameter< int >::type uw(uwSEXP);
+    __result = Rcpp::wrap(jiebaclass_ptr_v2(dict, model, user, stop, uw));
+    return __result;
+END_RCPP
+}
 // jiebaclass_mix_cut
 CharacterVector jiebaclass_mix_cut(CharacterVector& x, XPtr<JiebaClass> cutter);
 RcppExport SEXP jiebaR_jiebaclass_mix_cut(SEXP xSEXP, SEXP cutterSEXP) {
