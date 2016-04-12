@@ -7,6 +7,19 @@ init:
         Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
         Import-Module '..\appveyor-tool.ps1'
 
+environment:
+  matrix:
+
+  - R_VERSION: devel
+    R_ARCH: i386
+    GCC_PATH: mingw_32
+    channel: nightly
+
+  - R_VERSION: devel
+    R_ARCH: x64
+    GCC_PATH: mingw_64
+    channel: nightly
+
 install:
   ps: Bootstrap
 

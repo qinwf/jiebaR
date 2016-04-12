@@ -58,7 +58,8 @@
 #'   is used for segmentation and speech tagging  workers. 
 #'   
 #' @param bylines return the result by the lines of input files
-#'   
+#' 
+#' @param user_weight "median", "min" or "max" for the weight of words in user dict.
 #' @return  This function returns an environment containing segmentation 
 #' settings and worker. Public settings can be modified and got 
 #' using \code{$}.
@@ -226,4 +227,3 @@ read_stop_words<- function(filepath){
   class(res) <- "stopword_list"
   res
 }
-
