@@ -63,8 +63,6 @@ is used for segmentation and speech tagging  workers.}
 \item{bylines}{return the result by the lines of input files}
 
 \item{user_weight}{the weight of the user dict words. "min" "max" or "median".}
-
-\item{user_weight}{"median", "min" or "max" for the weight of words in user dict.}
 }
 \value{
 This function returns an environment containing segmentation 
