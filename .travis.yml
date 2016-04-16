@@ -21,7 +21,7 @@ env:
     - R_CHECK_ARGS="--no-vignettes --no-manual"
     - OS=$(uname -s)
   matrix:
-    - _R_CHECK_CRAN_INCOMING_=FALSE
+    - _R_CHECK_CRAN_INCOMING_=FALSE NOT_CRAN="true"
     - R_BUILD_ARGS=" " R_CHECK_ARGS="--as-cran" BOOTSTRAP_LATEX="1" _R_CHECK_CRAN_INCOMING_=TRUE BOOTSTRAP_PANDOC="1"
 
 before_install:

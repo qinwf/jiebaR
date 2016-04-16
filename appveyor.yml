@@ -14,11 +14,13 @@ environment:
     R_ARCH: i386
     GCC_PATH: mingw_32
     channel: nightly
+    NOT_CRAN: true
 
   - R_VERSION: devel
     R_ARCH: x64
     GCC_PATH: mingw_64
     channel: nightly
+    NOT_CRAN: true
 
 install:
   ps: Bootstrap

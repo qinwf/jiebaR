@@ -1,3 +1,10 @@
+Changes in Version 0.8.1
+=====================================
+
+   o Add: user_weight option for worker()
+   o Fix: Build with R 3.3.0
+
+
 Changes in Version 0.8
 =====================================
 
