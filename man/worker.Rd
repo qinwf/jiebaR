@@ -7,7 +7,7 @@
 worker(type = "mix", dict = DICTPATH, hmm = HMMPATH, user = USERPATH,
   idf = IDFPATH, stop_word = STOPPATH, write = T, qmax = 20, topn = 5,
   encoding = "UTF-8", detect = T, symbol = F, lines = 1e+05,
-  output = NULL, bylines = F, user_weight = "median")
+  output = NULL, bylines = F, user_weight = "max")
 }
 \arguments{
 \item{type}{The type of jiebaR workers including \code{mix}, \code{mp}, \code{hmm}, 

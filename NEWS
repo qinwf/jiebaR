@@ -1,11 +1,11 @@
-Changes in Version 0.8.1
+Changes in Version 0.8.2 (2016-4-18)
 =====================================
 
-   o Add: user_weight option for worker()
+   o Add: user_weight option for worker(), and default value is the max weight.
    o Fix: Build with R 3.3.0
 
 
-Changes in Version 0.8
+Changes in Version 0.8 (2016-1-14)
 =====================================
 
    o Remove: ShowDictPath() EditDict() tag()
@@ -32,7 +32,7 @@ Changes in Version 0.8
 
 
 
-Changes in Version 0.7
+Changes in Version 0.7 (2015-12-6)
 =====================================
 
    o Add: tobin() to transform simhash to binary format.
@@ -43,7 +43,7 @@ Changes in Version 0.7
    o Enhencement: Update tests for C API.
    o Warning: Next version will update internal CppJieba version and tag(), EditDict(), ShowDictPath() will be remove.
 
-Changes in Version 0.6
+Changes in Version 0.6 (2015-10-1)
 =====================================
 
    o Add: C API.
