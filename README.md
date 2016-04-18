@@ -87,7 +87,7 @@ Install the latest development version from GitHub:
 devtools::install_github("qinwf/jiebaR")
 ```
 
-Install from [CRAN](http://cran.r-project.org/web/packages/jiebaR/index.html):
+Install from [CRAN](https://cran.r-project.org/package=jiebaR):
 
 ```r
 install.packages("jiebaR")
@@ -96,7 +96,6 @@ install.packages("jiebaR")
 ["结巴"中文分词]:https://github.com/fxsjy/jieba
 [Rcpp]:https://github.com/RcppCore/Rcpp
 [Cppjieba]:https://github.com/yanyiwu/cppjieba
-[Rtools]:http://mirrors.xmu.edu.cn/CRAN/bin/windows/Rtools
 [深蓝词库转换]:https://github.com/studyzy/imewlconverter
 [开发版]:https://ci.appveyor.com/project/qinwf53234/jiebar/branch/master/artifacts
 [Rpy2]:http://rpy.sourceforge.net/
