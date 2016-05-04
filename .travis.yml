@@ -33,6 +33,8 @@ before_install:
   - ./travis-tool.sh bootstrap
 
 install:
+  - ./travis-tool.sh install_r_binary Rcpp RCurl stringi dplyr curl jsonlite yaml tidyr markdown
+  - ./travis-tool.sh install_r covr
   - ./travis-tool.sh install_deps
 
 before_script:
@@ -46,6 +48,8 @@ after_failure:
 
 after_success:
   - ./travis-tool.sh dump_logs
+  - [[ "Linux" == "$(uname -s)" ]] && [[ "$(NOT_CRAN)" == "true" ]] && Rscript -e 'library("covr"); codecov();' 
+
   
 notifications:
   email:
