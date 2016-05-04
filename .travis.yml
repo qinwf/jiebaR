@@ -48,7 +48,7 @@ after_failure:
 
 after_success:
   - ./travis-tool.sh dump_logs
-  - [[ "Linux" == "$(uname -s)" ]] && [[ "$(NOT_CRAN)" == "true" ]] && Rscript -e 'library("covr"); codecov();' 
+  - if [[ "Linux" == "$(uname -s)" ]] && [[ "$(NOT_CRAN)" == "true" ]] ; then Rscript -e 'library("covr"); codecov();' ; fi ; 
 
   
 notifications:
