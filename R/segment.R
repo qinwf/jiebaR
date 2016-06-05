@@ -176,7 +176,6 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
 
 
 cutw <- function(code, jiebar,  symbol, FILESMODE, mod) {
-  
 
   if(jiebar$bylines == FALSE){
     result = engine_cut(code,jiebar,mod)
@@ -209,9 +208,6 @@ cutw <- function(code, jiebar,  symbol, FILESMODE, mod) {
     }
   }
 
-  # if(!is.null(jiebar$PrivateVarible$loaded_stop_words)){
-  #   result = filter_segment(result,jiebar$PrivateVarible$loaded_stop_words)
-  # }
   return(result)
 }
 
