@@ -27,7 +27,7 @@ test_that("simhash",{
   
   expect_identical(simhasher[words],structure(list(simhash = "3804341492420753273", keyword = structure("hello", .Names = "11.7392")), .Names = c("simhash","keyword")))
   
-  expect_identical(distance("hello world" , "hello world!" , simhasher),structure(list(distance = "0", lhs = structure("hello", .Names = "11.7392"),rhs = structure("hello", .Names = "11.7392")), .Names = c("distance","lhs", "rhs")))
+  expect_identical(distance("hello world" , "hello world!" , simhasher),structure(list(distance = 0L, lhs = structure("hello", .Names = "11.7392"),rhs = structure("hello", .Names = "11.7392")), .Names = c("distance","lhs", "rhs")))
 })
 
 test_that("tagger",{

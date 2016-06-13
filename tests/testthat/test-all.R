@@ -17,7 +17,7 @@ test_that("segmentation", {
                                   .Names = c("7.14724", "4.29163", "2.81755"))),
                                   .Names = c("simhash", "keyword")))
   expect_identical({distance( "这是一个测试","这是一个测试",cutter)},
-                   structure(list(distance = "0", 
+                   structure(list(distance = 0L, 
                                   lhs = structure(c("测试", "这是","一个"), .Names = c("7.14724", "4.29163", "2.81755")), 
                                   rhs = structure(c("测试", "这是", "一个"), .Names = c("7.14724", "4.29163", "2.81755"))),
                              .Names = c("distance", "lhs", "rhs")))
@@ -82,7 +82,7 @@ test_that("vector_", {
   
   expect_identical(vector_simhash(cc["这是测试文本"],sims), structure(list(simhash = "10014870797707624170", keyword = structure(c("文本", "测试"), .Names = c("8.94485", "7.14724"))), .Names = c("simhash", "keyword")))
   
-  expect_identical(vector_distance(cc["测试这个恶"], cc["好玩不好玩"],sims),structure(list(distance = "23", lhs = structure("测试", .Names = "7.14724"), rhs = structure(c("不好玩", "好玩"), .Names = c("11.8212", "9.01033"))), .Names = c("distance", "lhs", "rhs")))
+  expect_identical(vector_distance(cc["测试这个恶"], cc["好玩不好玩"],sims),structure(list(distance = 23L, lhs = structure("测试", .Names = "7.14724"), rhs = structure(c("不好玩", "好玩"), .Names = c("11.8212", "9.01033"))), .Names = c("distance", "lhs", "rhs")))
   
   keyz = worker("keywords")
   
