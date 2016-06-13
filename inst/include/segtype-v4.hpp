@@ -394,8 +394,8 @@ public:
     }
     rhsm.attr("names") = rhsatb;
 
-    CharacterVector hashvec;
-    hashvec.push_back(int64tos(hash.distances(lhsres, rhsres)));
+    IntegerVector hashvec;
+    hashvec.push_back(hash.distances(lhsres, rhsres));
     return List::create( Named("distance") = hashvec,
                               Named("lhs") = lhsm,
                               Named("rhs") = rhsm
@@ -435,8 +435,8 @@ public:
     }
     rhsm.attr("names") = rhsatb;
 
-    CharacterVector hashvec;
-    hashvec.push_back(int64tos(hash.distances(lhsres, rhsres)));
+    IntegerVector hashvec;
+    hashvec.push_back(hash.distances(lhsres, rhsres));
     return List::create( Named("distance") = hashvec,
                               Named("lhs") = lhsm,
                               Named("rhs") = rhsm

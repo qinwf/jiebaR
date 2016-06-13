@@ -116,6 +116,14 @@ u64tobin <- function(x) {
     .Call('jiebaR_u64tobin', PACKAGE = 'jiebaR', x)
 }
 
+cpp_ham_dist <- function(x, y) {
+    .Call('jiebaR_cpp_ham_dist', PACKAGE = 'jiebaR', x, y)
+}
+
+cpp_ham_dist_mat <- function(x, y) {
+    .Call('jiebaR_cpp_ham_dist_mat', PACKAGE = 'jiebaR', x, y)
+}
+
 get_loc <- function(word) {
     .Call('jiebaR_get_loc', PACKAGE = 'jiebaR', word)
 }

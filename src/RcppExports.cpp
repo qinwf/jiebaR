@@ -348,6 +348,30 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// cpp_ham_dist
+IntegerVector cpp_ham_dist(CharacterVector x, CharacterVector y);
+RcppExport SEXP jiebaR_cpp_ham_dist(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type y(ySEXP);
+    __result = Rcpp::wrap(cpp_ham_dist(x, y));
+    return __result;
+END_RCPP
+}
+// cpp_ham_dist_mat
+IntegerVector cpp_ham_dist_mat(CharacterVector x, CharacterVector y);
+RcppExport SEXP jiebaR_cpp_ham_dist_mat(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type y(ySEXP);
+    __result = Rcpp::wrap(cpp_ham_dist_mat(x, y));
+    return __result;
+END_RCPP
+}
 // get_loc
 List get_loc(vector<string>& word);
 RcppExport SEXP jiebaR_get_loc(SEXP wordSEXP) {
