@@ -5,7 +5,7 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 CharacterVector u64tobin(string x){
   string res;
-  uint64_t todo = atoi(x.c_str());
+  uint64_t todo = stoull(x.c_str());
   Simhash::Simhasher::toBinaryString(todo,res);
   return wrap(res);
 }
@@ -27,8 +27,9 @@ IntegerVector cpp_ham_dist(CharacterVector x, CharacterVector y){
   IntegerVector res(bigx_size);
   
   for(auto it = 0; it != bigx_size; it++){
-    uint64_t todox = atoi(R_CHAR(STRING_ELT(bigx, it)));
-    uint64_t todoy = atoi(R_CHAR(STRING_ELT(bigy, it % bigy_size)));
+    uint64_t todox = stoull(R_CHAR(STRING_ELT(bigx, it)));
+    uint64_t todoy = stoull(R_CHAR(STRING_ELT(bigy, it % bigy_size)));
+
     res[it] = Simhash::Simhasher::distances(todox, todoy);
   }
   
@@ -36,7 +37,7 @@ IntegerVector cpp_ham_dist(CharacterVector x, CharacterVector y){
 }
 
 // [[Rcpp::export]]
-IntegerVector cpp_ham_dist_mat(CharacterVector x,CharacterVector y){
+IntegerVector cpp_ham_dist_mat(CharacterVector x, CharacterVector y){
   IntegerMatrix res(x.size(), y.size());
   auto x_size = x.size();
   auto y_size = y.size();
@@ -44,11 +45,10 @@ IntegerVector cpp_ham_dist_mat(CharacterVector x,CharacterVector y){
   SEXP yx = y;
   for(auto it = 0; it != x_size; it++){
     for(auto ij = 0; ij!=y_size; ij++){
-      uint64_t todox = atoi(R_CHAR(STRING_ELT(xx, it)));
-      uint64_t todoy = atoi(R_CHAR(STRING_ELT(yx, ij)));
+      uint64_t todox = stoull(R_CHAR(STRING_ELT(xx, it)));
+      uint64_t todoy = stoull(R_CHAR(STRING_ELT(yx, it)));
       res(it,ij) = Simhash::Simhasher::distances(todox, todoy);
     }
-
   }
   
   return wrap(res);
