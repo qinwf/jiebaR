@@ -47,6 +47,8 @@ library("jiebaR")
 
 [使用指南](http://qinwenfeng.com/jiebaR/) ：http://qinwenfeng.com/jiebaR/
 
+[正在撰写的文档](https://jiebaR.qinwf.com/) : https://jiebaR.qinwf.com/
+
 [Shiny 演示](https://qinwf.shinyapps.io/jiebaR-shiny/) ：https://qinwf.shinyapps.io/jiebaR-shiny/
 
 [细胞词库转换](https://github.com/qinwf/cidian) ：https://github.com/qinwf/cidian/
