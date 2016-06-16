@@ -46,7 +46,7 @@ IntegerVector cpp_ham_dist_mat(CharacterVector x, CharacterVector y){
   for(auto it = 0; it != x_size; it++){
     for(auto ij = 0; ij!=y_size; ij++){
       uint64_t todox = stoull(R_CHAR(STRING_ELT(xx, it)));
-      uint64_t todoy = stoull(R_CHAR(STRING_ELT(yx, it)));
+      uint64_t todoy = stoull(R_CHAR(STRING_ELT(yx, ij)));
       res(it,ij) = Simhash::Simhasher::distances(todox, todoy);
     }
   }
