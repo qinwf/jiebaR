@@ -49,6 +49,9 @@ SEXP jiebaR_jiebaclass_tag_tag(SEXP x, SEXP cutter);
 
 SEXP jiebaR_jiebaclass_tag_file(SEXP x, SEXP cutter);
 
+SEXP jiebaR_jiebaclass_tag_vec(SEXP x, SEXP cutter);
+
+
 SEXP jiebaR_set_query_threshold(SEXP num, SEXP cutter);
 
 SEXP jiebaR_add_user_word(SEXP x,SEXP tag, SEXP cutter);
@@ -150,6 +153,7 @@ static const R_CallMethodDef callMethods[] = {
     _RC(jiebaR_jiebaclass_level_cut_pair, 2)
     _RC(jiebaR_jiebaclass_tag_tag, 2)
     _RC(jiebaR_jiebaclass_tag_file, 2)
+    _RC(jiebaR_jiebaclass_tag_vec, 2)
     _RC(jiebaR_set_query_threshold, 2)
     _RC(jiebaR_add_user_word, 3)
     _RC(jiebaR_u64tobin, 1)
@@ -186,12 +190,13 @@ void R_init_jiebaR(DllInfo *info)
     _RJ(jiebaR_jiebaclass_level_cut_pair)
     _RJ(jiebaR_jiebaclass_tag_tag)
     _RJ(jiebaR_jiebaclass_tag_file)
+    _RJ(jiebaR_jiebaclass_tag_vec)  
     _RJ(jiebaR_set_query_threshold)
     _RJ(jiebaR_add_user_word)
     _RJ(jiebaR_u64tobin)
     _RJ(jiebaR_get_loc)
   // v3
-
+  // 
     R_RegisterCCallable("jiebaR", "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    );
     R_RegisterCCallable("jiebaR", "jiebaR_mp_ptr",      (DL_FUNC) &jiebaR_mp_ptr        );
     R_RegisterCCallable("jiebaR", "jiebaR_mp_cut",      (DL_FUNC) &jiebaR_mp_cut        );

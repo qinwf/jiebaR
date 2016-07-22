@@ -63,6 +63,13 @@ CharacterVector jiebaclass_tag_tag(CharacterVector& x, XPtr<JiebaClass> cutter){
 CharacterVector jiebaclass_tag_file(CharacterVector& x, XPtr<JiebaClass> cutter){
   return wrap(cutter->cut_tag_file(x));
 }
+
+
+// [[Rcpp::export]]
+CharacterVector  jiebaclass_tag_vec(vector<string>& code, XPtr<JiebaClass> cutter){
+  return wrap(cutter->vector_tag(code));
+}
+
 // [[Rcpp::export]]
 SEXP set_query_threshold(size_t num, XPtr<JiebaClass> cutter){
   return wrap(cutter->set_query_threshold(num));

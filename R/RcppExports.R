@@ -68,6 +68,10 @@ jiebaclass_tag_file <- function(x, cutter) {
     .Call('jiebaR_jiebaclass_tag_file', PACKAGE = 'jiebaR', x, cutter)
 }
 
+jiebaclass_tag_vec <- function(code, cutter) {
+    .Call('jiebaR_jiebaclass_tag_vec', PACKAGE = 'jiebaR', code, cutter)
+}
+
 set_query_threshold <- function(num, cutter) {
     .Call('jiebaR_set_query_threshold', PACKAGE = 'jiebaR', num, cutter)
 }

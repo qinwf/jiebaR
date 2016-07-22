@@ -232,3 +232,18 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
   }
   result
 }
+
+#' Tag the a character vector
+#' 
+#' @param string a character vector 
+#' @param jiebar jiebaR Worker.
+#' @export
+vector_tag = function(string, jiebar){
+  stopifnot("jieba" %in% class(jiebar))
+  if(.Platform$OS.type == "windows"){
+    string = enc2utf8(string)
+  }
+  res = jiebaclass_tag_vec(string, jiebar$worker)
+  Encoding(res) = "UTF-8"
+  res
+}

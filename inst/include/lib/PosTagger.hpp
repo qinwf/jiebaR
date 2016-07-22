@@ -48,6 +48,25 @@ class PosTagger {
     }
     return !res.empty();
   }
+  bool simpleTag(vector<string>& CutRes,vector<pair<string, string> >& res) const{
+    const DictUnit *tmp = NULL;
+    Unicode unico;
+    const DictTrie * dict = segment_.GetDictTrie();
+    assert(dict != NULL);
+    for (vector<string>::iterator itr = CutRes.begin(); itr != CutRes.end(); ++itr) {
+      if (!TransCode::Decode(*itr, unico)) {
+        LOG(ERROR) << "Decode failed.";
+        return false;
+      }
+      tmp = dict->Find(unico.begin(), unico.end());
+      if (tmp == NULL || tmp->tag.empty()) {
+        res.push_back(make_pair(*itr, SpecialRule(unico)));
+      } else {
+        res.push_back(make_pair(*itr, tmp->tag));
+      }
+    }
+    return !res.empty();
+  }
  private:
   const char* SpecialRule(const Unicode& unicode) const {
     size_t m = 0;

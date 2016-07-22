@@ -66,6 +66,9 @@ class Jieba {
   void Tag(const string& sentence, vector<pair<string, string> >& words) const {
     pos_tagger_.Tag(sentence, words);
   }
+  void simpleTag(vector<string>& sentence, vector<pair<string, string> >& words) const {
+    pos_tagger_.simpleTag(sentence, words);
+  }
   bool InsertUserWord(const string& word, const string& tag = UNKNOWN_TAG) {
     return dict_trie_.InsertUserWord(word, tag);
   }

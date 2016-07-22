@@ -153,6 +153,42 @@ public:
     filter(stopWords,words);
     return wrap(words);
   }
+  CharacterVector vector_tag(vector<string>& x)
+  {
+    vector<pair<string, string> > res;
+    cutter.simpleTag(x, res);
+    //unsigned int it;
+    vector<string> m;
+    m.reserve(res.size());
+    vector<string> atb;
+    atb.reserve(res.size());
+    
+    if(stopWords.size()>0){
+      for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
+      {
+        
+        if (stopWords.end() == stopWords.find((*it).first))
+        {
+          m.push_back((*it).first);
+          atb.push_back((*it).second);
+        }
+        
+      }	
+    } else {
+      for (vector<pair<string, string> >::iterator it = res.begin(); it != res.end(); it++)
+      {
+        m.push_back((*it).first);
+        atb.push_back((*it).second);
+      }
+    }
+    
+    CharacterVector m_cv(m.begin(),m.end());
+    CharacterVector atb_cv(atb.begin(),atb.end()); 
+    m_cv.attr("names") = atb_cv;
+    
+    return wrap(m_cv);
+    
+  }
   CharacterVector cut_tag_tag(CharacterVector& x)
   {
     const char *const test_lines = x[0];
@@ -436,6 +472,8 @@ public:
     rhsm.attr("names") = rhsatb;
 
     IntegerVector hashvec;
+    Rcout<<lhsres<<"\n " << rhsres <<"\n"<<  hash.distances(lhsres, rhsres) <<endl;
+    
     hashvec.push_back(hash.distances(lhsres, rhsres));
     return List::create( Named("distance") = hashvec,
                               Named("lhs") = lhsm,

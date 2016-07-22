@@ -191,6 +191,18 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// jiebaclass_tag_vec
+CharacterVector jiebaclass_tag_vec(vector<string>& code, XPtr<JiebaClass> cutter);
+RcppExport SEXP jiebaR_jiebaclass_tag_vec(SEXP codeSEXP, SEXP cutterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< vector<string>& >::type code(codeSEXP);
+    Rcpp::traits::input_parameter< XPtr<JiebaClass> >::type cutter(cutterSEXP);
+    __result = Rcpp::wrap(jiebaclass_tag_vec(code, cutter));
+    return __result;
+END_RCPP
+}
 // set_query_threshold
 SEXP set_query_threshold(size_t num, XPtr<JiebaClass> cutter);
 RcppExport SEXP jiebaR_set_query_threshold(SEXP numSEXP, SEXP cutterSEXP) {
