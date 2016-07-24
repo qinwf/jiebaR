@@ -5,8 +5,9 @@ Changes in Version 0.9
    o Add: apply_list to handle nested list input data
    o Add: simhash_dist to compute distance of simhash values
    o Add: simhash_dist_mat to compute compute distance matrix of simhash values
+   o Add: vector_tag to tag a character vector
 
-   
+
 Changes in Version 0.8.2 (2016-4-18)
 =====================================
 

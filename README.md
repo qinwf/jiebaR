@@ -34,7 +34,7 @@ cc["这是一个测试"] # or segment("这是一个测试", cc)
 # [1] "这是" "一个" "测试"
 ```
 
-同时还可以通过Github安装[开发版]，建议使用 gcc >= 4.6 编译，Windows需要安装 [Rtools](https://cran.r-project.org/bin/windows/Rtools/) ：
+同时还可以通过Github安装[开发版]，建议使用 gcc >= 4.9 编译，Windows需要安装 [Rtools](https://cran.r-project.org/bin/windows/Rtools/) ：
 
 ```r
 library(devtools)
