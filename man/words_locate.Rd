@@ -15,4 +15,8 @@ a list with words, start position, and end position
 \description{
 Get text location
 }
+\examples{
+words_locate(c("this","is","a", "test"))
+
+}
 

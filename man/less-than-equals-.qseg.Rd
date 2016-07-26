@@ -20,12 +20,16 @@ qseg
 \item{code}{a string}
 }
 \description{
+Depreciated.
+}
+\details{
+Quick mode is depreciated, and is scheduled to be remove in v0.11.0. If you want to keep this feature, please submit a issue on GitHub page to let me know.
+
 Quick mode symbol to do segmentation, keyword extraction 
 and speech tagging. This symbol will initialize a \code{quick_worker} 
 when it is first called, and will do segmentation or other types of work 
 immediately.
-}
-\details{
+
 You can reset the default model setting by \code{$}, and 
 it will change the default setting the next time you use quick mode. 
 If you only want to change the parameter temporarily, you can reset the 

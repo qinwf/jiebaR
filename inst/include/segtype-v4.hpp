@@ -472,8 +472,7 @@ public:
     rhsm.attr("names") = rhsatb;
 
     IntegerVector hashvec;
-    Rcout<<lhsres<<"\n " << rhsres <<"\n"<<  hash.distances(lhsres, rhsres) <<endl;
-    
+
     hashvec.push_back(hash.distances(lhsres, rhsres));
     return List::create( Named("distance") = hashvec,
                               Named("lhs") = lhsm,

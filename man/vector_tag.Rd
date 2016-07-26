@@ -14,4 +14,12 @@ vector_tag(string, jiebar)
 \description{
 Tag the a character vector
 }
+\examples{
+\dontrun{
+cc = worker()
+(res = cc["this is test"])
+vector_tag(res, cc)
+}
+
+}
 

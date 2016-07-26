@@ -28,6 +28,9 @@ new_user_word = function(worker, words, tags){
 #' @param words a string
 #' @return a list with words, start position, and end position
 #' @export
+#' @examples 
+#' words_locate(c("this","is","a", "test"))
+#' 
 words_locate = function(words){
   if (.Platform$OS.type == "windows") {
     words <- enc2utf8(words)

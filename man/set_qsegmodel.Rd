@@ -16,6 +16,9 @@ reset_qsegmodel()
 \item{qsegmodel}{a list which has the same structure as the return value of get_qsegmodel}
 }
 \description{
+Depreciated.
+}
+\details{
 These function can get and modify quick mode model. \code{get_qsegmodel} returns
 the default model parameters. \code{set_qsegmodel} can modify quick mode model 
 using a list, which has the same structure as the return value of get_qsegmodel.

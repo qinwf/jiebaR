@@ -1,5 +1,9 @@
 #' Quick mode symbol
 #' 
+#' Depreciated.
+#' 
+#' Quick mode is depreciated, and is scheduled to be remove in v0.11.0. If you want to keep this feature, please submit a issue on GitHub page to let me know.
+#' 
 #' Quick mode symbol to do segmentation, keyword extraction 
 #' and speech tagging. This symbol will initialize a \code{quick_worker} 
 #' when it is first called, and will do segmentation or other types of work 
@@ -35,6 +39,8 @@
 `<=.qseg`<-function(qseg, code){
   if(!exists("quick_worker",envir = .GlobalEnv ,inherits = F) || 
        .GlobalEnv$quick_worker$PrivateVarible$timestamp != TIMESTAMP){
+    
+    warning("Quick mode is depreciated, and is scheduled to be remove in v0.11.0. If you want to keep this feature, please submit a issue on GitHub page to let me know.")
     
     if(exists("qseg",envir = .GlobalEnv,inherits = FALSE ) ) 
       rm("qseg",envir = .GlobalEnv)
@@ -448,6 +454,8 @@ get_qsegmodel<-function(){
 }
 
 #' Set quick mode model
+#' 
+#' Depreciated.
 #' 
 #' These function can get and modify quick mode model. \code{get_qsegmodel} returns
 #' the default model parameters. \code{set_qsegmodel} can modify quick mode model 
