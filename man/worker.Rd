@@ -10,19 +10,19 @@ worker(type = "mix", dict = DICTPATH, hmm = HMMPATH, user = USERPATH,
   output = NULL, bylines = F, user_weight = "max")
 }
 \arguments{
-\item{type}{The type of jiebaR workers including \code{mix}, \code{mp}, \code{hmm}, 
+\item{type}{The type of jiebaR workers including \code{mix}, \code{mp}, \code{hmm}, \code{full}, 
 \code{query}, \code{tag}, \code{simhash}, and \code{keywords}.}
 
 \item{dict}{A path to main dictionary, default value is \code{DICTPATH},
-and the value is used for \code{mix}, \code{mp}, \code{query},
+and the value is used for \code{mix}, \code{mp}, \code{query}, \code{full}, 
 \code{tag}, \code{simhash} and \code{keywords} workers.}
 
-\item{hmm}{A path to Hidden Markov Model, default value is \code{HMMPATH}, 
+\item{hmm}{A path to Hidden Markov Model, default value is \code{HMMPATH}, \code{full}, 
 and the value is used for \code{mix}, \code{hmm}, \code{query}, 
  \code{tag}, \code{simhash} and \code{keywords} workers.}
 
-\item{user}{A path to user dictionary, default value is \code{USERPATH},
-and the value is used for \code{mix}, \code{tag} and \code{mp} workers.}
+\item{user}{A path to user dictionary, default value is \code{USERPATH}, 
+and the value is used for \code{mix}, \code{full},  \code{tag} and \code{mp}  workers.}
 
 \item{idf}{A path to inverse document frequency, default value is \code{IDFPATH},
 and the value is used for \code{simhash} and \code{keywords} workers.}
@@ -66,13 +66,13 @@ is used for segmentation and speech tagging  workers.}
 }
 \value{
 This function returns an environment containing segmentation 
-settings and worker. Public settings can be modified and got 
+settings and worker. Public settings can be modified 
 using \code{$}.
 }
 \description{
 This function can initialize jiebaR workers. You can initialize different 
 kinds of workers including \code{mix}, \code{mp}, \code{hmm}, 
-\code{query}, \code{tag}, \code{simhash}, and \code{keywords}.
+\code{query}, \code{full}, \code{tag}, \code{simhash}, and \code{keywords}.
 see Detail for more information.
 }
 \details{
@@ -98,10 +98,13 @@ and Hidden Markov Model to construct segmentation.  \code{dict}
 \code{hmm} and \code{user} should be provided when initializing 
 jiebaR worker.
 
+
 QuerySegment model uses MixSegment to construct segmentation and then 
 enumerates all the possible long words in the dictionary.  \code{dict}, 
 \code{hmm} and \code{qmax} should be provided when initializing 
 jiebaR worker.
+
+FullSegment model will enumerates all the possible words in the dictionary.
 
 Speech Tagging worker uses MixSegment model to cut word and 
 tag each word after segmentation using labels compatible with 
@@ -125,9 +128,8 @@ jiebaR worker.
 words = "hello world"
 test1 = worker()
 test1
-test1 <= words}
+test1 <= words
 
-\dontrun{
 test <= "./temp.txt"
  
 engine2 = worker("mix",symbol = T)
@@ -139,15 +141,11 @@ engine2 <= words
 
 engine3 = worker(type = "mix", dict = "dict_path",symbol = T)
 engine3 <= "./temp.txt"
- }
- \dontrun{
+
 keys = worker("keywords", topn = 1)
 keys <= words
 tagger = worker("tag")
 tagger <= words}
 
-}
-\author{
-Qin Wenfeng
 }
 

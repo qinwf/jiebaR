@@ -30,7 +30,6 @@
 #' jiebaR worker.
 #' 
 #' There is a symbol \code{<=} for this function.
-#' @author Qin Wenfeng
 #' @param code A Chinese sentence or the path of a text file. 
 #' @param jiebar jiebaR Worker.
 #' @param mod change default result type, value can be "mix","hmm","query","full","level", or "mp"

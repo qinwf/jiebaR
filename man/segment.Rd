@@ -46,9 +46,6 @@ jiebaR worker.
 
 There is a symbol \code{<=} for this function.
 }
-\author{
-Qin Wenfeng
-}
 \seealso{
 \code{\link{<=.segment}} \code{\link{worker}}
 }

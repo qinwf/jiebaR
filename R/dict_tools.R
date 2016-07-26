@@ -21,13 +21,11 @@ show_dictpath<-function(){
 #' 
 #' There are two column in the user dictionary. The first column is the word, 
 #' and the second column is speech tag using labels compatible with ictclas.
-#' Frequency of every word in the user dictionary will be the maximum number of 
-#' the system dictionary. If you want to provide the frequency of a new word,
+#' Frequency of every word in the user dictionary is set by user_weight in \code{worker} function. If you want to provide the frequency of a new word,
 #' you can put it in the system dictionary.
 #' 
 #' @param name the name of dictionary including \code{user}, \code{system},
 #' \code{stop_word}.
-#' @author Qin Wenfeng 
 #' @export
 edit_dict<-function(name = "user"){
   if(!(name %in% c("user","system","stop_word"))){
