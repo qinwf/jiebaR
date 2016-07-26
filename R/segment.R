@@ -60,7 +60,7 @@ segment <- function(code, jiebar,mod = NULL) {
       output<-jiebar$output
     }
     encoding<-jiebar$encoding
-    if(jiebar$detect==T)  encoding<-filecoding(code[1])
+    if(jiebar$detect==T)  encoding<-file_coding(code[1])
     FILESMODE <- T
     res = cutl(code = code[1], jiebar=jiebar,symbol = jiebar$symbol, lines = jiebar$lines, 
          output = output, encoding = encoding, write_file= jiebar$write,FILESMODE = FILESMODE, mod = mod)

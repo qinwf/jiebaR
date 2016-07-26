@@ -29,7 +29,7 @@ keywords <- function(code, jiebar) {
   if (file.exists(code) && jiebar$write != "NOFILE") {
     encoding <- jiebar$encoding
     
-    if(jiebar$detect == T)  encoding <- filecoding(code)
+    if(jiebar$detect == T)  encoding <- file_coding(code)
     keyl(code = code, jiebar = jiebar, encoding = encoding)
     
   } else {

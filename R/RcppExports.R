@@ -8,8 +8,8 @@
 #' @author Wu Yongwei, Qin wenfeng
 #' @references \url{https://github.com/adah1972/tellenc}
 #' @export
-filecoding <- function(file) {
-    .Call('jiebaR_filecoding', PACKAGE = 'jiebaR', file)
+file_coding <- function(file) {
+    .Call('jiebaR_file_coding', PACKAGE = 'jiebaR', file)
 }
 
 get_idf_cpp <- function(x, stop_) {

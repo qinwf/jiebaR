@@ -30,7 +30,7 @@ simhash <- function(code, jiebar) {
   
   if (file.exists(code) && jiebar$write != "NOFILE") {
     encoding <- jiebar$encoding
-    if(jiebar$detect == T)  encoding<-filecoding(code)
+    if(jiebar$detect == T)  encoding<-file_coding(code)
     simhashl(code = code, jiebar = jiebar, encoding = encoding)
   } else {
     if (.Platform$OS.type == "windows") {
@@ -136,7 +136,7 @@ distance <- function(codel,coder,jiebar){
   encoding <- jiebar$encoding
   
   if (file.exists(codel)) {
-    if(jiebar$detect == T)  encoding <- filecoding(codel)
+    if(jiebar$detect == T)  encoding <- file_coding(codel)
     codel <- distancel(codel,jiebar,encoding)
   } else{
     if (.Platform$OS.type == "windows") {
@@ -144,7 +144,7 @@ distance <- function(codel,coder,jiebar){
     }
   }
   if (file.exists(coder) && jiebar$write != "NOFILE") {
-    if(jiebar$detect == T)  encoding <- filecoding(coder)
+    if(jiebar$detect == T)  encoding <- file_coding(coder)
     coder <- distancel(coder,jiebar,encoding)
   } else{
     if (.Platform$OS.type == "windows") {

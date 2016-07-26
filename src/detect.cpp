@@ -325,7 +325,7 @@ static const char* check_ucs_bom(const unsigned char* const buffer,
   } patterns[] = {
     { "ucs-4",     "\x00\x00\xFE\xFF",  4 },
     { "ucs-4le",   "\xFF\xFE\x00\x00",  4 },
-    { "utf-8",     "\xEF\xBB\xBF",      3 },
+    { "UTF-8",     "\xEF\xBB\xBF",      3 },
     { "utf-16",    "\xFE\xFF",          2 },
     { "utf-16le",  "\xFF\xFE",          2 },
     { NULL,        NULL,                0 }
@@ -519,7 +519,7 @@ const char* tellenc(const unsigned char* const buffer, const size_t len)
     return "ascii";
   } else if (is_valid_utf8) {
     // Only valid UTF-8 sequences
-    return "utf-8";
+    return "UTF-8";
   } else if (const char* enc = search_freq_dbytes(dbyte_char_cnt)) {
     return enc;
   } else if (dbyte_hihi_cnt * 100 / dbyte_cnt < 5) {
@@ -553,7 +553,7 @@ const char* tellenc_simplify(const char* const buffer, const size_t len)
 //' @references \url{https://github.com/adah1972/tellenc}
 //' @export
 // [[Rcpp::export]]
-CharacterVector filecoding(CharacterVector file){
+CharacterVector file_coding(CharacterVector file){
   const char *const filename = file[0];
   FILE *fp = fopen(filename, "rb");
   if (fp == NULL)

@@ -48,3 +48,10 @@ edit_dict<-function(name = "user"){
     file.edit(file.path(path.package("jiebaRD"),"dict",dictname))
   }
 }
+
+#' @rdname file_coding
+#' @export
+filecoding = function(file){
+  warning("filecoding is renamed to file_coding, filecoding will be removed in v0.11.0.")
+  file_coding(file)
+}

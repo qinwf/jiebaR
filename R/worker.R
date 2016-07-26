@@ -23,7 +23,7 @@
 #'  and the value is used for \code{simhash} and \code{keywords} workers.
 #'   
 #' @param stop_word A path to stop word dictionary, default value is \code{STOPPATH},
-#'  and the value is used for \code{simhash}, \code{keywords}, \code{tagger} and \code{segment} workers. Encoding of this file is checked by \code{filecoding}, and it should be UTF-8 encoding. For \code{segment} workers, the default \code{STOPPATH} will not be used, so you should provide another file path.
+#'  and the value is used for \code{simhash}, \code{keywords}, \code{tagger} and \code{segment} workers. Encoding of this file is checked by \code{file_coding}, and it should be UTF-8 encoding. For \code{segment} workers, the default \code{STOPPATH} will not be used, so you should provide another file path.
 #'   
 #' @param write Whether to write the output to a file, or return 
 #'   a the result in a object. This value will only be used when 
@@ -43,7 +43,7 @@
 #' @param user_weight the weight of the user dict words. "min" "max" or "median".
 #'   
 #' @param detect Whether to detect the encoding of input file 
-#'  using \code{filecoding} function. If encoding 
+#'  using \code{file_coding} function. If encoding 
 #'  detection is enable, the value of \code{encoding} will be 
 #'  ignore.
 #'  
@@ -168,7 +168,7 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
     if(!file.exists(stop2)){
       stop("There is no such file for stop words.")
     }
-    encodings = suppressWarnings(filecoding(stop2))
+    encodings = suppressWarnings(file_coding(stop2))
     if(encodings != "UTF-8" && encodings != "binary"){
       cat("Encoding of stop words file: ",encodings,"\n")
       warning("stop words file should be UTF-8 encoding.")
@@ -222,7 +222,7 @@ read_stop_words<- function(filepath){
   if(!file.exists(filepath)){
     stop("There is no such file for stopwords.")
   }
-  res = readLines(filepath,encoding = filecoding(filepath))
+  res = readLines(filepath,encoding = file_coding(filepath))
   class(res) <- "stopword_list"
   res
 }

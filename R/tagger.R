@@ -44,7 +44,7 @@ tagging<- function(code, jiebar) {
       output<-jiebar$output
     }
     
-    if(jiebar$detect==T)  encoding<-filecoding(code[1])
+    if(jiebar$detect==T)  encoding<-file_coding(code[1])
     
     FILESMODE <- T
     
@@ -238,6 +238,13 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
 #' @param string a character vector 
 #' @param jiebar jiebaR Worker.
 #' @export
+#' @examples 
+#' \dontrun{
+#' cc = worker()
+#' (res = cc["this is test"])
+#' vector_tag(res, cc)
+#' }
+#' 
 vector_tag = function(string, jiebar){
   stopifnot("jieba" %in% class(jiebar))
   if(.Platform$OS.type == "windows"){

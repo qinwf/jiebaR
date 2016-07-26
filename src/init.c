@@ -4,7 +4,7 @@
 #include <R_ext/Rdynload.h>
 
 // v3
-SEXP jiebaR_filecoding(SEXP fileSEXP);
+SEXP jiebaR_file_coding(SEXP fileSEXP);
 
 SEXP jiebaR_key_ptr(SEXP nSEXP, SEXP dictSEXP, SEXP modelSEXP, SEXP idfSEXP, SEXP stopSEXP, SEXP userSEXP);
 
@@ -122,7 +122,7 @@ SEXP jiebaR_tag_file(SEXP xSEXP, SEXP cutterSEXP){
 
 
 static const R_CallMethodDef callMethods[] = {
-    { "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    , 1 },
+    { "jiebaR_file_coding",  (DL_FUNC) &jiebaR_file_coding    , 1 },
     { "jiebaR_mp_ptr",      (DL_FUNC) &jiebaR_mp_ptr        , 3 },
     { "jiebaR_mp_cut",      (DL_FUNC) &jiebaR_mp_cut        , 2 },
     { "jiebaR_mix_ptr",     (DL_FUNC) &jiebaR_mix_ptr       , 4 },
@@ -197,7 +197,7 @@ void R_init_jiebaR(DllInfo *info)
     _RJ(jiebaR_get_loc)
   // v3
   // 
-    R_RegisterCCallable("jiebaR", "jiebaR_filecoding",  (DL_FUNC) &jiebaR_filecoding    );
+    R_RegisterCCallable("jiebaR", "jiebaR_file_coding",  (DL_FUNC) &jiebaR_file_coding    );
     R_RegisterCCallable("jiebaR", "jiebaR_mp_ptr",      (DL_FUNC) &jiebaR_mp_ptr        );
     R_RegisterCCallable("jiebaR", "jiebaR_mp_cut",      (DL_FUNC) &jiebaR_mp_cut        );
     R_RegisterCCallable("jiebaR", "jiebaR_mix_ptr",     (DL_FUNC) &jiebaR_mix_ptr       );

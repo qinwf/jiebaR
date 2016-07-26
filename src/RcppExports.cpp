@@ -6,14 +6,14 @@
 
 using namespace Rcpp;
 
-// filecoding
-CharacterVector filecoding(CharacterVector file);
-RcppExport SEXP jiebaR_filecoding(SEXP fileSEXP) {
+// file_coding
+CharacterVector file_coding(CharacterVector file);
+RcppExport SEXP jiebaR_file_coding(SEXP fileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< CharacterVector >::type file(fileSEXP);
-    __result = Rcpp::wrap(filecoding(file));
+    __result = Rcpp::wrap(file_coding(file));
     return __result;
 END_RCPP
 }
