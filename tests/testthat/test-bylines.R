@@ -1,6 +1,7 @@
 context("Bylines tests")
 
-skip_on_cran({
+run_byline = function(){
+  skip_on_cran()
   cutter = worker(bylines = TRUE )
   test_that("bylines words input", {
     expect_identical({cutter[c("这是非常的好","大家好才是真的好")]},
@@ -36,5 +37,7 @@ skip_on_cran({
                             )
     )
   })
-})
+}
+
+run_byline()
 

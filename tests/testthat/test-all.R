@@ -48,9 +48,16 @@ test_that("filter_words", {
                            "过滤", "分词", "效果"), c("测试", "文本",
                             "用于", "测试", "过滤", "分词", "效果"))
   )
-  expect_identical({freq(c("测试", "测试", "文本","大风","是的是的"))},structure(list(char = c("是的是的", "测试", "大风", "文本"),freq = c(1, 2, 1, 1)), .Names = c("char", "freq"), row.names = c(NA,-4L), class = "data.frame"))
+  res = freq(c("测试", "测试", "文本","大风","是的是的"))
+  res = res[order(res[,1]),]
+  expect_identical( res,
+                   structure(list(char = c("测试", "大风", "是的是的", "文本"), freq = c(2, 1, 1, 1)), .Names = c("char", "freq"), row.names = c(4L, 2L, 1L, 3L), class = "data.frame"))
   
-  expect_identical({freq(cutter["今天是周二，是一个晴天。"])},structure(list(char = c("是", "周二", "晴天", "一个", "今天"),freq = c(2, 1, 1, 1, 1)), .Names = c("char", "freq"), row.names = c(NA, -5L), class = "data.frame"))
+  res = freq(cutter["今天是周二，是一个晴天。"])
+  res = res[order(res[,1]),]
+  
+  expect_identical( res,
+                   structure(list(char = c("今天", "晴天", "是", "一个", "周二"), freq = c(1, 1, 2, 1, 1)), .Names = c("char", "freq"), row.names = c(5L, 2L, 4L, 1L, 3L), class = "data.frame"))
 })
 
 test_that("words_locate", {
