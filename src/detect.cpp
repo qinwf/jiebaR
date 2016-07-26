@@ -1,9 +1,8 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-
 /*
-* Copyright (C) 2006-2010 Wu Yongwei <wuyongwei@gmail.com>
+* Copyright (C) 2006-2016 Wu Yongwei <wuyongwei@gmail.com>
 *
 * This software is provided 'as-is', without any express or implied
 * warranty.  In no event will the authors be held liable for any
@@ -24,44 +23,34 @@ using namespace Rcpp;
 *
 *
 * The latest version of this software should be available at:
-*      <URL:http://wyw.dcweb.cn/>
+*      <URL:https://github.com/adah1972/tellenc>
 *
 */
 
-
 /**
-* * * @file    tellenc.cpp
-* * *
-* * * Program to detect the encoding of text.  It currently supports ASCII,
-* * * UTF-8, UTF-16/32 (little-endian or big-endian), Latin1, Windows-1252,
-* * * CP437, GB2312, GBK, Big5, and SJIS.
-* * *
-* * * @version 1.15, 2010/03/28
-* * * @author  Wu Yongwei
-* * */
+* @file    tellenc.cpp
+*
+* Program to detect the encoding of text.  It currently supports ASCII,
+* UTF-8, UTF-16/32 (little-endian or big-endian), Latin1, Windows-1252,
+* CP437, GB2312, GBK, Big5, and SJIS, among others.
+*
+* @version 1.21, 2016/03/07
+* @author  Wu Yongwei
+*/
 
 #include <algorithm>        // sort
-#include <functional>       // binary_function
 #include <map>              // map
 #include <memory>           // pair
 #include <vector>           // vector
 #include <ctype.h>          // isprint
 #include <errno.h>          // errno
-//#include <stdio.h>          // fopen/fclose/fprintf/printf/puts
+#include <stdio.h>          // fopen/fclose/fprintf/printf/puts
 #include <stdlib.h>         // exit
 #include <string.h>         // memcmp/strcmp/strerror
 
 #ifndef _WIN32
 #define __cdecl
 #endif
-
-/* The following is the way what I expected MSVC to work: treat the text
-* here as in UTF-8, so it won't emit warnings for the UTF-8 comments
-* below.  It seems it never really works: it is unnecessary in versions
-* prior to Visual C++ 2005, and will even cause errors beginning in
-* that version.  The new versions of MSVC accept the UTF-8 BOM
-* character to interpret the file correctly, but the BOM causes errors
-* in MSVC 6 and GCC 2/3. */
 
 #ifndef TELLENC_BUFFER_SIZE
 #define TELLENC_BUFFER_SIZE 200000
@@ -70,31 +59,28 @@ using namespace Rcpp;
 using namespace std;
 
 typedef unsigned short uint16_t;
-typedef pair<uint16_t, size_t> char_count_t;
+typedef unsigned int   uint32_t;
+typedef pair<uint16_t, uint32_t>  char_count_t;
+typedef map<uint16_t, uint32_t>   char_count_map_t;
+typedef vector<char_count_t>      char_count_vec_t;
 
-struct freq_analysis_data_t
-{
+struct freq_analysis_data_t {
   uint16_t    dbyte;
-  const char *enc;
+  const char* enc;
 };
 
-struct greater_char_count :
-  public binary_function<const char_count_t &,
-                         const char_count_t &,
-                         bool>
-{
-  result_type operator()(first_argument_type lhs, second_argument_type rhs)
+struct greater_char_count {
+  bool operator()(const char_count_t& lhs, const char_count_t& rhs)
   {
-    if (lhs.second > rhs.second)
-    {
+    if (lhs.second > rhs.second) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
 };
 
-enum UTF8_State
-{
+enum UTF8_State {
   UTF8_INVALID,
   UTF8_1,
   UTF8_2,
@@ -112,9 +98,29 @@ static const int ODD  = 1;
 
 static UTF8_State utf8_char_table[MAX_CHAR];
 
-static freq_analysis_data_t freq_analysis_data[] =
-  {
+static freq_analysis_data_t freq_analysis_data[] = {
+  { 0x9a74, "windows-1250" },         // "št" (Czech)
+  { 0xe865, "windows-1250" },         // "če" (Czech)
+  { 0xf865, "windows-1250" },         // "ře" (Czech)
+  { 0xe167, "windows-1250" },         // "ág" (Hungarian)
+  { 0xe96c, "windows-1250" },         // "él" (Hungarian)
+  { 0xb36f, "windows-1250" },         // "ło" (Polish)
+  { 0xea7a, "windows-1250" },         // "ęz" (Polish)
+  { 0xf377, "windows-1250" },         // "ów" (Polish)
+  { 0x9d20, "windows-1250" },         // "ť " (Slovak)
+  { 0xfa9d, "windows-1250" },         // "úť" (Slovak)
+  { 0x9e69, "windows-1250" },         // "ži" (Slovenian)
+  { 0xe869, "windows-1250" },         // "či" (Slovenian)
+  { 0xe020, "windows-1252" },         // "à " (French)
+  { 0xe920, "windows-1252" },         // "é " (French)
+  { 0xe963, "windows-1252" },         // "éc" (French)
+  { 0xe965, "windows-1252" },         // "ée" (French)
+  { 0xe972, "windows-1252" },         // "ér" (French)
   { 0xe4e4, "windows-1252" },         // "ää" (Finnish)
+  { 0xe474, "windows-1252" },         // "ät" (German)
+  { 0xfc72, "windows-1252" },         // "ür" (German)
+  { 0xed6e, "windows-1252" },         // "ín" (Spanish)
+  { 0xf36e, "windows-1252" },         // "ón" (Spanish)
   { 0x8220, "cp437" },                // "é " (French)
   { 0x8263, "cp437" },                // "éc" (French)
   { 0x8265, "cp437" },                // "ée" (French)
@@ -196,7 +202,40 @@ static freq_analysis_data_t freq_analysis_data[] =
   { 0x9094, "sjis" },                 // "数"
   { 0x93fa, "sjis" },                 // "日"
   { 0x95f1, "sjis" },                 // "報"
-  };
+  { 0xa1bc, "euc-jp" },               // "ー"
+  { 0xa4bf, "euc-jp" },               // "た"
+  { 0xa4ca, "euc-jp" },               // "な"
+  { 0xa4cb, "euc-jp" },               // "に"
+  { 0xa4ce, "euc-jp" },               // "の"
+  { 0xa4de, "euc-jp" },               // "ま"
+  { 0xa4f2, "euc-jp" },               // "を"
+  { 0xa5c8, "euc-jp" },               // "ト"
+  { 0xa5f3, "euc-jp" },               // "ン"
+  { 0xb2f1, "euc-jp" },               // "会"
+  { 0xbfcd, "euc-jp" },               // "人"
+  { 0xbff4, "euc-jp" },               // "数"
+  { 0xc6fc, "euc-jp" },               // "日"
+  { 0xcaf3, "euc-jp" },               // "報"
+  { 0xc0cc, "euc-kr" },               // "이"
+  { 0xb0fa, "euc-kr" },               // "과"
+  { 0xb1e2, "euc-kr" },               // "기"
+  { 0xb4c2, "euc-kr" },               // "는"
+  { 0xb7ce, "euc-kr" },               // "로"
+  { 0xb1db, "euc-kr" },               // "글"
+  { 0xc5e4, "euc-kr" },               // "토"
+  { 0xc1a4, "euc-kr" },               // "정"
+  { 0xc920, "koi8-r" },               // "и "
+  { 0xc7cf, "koi8-r" },               // "го"
+  { 0xcbcf, "koi8-r" },               // "ко"
+  { 0xd3cb, "koi8-r" },               // "ск"
+  { 0xd3d4, "koi8-r" },               // "ст"
+  { 0xa6a7, "koi8-u" },               // "ії"
+  { 0xa6ce, "koi8-u" },               // "ін"
+  { 0xa6d7, "koi8-u" },               // "ів"
+  { 0xa7ce, "koi8-u" },               // "їн"
+  { 0xd0cf, "koi8-u" },               // "по"
+  { 0xd4c9, "koi8-u" },               // "ти"
+};
 
 static size_t nul_count_byte[2];
 static size_t nul_count_word[2];
@@ -204,15 +243,15 @@ static size_t nul_count_word[2];
 static bool is_binary = false;
 static bool is_valid_utf8 = true;
 static bool is_valid_latin1 = true;
+static uint32_t dbyte_cnt = 0;
+static uint32_t dbyte_hihi_cnt = 0;
 
 bool verbose = false;
 
 static inline bool is_non_text(char ch)
 {
-  for (size_t i = 0; i < sizeof(NON_TEXT_CHARS); ++i)
-  {
-    if (ch == NON_TEXT_CHARS[i])
-    {
+  for (size_t i = 0; i < sizeof(NON_TEXT_CHARS); ++i) {
+    if (ch == NON_TEXT_CHARS[i]) {
       return true;
     }
   }
@@ -224,169 +263,143 @@ void init_utf8_char_table()
   int ch = 0;
   utf8_char_table[ch] = UTF8_INVALID;
   ++ch;
-  for (; ch <= 0x7f; ++ch)
-  {
+  for (; ch <= 0x7f; ++ch) {
     utf8_char_table[ch] = UTF8_1;
   }
-  for (; ch <= 0xbf; ++ch)
-  {
+  for (; ch <= 0xbf; ++ch) {
     utf8_char_table[ch] = UTF8_TAIL;
   }
-  for (; ch <= 0xc1; ++ch)
-  {
+  for (; ch <= 0xc1; ++ch) {
     utf8_char_table[ch] = UTF8_INVALID;
   }
-  for (; ch <= 0xdf; ++ch)
-  {
+  for (; ch <= 0xdf; ++ch) {
     utf8_char_table[ch] = UTF8_2;
   }
-  for (; ch <= 0xef; ++ch)
-  {
+  for (; ch <= 0xef; ++ch) {
     utf8_char_table[ch] = UTF8_3;
   }
-  for (; ch <= 0xf4; ++ch)
-  {
+  for (; ch <= 0xf4; ++ch) {
     utf8_char_table[ch] = UTF8_4;
   }
-  for (; ch <= 0xff; ++ch)
-  {
+  for (; ch <= 0xff; ++ch) {
     utf8_char_table[ch] = UTF8_INVALID;
   }
 }
 
-static void init_char_count(char_count_t char_cnt[])
+static void init_sbyte_char_count(char_count_t sbyte_char_cnt[])
 {
-  for (size_t i = 0; i < MAX_CHAR; ++i)
-  {
-    char_cnt[i].first = i;
-    char_cnt[i].second = 0;
+  for (size_t i = 0; i < MAX_CHAR; ++i) {
+    sbyte_char_cnt[i].first = i;
+    sbyte_char_cnt[i].second = 0;
   }
 }
 
-//  static void print_char_cnt(const char_count_t char_cnt[])
-//  {
-//    for (size_t i = 0; i < MAX_CHAR; ++i)
-//    {
-//      unsigned char ch = (unsigned char)char_cnt[i].first;
-//      if (char_cnt[i].second == 0)
-//      break;
-//      printf("%.2x ('%c'): %-6u    ", ch,
-//      isprint(ch) ? ch : '?', char_cnt[i].second);
-//    }
-//    printf("\n");
-//  }
+// static void print_sbyte_char_cnt(const char_count_t sbyte_char_cnt[])
+// {
+//   for (size_t i = 0; i < MAX_CHAR; ++i) {
+//     unsigned char ch = (unsigned char)sbyte_char_cnt[i].first;
+//     if (sbyte_char_cnt[i].second == 0)
+//       break;
+//     printf("%.2x ('%c'): %-6u    ", ch,
+//            isprint(ch) ? ch : '?', sbyte_char_cnt[i].second);
+//   }
+//   printf("\n");
+// }
+// 
+// static void print_dbyte_char_cnt(const char_count_vec_t& dbyte_char_cnt)
+// {
+//   for (char_count_vec_t::const_iterator it = dbyte_char_cnt.begin();
+//        it != dbyte_char_cnt.end(); ++it) {
+//     printf("%.4x: %-6u        ", it->first, it->second);
+//   }
+//   printf("\n");
+// }
 
-//  static void print_dbyte_char_cnt(const vector<char_count_t> &dbyte_char_cnt)
-//  {
-//    for (vector<char_count_t>::const_iterator it = dbyte_char_cnt.begin();
-//    it != dbyte_char_cnt.end(); ++it)
-//    {
-//      printf("%.4x: %-6u        ", it->first, it->second);
-//    }
-//  }
-
-static const char *check_ucs_bom(const unsigned char *const buffer)
+static const char* check_ucs_bom(const unsigned char* const buffer,
+                                 const size_t len)
 {
-  const struct
-  {
-    const char *name;
-    const char *pattern;
+  const struct pattern_t {
+    const char* name;
+    const char* pattern;
     size_t pattern_len;
-  } patterns[] =
-    {
-    { "UCS-4",      "\x00\x00\xFE\xFF",     4 },
-    { "UCS-4LE",    "\xFF\xFE\x00\x00",     4 },
-    { "UTF-8",      "\xEF\xBB\xBF",         3 },
-    { "UTF-16",     "\xFE\xFF",             2 },
-    { "UTF-16LE",   "\xFF\xFE",             2 },
-    { NULL,         NULL,                   0 }
-    };
-  for (size_t i = 0; patterns[i].name; ++i)
-  {
-    if (memcmp(buffer, patterns[i].pattern, patterns[i].pattern_len)
-          == 0)
-    {
-      return patterns[i].name;
+  } patterns[] = {
+    { "ucs-4",     "\x00\x00\xFE\xFF",  4 },
+    { "ucs-4le",   "\xFF\xFE\x00\x00",  4 },
+    { "utf-8",     "\xEF\xBB\xBF",      3 },
+    { "utf-16",    "\xFE\xFF",          2 },
+    { "utf-16le",  "\xFF\xFE",          2 },
+    { NULL,        NULL,                0 }
+  };
+  for (size_t i = 0; patterns[i].name; ++i) {
+    const pattern_t& item = patterns[i];
+    if (len >= item.pattern_len &&
+        memcmp(buffer, item.pattern, item.pattern_len) == 0) {
+      return item.name;
     }
   }
   return NULL;
 }
 
-static const char *check_dbyte(uint16_t dbyte)
+static const char* check_freq_dbyte(uint16_t dbyte)
 {
   for (size_t i = 0;
        i < sizeof freq_analysis_data / sizeof(freq_analysis_data_t);
-       ++i)
-  {
-    if (dbyte == freq_analysis_data[i].dbyte)
-    {
+       ++i) {
+    if (dbyte == freq_analysis_data[i].dbyte) {
+      // if (verbose) {
+      //   printf("Found frequent double-byte %.4x\n", dbyte);
+      // }
       return freq_analysis_data[i].enc;
     }
   }
   return NULL;
 }
 
-static const char *check_freq_dbytes(const vector<char_count_t> &dbyte_char_cnt)
+static const char* search_freq_dbytes(const char_count_vec_t& dbyte_char_cnt)
 {
   size_t max_comp_idx = 10;
-  if (max_comp_idx > dbyte_char_cnt.size())
-  {
+  if (max_comp_idx > dbyte_char_cnt.size()) {
     max_comp_idx = dbyte_char_cnt.size();
   }
-  for (size_t i = 0; i < max_comp_idx; ++i)
-  {
-    if (const char *enc = check_dbyte(dbyte_char_cnt[i].first))
-    {
+  for (size_t i = 0; i < max_comp_idx; ++i) {
+    if (const char* enc = check_freq_dbyte(dbyte_char_cnt[i].first)) {
       return enc;
     }
   }
   return NULL;
 }
 
-const char *tellenc2(const unsigned char *const buffer, const size_t len)
+const char* tellenc(const unsigned char* const buffer, const size_t len)
 {
-  char_count_t char_cnt[MAX_CHAR];
-  map<uint16_t, size_t> mp_dbyte_char_cnt;
-  size_t dbyte_cnt = 0;
-  size_t dbyte_hihi_cnt = 0;
-  
-  if (len >= 4)
-  {
-    if (const char *result = check_ucs_bom(buffer))
-    {
-      return result;
-    }
-  }
-  else if (len == 0)
-  {
+  if (len == 0) {
     return "unknown";
   }
   
-  init_char_count(char_cnt);
+  if (const char* result = check_ucs_bom(buffer, len)) {
+    return result;
+  }
+  
+  char_count_t sbyte_char_cnt[MAX_CHAR];
+  char_count_map_t dbyte_char_cnt_map;
+  init_sbyte_char_count(sbyte_char_cnt);
   
   unsigned char ch;
   int last_ch = EOF;
   int utf8_state = UTF8_1;
-  for (size_t i = 0; i < len; ++i)
-  {
+  for (size_t i = 0; i < len; ++i) {
     ch = buffer[i];
-    char_cnt[ch].second++;
+    sbyte_char_cnt[ch].second++;
     
     // Check for binary data (including UTF-16/32)
-    if (is_non_text(ch))
-    {
-      if (!is_binary && !(ch == DOS_EOF && i == len - 1))
-      {
+    if (is_non_text(ch)) {
+      if (!is_binary && !(ch == DOS_EOF && i == len - 1)) {
         is_binary = true;
       }
-      if (ch == NUL)
-      {
+      if (ch == NUL) {
         // Count for NULs in even- and odd-number bytes
         nul_count_byte[i & 1]++;
-        if (i & 1)
-        {
-          if (buffer[i - 1] == NUL)
-          {
+        if (i & 1) {
+          if (buffer[i - 1] == NUL) {
             // Count for NULs in even- and odd-number words
             nul_count_word[(i / 2) & 1]++;
           }
@@ -395,56 +408,41 @@ const char *tellenc2(const unsigned char *const buffer, const size_t len)
     }
     
     // Check for UTF-8 validity
-    if (is_valid_utf8)
-    {
-      switch (utf8_char_table[ch])
-      {
+    if (is_valid_utf8) {
+      switch (utf8_char_table[ch]) {
       case UTF8_INVALID:
         is_valid_utf8 = false;
         break;
       case UTF8_1:
-        if (utf8_state != UTF8_1)
-        {
+        if (utf8_state != UTF8_1) {
           is_valid_utf8 = false;
         }
         break;
       case UTF8_2:
-        if (utf8_state != UTF8_1)
-        {
+        if (utf8_state != UTF8_1) {
           is_valid_utf8 = false;
-        }
-        else
-        {
+        } else {
           utf8_state = UTF8_2;
         }
         break;
       case UTF8_3:
-        if (utf8_state != UTF8_1)
-        {
+        if (utf8_state != UTF8_1) {
           is_valid_utf8 = false;
-        }
-        else
-        {
+        } else {
           utf8_state = UTF8_3;
         }
         break;
       case UTF8_4:
-        if (utf8_state != UTF8_1)
-        {
+        if (utf8_state != UTF8_1) {
           is_valid_utf8 = false;
-        }
-        else
-        {
+        } else {
           utf8_state = UTF8_4;
         }
         break;
       case UTF8_TAIL:
-        if (utf8_state > UTF8_1)
-        {
+        if (utf8_state > UTF8_1) {
           utf8_state--;
-        }
-        else
-        {
+        } else {
           is_valid_utf8 = false;
         }
         break;
@@ -452,133 +450,101 @@ const char *tellenc2(const unsigned char *const buffer, const size_t len)
     }
     
     // Check whether non-Latin1 characters appear
-    if (is_valid_latin1)
-    {
-      if (ch >= 0x80 && ch < 0xa0)
-      {
+    if (is_valid_latin1) {
+      if (ch >= 0x80 && ch < 0xa0) {
         is_valid_latin1 = false;
       }
     }
     
     // Construct double-bytes and count
-    if (last_ch != EOF)
-    {
+    if (last_ch != EOF) {
       uint16_t dbyte_char = (last_ch << 8) + ch;
-      mp_dbyte_char_cnt[dbyte_char]++;
+      dbyte_char_cnt_map[dbyte_char]++;
       dbyte_cnt++;
-      if (last_ch > 0xa0 && ch > 0xa0)
-      {
+      if (last_ch > 0xa0 && ch > 0xa0) {
         dbyte_hihi_cnt++;
       }
       last_ch = EOF;
-    }
-    else if (ch >= 0x80)
-    {
+    } else if (ch >= 0x80) {
       last_ch = ch;
     }
   }
   
   // Get the character counts in descending order
-  sort(char_cnt, char_cnt + MAX_CHAR, greater_char_count());
-  
-//   if (verbose)
-//   {
-//     print_char_cnt(char_cnt);
-//   }
+  sort(sbyte_char_cnt, sbyte_char_cnt + MAX_CHAR, greater_char_count());
   
   // Get the double-byte counts in descending order
-  vector<char_count_t> dbyte_char_cnt;
-  for (map<uint16_t, size_t>::iterator it = mp_dbyte_char_cnt.begin();
-       it != mp_dbyte_char_cnt.end(); ++it)
-  {
+  char_count_vec_t dbyte_char_cnt;
+  for (char_count_map_t::iterator it = dbyte_char_cnt_map.begin();
+       it != dbyte_char_cnt_map.end(); ++it) {
     dbyte_char_cnt.push_back(*it);
   }
   sort(dbyte_char_cnt.begin(),
        dbyte_char_cnt.end(),
        greater_char_count());
   
-  //    if (verbose)
-  //    {
-  //      print_dbyte_char_cnt(dbyte_char_cnt);
-  //      printf("\n");
-  //      printf("%u characters\n", len);
-  //      printf("%u double-byte characters\n", dbyte_cnt);
-  //      printf("%u double-byte hi-hi characters\n", dbyte_hihi_cnt);
-  //      printf("%u unique double-byte characters\n", dbyte_char_cnt.size());
-  //    }
+  // if (verbose) {
+  //   print_sbyte_char_cnt(sbyte_char_cnt);
+  //   print_dbyte_char_cnt(dbyte_char_cnt);
+  //   printf("%u characters\n", (unsigned)len);
+  //   printf("%u double-byte characters\n", dbyte_cnt);
+  //   printf("%u double-byte hi-hi characters\n", dbyte_hihi_cnt);
+  //   printf("%u unique double-byte characters\n",
+  //          (unsigned)dbyte_char_cnt.size());
+  // }
   
-  if (!is_valid_utf8 && is_binary)
-  {
+  if (!is_valid_utf8 && is_binary) {
     // Heuristics for UTF-16/32
     if        (nul_count_byte[EVEN] > 4 &&
-      (nul_count_byte[ODD] == 0 ||
-      nul_count_byte[EVEN] / nul_count_byte[ODD] > 20))
-    {
+               (nul_count_byte[ODD] == 0 ||
+               nul_count_byte[EVEN] / nul_count_byte[ODD] > 20)) {
       return "utf-16";
-    }
-    else if (nul_count_byte[ODD] > 4 &&
+    } else if (nul_count_byte[ODD] > 4 &&
       (nul_count_byte[EVEN] == 0 ||
-      nul_count_byte[ODD] / nul_count_byte[EVEN] > 20))
-    {
+      nul_count_byte[ODD] / nul_count_byte[EVEN] > 20)) {
       return "utf-16le";
-    }
-    else if (nul_count_word[EVEN] > 4 &&
+    } else if (nul_count_word[EVEN] > 4 &&
       (nul_count_word[ODD] == 0 ||
-      nul_count_word[EVEN] / nul_count_word[ODD] > 20))
-    {
+      nul_count_word[EVEN] / nul_count_word[ODD] > 20)) {
       return "ucs-4";   // utf-32 is not a built-in encoding for Vim
-    }
-    else if (nul_count_word[ODD] > 4 &&
+    } else if (nul_count_word[ODD] > 4 &&
       (nul_count_word[EVEN] == 0 ||
-      nul_count_word[ODD] / nul_count_word[EVEN] > 20))
-    {
+      nul_count_word[ODD] / nul_count_word[EVEN] > 20)) {
       return "ucs-4le"; // utf-32le is not a built-in encoding for Vim
-    }
-    else
-    {
+    } else {
       return "binary";
     }
-  }
-  else if (dbyte_cnt == 0)
-  {
+  } else if (dbyte_cnt == 0) {
     // No characters outside the scope of ASCII
     return "ascii";
-  }
-  else if (is_valid_utf8)
-  {
+  } else if (is_valid_utf8) {
     // Only valid UTF-8 sequences
-    return "UTF-8";
-  }
-  else if (const char *enc = check_freq_dbytes(dbyte_char_cnt))
-  {
-    if (strcmp(enc, "gbk") == 0 && dbyte_hihi_cnt == dbyte_cnt)
-    {
-      // Special case for GB2312: no high-byte followed by a low-byte
-      return "gb2312";
-    }
+    return "utf-8";
+  } else if (const char* enc = search_freq_dbytes(dbyte_char_cnt)) {
     return enc;
-  }
-  else if (dbyte_hihi_cnt * 100 / dbyte_cnt < 5)
-  {
+  } else if (dbyte_hihi_cnt * 100 / dbyte_cnt < 5) {
     // Mostly a low-byte follows a high-byte
     return "windows-1252";
   }
   return NULL;
 }
 
-const char *tellenc(const char *const buffer, const size_t len)
+const char* tellenc_simplify(const char* const buffer, const size_t len)
 {
-  const char *enc = tellenc2((const unsigned char *const)buffer, len);
-  if (is_valid_latin1 && enc && strcmp(enc, "windows-1252") == 0)
-  {
-    // Latin1 is subset of Windows-1252
-    return "latin1";
+  const char* enc = tellenc((const unsigned char*)buffer, len);
+  if (enc) {
+    if (strcmp(enc, "windows-1252") == 0 && is_valid_latin1) {
+      // Latin1 is subset of Windows-1252
+      return "latin1";
+    } else if (strcmp(enc, "gbk") == 0 && dbyte_hihi_cnt == dbyte_cnt) {
+      // Special case for GB2312: no high-byte followed by a low-byte
+      return "gb2312";
+    }
   }
-  else
-  {
-    return enc;
-  }
+  return enc;
 }
+
+
 //' @title Files encoding detection
 //' @description The function detect the encoding of input files.
 //' @param file A file path.
@@ -601,7 +567,7 @@ CharacterVector filecoding(CharacterVector file){
   fclose(fp);
   
   init_utf8_char_table();
-  if (const char *enc = tellenc(buffer, len))
+  if (const char *enc = tellenc_simplify(buffer, len))
   {
     return CharacterVector::create(enc);
   }
