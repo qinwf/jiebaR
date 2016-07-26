@@ -545,12 +545,15 @@ const char* tellenc_simplify(const char* const buffer, const size_t len)
 }
 
 
-//' @title Files encoding detection
-//' @description The function detect the encoding of input files.
+//' Files encoding detection
+//' 
+//' This function detects the encoding of input files. 
+//' You can also check encoding with checkenc package which is on GitHub.
 //' @param file A file path.
 //' @return The encoding of file
 //' @author Wu Yongwei, Qin wenfeng
 //' @references \url{https://github.com/adah1972/tellenc}
+//' @seealso \url{https://github.com/qinwf/checkenc}
 //' @export
 // [[Rcpp::export]]
 CharacterVector file_coding(CharacterVector file){
