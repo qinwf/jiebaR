@@ -77,3 +77,4 @@ class Logger {
 } // namespace limonp
 
 #endif // LIMONP_LOGGING_HPP
+

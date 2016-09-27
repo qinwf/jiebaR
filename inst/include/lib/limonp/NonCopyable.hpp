@@ -21,3 +21,4 @@ class NonCopyable {
 } // namespace limonp
 
 #endif // LIMONP_NONCOPYABLE_H
+

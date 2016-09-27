@@ -138,3 +138,4 @@ ostream & operator << (ostream& os, const LocalVector<T>& vec) {
 }
 
 #endif
+
