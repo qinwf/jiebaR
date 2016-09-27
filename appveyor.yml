@@ -20,11 +20,6 @@ environment:
     GCC_PATH: mingw_32
 
   - R_VERSION: devel
-    NOT_CRAN: true
-    R_ARCH: x64
-    GCC_PATH: mingw_64
-
-  - R_VERSION: devel
     GCC_PATH: mingw_32
 
   - R_VERSION: devel

@@ -9,7 +9,7 @@ invisible(cc["unzip"])
 test_that("C_API",{
   # testthat is not supported on Solari r-patched and R 3.3.0 on 2016/4/16
   skip_on_cran()
-  install("./C_API")
+  install("./C_API",args = "--no-multiarch")
   expect_true(!any(as.data.frame(test("./C_API"))[["error"]]) )
   # expect_error(not(check(as.package("./C_API"))))
 })
@@ -17,7 +17,7 @@ test_that("C_API",{
 test_that("CPP_API",{
   # testthat is not supported on Solari r-patched and Windows R 3.3.0 on 2016/4/16
   skip_on_cran()
-  install("./CPP_API")
+  install("./CPP_API", args = "--no-multiarch")
   expect_true(!any(as.data.frame(test("./CPP_API"))[["error"]]) )
   # expect_error(not(check(as.package("./CPP_API"))))
 })
