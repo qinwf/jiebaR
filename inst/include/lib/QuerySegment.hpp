@@ -82,3 +82,4 @@ class QuerySegment: public SegmentBase {
 } // namespace cppjieba
 
 #endif
+

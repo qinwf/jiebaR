@@ -127,3 +127,4 @@ struct HMMModel {
 } // namespace cppjieba
 
 #endif
+

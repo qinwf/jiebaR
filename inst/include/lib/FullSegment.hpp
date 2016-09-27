@@ -80,3 +80,4 @@ class FullSegment: public SegmentBase {
 }
 
 #endif
+

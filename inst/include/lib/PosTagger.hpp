@@ -97,3 +97,4 @@ class PosTagger {
 } // namespace cppjieba
 
 #endif
+

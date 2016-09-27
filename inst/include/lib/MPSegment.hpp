@@ -111,3 +111,4 @@ class MPSegment: public SegmentBase {
 } // namespace cppjieba
 
 #endif
+

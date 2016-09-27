@@ -89,3 +89,4 @@ class MixSegment: public SegmentBase {
 } // namespace cppjieba
 
 #endif
+

@@ -178,3 +178,4 @@ class HMMSegment: public SegmentBase {
 } // namespace cppjieba
 
 #endif
+

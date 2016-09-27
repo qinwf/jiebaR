@@ -60,3 +60,4 @@ class PreFilter {
 } // namespace cppjieba
 
 #endif // CPPJIEBA_PRE_FILTER_H
+

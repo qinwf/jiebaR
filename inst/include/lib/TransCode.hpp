@@ -69,3 +69,4 @@ inline void Encode(const vector<Unicode>& input, vector<string>& output) {
 } // namespace cppjieba
 
 #endif
+

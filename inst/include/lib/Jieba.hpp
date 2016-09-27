@@ -106,3 +106,4 @@ class Jieba {
 } // namespace cppjieba
 
 #endif // CPPJIEAB_JIEBA_H
+

@@ -80,3 +80,4 @@ class LevelSegment: public SegmentBase{
 } // namespace cppjieba
 
 #endif // CPPJIEBA_LEVELSEGMENT_H
+
