@@ -13,7 +13,21 @@ get_idf(x, stop_word = STOPPATH, path = NULL)
 
 \item{path}{output path}
 }
+\value{
+a data.frame or a file
+}
 \description{
-If path is not NULL, it will write the result to the path
+Generate IDF dict from a list of documents.
+}
+\details{
+Input list contains multiple character vectors with words, 
+and each vector represents a document.
+
+Stop words will be removed from the result.
+
+If path is not NULL, it will write the result to the path.
+}
+\seealso{
+https://en.wikipedia.org/wiki/Tf-idf#Inverse_document_frequency_2
 }
 

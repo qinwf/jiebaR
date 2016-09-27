@@ -13,14 +13,14 @@ get_tuple = function(x,size=2,dataframe=T){
     if(.Platform$OS.type=="windows"){
       x = enc2utf8(x)
     }
-    res = get_tuple_vector(x,size)
   }
   if(inherits(x,"list")){
     if(.Platform$OS.type=="windows"){
       x = lapply(x,enc2utf8)
     }
-    res = get_tuple_list(x,size)
   }
+  res = get_tuple_vector(x,size)
+  
   if(.Platform$OS.type=="windows"){
     Encoding(names(res))="UTF-8"
   }

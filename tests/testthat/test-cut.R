@@ -44,3 +44,32 @@ test_that("keys",{
   
 })
 
+test_that("tobin", {
+  expect_equal(tobin("200000000000000000"), "0000001011000110100010101111000010111011000101000000000000000000")
+  expect_equal(tobin("2"),"0000000000000000000000000000000000000000000000000000000000000010")
+})
+
+test_that("query_threshold", {
+  cc = worker()
+  query_threshold(cc,1)
+  expect_equal(cc$max_word_length ,1)
+})
+
+test_that("tools",{
+  invisible(show_dictpath())
+})
+
+test_that("get_idf",{
+  skip_on_cran()
+  res = get_idf(list(c("a","b","c"), c("1","a","b","2")))
+  expect_equivalent(res, structure(list(name = c("b", "c"), count = c(0, 0.693147180559945
+  )), .Names = c("name", "count"), row.names = c("0", "1"), class = "data.frame"))
+})
+
+test_that("get_tuple",{
+  skip_on_cran()
+  res = get_tuple(c("sd","sd","sd","rd"),2)
+  expect_equivalent(res, structure(list(name = c("sdsd", "sdrd"), count = c(2, 1)), 
+                                   .Names = c("name", "count"), row.names = c(2L, 1L), 
+                                   class = "data.frame"))
+})

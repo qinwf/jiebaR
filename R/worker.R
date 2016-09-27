@@ -218,11 +218,3 @@ assignjieba<-function(worker,detect,encoding,symbol,lines,output,write,private,b
   assign(x = "bylines",value = bylines, envir=result)
 }
 
-read_stop_words<- function(filepath){
-  if(!file.exists(filepath)){
-    stop("There is no such file for stopwords.")
-  }
-  res = readLines(filepath,encoding = file_coding(filepath))
-  class(res) <- "stopword_list"
-  res
-}
