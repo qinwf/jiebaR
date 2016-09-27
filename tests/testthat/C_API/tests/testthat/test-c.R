@@ -46,7 +46,7 @@ test_that("keys c api",{
   
 })
 
-test_that("simhahs c api",{
+test_that("simhash c api",{
   cutter = jiebaRapi:::sim_ptr(jiebaR::DICTPATH,jiebaR::HMMPATH,
                                jiebaR::IDFPATH,jiebaR::STOPPATH,jiebaR::USERPATH)
   
@@ -56,7 +56,7 @@ test_that("simhahs c api",{
                          .Names = c("simhash", "keyword")))
   
   expect_equal(jiebaRapi:::sim_distance("this is test","this is test",3,cutter),
-               structure(list(distance = "0", lhs = 
+               structure(list(distance = 0, lhs = 
                                 structure("test", .Names = "11.7392"), 
                rhs = structure("test", .Names = "11.7392")), 
                .Names = c("distance", 
