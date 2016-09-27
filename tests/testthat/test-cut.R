@@ -83,6 +83,6 @@ test_that("ham_dist", {
 
 test_that("print",{
   print(worker())
-  print(worker("key"))
+  print(worker("keywords"))
   print(worker("simhash"))
 })
