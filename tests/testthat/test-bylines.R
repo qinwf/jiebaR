@@ -19,7 +19,9 @@ run_byline = function(){
   cutter$bylines = TRUE
   cutter$output = "test.out"
   test_that("bylines words input", {
-    expect_identical({cutter["bylines.utf8"]; out.r = file("test.out", open = "r");
+    expect_identical({
+                      cutter["bylines.utf8"];
+                      out.r = file("test.out", open = "r");
                       res = readLines(out.r,encoding = "UTF-8");
                       close(out.r);
                       enc2utf8(res);

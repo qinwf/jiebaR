@@ -56,7 +56,7 @@ test_that("filter_words", {
   res = freq(cutter["今天是周二，是一个晴天。"])
   res = res[order(res[,1]),]
   
-  expect_identical( res,
+  expect_equivalent( res,
                    structure(list(char = c("今天", "晴天", "是", "一个", "周二"), freq = c(1, 1, 2, 1, 1)), .Names = c("char", "freq"), row.names = c(5L, 2L, 4L, 1L, 3L), class = "data.frame"))
 })
 

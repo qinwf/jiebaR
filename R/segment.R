@@ -123,7 +123,7 @@ cutl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
               lines_of_output <- length(out.lines)
               for(num in 1:lines_of_output){
                 writeLines(paste(out.lines[[num]], collapse = " "), output.w)
-                writeLines("\n", output.w)
+                # writeLines("\n", output.w)
               }
             } else {
               writeLines(paste(out.lines, collapse = " "), output.w)
