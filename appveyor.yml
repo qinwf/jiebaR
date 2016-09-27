@@ -16,6 +16,7 @@ environment:
 
   matrix:
   - R_VERSION: devel
+    CRAN: http://cran.rstudio.com
     NOT_CRAN: true
     GCC_PATH: mingw_32
 
