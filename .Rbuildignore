@@ -16,3 +16,7 @@ tests/testthat/test-bylines\.R
 ^\.idea/
 ^cran-comments\.md$
 ^\.git/
+tests/testthat/CPP_API/src/jiebaRapi\.so
+tests/testthat/CPP_API/src/test_api\.o
+tests/testthat/C_API/src/jiebaRapi\.so
+tests/testthat/C_API/src/test_api\.o
