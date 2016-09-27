@@ -60,16 +60,23 @@ test_that("tools",{
 })
 
 test_that("get_idf",{
-  skip_on_cran()
   res = get_idf(list(c("a","b","c"), c("1","a","b","2")))
-  expect_equivalent(res, structure(list(name = c("b", "c"), count = c(0, 0.693147180559945
-  )), .Names = c("name", "count"), row.names = c("0", "1"), class = "data.frame"))
+  expect_true(nrow(res) == 2)
+  expect_true(res[res[,1] == "b",]["count"] == 0)
+  expect_true(res[res[,1] == "c",]["count"] == 0.693147180559945)
 })
 
 test_that("get_tuple",{
-  skip_on_cran()
   res = get_tuple(c("sd","sd","sd","rd"),2)
-  expect_equivalent(res, structure(list(name = c("sdsd", "sdrd"), count = c(2, 1)), 
-                                   .Names = c("name", "count"), row.names = c(2L, 1L), 
-                                   class = "data.frame"))
+  expect_true(nrow(res) == 2)
+  expect_true(res[res[,1] == "sdsd",]["count"] == 2L)
+  expect_true(res[res[,1] == "sdrd",]["count"] == 1L)
+  
+})
+
+test_that("ham_dist", {
+  expect_equal(simhash_dist("1","1"), 0)
+  expect_equal(simhash_dist("1","2"), 2)
+  res = simhash_dist_mat(c("1","12","123"),c("2","1"))
+  expect_equal(res, structure(c(2L, 3L, 5L, 0L, 3L, 5L), .Dim = c(3L, 2L)))
 })
