@@ -63,7 +63,7 @@ test_that("get_idf",{
   res = get_idf(list(c("a","b","c"), c("1","a","b","2")))
   expect_true(nrow(res) == 2)
   expect_true(res[res[,1] == "b",]["count"] == 0)
-  expect_true(res[res[,1] == "c",]["count"] == 0.693147180559945)
+  expect_true(round(res[res[,1] == "c",]["count"],digits = 2) == 0.69)
 })
 
 test_that("get_tuple",{
@@ -79,4 +79,8 @@ test_that("ham_dist", {
   expect_equal(simhash_dist("1","2"), 2)
   res = simhash_dist_mat(c("1","12","123"),c("2","1"))
   expect_equal(res, structure(c(2L, 3L, 5L, 0L, 3L, 5L), .Dim = c(3L, 2L)))
+})
+
+test_that("print",{
+  
 })
