@@ -4,6 +4,7 @@
 #' @param number the query threshold
 #' @export
 query_threshold = function(worker, number){
+  warning("This function is depreciated, and will be removed in the next version due to the upstream apis changes.")
   stopifnot(inherits(worker,"jieba"))
   set_query_threshold(number,worker$worker)
   worker$max_word_length = number
@@ -32,6 +33,7 @@ new_user_word = function(worker, words, tags){
 #' words_locate(c("this","is","a", "test"))
 #' 
 words_locate = function(words){
+  warning("This function is depreciated, and will be removed in the next version due to the upstream apis changes.")
   if (.Platform$OS.type == "windows") {
     words <- enc2utf8(words)
   }
