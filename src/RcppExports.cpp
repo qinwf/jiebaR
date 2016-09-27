@@ -143,30 +143,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// jiebaclass_level_cut
-CharacterVector jiebaclass_level_cut(CharacterVector& x, XPtr<JiebaClass> cutter);
-RcppExport SEXP jiebaR_jiebaclass_level_cut(SEXP xSEXP, SEXP cutterSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
-    Rcpp::traits::input_parameter< XPtr<JiebaClass> >::type cutter(cutterSEXP);
-    rcpp_result_gen = Rcpp::wrap(jiebaclass_level_cut(x, cutter));
-    return rcpp_result_gen;
-END_RCPP
-}
-// jiebaclass_level_cut_pair
-CharacterVector jiebaclass_level_cut_pair(CharacterVector& x, XPtr<JiebaClass> cutter);
-RcppExport SEXP jiebaR_jiebaclass_level_cut_pair(SEXP xSEXP, SEXP cutterSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector& >::type x(xSEXP);
-    Rcpp::traits::input_parameter< XPtr<JiebaClass> >::type cutter(cutterSEXP);
-    rcpp_result_gen = Rcpp::wrap(jiebaclass_level_cut_pair(x, cutter));
-    return rcpp_result_gen;
-END_RCPP
-}
 // jiebaclass_tag_tag
 CharacterVector jiebaclass_tag_tag(CharacterVector& x, XPtr<JiebaClass> cutter);
 RcppExport SEXP jiebaR_jiebaclass_tag_tag(SEXP xSEXP, SEXP cutterSEXP) {
@@ -200,18 +176,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< vector<string>& >::type code(codeSEXP);
     Rcpp::traits::input_parameter< XPtr<JiebaClass> >::type cutter(cutterSEXP);
     rcpp_result_gen = Rcpp::wrap(jiebaclass_tag_vec(code, cutter));
-    return rcpp_result_gen;
-END_RCPP
-}
-// set_query_threshold
-SEXP set_query_threshold(size_t num, XPtr<JiebaClass> cutter);
-RcppExport SEXP jiebaR_set_query_threshold(SEXP numSEXP, SEXP cutterSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< size_t >::type num(numSEXP);
-    Rcpp::traits::input_parameter< XPtr<JiebaClass> >::type cutter(cutterSEXP);
-    rcpp_result_gen = Rcpp::wrap(set_query_threshold(num, cutter));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -381,17 +345,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< CharacterVector >::type y(ySEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_ham_dist_mat(x, y));
-    return rcpp_result_gen;
-END_RCPP
-}
-// get_loc
-List get_loc(vector<string>& word);
-RcppExport SEXP jiebaR_get_loc(SEXP wordSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< vector<string>& >::type word(wordSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_loc(word));
     return rcpp_result_gen;
 END_RCPP
 }

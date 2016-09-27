@@ -45,16 +45,6 @@ CharacterVector jiebaclass_query_cut(CharacterVector& x, XPtr<JiebaClass> cutter
 }
 
 // [[Rcpp::export]]
-CharacterVector jiebaclass_level_cut(CharacterVector& x, XPtr<JiebaClass> cutter){
-  return wrap(cutter->cut_level(x));
-}
-
-// [[Rcpp::export]]
-CharacterVector jiebaclass_level_cut_pair(CharacterVector& x, XPtr<JiebaClass> cutter){
-  return wrap(cutter->cut_level_pair(x));
-}
-
-// [[Rcpp::export]]
 CharacterVector jiebaclass_tag_tag(CharacterVector& x, XPtr<JiebaClass> cutter){
   return wrap(cutter->cut_tag_tag(x));
 }
@@ -71,14 +61,9 @@ CharacterVector  jiebaclass_tag_vec(vector<string>& code, XPtr<JiebaClass> cutte
 }
 
 // [[Rcpp::export]]
-SEXP set_query_threshold(size_t num, XPtr<JiebaClass> cutter){
-  return wrap(cutter->set_query_threshold(num));
-}
-// [[Rcpp::export]]
 SEXP add_user_word(CharacterVector& x,CharacterVector& tag, XPtr<JiebaClass> cutter){
   return wrap(cutter->add_user_word(x,tag));
 }
-
 
 /////// keyword
 

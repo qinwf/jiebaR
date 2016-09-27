@@ -32,7 +32,7 @@
 #' There is a symbol \code{<=} for this function.
 #' @param code A Chinese sentence or the path of a text file. 
 #' @param jiebar jiebaR Worker.
-#' @param mod change default result type, value can be "mix","hmm","query","full","level", or "mp"
+#' @param mod change default result type, value can be "mix","hmm","query","full" or "mp"
 #' @seealso  \code{\link{<=.segment}} \code{\link{worker}} 
 #' 
 #' @export
@@ -214,7 +214,7 @@ engine_cut <- function(code,jiebar, mod){
   if(length(code) > 1){
     code <- paste(code, collapse = " ")
   }
-  ty = c("mix","hmm","query","full","level","mp","level_pair")
+  ty = c("mix","hmm","query","full","mp")
   if(!(jiebar$default %in% ty) ||
       (!is.null(mod) && !(mod %in% ty) ) 
      )
@@ -229,10 +229,9 @@ engine_cut <- function(code,jiebar, mod){
                      mix = jiebaclass_mix_cut(code, jiebar$worker),
                      mp  = jiebaclass_mp_cut(code,jiebar$max_word_length,jiebar$worker),
                      hmm = jiebaclass_hmm_cut(code,jiebar$worker),
-                     level = jiebaclass_level_cut(code,jiebar$worker),
                      query = jiebaclass_query_cut(code,jiebar$worker),
-                     full  = jiebaclass_full_cut(code,jiebar$worker),
-                     level_pair = jiebaclass_level_cut_pair(code,jiebar$worker)
+                     full  = jiebaclass_full_cut(code,jiebar$worker)
+                     
                    )
   return(result)
 }

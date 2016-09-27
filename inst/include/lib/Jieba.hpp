@@ -1,25 +1,24 @@
 #ifndef CPPJIEAB_JIEBA_H
 #define CPPJIEAB_JIEBA_H
 
-
 #include "QuerySegment.hpp"
-#include "PosTagger.hpp"
-#include "LevelSegment.hpp"
+#include "KeywordExtractor.hpp"
 
 namespace cppjieba {
 
 class Jieba {
  public:
-  Jieba(const string& dict_path, const string& model_path, const string& user_dict_path,DictTrie::UserWordWeightOption user_word_weight_opt = DictTrie::UserWordWeightOption::WordWeightMedian) 
-    : dict_trie_(dict_path, user_dict_path,user_word_weight_opt),
+  Jieba(const string& dict_path, 
+        const string& model_path,
+        const string& user_dict_path,
+        DictTrie::UserWordWeightOption user_word_weight_opt = DictTrie::UserWordWeightOption::WordWeightMedian)
+    : dict_trie_(dict_path, user_dict_path, user_word_weight_opt),
       model_(model_path),
       mp_seg_(&dict_trie_),
       hmm_seg_(&model_),
       mix_seg_(&dict_trie_, &model_),
       full_seg_(&dict_trie_),
-      query_seg_(&dict_trie_, &model_),
-      level_seg_(&dict_trie_),
-      pos_tagger_(&dict_trie_, &model_) {
+      query_seg_(&dict_trie_, &model_) {
   }
   ~Jieba() {
   }
@@ -33,44 +32,54 @@ class Jieba {
   void Cut(const string& sentence, vector<string>& words, bool hmm = true) const {
     mix_seg_.Cut(sentence, words, hmm);
   }
+  void Cut(const string& sentence, vector<Word>& words, bool hmm = true) const {
+    mix_seg_.Cut(sentence, words, hmm);
+  }
   void CutAll(const string& sentence, vector<string>& words) const {
+    full_seg_.Cut(sentence, words);
+  }
+  void CutAll(const string& sentence, vector<Word>& words) const {
     full_seg_.Cut(sentence, words);
   }
   void CutForSearch(const string& sentence, vector<string>& words, bool hmm = true) const {
     query_seg_.Cut(sentence, words, hmm);
   }
+  void CutForSearch(const string& sentence, vector<Word>& words, bool hmm = true) const {
+    query_seg_.Cut(sentence, words, hmm);
+  }
   void CutHMM(const string& sentence, vector<string>& words) const {
     hmm_seg_.Cut(sentence, words);
   }
-  void CutLevel(const string& sentence, vector<string>& words) const {
-    level_seg_.Cut(sentence, words);
-  }
-  void CutLevel(const string& sentence, vector<pair<string, size_t> >& words) const {
-    level_seg_.Cut(sentence, words);
+  void CutHMM(const string& sentence, vector<Word>& words) const {
+    hmm_seg_.Cut(sentence, words);
   }
   void CutSmall(const string& sentence, vector<string>& words, size_t max_word_len) const {
     mp_seg_.Cut(sentence, words, max_word_len);
   }
-  static void Locate(const vector<string>& words, vector<LocWord>& loc_words) {
-    loc_words.resize(words.size());
-    size_t begin = 0;
-    for (size_t i = 0; i < words.size(); i++) {
-      size_t len = TransCode::Decode(words[i]).size();
-      loc_words[i].word = words[i];
-      loc_words[i].begin = begin;
-      loc_words[i].end = loc_words[i].begin + len;
-      begin = loc_words[i].end;
-    }
+  void CutSmall(const string& sentence, vector<Word>& words, size_t max_word_len) const {
+    mp_seg_.Cut(sentence, words, max_word_len);
   }
   
   void Tag(const string& sentence, vector<pair<string, string> >& words) const {
-    pos_tagger_.Tag(sentence, words);
+    mix_seg_.Tag(sentence, words);
   }
-  void simpleTag(vector<string>& sentence, vector<pair<string, string> >& words) const {
-    pos_tagger_.simpleTag(sentence, words);
+  void SimpleTag(const vector<string>& sentence, vector<pair<string, string> >& words) const {
+    mix_seg_.SimpleTag(sentence, words);
+  }
+  string LookupTag(const string &str) const {
+    return mix_seg_.LookupTag(str);
   }
   bool InsertUserWord(const string& word, const string& tag = UNKNOWN_TAG) {
     return dict_trie_.InsertUserWord(word, tag);
+  }
+
+  void ResetSeparators(const string& s) {
+    //TODO
+    mp_seg_.ResetSeparators(s);
+    hmm_seg_.ResetSeparators(s);
+    mix_seg_.ResetSeparators(s);
+    full_seg_.ResetSeparators(s);
+    query_seg_.ResetSeparators(s);
   }
 
   const DictTrie* GetDictTrie() const {
@@ -79,14 +88,7 @@ class Jieba {
   const HMMModel* GetHMMModel() const {
     return &model_;
   }
- 
-  void SetQuerySegmentThreshold(size_t len) {
-    query_seg_.SetMaxWordLen(len);
-  }
-  // added jiebaR
-  int getQuerySegmentThreshold(size_t len) {
-    return (int) query_seg_.GetMaxWordLen();
-  }
+
  private:
   DictTrie dict_trie_;
   HMMModel model_;
@@ -97,13 +99,9 @@ class Jieba {
   MixSegment mix_seg_;
   FullSegment full_seg_;
   QuerySegment query_seg_;
-  LevelSegment level_seg_;
-  
-  PosTagger pos_tagger_;
-  
+
 }; // class Jieba
 
 } // namespace cppjieba
 
 #endif // CPPJIEAB_JIEBA_H
-
