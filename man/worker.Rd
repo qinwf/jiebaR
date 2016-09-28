@@ -123,29 +123,41 @@ and uses simhash algorithm to compute simhash.  \code{dict}
 jiebaR worker.
 }
 \examples{
-### Note: Can not display Chinese character on Windows here.
+### Note: Can not display Chinese characters here.
 \dontrun{
 words = "hello world"
-test1 = worker()
-test1
-test1 <= words
+engine1 = worker()
+segment(words, engine1)
 
-test <= "./temp.txt"
- 
-engine2 = worker("mix",symbol = T)
-engine2 <= "./temp.txt"
-engine2
-engine2$symbol = T
-engine2
-engine2 <= words
+# "./temp.txt" is a file path
+
+segment("./temp.txt", engine1)
+
+engine2 = worker("hmm")
+segment("./temp.txt", engine2)
+
+engine2$write = T
+segment("./temp.txt", engine2)
 
 engine3 = worker(type = "mix", dict = "dict_path",symbol = T)
-engine3 <= "./temp.txt"
+segment("./temp.txt", engine3)
+ }
+ 
+\dontrun{
+### Keyword Extraction
+engine = worker("keywords", topn = 1)
+keywords(words, engine)
 
-keys = worker("keywords", topn = 1)
-keys <= words
+### Speech Tagging 
 tagger = worker("tag")
-tagger <= words}
+tagging(words, tagger)
 
+### Simhash
+simhasher = worker("simhash", topn = 1)
+simhash(words, simhasher)
+distance("hello world" , "hello world!" , simhasher)
+
+show_dictpath()
+}
 }
 
