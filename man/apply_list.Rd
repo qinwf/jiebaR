@@ -2,20 +2,21 @@
 % Please edit documentation in R/util.R
 \name{apply_list}
 \alias{apply_list}
-\title{apply list input}
+\title{Apply list input to a worker}
 \usage{
 apply_list(input, worker)
 }
 \arguments{
-\item{input}{a list}
+\item{input}{a list of characters}
 
 \item{worker}{a worker}
 }
 \description{
-apply list input
+Apply list input to a worker
 }
 \examples{
 cutter = worker()
 apply_list(list("this is test", "that is not test"), cutter)
+apply_list(list("this is test", list("that is not test","ab c")), cutter)
 }
 

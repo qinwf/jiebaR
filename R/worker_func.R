@@ -1,5 +1,7 @@
 #' Set query threshold
 #' 
+#' Depreciated. This function will be remove in the next version.
+#' 
 #' @param worker a jieba worker
 #' @param number the query threshold
 #' @export
@@ -25,6 +27,8 @@ new_user_word = function(worker, words, tags){
   add_user_word(words,tags,worker$worker)
 }
 #' Get text location
+#' 
+#' Depreciated. This function will be remove in the next version.
 #' 
 #' @param words a string
 #' @return a list with words, start position, and end position

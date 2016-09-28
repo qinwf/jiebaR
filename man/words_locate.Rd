@@ -13,7 +13,7 @@ words_locate(words)
 a list with words, start position, and end position
 }
 \description{
-Get text location
+Depreciated. This function will be remove in the next version.
 }
 \examples{
 words_locate(c("this","is","a", "test"))

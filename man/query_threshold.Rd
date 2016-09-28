@@ -12,6 +12,6 @@ query_threshold(worker, number)
 \item{number}{the query threshold}
 }
 \description{
-Set query threshold
+Depreciated. This function will be remove in the next version.
 }
 
