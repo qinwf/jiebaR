@@ -110,7 +110,7 @@ tagl <- function(code, jiebar, symbol, lines, output, encoding, write_file,FILES
               for(num in 1:lines_of_output){
                 out.lines[[num]]<-gsub("\\s x\\s","",paste(out.lines[[num]], collapse = " "))
                 writeLines(paste(out.lines[[num]], collapse = " "), output.w)
-                writeLines("\n", output.w)
+                # writeLines("\n", output.w)
               }
             } else {
               out.lines<-gsub("\\s x\\s","",paste(out.lines, collapse = " "))
