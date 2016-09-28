@@ -37,10 +37,10 @@ You can use `worker()` to initialize a worker, and then use `[]` or `segment()` 
 ```{r}
 library(jiebaR)
 
-##  Using default argument to initialize worker.
+##  Using default settings to initialize a worker.
 cutter = worker()
 
-###  Note: Can not display Chinese character here.
+###  Note: Can not display Chinese characters here.
 
 segment( "This is a good day!" , cutter )
 
