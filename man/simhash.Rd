@@ -10,7 +10,8 @@ simhash(code, jiebar)
 vector_simhash(code, jiebar)
 }
 \arguments{
-\item{code}{A Chinese sentence or the path of a text file.}
+\item{code}{For \code{simhash}, a Chinese sentence or the path of a text file.
+For \code{vector_simhash}, a character vector of segmented words.}
 
 \item{jiebar}{jiebaR Worker.}
 }

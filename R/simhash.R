@@ -7,7 +7,8 @@
 #' 
 #' There is a symbol \code{<=} for this function.
 #' @seealso \code{\link{<=.simhash}} \code{\link{worker}} 
-#' @param code A Chinese sentence or the path of a text file. 
+#' @param code For \code{simhash}, a Chinese sentence or the path of a text file.
+#' For \code{vector_simhash}, a character vector of segmented words. 
 #' @param jiebar jiebaR Worker.
 #' @references MS Charikar - Similarity Estimation Techniques from Rounding Algorithms
 #' @author Qin Wenfeng

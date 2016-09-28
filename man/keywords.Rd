@@ -10,7 +10,8 @@ keywords(code, jiebar)
 vector_keywords(code, jiebar)
 }
 \arguments{
-\item{code}{A Chinese sentence or the path of a text file.}
+\item{code}{For \code{keywords}, a Chinese sentence or the path of a text file. 
+For \code{vector_keywords}, a character vector of segmented words.}
 
 \item{jiebar}{jiebaR Worker.}
 }

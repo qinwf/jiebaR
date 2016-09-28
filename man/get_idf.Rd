@@ -27,6 +27,9 @@ Stop words will be removed from the result.
 
 If path is not NULL, it will write the result to the path.
 }
+\examples{
+get_idf(list(c("abc","def"),c("abc"," ")))
+}
 \seealso{
 https://en.wikipedia.org/wiki/Tf-idf#Inverse_document_frequency_2
 }

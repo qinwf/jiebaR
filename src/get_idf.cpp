@@ -62,7 +62,7 @@ List get_idf_cpp(List x,Nullable<CharacterVector> stop_) {
   
   vector<string> row_names;
   row_names.reserve(sts.size());
-  for (unsigned int i = 0; i < sts.size(); ++i) {
+  for (unsigned int i = 1; i <= sts.size(); ++i) {
     row_names.emplace_back(int64tos(i));
   }
   

@@ -12,7 +12,8 @@
 #' @param x a list of character
 #' @param stop_word stopword path
 #' @param path output path
-#' 
+#' @examples 
+#' get_idf(list(c("abc","def"),c("abc"," ")))
 #' @return a data.frame or a file
 #' @seealso https://en.wikipedia.org/wiki/Tf-idf#Inverse_document_frequency_2
 #' @export

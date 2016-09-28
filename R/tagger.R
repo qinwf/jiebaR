@@ -235,7 +235,7 @@ tagw <- function(code, jiebar,  symbol, FILESMODE) {
 
 #' Tag the a character vector
 #' 
-#' @param string a character vector 
+#' @param string  a character vector of segmented words.
 #' @param jiebar jiebaR Worker.
 #' @export
 #' @examples 

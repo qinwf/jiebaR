@@ -2,8 +2,9 @@ Changes in Version 0.9 (2016-9-26)
 =====================================
 
    o Major Change: `distance` and `vector_distance` now return integer value as distance.
-   o Major Change: require C++11 with GCC 4.9+ to build this package
-   o Fix: `tobin` now return the correct value
+   o Major Change: requires C++11 with GCC 4.9+ to build this package
+   o Fix: `tobin` now returns the correct value
+   o Fix: `get_idf` rownames with 1 based index
    o Add: `apply_list` to handle nested list input data
    o Add: `simhash_dist` to compute distance of simhash values
    o Add: `simhash_dist_mat` to compute compute distance matrix of simhash values

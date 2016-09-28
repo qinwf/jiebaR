@@ -7,7 +7,7 @@
 vector_tag(string, jiebar)
 }
 \arguments{
-\item{string}{a character vector}
+\item{string}{a character vector of segmented words.}
 
 \item{jiebar}{jiebaR Worker.}
 }
