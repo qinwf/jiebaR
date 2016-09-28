@@ -99,29 +99,30 @@ vector_simhash <- function(code,jiebar){
   result
 }
 
-
-
-
-
 #' Hamming distance of words
 #' 
-#' The function uses Simhash worker to do keyword extraction and find 
+#' This function uses Simhash worker to do keyword extraction and finds 
 #' the keywords from two inputs, and then computes Hamming distance 
 #' between them.
 #' 
-#' @param codel a Chinese sentence or the path of a text file
-#' @param coder a Chinese sentence or the path of a text file
-#' @param jiebar jiebaR Worker
+#' @param codel For \code{distance}, a Chinese sentence or the path of a text file, 
+#' For \code{vector_distance}, a character vector of segmented words.
+#' @param coder  For \code{distance}, a Chinese sentence or the path of a text file, 
+#' For \code{vector_distance}, a character vector of segmented words.
+#' @param jiebar jiebaR worker
 #' @author Qin Wenfeng
 #' @seealso \code{\link{worker}} 
 #' @references \url{http://en.wikipedia.org/wiki/Hamming_distance}
 #' @examples 
 #' \dontrun{
-#' ### Simhash
+#' 
 #' words = "hello world"
 #' simhasher = worker("simhash", topn = 1)
 #' simhasher <= words
 #' distance("hello world" , "hello world!" , simhasher)
+#' 
+#' vector_distance(c("hello","world") , c("hello", "world","!") , simhasher)
+#' 
 #' }
 #' @export
 distance <- function(codel,coder,jiebar){

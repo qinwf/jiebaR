@@ -10,24 +10,29 @@ distance(codel, coder, jiebar)
 vector_distance(codel, coder, jiebar)
 }
 \arguments{
-\item{codel}{a Chinese sentence or the path of a text file}
+\item{codel}{For \code{distance}, a Chinese sentence or the path of a text file, 
+For \code{vector_distance}, a character vector of segmented words.}
 
-\item{coder}{a Chinese sentence or the path of a text file}
+\item{coder}{For \code{distance}, a Chinese sentence or the path of a text file, 
+For \code{vector_distance}, a character vector of segmented words.}
 
-\item{jiebar}{jiebaR Worker}
+\item{jiebar}{jiebaR worker}
 }
 \description{
-The function uses Simhash worker to do keyword extraction and find 
+This function uses Simhash worker to do keyword extraction and finds 
 the keywords from two inputs, and then computes Hamming distance 
 between them.
 }
 \examples{
 \dontrun{
-### Simhash
+
 words = "hello world"
 simhasher = worker("simhash", topn = 1)
 simhasher <= words
 distance("hello world" , "hello world!" , simhasher)
+
+vector_distance(c("hello","world") , c("hello", "world","!") , simhasher)
+
 }
 }
 \author{

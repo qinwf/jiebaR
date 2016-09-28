@@ -2,8 +2,7 @@
 % Please edit documentation in R/filter.R
 \name{filter_segment}
 \alias{filter_segment}
-\title{Filter segmentation result
-This function helps remove some words in the segmentation result.}
+\title{Filter segmentation result}
 \usage{
 filter_segment(input, filter_words, unit = 50)
 }
@@ -12,10 +11,15 @@ filter_segment(input, filter_words, unit = 50)
 
 \item{filter_words}{a string vector of words to be removed.}
 
-\item{unit}{the length of word unit to use in regular expression, and the default is 50. Long list of a words forms a big regular expressions, it may or may not be accepted: the POSIX standard only requires up to 256 bytes. So we use unit to split the words in units.}
+\item{unit}{the length of word unit to use in regular expression, 
+and the default is 50. Long list of a words forms a big regular expressions,
+ it may or may not be accepted: the POSIX standard only requires up to 256 
+ bytes. So we use unit to split the words in units.}
 }
 \description{
-Filter segmentation result
 This function helps remove some words in the segmentation result.
+}
+\examples{
+filter_segment(c("abc","def"," ","."), c("abc"))
 }
 

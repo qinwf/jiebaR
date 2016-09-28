@@ -14,14 +14,18 @@ edit_dict(name = "user")
 Edit the default user dictionary.
 }
 \details{
-There are three column in the system dictionary. The first column is the word, 
+There are three column in the system dictionary. Each column is seperated by space. 
+The first column is the word, 
 and the second column is the frequency of word. The third column is 
 speech tag using labels compatible with ictclas.
 
 There are two column in the user dictionary. The first column is the word, 
 and the second column is speech tag using labels compatible with ictclas.
-Frequency of every word in the user dictionary is set by user_weight in \code{worker} function. If you want to provide the frequency of a new word,
+Frequencies of words in the user dictionary is set by user_weight in \code{worker} function.
+ If you want to provide the frequency of a new word,
 you can put it in the system dictionary.
+
+Only one column in the stop words dictionary, and it contains the stop words.
 }
 \references{
 The ictclas speech tag : \url{http://t.cn/RAEj7e1}

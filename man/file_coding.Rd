@@ -19,6 +19,10 @@ The encoding of file
 This function detects the encoding of input files. 
 You can also check encoding with checkenc package which is on GitHub.
 }
+\details{
+This function will choose the most likely encoding, and it will be 
+more stable for a large input text file.
+}
 \author{
 Wu Yongwei, Qin wenfeng
 }

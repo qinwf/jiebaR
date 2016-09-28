@@ -1,10 +1,16 @@
 
 #' Filter segmentation result
+#'
 #' This function helps remove some words in the segmentation result.
 #' 
 #' @param input a string vector
 #' @param filter_words a string vector of words to be removed.
-#' @param unit the length of word unit to use in regular expression, and the default is 50. Long list of a words forms a big regular expressions, it may or may not be accepted: the POSIX standard only requires up to 256 bytes. So we use unit to split the words in units.
+#' @param unit the length of word unit to use in regular expression, 
+#' and the default is 50. Long list of a words forms a big regular expressions,
+#'  it may or may not be accepted: the POSIX standard only requires up to 256 
+#'  bytes. So we use unit to split the words in units.
+#' @examples 
+#' filter_segment(c("abc","def"," ","."), c("abc"))
 #' @export
 filter_segment <- function(input,filter_words,unit=50){
   length_words = length(filter_words)

@@ -549,6 +549,10 @@ const char* tellenc_simplify(const char* const buffer, const size_t len)
 //' 
 //' This function detects the encoding of input files. 
 //' You can also check encoding with checkenc package which is on GitHub.
+//' 
+//' This function will choose the most likely encoding, and it will be 
+//' more stable for a large input text file.
+//'  
 //' @param file A file path.
 //' @return The encoding of file
 //' @author Wu Yongwei, Qin wenfeng
