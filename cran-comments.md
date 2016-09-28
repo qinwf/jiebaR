@@ -1,6 +1,7 @@
 ## Test environments
-* OS X R-3.3.1
-* ubuntu 14.04 (on travis-ci), R 3.3.1
+
+* macOS R-3.3.1
+* Ubuntu 14.04 (on travis-ci), R 3.3.1
 * Windows 10 R-3.3.1 and R-devel
 
 ## R CMD check results
