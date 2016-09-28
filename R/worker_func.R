@@ -38,7 +38,10 @@ new_user_word = function(worker, words, tags = rep("n", length(words))){
 #' @return a list with words, start position, and end position
 #' @export
 #' @examples 
+#' \dontrun{
 #' words_locate(c("this","is","a", "test"))
+#' }
+#' 
 #' 
 words_locate = function(words){
   warning("This function is depreciated, and will be removed in the next version due to the upstream apis changes.")
