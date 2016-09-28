@@ -51,7 +51,7 @@ test_that("tobin", {
 
 test_that("query_threshold", {
   cc = worker()
-  query_threshold(cc,1)
+  expect_warning(query_threshold(cc,1))
   expect_equal(cc$max_word_length ,1)
 })
 

@@ -63,9 +63,9 @@ test_that("filter_words", {
 test_that("words_locate", {
   cc = worker()
   
-  expect_identical(words_locate(cc["我是谁"]),list(c("我", "是", "谁"), c("0", "1", "2"), c("1", "2", "3")))
+  expect_warning(expect_identical(words_locate(cc["我是谁"]),list(c("我", "是", "谁"), c("0", "1", "2"), c("1", "2", "3"))))
   
-  expect_identical(words_locate(cc["这是一个测试文本"]),list(c("这是", "一个", "测试", "文本"), c("0", "2", "4", "6"), c("2", "4", "6", "8")))
+  expect_warning(expect_identical(words_locate(cc["这是一个测试文本"]),list(c("这是", "一个", "测试", "文本"), c("0", "2", "4", "6"), c("2", "4", "6", "8"))))
 })
 
 test_that("new_user_word", {
