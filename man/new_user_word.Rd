@@ -4,16 +4,21 @@
 \alias{new_user_word}
 \title{Add user word}
 \usage{
-new_user_word(worker, words, tags)
+new_user_word(worker, words, tags = rep("n", length(words)))
 }
 \arguments{
 \item{worker}{a jieba worker}
 
 \item{words}{the new words}
 
-\item{tags}{the new words tags}
+\item{tags}{the new words tags, default "n"}
 }
 \description{
 Add user word
+}
+\examples{
+cc = worker()
+new_user_word(cc, "test")
+new_user_word(cc, "do", "v")
 }
 
