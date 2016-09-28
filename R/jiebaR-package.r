@@ -1,48 +1,51 @@
 #' A package for Chinese text segmentation
 #'
 #' This is a package for Chinese text segmentation, keyword extraction 
-#' and speech tagging with Rcpp and cppjieba. JiebaR supports four 
-#' types of segmentation mode: Maximum Probability, Hidden Markov Model, 
-#' Query Segment and Mix Segment. 
+#' and speech tagging with Rcpp and cppjieba.
 #' 
 #' You can use custom 
-#' dictionary to be included in the jiebaR default dictionary. JiebaR can 
-#' also identify new words, but adding your own new words will ensure a higher 
+#' dictionary. JiebaR can 
+#' also identify new words, but adding new words will ensure higher 
 #' accuracy.
+#' 
 #' @docType package
 #' @name jiebaR
 #' @author Qin Wenfeng <\url{http://qinwenfeng.com}>
 #' @references CppJieba \url{https://github.com/aszxqw/cppjieba};
 #' @seealso JiebaR \url{https://github.com/qinwf/jiebaR};
 #' @examples 
-#' ### Note: Can not display Chinese character here.
+#' ### Note: Can not display Chinese characters here.
 #' \dontrun{
 #' words = "hello world"
-#' test1 = worker()
-#' test1 <= words
-#' }
+#' engine1 = worker()
+#' segment(words, engine1)
+#'
+#' # "./temp.txt" is a file path
 #' 
-#' \dontrun{
-#' test <= "./temp.txt"
+#' segment("./temp.txt", engine1)
+#' 
 #' engine2 = worker("hmm")
-#' engine2 <= "./temp.txt"
+#' segment("./temp.txt", engine2)
+#' 
 #' engine2$write = T
-#' engine2 <= "./temp.txt"
+#' segment("./temp.txt", engine2)
+#'
 #' engine3 = worker(type = "mix", dict = "dict_path",symbol = T)
-#' engine3 <= "./temp.txt"
+#' segment("./temp.txt", engine3)
 #'  }
+#'  
 #' \dontrun{
 #' ### Keyword Extraction
-#' keys = worker("keywords", topn = 1)
-#' keys <= words
+#' engine = worker("keywords", topn = 1)
+#' keywords(words, engine)
 #' 
 #' ### Speech Tagging 
 #' tagger = worker("tag")
-#' tagger <= words
+#' tagging(words, tagger)
 #' 
 #' ### Simhash
 #' simhasher = worker("simhash", topn = 1)
-#' simhasher <= words
+#' simhash(words, simhasher)
 #' distance("hello world" , "hello world!" , simhasher)
 #' 
 #' show_dictpath()
