@@ -49,12 +49,6 @@ test_that("tobin", {
   expect_equal(tobin("2"),"0000000000000000000000000000000000000000000000000000000000000010")
 })
 
-test_that("query_threshold", {
-  cc = worker()
-  expect_warning(query_threshold(cc,1))
-  expect_equal(cc$max_word_length ,1)
-})
-
 test_that("tools",{
   invisible(show_dictpath())
 })

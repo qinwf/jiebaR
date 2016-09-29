@@ -118,33 +118,6 @@ public:
     filter(stopWords,words);
     return wrap(words);
   }
-  CharacterVector cut_level(CharacterVector& x)
-  {
-    const char *const test_lines = x[0];
-    vector<string> words;
-    cutter.CutLevel(test_lines, words);
-    filter(stopWords,words);
-    return wrap(words);
-  }
-  CharacterVector cut_level_pair(CharacterVector& x)
-  {
-    const char *const test_lines = x[0];
-    vector<pair<string, size_t> > res;
-    cutter.CutLevel(test_lines, res);
-    // FIXME
-    // filter(stopWords,words);
-    CharacterVector m(res.size());
-    CharacterVector atb(res.size());
-    CharacterVector::iterator m_it = m.begin();
-    CharacterVector::iterator atb_it = atb.begin();
-    for (vector<pair<string, size_t> >::iterator it = res.begin(); it != res.end(); it++)
-    {
-      *m_it = (*it).first; m_it++;
-      *atb_it = int64tos((*it).second); atb_it++;
-    }
-    m.attr("names") = atb;
-    return wrap(m);
-  }
   CharacterVector cut_mp(CharacterVector& x,size_t maxlen)
   {
     const char *const test_lines = x[0];
@@ -156,7 +129,7 @@ public:
   CharacterVector vector_tag(vector<string>& x)
   {
     vector<pair<string, string> > res;
-    cutter.simpleTag(x, res);
+    cutter.SimpleTag(x, res);
     //unsigned int it;
     vector<string> m;
     m.reserve(res.size());
@@ -256,10 +229,7 @@ public:
     
     return wrap(m);
   }
-  SEXP set_query_threshold(size_t len) {
-    cutter.SetQuerySegmentThreshold(len);
-    return wrap(len);
-  }
+
   LogicalVector add_user_word(CharacterVector& word, CharacterVector& tag) {
     auto it_tag = tag.begin();
     for(auto it = word.begin();it != word.end();it++){

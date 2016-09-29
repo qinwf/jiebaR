@@ -59,14 +59,6 @@ jiebaclass_query_cut <- function(x, cutter) {
     .Call('jiebaR_jiebaclass_query_cut', PACKAGE = 'jiebaR', x, cutter)
 }
 
-jiebaclass_level_cut <- function(x, cutter) {
-    .Call('jiebaR_jiebaclass_level_cut', PACKAGE = 'jiebaR', x, cutter)
-}
-
-jiebaclass_level_cut_pair <- function(x, cutter) {
-    .Call('jiebaR_jiebaclass_level_cut_pair', PACKAGE = 'jiebaR', x, cutter)
-}
-
 jiebaclass_tag_tag <- function(x, cutter) {
     .Call('jiebaR_jiebaclass_tag_tag', PACKAGE = 'jiebaR', x, cutter)
 }
@@ -77,10 +69,6 @@ jiebaclass_tag_file <- function(x, cutter) {
 
 jiebaclass_tag_vec <- function(code, cutter) {
     .Call('jiebaR_jiebaclass_tag_vec', PACKAGE = 'jiebaR', code, cutter)
-}
-
-set_query_threshold <- function(num, cutter) {
-    .Call('jiebaR_set_query_threshold', PACKAGE = 'jiebaR', num, cutter)
 }
 
 add_user_word <- function(x, tag, cutter) {
@@ -133,10 +121,6 @@ cpp_ham_dist <- function(x, y) {
 
 cpp_ham_dist_mat <- function(x, y) {
     .Call('jiebaR_cpp_ham_dist_mat', PACKAGE = 'jiebaR', x, y)
-}
-
-get_loc <- function(word) {
-    .Call('jiebaR_get_loc', PACKAGE = 'jiebaR', word)
 }
 
 words_freq <- function(x) {

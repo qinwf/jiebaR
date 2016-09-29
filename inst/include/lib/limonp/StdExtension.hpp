@@ -144,3 +144,4 @@ ofstream & operator << (ofstream & ofs, const basic_string<T>& s) {
 } // namespace std
 
 #endif
+

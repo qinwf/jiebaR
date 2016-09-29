@@ -53,22 +53,3 @@ IntegerVector cpp_ham_dist_mat(CharacterVector x, CharacterVector y){
   
   return wrap(res);
 }
-
-// [[Rcpp::export]]
-List get_loc(vector<string>& word){
-  vector<cppjieba::Jieba::LocWord> res;
-  Jieba::Locate(word,res);
-  vector<string> strings;
-  vector<string> begins;
-  vector<string> ends;
-  strings.reserve(word.size());
-  begins.reserve(word.size());
-  ends.reserve(word.size());
-  
-  for(auto it=res.begin(); it!=res.end();it++){
-    strings.push_back(it->word);
-    begins.push_back(int64tos(it->begin));
-    ends.push_back(int64tos(it->end));
-  }
-  return List::create(strings,begins,ends);
-}

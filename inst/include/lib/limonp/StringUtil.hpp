@@ -295,3 +295,4 @@ inline string PathJoin(const string& path1, const string& path2) {
 
 }
 #endif
+

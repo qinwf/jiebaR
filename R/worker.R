@@ -153,7 +153,7 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
                    qmax = 20, topn = 5, encoding = "UTF-8", detect = T, symbol = F,
                    lines = 1e+05, output = NULL, bylines = F, user_weight = "max") 
 { 
-  if(!any(type == c("mix","mp","hmm","query","simhash","keywords","tag","full","level","level_pair"))){
+  if(!any(type == c("mix","mp","hmm","query","simhash","keywords","tag","full"))){
     stop("unknown worker type")
   }
   stopifnot(user_weight %in% c("median","min","max"))
@@ -189,7 +189,7 @@ worker <- function(type = "mix", dict = DICTPATH, hmm = HMMPATH,
   if(user_weight == "min")    uw=1L
   if(user_weight == "median") uw=2L
   if(user_weight == "max")    uw=3L
-  if(type %in% c("mix","query","hmm","mp","tag","full","level","level_pair")){
+  if(type %in% c("mix","query","hmm","mp","tag","full")){
     worker  = jiebaclass_ptr_v2(dict, hmm, user,stop2,uw)
     private = list(dict = dict,user = user, hmm = hmm, stop_word= stop2,user_weight = user_weight, timestamp = TIMESTAMP)
     assignjieba(worker,detect,encoding,symbol,lines,output,write,private,bylines,result)
