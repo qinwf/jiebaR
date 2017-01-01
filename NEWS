@@ -1,3 +1,12 @@
+Changes in Version 0.10 (WIP)
+=====================================
+
+
+   o Major Change: New v2 functions for all methods, and the old methods will remain until 1.0 release.
+   o Add: THULAC methods
+   o Change: Query mode now behaves the same as Python jieba `cut_for_search`.
+   o Remove: `query_threshold` `words_locate`
+   
 Changes in Version 0.9.1 (2016-9-28)
 =====================================
 
