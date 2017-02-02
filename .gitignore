@@ -11,3 +11,5 @@ packrat/lib*/
 *src-x64/
 inst/doc
 .idea/
+
+.vscode/settings.json

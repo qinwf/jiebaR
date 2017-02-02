@@ -11,7 +11,7 @@ segment(code, jiebar, mod = NULL)
 
 \item{jiebar}{jiebaR Worker.}
 
-\item{mod}{change default result type, value can be "mix","hmm","query","full","level", or "mp"}
+\item{mod}{change default result type, value can be "mix","hmm","query","full" or "mp"}
 }
 \description{
 The function uses initialized engines for words segmentation. You 

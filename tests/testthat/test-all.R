@@ -87,3 +87,10 @@ test_that("vector_", {
   
   expect_identical(vector_keywords(cc["测试这个恶好玩不好玩"],keyz),structure(c("不好玩", "好玩", "测试"), .Names = c("11.8212", "9.01033", "7.14724")))
 })
+
+test_that("#48", {
+  dd = tempfile()
+  writeLines("的𠝹刀 n\n\n",con = dd)
+  cc = worker(user = dd)
+  expect_equal(cc["的𠝹刀"],"的𠝹刀")
+})
