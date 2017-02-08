@@ -334,32 +334,7 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x, cutter);
   }
-  /**
-   * [description]
-   * @param  xSEXP      a string in R, only the first element will be used
-   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
-   * @return            a string vector
-   */
-  SEXP attribute_hidden jiebaR_jiebaclass_level_cut(SEXP x, SEXP cutter){
-    static SEXP(*f)(SEXP,SEXP) = NULL;
-    if (!f) {
-      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_level_cut");
-    }
-    return f(x, cutter);
-  }
-  /**
-   * [description]
-   * @param  xSEXP      a string in R, only the first element will be used
-   * @param  cutterSEXP a jieba ptr, warning: no checking for ptr type in runtime
-   * @return            a string vector with names
-   */
-  SEXP attribute_hidden jiebaR_jiebaclass_level_cut_pair(SEXP x, SEXP cutter){
-    static SEXP(*f)(SEXP,SEXP) = NULL;
-    if (!f) {
-      f = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("jiebaR", "jiebaR_jiebaclass_level_cut_pair");
-    }
-    return f(x, cutter);
-  }
+
   /**
    * [description]
    * @param  xSEXP      a string in R, only the first element will be used
