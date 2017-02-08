@@ -1,32 +1,16 @@
 ---
 title: "Quick Start Guide - jiebaR"
-output: 
-  html_document:
-    toc: yes
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-<!--
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{Quick Start Guide}
-  \usepackage[utf8]{inputenc}
--->
 
 [Chinese Version]
 
 This is a package for Chinese text segmentation, keyword extraction
 and speech tagging. 
-
-## Features
-
-+ Support Windows, Linux,and Mac.
-+ Using Rcpp Modules to load different segmentation worker at the same time.
-+ Support Chinese text segmentation, keyword extraction, speech tagging and simhash computation.
-+ Custom dictionary path.
-+ Support simplified Chinese and traditional Chinese.
-+ New words identification.
-+ Auto encoding detection.
-+ Fast text segmentation.
-+ Easy installation.
-+ MIT license.
 
 ## Example
 
@@ -147,9 +131,10 @@ distance("hello world" , "hello world!" , simhasher)
 See https://jiebaR.qinwf.com/
 
 ## More Information and Issues
+
 [https://github.com/qinwf/jiebaR](https://github.com/qinwf/jiebaR)
 
-[https://github.com/aszxqw/cppjieba](https://github.com/aszxqw/cppjieba)
+[https://github.com/yanyiwu/cppjieba](https://github.com/yanyiwu/cppjieba)
 
 [Chinese Version]:https://github.com/qinwf/jiebaR
 [imewlconverter]:https://github.com/studyzy/imewlconverter
