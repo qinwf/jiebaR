@@ -47,21 +47,14 @@ CharacterVector jiebaclass_full_cut(CharacterVector& x, XPtr<JiebaClass> cutter)
 
 CharacterVector jiebaclass_query_cut(CharacterVector& x, XPtr<JiebaClass> cutter);
 
-CharacterVector jiebaclass_level_cut(CharacterVector& x, XPtr<JiebaClass> cutter);
-
-CharacterVector jiebaclass_level_cut_pair(CharacterVector& x, XPtr<JiebaClass> cutter);
-
 CharacterVector jiebaclass_tag_tag(CharacterVector& x, XPtr<JiebaClass> cutter);
 
 CharacterVector jiebaclass_tag_file(CharacterVector& x, XPtr<JiebaClass> cutter);
-
-SEXP set_query_threshold(size_t num, XPtr<JiebaClass> cutter);
 
 SEXP add_user_word(CharacterVector& x,CharacterVector& tag, XPtr<JiebaClass> cutter);
 
 
 CharacterVector u64tobin(string x);
-List get_loc(vector<string>& word, XPtr<JiebaClass> cutter);
 
 
 
