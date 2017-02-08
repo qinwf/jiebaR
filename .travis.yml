@@ -16,8 +16,6 @@ r:
   - release
   - devel
 
-r_check_revdep: true
-
 notifications:
   email:
     on_success: change
