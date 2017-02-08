@@ -1,9 +1,7 @@
-Changes in Version 0.10 (WIP)
+Changes in Version 0.10  (2016-2-10)
 =====================================
 
-
-   o Major Change: New v2 functions for all methods, and the old methods will remain until 1.0 release.
-   o Add: THULAC methods
+   o Major Change: Update CppJieba version to 5.0.0,
    o Change: Query mode now behaves the same as Python jieba `cut_for_search`.
    o Remove: `query_threshold` `words_locate`
    
