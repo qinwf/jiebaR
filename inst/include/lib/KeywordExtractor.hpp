@@ -73,7 +73,9 @@ class KeywordExtractor {
     for (size_t i = 0; i < words.size(); ++i) {
       size_t t = offset;
       offset += words[i].size();
-      if (IsSingleWord(words[i]) || stopWords_.find(words[i]) != stopWords_.end()) {
+      // updated see issue https://github.com/qinwf/jiebaR/issues/27#issuecomment-295026563
+      // if (IsSingleWord(words[i]) || stopWords_.find(words[i]) != stopWords_.end()) {
+      if (stopWords_.find(words[i]) != stopWords_.end()) {
         continue;
       }
       wordmap[words[i]].offsets.push_back(t);
@@ -110,7 +112,9 @@ class KeywordExtractor {
     for (size_t i = 0; i < words.size(); ++i) {
       size_t t = offset;
       offset += words[i].size();
-      if (IsSingleWord(words[i]) || stopWords_.find(words[i]) != stopWords_.end()) {
+      // updated see issue https://github.com/qinwf/jiebaR/issues/27#issuecomment-295026563
+      // if (IsSingleWord(words[i]) || stopWords_.find(words[i]) != stopWords_.end()) {
+      if (stopWords_.find(words[i]) != stopWords_.end()) {
         continue;
       }
       wordmap[words[i]].offsets.push_back(t);
