@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>jiebaR 中文分词文档</title>
+  <meta name="description" content="jiebaR 中文分词">
+  <meta name="generator" content="bookdown 0.3.18 and GitBook 2.6.7">
+
+  <meta property="og:title" content="jiebaR 中文分词文档" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://jiebaR.qinwf.com" />
+  
+  <meta property="og:description" content="jiebaR 中文分词" />
+  <meta name="github-repo" content="qinwf/jiebaR_doc" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="jiebaR 中文分词文档" />
+  
+  <meta name="twitter:description" content="jiebaR 中文分词" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="section-3.html">
+<link rel="next" href="section-5.html">
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79458133-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+<meta name="twitter:site" content="https://jiebaR.qinwf.com/">
+<meta name="twitter:title" content="jiebaR 中文分词 - 文档">
+<meta name="twitter:description" content="R语言 jiebaR 中文分词 - 文档教程">
+<meta name="twitter:image" content="https://jiebaR.qinwf.com/Rlogo.png">
+
+<meta property="og:url" content="https://jiebaR.qinwf.com/">
+<meta property="og:title" content="jiebaR 中文分词 - 文档">
+<meta property="og:description" content="R语言 jiebaR 中文分词 - 文档教程">
+<meta property="og:site_name" content="jiebaR 中文分词 - 文档">
+<meta property="og:image" content="https://jiebaR.qinwf.com/Rlogo.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">jiebaR 中文分词</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 简介</a><ul>
+<li class="chapter" data-level="1.1" data-path="section-1-1.html"><a href="section-1-1.html"><i class="fa fa-check"></i><b>1.1</b> 遇到了问题？</a></li>
+<li class="chapter" data-level="1.2" data-path="section-1-2.html"><a href="section-1-2.html"><i class="fa fa-check"></i><b>1.2</b> 旧版文档</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>2</b> 安装</a><ul>
+<li class="chapter" data-level="2.1" data-path="cran-.html"><a href="cran-.html"><i class="fa fa-check"></i><b>2.1</b> CRAN 版</a></li>
+<li class="chapter" data-level="2.2" data-path="section-2-2.html"><a href="section-2-2.html"><i class="fa fa-check"></i><b>2.2</b> 最新版</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="section-3.html"><a href="section-3.html"><i class="fa fa-check"></i><b>3</b> 分词</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="section-3.html"><a href="section-3.html#section-3.0.1"><i class="fa fa-check"></i><b>3.0.1</b> 对文本分词</a></li>
+<li class="chapter" data-level="3.0.2" data-path="section-3.html"><a href="section-3.html#-bylines"><i class="fa fa-check"></i><b>3.0.2</b> 分行输出 $bylines</a></li>
+<li class="chapter" data-level="3.0.3" data-path="section-3.html"><a href="section-3.html#-symbol"><i class="fa fa-check"></i><b>3.0.3</b> 保留符号 $symbol</a></li>
+<li class="chapter" data-level="3.0.4" data-path="section-3.html"><a href="section-3.html#-new_user_word"><i class="fa fa-check"></i><b>3.0.4</b> 添加新词到已经新建的分词器中 new_user_word()</a></li>
+<li class="chapter" data-level="3.0.5" data-path="section-3.html"><a href="section-3.html#-workerstop_word"><i class="fa fa-check"></i><b>3.0.5</b> 添加停止词 worker(stop_word = “…”)</a></li>
+<li class="chapter" data-level="3.0.6" data-path="section-3.html"><a href="section-3.html#----readlines--writelines"><i class="fa fa-check"></i><b>3.0.6</b> 对文件进行分词 - 使用 readLines 和 writeLines</a></li>
+<li class="chapter" data-level="3.0.7" data-path="section-3.html"><a href="section-3.html#---"><i class="fa fa-check"></i><b>3.0.7</b> 对文件进行分词 - 自动检测路径</a></li>
+<li class="chapter" data-level="3.0.8" data-path="section-3.html"><a href="section-3.html#-write-nofile"><i class="fa fa-check"></i><b>3.0.8</b> 关闭自动检测路径 $write = “NOFILE”</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="worker-.html"><a href="worker-.html"><i class="fa fa-check"></i><b>4</b> worker() 初始化参数</a><ul>
+<li class="chapter" data-level="4.0.1" data-path="worker-.html"><a href="worker-.html#type"><i class="fa fa-check"></i><b>4.0.1</b> type</a></li>
+<li class="chapter" data-level="4.0.2" data-path="worker-.html"><a href="worker-.html#dict-"><i class="fa fa-check"></i><b>4.0.2</b> dict 系统词典</a></li>
+<li class="chapter" data-level="4.0.3" data-path="worker-.html"><a href="worker-.html#user-"><i class="fa fa-check"></i><b>4.0.3</b> user 用户词典</a></li>
+<li class="chapter" data-level="4.0.4" data-path="worker-.html"><a href="worker-.html#user_weight"><i class="fa fa-check"></i><b>4.0.4</b> user_weight</a></li>
+<li class="chapter" data-level="4.0.5" data-path="worker-.html"><a href="worker-.html#idf-idf"><i class="fa fa-check"></i><b>4.0.5</b> idf IDF词典</a></li>
+<li class="chapter" data-level="4.0.6" data-path="worker-.html"><a href="worker-.html#stop_word-"><i class="fa fa-check"></i><b>4.0.6</b> stop_word 关键词用停止词库</a></li>
+<li class="chapter" data-level="4.0.7" data-path="worker-.html"><a href="worker-.html#write-"><i class="fa fa-check"></i><b>4.0.7</b> write 写入文件</a></li>
+<li class="chapter" data-level="4.0.8" data-path="worker-.html"><a href="worker-.html#qmax-"><i class="fa fa-check"></i><b>4.0.8</b> qmax 最大索引长度</a></li>
+<li class="chapter" data-level="4.0.9" data-path="worker-.html"><a href="worker-.html#topn-"><i class="fa fa-check"></i><b>4.0.9</b> topn 关键词数</a></li>
+<li class="chapter" data-level="4.0.10" data-path="worker-.html"><a href="worker-.html#encoding-"><i class="fa fa-check"></i><b>4.0.10</b> encoding 输入文件编码</a></li>
+<li class="chapter" data-level="4.0.11" data-path="worker-.html"><a href="worker-.html#detect-"><i class="fa fa-check"></i><b>4.0.11</b> detect 检测编码</a></li>
+<li class="chapter" data-level="4.0.12" data-path="worker-.html"><a href="worker-.html#symbol-"><i class="fa fa-check"></i><b>4.0.12</b> symbol 保留符号</a></li>
+<li class="chapter" data-level="4.0.13" data-path="worker-.html"><a href="worker-.html#lines-"><i class="fa fa-check"></i><b>4.0.13</b> lines 读取行数</a></li>
+<li class="chapter" data-level="4.0.14" data-path="worker-.html"><a href="worker-.html#output-"><i class="fa fa-check"></i><b>4.0.14</b> output 输出路径</a></li>
+<li class="chapter" data-level="4.0.15" data-path="worker-.html"><a href="worker-.html#bylines-"><i class="fa fa-check"></i><b>4.0.15</b> bylines 按行输出</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-5.html"><a href="section-5.html"><i class="fa fa-check"></i><b>5</b> 标记和关键词</a><ul>
+<li class="chapter" data-level="5.0.1" data-path="section-5.html"><a href="section-5.html#section-5.0.1"><i class="fa fa-check"></i><b>5.0.1</b> 标记</a></li>
+<li class="chapter" data-level="5.0.2" data-path="section-5.html"><a href="section-5.html#section-5.0.2"><i class="fa fa-check"></i><b>5.0.2</b> 关键词</a></li>
+<li class="chapter" data-level="5.0.3" data-path="section-5.html"><a href="section-5.html#simhash-"><i class="fa fa-check"></i><b>5.0.3</b> Simhash 与海明距离</a></li>
+<li class="chapter" data-level="5.0.4" data-path="section-5.html"><a href="section-5.html#tobin--simhash-"><i class="fa fa-check"></i><b>5.0.4</b> tobin 进行 Simhash 数值的二进制转换。</a></li>
+<li class="chapter" data-level="5.0.5" data-path="section-5.html"><a href="section-5.html#-freq"><i class="fa fa-check"></i><b>5.0.5</b> 词频统计 freq()</a></li>
+<li class="chapter" data-level="5.0.6" data-path="section-5.html"><a href="section-5.html#-idf--get_idf"><i class="fa fa-check"></i><b>5.0.6</b> 生成 IDF 文件 get_idf()</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="section-6.html"><a href="section-6.html"><i class="fa fa-check"></i><b>6</b> 其他常用包</a><ul>
+<li class="chapter" data-level="6.0.1" data-path="section-6.html"><a href="section-6.html#cidian"><i class="fa fa-check"></i><b>6.0.1</b> cidian</a></li>
+<li class="chapter" data-level="6.0.2" data-path="section-6.html"><a href="section-6.html#text2vec"><i class="fa fa-check"></i><b>6.0.2</b> text2vec</a></li>
+<li class="chapter" data-level="6.0.3" data-path="section-6.html"><a href="section-6.html#ropencc"><i class="fa fa-check"></i><b>6.0.3</b> ropencc</a></li>
+<li class="chapter" data-level="6.0.4" data-path="section-6.html"><a href="section-6.html#wordcloud2"><i class="fa fa-check"></i><b>6.0.4</b> wordcloud2</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>7</b> 常见问题</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="section-7.html"><a href="section-7.html#-tm-"><i class="fa fa-check"></i><b>7.0.1</b> 为什么 tm 包里词都连起来了？</a></li>
+<li class="chapter" data-level="7.0.2" data-path="section-7.html"><a href="section-7.html#section-7.0.2"><i class="fa fa-check"></i><b>7.0.2</b> 空行警告</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://jiebaR.qinwf.com/" target="blank">Build with R bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">jiebaR 中文分词文档</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="worker-" class="section level1">
+<h1><span class="header-section-number">4</span> worker() 初始化参数</h1>
+<p>worker() 用于新建分词引擎，可以同时新建多个分词引擎。引擎的类型有： mix（混合模型）, mp（最大概率模型）, hmm（HMM模型）, query（索引模型）, tag（标记模型）, simhash（Simhash 模型）和 keywords（关键词模型），共7种。 默认参数</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">worker</span>(
+    <span class="dt">type =</span> <span class="st">&quot;mix&quot;</span>, 
+    <span class="dt">dict =</span> DICTPATH, 
+    <span class="dt">hmm =</span> HMMPATH, 
+    <span class="dt">user =</span> USERPATH,
+    <span class="dt">idf =</span> IDFPATH, 
+    <span class="dt">stop_word =</span> 
+    STOPPATH, 
+    <span class="dt">write =</span> T, 
+    <span class="dt">qmax =</span> <span class="dv">20</span>, 
+    <span class="dt">topn =</span> <span class="dv">5</span>,
+    <span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>, 
+    <span class="dt">detect =</span> T, 
+    <span class="dt">symbol =</span> F, 
+    <span class="dt">lines =</span> <span class="fl">1e+05</span>,
+    <span class="dt">output =</span> <span class="ot">NULL</span>, 
+    <span class="dt">bylines =</span> F)</code></pre></div>
+<div id="type" class="section level3">
+<h3><span class="header-section-number">4.0.1</span> type</h3>
+<p>mp（最大概率模型）- 基于词典和词频</p>
+<p>hmm（HMM模型）- 基于 HMM 模型，可以发现词典中没有的词</p>
+<p>mix（混合模型）- 先用 mp 分，mp 分完调用 hmm 再来把剩余的可能成词的单字分出来。</p>
+<p>query（索引模型）- mix 基础上，对大于一定长度的词再进行一次切分。</p>
+<p>tag（标记模型）- 词性标记，基于词典的</p>
+<p>keywords（关键词模型）- tf-idf 抽 关键词</p>
+<p>simhash（Simhash 模型） - 在关键词的基础上计算 simhash</p>
+</div>
+<div id="dict-" class="section level3">
+<h3><span class="header-section-number">4.0.2</span> dict 系统词典</h3>
+<p>优先载入的词典，纯文本文件，默认路径为 jiebaR::DICTPATH 包括词、词频、词性标记三列，用空格分开三列。可以输入自定义路径。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(jiebaR::DICTPATH, <span class="dv">5</span>)
+<span class="co">#&gt; [1] &quot;1号店 3 n&quot; &quot;1號店 3 n&quot; &quot;4S店 3 n&quot;  &quot;4s店 3 n&quot;  &quot;AA制 3 n&quot;</span></code></pre></div>
+</div>
+<div id="user-" class="section level3">
+<h3><span class="header-section-number">4.0.3</span> user 用户词典</h3>
+<p>用户词典，包括词、词性标记两列。用户词典中的所有词的词频均为系统词典中的最大词频 (默认，可以通过 user_weight 参数修改)。</p>
+</div>
+<div id="user_weight" class="section level3">
+<h3><span class="header-section-number">4.0.4</span> user_weight</h3>
+<p>用户词典中的词的词频，默认为 “max”，系统词典中的最大值。</p>
+<p>还可以选 “min” 最小值或者 “median” 中位数。</p>
+</div>
+<div id="idf-idf" class="section level3">
+<h3><span class="header-section-number">4.0.5</span> idf IDF词典</h3>
+<p>IDF 词典，关键词提取使用。</p>
+</div>
+<div id="stop_word-" class="section level3">
+<h3><span class="header-section-number">4.0.6</span> stop_word 关键词用停止词库</h3>
+<p>关键词提取使用的停止词库。分词时也可以使用，但是分词时使用的对应路径不能为默认的 jiebaR::STOPPATH。</p>
+</div>
+<div id="write-" class="section level3">
+<h3><span class="header-section-number">4.0.7</span> write 写入文件</h3>
+<p>是否将文件分词结果写入文件，默认为否。只在输入内容为文件路径时，本参数才会被使用。本参数只对分词和词性标注有效。</p>
+</div>
+<div id="qmax-" class="section level3">
+<h3><span class="header-section-number">4.0.8</span> qmax 最大索引长度</h3>
+<p>索引模型中，最大可能成词的字符数。</p>
+</div>
+<div id="topn-" class="section level3">
+<h3><span class="header-section-number">4.0.9</span> topn 关键词数</h3>
+<p>提取的关键词数。</p>
+</div>
+<div id="encoding-" class="section level3">
+<h3><span class="header-section-number">4.0.10</span> encoding 输入文件编码</h3>
+<p>输入文件的编码，默认为UTF-8。</p>
+</div>
+<div id="detect-" class="section level3">
+<h3><span class="header-section-number">4.0.11</span> detect 检测编码</h3>
+<p>是否检查输入文件的编码，默认检查。</p>
+</div>
+<div id="symbol-" class="section level3">
+<h3><span class="header-section-number">4.0.12</span> symbol 保留符号</h3>
+<p>是否保留符号，默认不保留符号。</p>
+</div>
+<div id="lines-" class="section level3">
+<h3><span class="header-section-number">4.0.13</span> lines 读取行数</h3>
+<p>每次读取文件的最大行数，用于控制读取文件的长度。对于大文件，实现分次读取。</p>
+</div>
+<div id="output-" class="section level3">
+<h3><span class="header-section-number">4.0.14</span> output 输出路径</h3>
+<p>指定输出路径，一个字符串路径。只在输入内容为文件路径时，本参数才会被使用。</p>
+</div>
+<div id="bylines-" class="section level3">
+<h3><span class="header-section-number">4.0.15</span> bylines 按行输出</h3>
+<p>文件结果是否按行输出，如果是，则将读入的文件或字符串向量按行逐个进行分词操作。</p>
+
+</div>
+</div>
+
+<script src="./fanjian.js"></script>
+<script src="./button.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="section-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": true,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/qinwf/jiebaR_doc/edit/master/03-worker.rmd",
+"text": "Edit"
+},
+"download": ["bookdown.epub", "bookdown.mobi"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

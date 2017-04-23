@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>jiebaR 中文分词文档</title>
+  <meta name="description" content="jiebaR 中文分词">
+  <meta name="generator" content="bookdown 0.3.18 and GitBook 2.6.7">
+
+  <meta property="og:title" content="jiebaR 中文分词文档" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://jiebaR.qinwf.com" />
+  
+  <meta property="og:description" content="jiebaR 中文分词" />
+  <meta name="github-repo" content="qinwf/jiebaR_doc" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="jiebaR 中文分词文档" />
+  
+  <meta name="twitter:description" content="jiebaR 中文分词" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="section-2.html">
+<link rel="next" href="section-2-2.html">
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79458133-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+<meta name="twitter:site" content="https://jiebaR.qinwf.com/">
+<meta name="twitter:title" content="jiebaR 中文分词 - 文档">
+<meta name="twitter:description" content="R语言 jiebaR 中文分词 - 文档教程">
+<meta name="twitter:image" content="https://jiebaR.qinwf.com/Rlogo.png">
+
+<meta property="og:url" content="https://jiebaR.qinwf.com/">
+<meta property="og:title" content="jiebaR 中文分词 - 文档">
+<meta property="og:description" content="R语言 jiebaR 中文分词 - 文档教程">
+<meta property="og:site_name" content="jiebaR 中文分词 - 文档">
+<meta property="og:image" content="https://jiebaR.qinwf.com/Rlogo.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">jiebaR 中文分词</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 简介</a><ul>
+<li class="chapter" data-level="1.1" data-path="section-1-1.html"><a href="section-1-1.html"><i class="fa fa-check"></i><b>1.1</b> 遇到了问题？</a></li>
+<li class="chapter" data-level="1.2" data-path="section-1-2.html"><a href="section-1-2.html"><i class="fa fa-check"></i><b>1.2</b> 旧版文档</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>2</b> 安装</a><ul>
+<li class="chapter" data-level="2.1" data-path="cran-.html"><a href="cran-.html"><i class="fa fa-check"></i><b>2.1</b> CRAN 版</a></li>
+<li class="chapter" data-level="2.2" data-path="section-2-2.html"><a href="section-2-2.html"><i class="fa fa-check"></i><b>2.2</b> 最新版</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="section-3.html"><a href="section-3.html"><i class="fa fa-check"></i><b>3</b> 分词</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="section-3.html"><a href="section-3.html#section-3.0.1"><i class="fa fa-check"></i><b>3.0.1</b> 对文本分词</a></li>
+<li class="chapter" data-level="3.0.2" data-path="section-3.html"><a href="section-3.html#-bylines"><i class="fa fa-check"></i><b>3.0.2</b> 分行输出 $bylines</a></li>
+<li class="chapter" data-level="3.0.3" data-path="section-3.html"><a href="section-3.html#-symbol"><i class="fa fa-check"></i><b>3.0.3</b> 保留符号 $symbol</a></li>
+<li class="chapter" data-level="3.0.4" data-path="section-3.html"><a href="section-3.html#-new_user_word"><i class="fa fa-check"></i><b>3.0.4</b> 添加新词到已经新建的分词器中 new_user_word()</a></li>
+<li class="chapter" data-level="3.0.5" data-path="section-3.html"><a href="section-3.html#-workerstop_word"><i class="fa fa-check"></i><b>3.0.5</b> 添加停止词 worker(stop_word = “…”)</a></li>
+<li class="chapter" data-level="3.0.6" data-path="section-3.html"><a href="section-3.html#----readlines--writelines"><i class="fa fa-check"></i><b>3.0.6</b> 对文件进行分词 - 使用 readLines 和 writeLines</a></li>
+<li class="chapter" data-level="3.0.7" data-path="section-3.html"><a href="section-3.html#---"><i class="fa fa-check"></i><b>3.0.7</b> 对文件进行分词 - 自动检测路径</a></li>
+<li class="chapter" data-level="3.0.8" data-path="section-3.html"><a href="section-3.html#-write-nofile"><i class="fa fa-check"></i><b>3.0.8</b> 关闭自动检测路径 $write = “NOFILE”</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="worker-.html"><a href="worker-.html"><i class="fa fa-check"></i><b>4</b> worker() 初始化参数</a><ul>
+<li class="chapter" data-level="4.0.1" data-path="worker-.html"><a href="worker-.html#type"><i class="fa fa-check"></i><b>4.0.1</b> type</a></li>
+<li class="chapter" data-level="4.0.2" data-path="worker-.html"><a href="worker-.html#dict-"><i class="fa fa-check"></i><b>4.0.2</b> dict 系统词典</a></li>
+<li class="chapter" data-level="4.0.3" data-path="worker-.html"><a href="worker-.html#user-"><i class="fa fa-check"></i><b>4.0.3</b> user 用户词典</a></li>
+<li class="chapter" data-level="4.0.4" data-path="worker-.html"><a href="worker-.html#user_weight"><i class="fa fa-check"></i><b>4.0.4</b> user_weight</a></li>
+<li class="chapter" data-level="4.0.5" data-path="worker-.html"><a href="worker-.html#idf-idf"><i class="fa fa-check"></i><b>4.0.5</b> idf IDF词典</a></li>
+<li class="chapter" data-level="4.0.6" data-path="worker-.html"><a href="worker-.html#stop_word-"><i class="fa fa-check"></i><b>4.0.6</b> stop_word 关键词用停止词库</a></li>
+<li class="chapter" data-level="4.0.7" data-path="worker-.html"><a href="worker-.html#write-"><i class="fa fa-check"></i><b>4.0.7</b> write 写入文件</a></li>
+<li class="chapter" data-level="4.0.8" data-path="worker-.html"><a href="worker-.html#qmax-"><i class="fa fa-check"></i><b>4.0.8</b> qmax 最大索引长度</a></li>
+<li class="chapter" data-level="4.0.9" data-path="worker-.html"><a href="worker-.html#topn-"><i class="fa fa-check"></i><b>4.0.9</b> topn 关键词数</a></li>
+<li class="chapter" data-level="4.0.10" data-path="worker-.html"><a href="worker-.html#encoding-"><i class="fa fa-check"></i><b>4.0.10</b> encoding 输入文件编码</a></li>
+<li class="chapter" data-level="4.0.11" data-path="worker-.html"><a href="worker-.html#detect-"><i class="fa fa-check"></i><b>4.0.11</b> detect 检测编码</a></li>
+<li class="chapter" data-level="4.0.12" data-path="worker-.html"><a href="worker-.html#symbol-"><i class="fa fa-check"></i><b>4.0.12</b> symbol 保留符号</a></li>
+<li class="chapter" data-level="4.0.13" data-path="worker-.html"><a href="worker-.html#lines-"><i class="fa fa-check"></i><b>4.0.13</b> lines 读取行数</a></li>
+<li class="chapter" data-level="4.0.14" data-path="worker-.html"><a href="worker-.html#output-"><i class="fa fa-check"></i><b>4.0.14</b> output 输出路径</a></li>
+<li class="chapter" data-level="4.0.15" data-path="worker-.html"><a href="worker-.html#bylines-"><i class="fa fa-check"></i><b>4.0.15</b> bylines 按行输出</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-5.html"><a href="section-5.html"><i class="fa fa-check"></i><b>5</b> 标记和关键词</a><ul>
+<li class="chapter" data-level="5.0.1" data-path="section-5.html"><a href="section-5.html#section-5.0.1"><i class="fa fa-check"></i><b>5.0.1</b> 标记</a></li>
+<li class="chapter" data-level="5.0.2" data-path="section-5.html"><a href="section-5.html#section-5.0.2"><i class="fa fa-check"></i><b>5.0.2</b> 关键词</a></li>
+<li class="chapter" data-level="5.0.3" data-path="section-5.html"><a href="section-5.html#simhash-"><i class="fa fa-check"></i><b>5.0.3</b> Simhash 与海明距离</a></li>
+<li class="chapter" data-level="5.0.4" data-path="section-5.html"><a href="section-5.html#tobin--simhash-"><i class="fa fa-check"></i><b>5.0.4</b> tobin 进行 Simhash 数值的二进制转换。</a></li>
+<li class="chapter" data-level="5.0.5" data-path="section-5.html"><a href="section-5.html#-freq"><i class="fa fa-check"></i><b>5.0.5</b> 词频统计 freq()</a></li>
+<li class="chapter" data-level="5.0.6" data-path="section-5.html"><a href="section-5.html#-idf--get_idf"><i class="fa fa-check"></i><b>5.0.6</b> 生成 IDF 文件 get_idf()</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="section-6.html"><a href="section-6.html"><i class="fa fa-check"></i><b>6</b> 其他常用包</a><ul>
+<li class="chapter" data-level="6.0.1" data-path="section-6.html"><a href="section-6.html#cidian"><i class="fa fa-check"></i><b>6.0.1</b> cidian</a></li>
+<li class="chapter" data-level="6.0.2" data-path="section-6.html"><a href="section-6.html#text2vec"><i class="fa fa-check"></i><b>6.0.2</b> text2vec</a></li>
+<li class="chapter" data-level="6.0.3" data-path="section-6.html"><a href="section-6.html#ropencc"><i class="fa fa-check"></i><b>6.0.3</b> ropencc</a></li>
+<li class="chapter" data-level="6.0.4" data-path="section-6.html"><a href="section-6.html#wordcloud2"><i class="fa fa-check"></i><b>6.0.4</b> wordcloud2</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>7</b> 常见问题</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="section-7.html"><a href="section-7.html#-tm-"><i class="fa fa-check"></i><b>7.0.1</b> 为什么 tm 包里词都连起来了？</a></li>
+<li class="chapter" data-level="7.0.2" data-path="section-7.html"><a href="section-7.html#section-7.0.2"><i class="fa fa-check"></i><b>7.0.2</b> 空行警告</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://jiebaR.qinwf.com/" target="blank">Build with R bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">jiebaR 中文分词文档</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cran-" class="section level2">
+<h2><span class="header-section-number">2.1</span> CRAN 版</h2>
+<p>通过CRAN安装:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;jiebaR&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;jiebaR&quot;</span>)</code></pre></div>
+</div>
+
+<script src="./fanjian.js"></script>
+<script src="./button.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="section-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-2-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": true,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/qinwf/jiebaR_doc/edit/master/01-setup.rmd",
+"text": "Edit"
+},
+"download": ["bookdown.epub", "bookdown.mobi"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
