@@ -23,13 +23,11 @@ install_github("qinwf/jiebaR")
 
 ## 使用指南 与 演示
 
-[使用指南](http://qinwenfeng.com/jiebaR/) ：http://qinwenfeng.com/jiebaR/
+[使用指南 (已更新 🎉)](http://qinwenfeng.com/jiebaR/)
 
-[v2 文档](https://jiebaR.qinwf.com/) : https://jiebaR.qinwf.com/
+[Shiny 演示](https://qinwf.shinyapps.io/jiebaR-shiny/)
 
-[Shiny 演示](https://qinwf.shinyapps.io/jiebaR-shiny/) ：https://qinwf.shinyapps.io/jiebaR-shiny/
-
-[细胞词库转换](https://github.com/qinwf/cidian) ：https://github.com/qinwf/cidian/
+[用 cidian 包进行细胞词库转换](https://github.com/qinwf/cidian)
 
 ## 问题
 
