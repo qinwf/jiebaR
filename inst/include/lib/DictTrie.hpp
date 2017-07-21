@@ -99,7 +99,13 @@ class DictTrie {
     vector<string> files = limonp::Split(filePaths, "|;");
     size_t lineno = 0;
     for (size_t i = 0; i < files.size(); i++) {
+      if (files[i] == ""){
+        continue;
+      }
       ifstream ifs(files[i].c_str());
+      if (!ifs.good()){
+        continue;
+      }
       XCHECK(ifs.is_open()) << "open " << files[i] << " failed"; 
       string line;
       DictUnit node_info;
