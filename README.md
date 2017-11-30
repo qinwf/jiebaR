@@ -35,7 +35,7 @@ install_github("qinwf/jiebaR")
 
 + 发送邮件至用户邮件列表  [jiebaR@googlegroups.com](mailto:jiebaR@googlegroups.com)
 + 访问 https://groups.google.com/d/forum/jiebaR
-+ 在 [GitHub](https://github.com/qinwf/jiebaR) 提交 issues。
++ 在 [GitHub](https://github.com/qinwf/jiebaR/issues) 提交 issues。
 
 # jiebaR
 
@@ -48,6 +48,8 @@ Install the latest development version from GitHub:
 
 ```r
 devtools::install_github("qinwf/jiebaR")
+# optional: data package
+devtools::install_github("qinwf/jiabaRD")
 ```
 
 Install from [CRAN](https://cran.r-project.org/package=jiebaR):
@@ -55,3 +57,11 @@ Install from [CRAN](https://cran.r-project.org/package=jiebaR):
 ```r
 install.packages("jiebaR")
 ```
+
+## Questions
+
+If you encounter any problems, please feel free to:
+
++ Reach our [Google Groups e-mail](mailto:jiebaR@googlegroups.com)
++ Visit our [Google Groups page](https://groups.google.com/d/forum/jiebaR)
++ [File an Issue](https://github.com/qinwf/jiebaR/issues)
