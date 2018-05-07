@@ -4,9 +4,9 @@
 \name{DICTPATH}
 \alias{DICTPATH}
 \alias{HMMPATH}
+\alias{USERPATH}
 \alias{IDFPATH}
 \alias{STOPPATH}
-\alias{USERPATH}
 \title{The path of dictionary}
 \format{character}
 \usage{
@@ -25,4 +25,3 @@ The path of dictionary, and it is used by segmentation and other
 function.
 }
 \keyword{datasets}
-

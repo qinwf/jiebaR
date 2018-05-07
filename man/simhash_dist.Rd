@@ -27,4 +27,3 @@ tobin("1")
 tobin("2")
 simhash_dist_mat(c("1","12","123"),c("2","1"))
 }
-

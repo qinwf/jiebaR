@@ -22,4 +22,3 @@ This function helps remove some words in the segmentation result.
 \examples{
 filter_segment(c("abc","def"," ","."), c("abc"))
 }
-

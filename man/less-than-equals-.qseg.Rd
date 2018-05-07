@@ -51,11 +51,10 @@ get_qsegmodel()
 }
 
 }
-\author{
-Qin Wenfeng <\url{http://qinwenfeng.com}>
-}
 \seealso{
 \code{\link{set_qsegmodel}} \code{\link{worker}}
 }
+\author{
+Qin Wenfeng <\url{http://qinwenfeng.com}>
+}
 \keyword{datasets}
-

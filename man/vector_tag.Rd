@@ -22,4 +22,3 @@ vector_tag(res, cc)
 }
 
 }
-

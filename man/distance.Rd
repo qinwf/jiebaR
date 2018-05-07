@@ -35,13 +35,12 @@ vector_distance(c("hello","world") , c("hello", "world","!") , simhasher)
 
 }
 }
-\author{
-Qin Wenfeng
-}
 \references{
 \url{http://en.wikipedia.org/wiki/Hamming_distance}
 }
 \seealso{
 \code{\link{worker}}
 }
-
+\author{
+Qin Wenfeng
+}

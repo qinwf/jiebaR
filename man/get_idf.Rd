@@ -33,4 +33,3 @@ get_idf(list(c("abc","def"),c("abc"," ")))
 \seealso{
 https://en.wikipedia.org/wiki/Tf-idf#Inverse_document_frequency_2
 }
-

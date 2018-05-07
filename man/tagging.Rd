@@ -30,13 +30,12 @@ tagger = worker("tag")
 tagger <= words
 }
 }
-\author{
-Qin Wenfeng
-}
 \references{
 The ictclas speech tag : \url{http://t.cn/RAEj7e1}
 }
 \seealso{
 \code{\link{<=.tagger}} \code{\link{worker}}
 }
-
+\author{
+Qin Wenfeng
+}

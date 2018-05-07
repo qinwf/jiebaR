@@ -21,4 +21,3 @@ cc = worker()
 new_user_word(cc, "test")
 new_user_word(cc, "do", "v")
 }
-

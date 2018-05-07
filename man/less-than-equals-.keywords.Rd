@@ -26,4 +26,3 @@ test1 <= words}
 \author{
 Qin Wenfeng <\url{http://qinwenfeng.com}>
 }
-

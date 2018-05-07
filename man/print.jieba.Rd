@@ -3,9 +3,9 @@
 \name{print.inv}
 \alias{print.inv}
 \alias{print.jieba}
+\alias{print.simhash}
 \alias{print.keywords}
 \alias{print.qseg}
-\alias{print.simhash}
 \title{Print worker settings}
 \usage{
 \method{print}{inv}(x, ...)
@@ -29,4 +29,3 @@ These functoins print the worker settings.
 \author{
 Qin Wenfeng
 }
-

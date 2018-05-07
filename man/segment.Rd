@@ -49,4 +49,3 @@ There is a symbol \code{<=} for this function.
 \seealso{
 \code{\link{<=.segment}} \code{\link{worker}}
 }
-

@@ -54,13 +54,12 @@ show_dictpath()
 }
 
 }
-\author{
-Qin Wenfeng <\url{http://qinwenfeng.com}>
-}
 \references{
 CppJieba \url{https://github.com/aszxqw/cppjieba};
 }
 \seealso{
 JiebaR \url{https://github.com/qinwf/jiebaR};
 }
-
+\author{
+Qin Wenfeng <\url{http://qinwenfeng.com}>
+}

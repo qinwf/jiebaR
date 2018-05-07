@@ -23,13 +23,12 @@ You can also check encoding with checkenc package which is on GitHub.
 This function will choose the most likely encoding, and it will be 
 more stable for a large input text file.
 }
-\author{
-Wu Yongwei, Qin wenfeng
-}
 \references{
 \url{https://github.com/adah1972/tellenc}
 }
 \seealso{
 \url{https://github.com/qinwf/checkenc}
 }
-
+\author{
+Wu Yongwei, Qin wenfeng
+}

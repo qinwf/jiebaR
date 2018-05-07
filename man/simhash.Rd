@@ -33,13 +33,12 @@ simhasher <= words
 distance("hello world" , "hello world!" , simhasher)
 }
 }
-\author{
-Qin Wenfeng
-}
 \references{
 MS Charikar - Similarity Estimation Techniques from Rounding Algorithms
 }
 \seealso{
 \code{\link{<=.simhash}} \code{\link{worker}}
 }
-
+\author{
+Qin Wenfeng
+}

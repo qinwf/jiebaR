@@ -30,4 +30,3 @@ Only one column in the stop words dictionary, and it contains the stop words.
 \references{
 The ictclas speech tag : \url{http://t.cn/RAEj7e1}
 }
-

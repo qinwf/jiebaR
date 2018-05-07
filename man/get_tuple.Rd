@@ -19,4 +19,3 @@ get tuple from the segmentation result
 \examples{
 get_tuple(c("sd","sd","sd","rd"),2)
 }
-

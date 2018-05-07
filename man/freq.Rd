@@ -21,4 +21,3 @@ freq(c("a","a","c"))
 \author{
 Qin wenfeng
 }
-

@@ -14,4 +14,3 @@ in default environment.
 \author{
 Qin Wenfeng
 }
-

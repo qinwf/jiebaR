@@ -12,4 +12,3 @@ tobin(x)
 \description{
 simhash value to binary
 }
-

@@ -2,8 +2,8 @@
 % Please edit documentation in R/quick.R
 \name{get_qsegmodel}
 \alias{get_qsegmodel}
-\alias{reset_qsegmodel}
 \alias{set_qsegmodel}
+\alias{reset_qsegmodel}
 \title{Set quick mode model}
 \usage{
 get_qsegmodel()
@@ -42,10 +42,9 @@ set_qsegmodel(model)
 reset_qsegmodel()
 }
 }
-\author{
-Qin Wenfeng <\url{http://qinwenfeng.com}>
-}
 \seealso{
 \code{\link{qseg}} \code{\link{worker}}
 }
-
+\author{
+Qin Wenfeng <\url{http://qinwenfeng.com}>
+}

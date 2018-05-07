@@ -33,13 +33,12 @@ There is a symbol \code{<=} for this function.
 keys = worker("keywords", topn = 1)
 keys <= "words of fun"}
 }
-\author{
-Qin Wenfeng
-}
 \references{
 \url{http://en.wikipedia.org/wiki/Tf-idf}
 }
 \seealso{
 \code{\link{<=.keywords}} \code{\link{worker}}
 }
-
+\author{
+Qin Wenfeng
+}
