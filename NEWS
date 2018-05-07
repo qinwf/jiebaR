@@ -1,4 +1,4 @@
-Changes in Version 0.10  (2016-2-10)
+Changes in Version 0.10  (2018-5-8)
 =====================================
 
    o Major Change: update CppJieba version to 5.0.0.
@@ -6,6 +6,7 @@ Changes in Version 0.10  (2016-2-10)
    o Remove: `level` and `level_pair` methods for worker
    o Change: query mode now behaves the same as Python jieba `cut_for_search`.
    o Fix: special Unicode string decoding error
+   o Fix: GCC 8 warnings
    
 Changes in Version 0.9.1 (2016-9-28)
 =====================================
