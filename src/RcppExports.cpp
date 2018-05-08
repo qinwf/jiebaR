@@ -359,3 +359,40 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_jiebaR_file_coding", (DL_FUNC) &_jiebaR_file_coding, 1},
+    {"_jiebaR_get_idf_cpp", (DL_FUNC) &_jiebaR_get_idf_cpp, 2},
+    {"_jiebaR_get_tuple_list", (DL_FUNC) &_jiebaR_get_tuple_list, 2},
+    {"_jiebaR_get_tuple_vector", (DL_FUNC) &_jiebaR_get_tuple_vector, 2},
+    {"_jiebaR_jiebaclass_ptr", (DL_FUNC) &_jiebaR_jiebaclass_ptr, 4},
+    {"_jiebaR_jiebaclass_ptr_v2", (DL_FUNC) &_jiebaR_jiebaclass_ptr_v2, 5},
+    {"_jiebaR_jiebaclass_mix_cut", (DL_FUNC) &_jiebaR_jiebaclass_mix_cut, 2},
+    {"_jiebaR_jiebaclass_mp_cut", (DL_FUNC) &_jiebaR_jiebaclass_mp_cut, 3},
+    {"_jiebaR_jiebaclass_hmm_cut", (DL_FUNC) &_jiebaR_jiebaclass_hmm_cut, 2},
+    {"_jiebaR_jiebaclass_full_cut", (DL_FUNC) &_jiebaR_jiebaclass_full_cut, 2},
+    {"_jiebaR_jiebaclass_query_cut", (DL_FUNC) &_jiebaR_jiebaclass_query_cut, 2},
+    {"_jiebaR_jiebaclass_tag_tag", (DL_FUNC) &_jiebaR_jiebaclass_tag_tag, 2},
+    {"_jiebaR_jiebaclass_tag_file", (DL_FUNC) &_jiebaR_jiebaclass_tag_file, 2},
+    {"_jiebaR_jiebaclass_tag_vec", (DL_FUNC) &_jiebaR_jiebaclass_tag_vec, 2},
+    {"_jiebaR_add_user_word", (DL_FUNC) &_jiebaR_add_user_word, 3},
+    {"_jiebaR_key_ptr", (DL_FUNC) &_jiebaR_key_ptr, 6},
+    {"_jiebaR_key_tag", (DL_FUNC) &_jiebaR_key_tag, 2},
+    {"_jiebaR_key_cut", (DL_FUNC) &_jiebaR_key_cut, 2},
+    {"_jiebaR_key_keys", (DL_FUNC) &_jiebaR_key_keys, 2},
+    {"_jiebaR_sim_ptr", (DL_FUNC) &_jiebaR_sim_ptr, 5},
+    {"_jiebaR_sim_sim", (DL_FUNC) &_jiebaR_sim_sim, 3},
+    {"_jiebaR_sim_vec", (DL_FUNC) &_jiebaR_sim_vec, 3},
+    {"_jiebaR_sim_distance", (DL_FUNC) &_jiebaR_sim_distance, 4},
+    {"_jiebaR_sim_distance_vec", (DL_FUNC) &_jiebaR_sim_distance_vec, 4},
+    {"_jiebaR_u64tobin", (DL_FUNC) &_jiebaR_u64tobin, 1},
+    {"_jiebaR_cpp_ham_dist", (DL_FUNC) &_jiebaR_cpp_ham_dist, 2},
+    {"_jiebaR_cpp_ham_dist_mat", (DL_FUNC) &_jiebaR_cpp_ham_dist_mat, 2},
+    {"_jiebaR_words_freq", (DL_FUNC) &_jiebaR_words_freq, 1},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_jiebaR(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}

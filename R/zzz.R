@@ -1,13 +1,13 @@
-##' @useDynLib jiebaR
+##' @useDynLib jiebaR, .registration = TRUE
 ##' @import Rcpp
 ##' @import jiebaRD
 ##' @importFrom utils file.edit unzip write.table
 NULL
 
 #' The path of dictionary
-#' 
-#' The path of dictionary, and it is used by segmentation and other 
-#' function. 
+#'
+#' The path of dictionary, and it is used by segmentation and other
+#' function.
 #' @format  character
 #' @export
 DICTPATH<-NULL
@@ -34,9 +34,9 @@ TIMESTAMP<-NULL
 #     if (.Platform$OS.type == "windows") {
 #       Sys.setlocale( locale = "English")
 #     }
-  
+
     assign(x = "TIMESTAMP",  as.numeric(Sys.time()),asNamespace('jiebaR'))
-  
+
     assign(x = "DICTPATH", file.path(find.package("jiebaRD"),"dict","jieba.dict.utf8"),asNamespace('jiebaR'))
     assign(x = "HMMPATH",  file.path(find.package("jiebaRD"),"dict","hmm_model.utf8"),asNamespace('jiebaR'))
     assign(x = "USERPATH", file.path(find.package("jiebaRD"),"dict","user.dict.utf8"),asNamespace('jiebaR'))
@@ -46,7 +46,7 @@ TIMESTAMP<-NULL
 }
 
 # setLoadAction(
-#   function(ns){ 
+#   function(ns){
 # #     loadModule("mod_mpseg", TRUE)
 # #     loadModule("mod_mixseg", TRUE)
 # #     loadModule("mod_query", TRUE)
@@ -54,7 +54,7 @@ TIMESTAMP<-NULL
 # #     loadModule("mod_tag", TRUE)
 # #     loadModule("mod_key", TRUE)
 # #     loadModule("mod_sim", TRUE)
-#     ###Loading DICTPATH when package loaded.    
+#     ###Loading DICTPATH when package loaded.
 #    })
 
 .onDetach<- function(libpath) {
@@ -63,5 +63,5 @@ TIMESTAMP<-NULL
   #     }
   if(exists("quick_worker",envir = .GlobalEnv,,inherits = FALSE )) rm("quick_worker",envir = .GlobalEnv)
   if(exists("qseg",envir = .GlobalEnv,,inherits = FALSE )) rm("qseg",envir = .GlobalEnv)
-  
+
 }

@@ -81,11 +81,12 @@ test_that("vector_", {
   
   expect_identical(vector_simhash(cc["这是测试文本"],sims), structure(list(simhash = "10014870797707624170", keyword = structure(c("文本", "测试"), .Names = c("8.94485", "7.14724"))), .Names = c("simhash", "keyword")))
   
-  expect_identical(vector_distance(cc["测试这个恶"], cc["好玩不好玩"],sims),structure(list(distance = 23L, lhs = structure("测试", .Names = "7.14724"), rhs = structure(c("不好玩", "好玩"), .Names = c("11.8212", "9.01033"))), .Names = c("distance", "lhs", "rhs")))
+  expect_identical(vector_distance(cc["测试这个恶"], cc["好玩不好玩"],sims), list(distance = 29L, lhs = c(`11.7392` = "恶", `7.14724` = "测试"
+  ), rhs = c(`11.8212` = "不好玩", `9.01033` = "好玩")))
   
   keyz = worker("keywords")
   
-  expect_identical(vector_keywords(cc["测试这个恶好玩不好玩"],keyz),structure(c("不好玩", "好玩", "测试"), .Names = c("11.8212", "9.01033", "7.14724")))
+  expect_identical(vector_keywords(cc["测试这个恶好玩不好玩"],keyz), c(`11.8212` = "不好玩", `11.7392` = "恶", `9.01033` = "好玩", `7.14724` = "测试"))
 })
 
 test_that("#48", {

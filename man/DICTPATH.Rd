@@ -21,7 +21,7 @@ IDFPATH
 STOPPATH
 }
 \description{
-The path of dictionary, and it is used by segmentation and other 
+The path of dictionary, and it is used by segmentation and other
 function.
 }
 \keyword{datasets}

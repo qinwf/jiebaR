@@ -16,114 +16,114 @@
 #' @seealso \url{https://github.com/qinwf/checkenc}
 #' @export
 file_coding <- function(file) {
-    .Call('_jiebaR_file_coding', PACKAGE = 'jiebaR', file)
+    .Call(`_jiebaR_file_coding`, file)
 }
 
 get_idf_cpp <- function(x, stop_) {
-    .Call('_jiebaR_get_idf_cpp', PACKAGE = 'jiebaR', x, stop_)
+    .Call(`_jiebaR_get_idf_cpp`, x, stop_)
 }
 
 get_tuple_list <- function(x, step) {
-    .Call('_jiebaR_get_tuple_list', PACKAGE = 'jiebaR', x, step)
+    .Call(`_jiebaR_get_tuple_list`, x, step)
 }
 
 get_tuple_vector <- function(x, step) {
-    .Call('_jiebaR_get_tuple_vector', PACKAGE = 'jiebaR', x, step)
+    .Call(`_jiebaR_get_tuple_vector`, x, step)
 }
 
 jiebaclass_ptr <- function(dict, model, user, stop) {
-    .Call('_jiebaR_jiebaclass_ptr', PACKAGE = 'jiebaR', dict, model, user, stop)
+    .Call(`_jiebaR_jiebaclass_ptr`, dict, model, user, stop)
 }
 
 jiebaclass_ptr_v2 <- function(dict, model, user, stop, uw) {
-    .Call('_jiebaR_jiebaclass_ptr_v2', PACKAGE = 'jiebaR', dict, model, user, stop, uw)
+    .Call(`_jiebaR_jiebaclass_ptr_v2`, dict, model, user, stop, uw)
 }
 
 jiebaclass_mix_cut <- function(x, cutter) {
-    .Call('_jiebaR_jiebaclass_mix_cut', PACKAGE = 'jiebaR', x, cutter)
+    .Call(`_jiebaR_jiebaclass_mix_cut`, x, cutter)
 }
 
 jiebaclass_mp_cut <- function(x, num, cutter) {
-    .Call('_jiebaR_jiebaclass_mp_cut', PACKAGE = 'jiebaR', x, num, cutter)
+    .Call(`_jiebaR_jiebaclass_mp_cut`, x, num, cutter)
 }
 
 jiebaclass_hmm_cut <- function(x, cutter) {
-    .Call('_jiebaR_jiebaclass_hmm_cut', PACKAGE = 'jiebaR', x, cutter)
+    .Call(`_jiebaR_jiebaclass_hmm_cut`, x, cutter)
 }
 
 jiebaclass_full_cut <- function(x, cutter) {
-    .Call('_jiebaR_jiebaclass_full_cut', PACKAGE = 'jiebaR', x, cutter)
+    .Call(`_jiebaR_jiebaclass_full_cut`, x, cutter)
 }
 
 jiebaclass_query_cut <- function(x, cutter) {
-    .Call('_jiebaR_jiebaclass_query_cut', PACKAGE = 'jiebaR', x, cutter)
+    .Call(`_jiebaR_jiebaclass_query_cut`, x, cutter)
 }
 
 jiebaclass_tag_tag <- function(x, cutter) {
-    .Call('_jiebaR_jiebaclass_tag_tag', PACKAGE = 'jiebaR', x, cutter)
+    .Call(`_jiebaR_jiebaclass_tag_tag`, x, cutter)
 }
 
 jiebaclass_tag_file <- function(x, cutter) {
-    .Call('_jiebaR_jiebaclass_tag_file', PACKAGE = 'jiebaR', x, cutter)
+    .Call(`_jiebaR_jiebaclass_tag_file`, x, cutter)
 }
 
 jiebaclass_tag_vec <- function(code, cutter) {
-    .Call('_jiebaR_jiebaclass_tag_vec', PACKAGE = 'jiebaR', code, cutter)
+    .Call(`_jiebaR_jiebaclass_tag_vec`, code, cutter)
 }
 
 add_user_word <- function(x, tag, cutter) {
-    .Call('_jiebaR_add_user_word', PACKAGE = 'jiebaR', x, tag, cutter)
+    .Call(`_jiebaR_add_user_word`, x, tag, cutter)
 }
 
 key_ptr <- function(n, dict, model, idf, stop, user) {
-    .Call('_jiebaR_key_ptr', PACKAGE = 'jiebaR', n, dict, model, idf, stop, user)
+    .Call(`_jiebaR_key_ptr`, n, dict, model, idf, stop, user)
 }
 
 key_tag <- function(x, cutter) {
-    .Call('_jiebaR_key_tag', PACKAGE = 'jiebaR', x, cutter)
+    .Call(`_jiebaR_key_tag`, x, cutter)
 }
 
 key_cut <- function(x, cutter) {
-    .Call('_jiebaR_key_cut', PACKAGE = 'jiebaR', x, cutter)
+    .Call(`_jiebaR_key_cut`, x, cutter)
 }
 
 key_keys <- function(x, cutter) {
-    .Call('_jiebaR_key_keys', PACKAGE = 'jiebaR', x, cutter)
+    .Call(`_jiebaR_key_keys`, x, cutter)
 }
 
 sim_ptr <- function(dict, model, idf, stop, user) {
-    .Call('_jiebaR_sim_ptr', PACKAGE = 'jiebaR', dict, model, idf, stop, user)
+    .Call(`_jiebaR_sim_ptr`, dict, model, idf, stop, user)
 }
 
 sim_sim <- function(code, topn, cutter) {
-    .Call('_jiebaR_sim_sim', PACKAGE = 'jiebaR', code, topn, cutter)
+    .Call(`_jiebaR_sim_sim`, code, topn, cutter)
 }
 
 sim_vec <- function(code, topn, cutter) {
-    .Call('_jiebaR_sim_vec', PACKAGE = 'jiebaR', code, topn, cutter)
+    .Call(`_jiebaR_sim_vec`, code, topn, cutter)
 }
 
 sim_distance <- function(lhs, rhs, topn, cutter) {
-    .Call('_jiebaR_sim_distance', PACKAGE = 'jiebaR', lhs, rhs, topn, cutter)
+    .Call(`_jiebaR_sim_distance`, lhs, rhs, topn, cutter)
 }
 
 sim_distance_vec <- function(lcode, rcode, topn, cutter) {
-    .Call('_jiebaR_sim_distance_vec', PACKAGE = 'jiebaR', lcode, rcode, topn, cutter)
+    .Call(`_jiebaR_sim_distance_vec`, lcode, rcode, topn, cutter)
 }
 
 u64tobin <- function(x) {
-    .Call('_jiebaR_u64tobin', PACKAGE = 'jiebaR', x)
+    .Call(`_jiebaR_u64tobin`, x)
 }
 
 cpp_ham_dist <- function(x, y) {
-    .Call('_jiebaR_cpp_ham_dist', PACKAGE = 'jiebaR', x, y)
+    .Call(`_jiebaR_cpp_ham_dist`, x, y)
 }
 
 cpp_ham_dist_mat <- function(x, y) {
-    .Call('_jiebaR_cpp_ham_dist_mat', PACKAGE = 'jiebaR', x, y)
+    .Call(`_jiebaR_cpp_ham_dist_mat`, x, y)
 }
 
 words_freq <- function(x) {
-    .Call('_jiebaR_words_freq', PACKAGE = 'jiebaR', x)
+    .Call(`_jiebaR_words_freq`, x)
 }
 
