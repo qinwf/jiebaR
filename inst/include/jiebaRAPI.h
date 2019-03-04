@@ -20,11 +20,11 @@ extern "C" {
 /**
  *  **********  all text input should be UTF-8 encoding string**************
  *  For windows platform, the string output of C++ to be printed by R should have Encoding() setted first
- *               
+ *
  */
 
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP,SEXP stopSEXP){
     static SEXP(*f)(SEXP,SEXP,SEXP) = NULL;
@@ -34,7 +34,7 @@ SEXP attribute_hidden jiebaR_mp_ptr(SEXP dictSEXP, SEXP userSEXP,SEXP stopSEXP){
     return f(dictSEXP,userSEXP,stopSEXP);
 }
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
@@ -44,7 +44,7 @@ SEXP attribute_hidden jiebaR_mp_cut(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 }
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP){
     static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
@@ -54,7 +54,7 @@ SEXP attribute_hidden jiebaR_mix_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEX
     return f(dictSEXP, modelSEXP, userSEXP, stopSEXP);
 }
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
@@ -64,7 +64,7 @@ SEXP attribute_hidden jiebaR_mix_cut(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 }
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP, SEXP stopSEXP){
     static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
@@ -74,7 +74,7 @@ SEXP attribute_hidden jiebaR_query_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP nSEXP
     return f(dictSEXP, modelSEXP, nSEXP, stopSEXP);
 }
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
@@ -84,7 +84,7 @@ SEXP attribute_hidden jiebaR_query_cut(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 }
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
@@ -94,7 +94,7 @@ SEXP attribute_hidden jiebaR_hmm_ptr(SEXP modelSEXP, SEXP stopSEXP){
     return f(modelSEXP, stopSEXP);
 }
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
@@ -104,7 +104,7 @@ SEXP attribute_hidden jiebaR_hmm_cut(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 }
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEXP, SEXP stopSEXP){
     static SEXP(*f)(SEXP,SEXP,SEXP,SEXP) = NULL;
@@ -114,7 +114,7 @@ SEXP attribute_hidden jiebaR_tag_ptr(SEXP dictSEXP, SEXP modelSEXP, SEXP userSEX
     return f(dictSEXP, modelSEXP, userSEXP, stopSEXP);
 }
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
@@ -124,7 +124,7 @@ SEXP attribute_hidden jiebaR_tag_tag(SEXP xSEXP, SEXP cutterSEXP){
     return f(xSEXP,cutterSEXP);
 }
   /**
-   *   removed in jiebaR v0.8 cppjieba v4.4.1            
+   *   removed in jiebaR v0.8 cppjieba v4.4.1
    */
 SEXP attribute_hidden jiebaR_tag_file(SEXP xSEXP, SEXP cutterSEXP){
     static SEXP(*f)(SEXP,SEXP) = NULL;
@@ -242,7 +242,7 @@ SEXP attribute_hidden jiebaR_sim_distance(SEXP lhsSEXP, SEXP rhsSEXP, SEXP topnS
     return f(lhsSEXP, rhsSEXP, topnSEXP, cutterSEXP);
 }
 
-  
+
 // v4 new
 
 /**
@@ -260,8 +260,8 @@ SEXP attribute_hidden jiebaR_jiebaclass_ptr(SEXP dict, SEXP model, SEXP user,SEX
     }
     return f(dict, model, user,stop);
 }
-  
-  
+
+
   SEXP attribute_hidden jiebaR_jiebaclass_ptr_v2(SEXP dict, SEXP model, SEXP user,SEXP stop,SEXP uw){
     static SEXP(*f)(SEXP,SEXP,SEXP,SEXP,SEXP) = NULL;
     if (!f) {
@@ -388,9 +388,9 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(x);
   }
-  
 
-  
+
+
   /**
    * [jiebaR_filecoding description]
    * @param  fileSEXP a file path
@@ -403,7 +403,7 @@ SEXP attribute_hidden jiebaR_jiebaclass_mix_cut(SEXP x, SEXP cutter){
     }
     return f(fileSEXP);
   }
-  
+
 
 
 #ifdef __cplusplus

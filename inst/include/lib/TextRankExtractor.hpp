@@ -13,7 +13,7 @@ namespace cppjieba {
     typedef struct _Word {string word;vector<size_t> offsets;double weight;}    Word; // struct Word
   private:
     typedef std::map<string,Word> WordMap;
-  
+
     class WordGraph{
     private:
       typedef double Score;
@@ -85,17 +85,17 @@ namespace cppjieba {
       }
     };
 
-  public: 
-  TextRankExtractor(const string& dictPath, 
-        const string& hmmFilePath, 
-        const string& stopWordPath, 
-        const string& userDict = "") 
+  public:
+  TextRankExtractor(const string& dictPath,
+        const string& hmmFilePath,
+        const string& stopWordPath,
+        const string& userDict = "")
     : segment_(dictPath, hmmFilePath, userDict) {
     LoadStopWordDict(stopWordPath);
   }
-  TextRankExtractor(const DictTrie* dictTrie, 
+  TextRankExtractor(const DictTrie* dictTrie,
         const HMMModel* model,
-        const string& stopWordPath) 
+        const string& stopWordPath)
     : segment_(dictTrie, model) {
     LoadStopWordDict(stopWordPath);
   }
@@ -150,13 +150,13 @@ namespace cppjieba {
       }
 
       graph.rank(wordmap,rankTime);
-      
+
       keywords.clear();
       keywords.reserve(wordmap.size());
       for (WordMap::iterator itr = wordmap.begin(); itr != wordmap.end(); ++itr) {
         keywords.push_back(itr->second);
       }
-      
+
       topN = min(topN, keywords.size());
       partial_sort(keywords.begin(), keywords.begin() + topN, keywords.end(), Compare);
       keywords.resize(topN);
@@ -179,9 +179,9 @@ namespace cppjieba {
     MixSegment segment_;
     unordered_set<string> stopWords_;
   }; // class TextRankExtractor
-  
+
   inline ostream& operator << (ostream& os, const TextRankExtractor::Word& word) {
-    return os << "{\"word\": \"" << word.word << "\", \"offset\": " << word.offsets << ", \"weight\": " << word.weight << "}"; 
+    return os << "{\"word\": \"" << word.word << "\", \"offset\": " << word.offsets << ", \"weight\": " << word.weight << "}";
   }
 } // namespace cppjieba
 
