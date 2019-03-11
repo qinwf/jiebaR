@@ -29,6 +29,8 @@ IDFPATH<-NULL
 STOPPATH<-NULL
 
 TIMESTAMP<-NULL
+TEMP_ORIGIN<-NULL
+TEMPPATH<-NULL
 
 .onLoad <- function(libname, pkgname) {
 #     if (.Platform$OS.type == "windows") {
@@ -37,11 +39,16 @@ TIMESTAMP<-NULL
 
     assign(x = "TIMESTAMP",  as.numeric(Sys.time()),asNamespace('jiebaR'))
 
-    assign(x = "DICTPATH", file.path(find.package("jiebaRD"),"dict","jieba.dict.utf8"),asNamespace('jiebaR'))
-    assign(x = "HMMPATH",  file.path(find.package("jiebaRD"),"dict","hmm_model.utf8"),asNamespace('jiebaR'))
+    assign(x = "TEMP_ORIGIN", tempdir(),asNamespace('jiebaR'))
+    assign(x = "TEMPPATH", file.path(TEMP_ORIGIN, 'jiebaR_dict'),asNamespace('jiebaR'))
+
+    dir.create(TEMPPATH)
+
+    assign(x = "DICTPATH", file.path(TEMPPATH,"dict","jieba.dict.utf8"),asNamespace('jiebaR'))
+    assign(x = "HMMPATH",  file.path(TEMPPATH,"dict","hmm_model.utf8"),asNamespace('jiebaR'))
     assign(x = "USERPATH", file.path(find.package("jiebaRD"),"dict","user.dict.utf8"),asNamespace('jiebaR'))
     assign(x = "STOPPATH", file.path(find.package("jiebaRD"),"dict","stop_words.utf8"),asNamespace('jiebaR'))
-    assign(x = "IDFPATH",  file.path(find.package("jiebaRD"),"dict","idf.utf8"),asNamespace('jiebaR'))
+    assign(x = "IDFPATH",  file.path(TEMPPATH,"dict","idf.utf8"),asNamespace('jiebaR'))
 
 }
 
@@ -63,5 +70,7 @@ TIMESTAMP<-NULL
   #     }
   if(exists("quick_worker",envir = .GlobalEnv,,inherits = FALSE )) rm("quick_worker",envir = .GlobalEnv)
   if(exists("qseg",envir = .GlobalEnv,,inherits = FALSE )) rm("qseg",envir = .GlobalEnv)
-
+  if (dir.exists(TEMPPATH)) {
+    unlink(TEMPPATH, recursive=TRUE)
+  }
 }
