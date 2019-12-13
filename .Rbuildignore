@@ -21,3 +21,5 @@ tests/testthat/CPP_API/src/jiebaRapi\.so
 tests/testthat/CPP_API/src/test_api\.o
 tests/testthat/C_API/src/jiebaRapi\.so
 tests/testthat/C_API/src/test_api\.o
+^README\.md$
+^\.vscode$
