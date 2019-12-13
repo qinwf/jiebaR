@@ -79,13 +79,18 @@ inline string& Lower(string& str) {
   return str;
 }
 
+inline bool IsSpace(unsigned c) {
+  // when passing large int as the argument of isspace, it core dump, so here need a type cast.
+  return c > 0xff ? false : std::isspace(c & 0xff);
+}
+
 inline std::string& LTrim(std::string &s) {
-  s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+  s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::function<bool(unsigned)>(IsSpace))));
   return s;
 }
 
 inline std::string& RTrim(std::string &s) {
-  s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+  s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::function<bool(unsigned)>(IsSpace))).base(), s.end());
   return s;
 }
 
@@ -93,19 +98,19 @@ inline std::string& Trim(std::string &s) {
   return LTrim(RTrim(s));
 }
 
-inline std::string& LTrim(std::string & s, char x) {
-  s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::bind2nd(std::equal_to<char>(), x))));
-  return s;
-}
+// inline std::string& LTrim(std::string & s, char x) {
+//   s.erase(s.begin(), std::find_if(s.begin(), s.end(), [x](char astr){ return astr != x; }));
+//   return s;
+// }
 
-inline std::string& RTrim(std::string & s, char x) {
-  s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::bind2nd(std::equal_to<char>(), x))).base(), s.end());
-  return s;
-}
+// inline std::string& RTrim(std::string & s, char x) {
+//   s.erase(std::find_if(s.rbegin(), s.rend(), [x](char astr){ return astr != x; }).base(), s.end());
+//   return s;
+// }
 
-inline std::string& Trim(std::string &s, char x) {
-  return LTrim(RTrim(s, x), x);
-}
+// inline std::string& Trim(std::string &s, char x) {
+//   return LTrim(RTrim(s, x), x);
+// }
 
 inline bool Split(const string& src, vector<string>& res, const string& pattern, size_t len = string::npos, size_t offset = 0) {
   if (src.empty())
@@ -113,7 +118,7 @@ inline bool Split(const string& src, vector<string>& res, const string& pattern,
     return false;
   }
   res.clear();
-  
+
   size_t start = 0;
   size_t end = 0;
   size_t cnt = 0;
