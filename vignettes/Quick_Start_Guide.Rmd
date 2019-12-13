@@ -2,7 +2,7 @@
 title: "Quick Start Guide - jiebaR"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Quick Start Guide - jiebaR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -10,7 +10,7 @@ vignette: >
 [Chinese Version]
 
 This is a package for Chinese text segmentation, keyword extraction
-and speech tagging. 
+and speech tagging.
 
 ## Example
 
@@ -41,13 +41,13 @@ segment( "./temp.dat" , cutter ) ### Auto encoding detection.
 You can initialize multiple engines simultaneously.
 
 ```r
-cutter2 = worker(type  = "mix", 
+cutter2 = worker(type  = "mix",
                  dict = "some_path/jieba.dict.utf8",
-                 hmm   = "some_path/hmm_model.utf8",  
+                 hmm   = "some_path/hmm_model.utf8",
                  user  = "some_path/test.dict.utf8",
                  detect=T,      symbol = F,
                  lines = 1e+05, output = NULL
-                 ) 
+                 )
 cutter2   ### Print information of worker
 ```
 
@@ -57,11 +57,11 @@ Worker Type:  Mix Segment
 Detect Encoding :  TRUE
 Default Encoding:  UTF-8
 Keep Symbols    :  FALSE
-Output Path     :  
+Output Path     :
 Write File      :  TRUE
 Max Read Lines  :  1e+05
 
-Fixed Model Components:  
+Fixed Model Components:
 
 $dict
 [1] "dict/jieba.dict.utf8"
@@ -103,7 +103,7 @@ tagger[words]
 
 ### Keyword Extraction
 
-Keyword Extraction worker use MixSegment model to cut word and use 
+Keyword Extraction worker use MixSegment model to cut word and use
  TF-IDF algorithm to find the keywords.
 
 ```{r}
@@ -113,7 +113,7 @@ keys <= "words of fun"
 
 ### Simhash Distance
 
-Simhash worker can do keyword extraction and find 
+Simhash worker can do keyword extraction and find
 the keywords from two inputs, and then computes Hamming distance between them.
 
 ```{r}
