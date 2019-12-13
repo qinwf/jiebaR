@@ -3,8 +3,8 @@ Type: Package
 Title: Chinese Text Segmentation
 Description: Chinese text segmentation, keyword extraction and speech tagging
     For R.
-Version: 0.10.99
-Date: 2019-3-11
+Version: 0.11
+Date: 2019-12-13
 Author: Qin Wenfeng, Wu Yanyi 
 Maintainer: Qin Wenfeng <mail@qinwenfeng.com>
 License: MIT + file LICENSE
