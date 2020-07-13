@@ -12,15 +12,15 @@
   <meta property="og:title" content="jiebaR 中文分词文档" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://jiebaR.qinwf.com" />
-  
+
   <meta property="og:description" content="jiebaR 中文分词" />
   <meta name="github-repo" content="qinwf/jiebaR_doc" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="jiebaR 中文分词文档" />
-  
+
   <meta name="twitter:description" content="jiebaR 中文分词" />
-  
+
 
 
 
@@ -28,8 +28,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  
-  
+
+
 <link rel="prev" href="section-2-2.html">
 <link rel="next" href="worker-.html">
 <script src="libs/jquery/jquery.min.js"></script>
@@ -168,12 +168,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.0.5" data-path="section-5.html"><a href="section-5.html#-freq"><i class="fa fa-check"></i><b>5.0.5</b> 词频统计 freq()</a></li>
 <li class="chapter" data-level="5.0.6" data-path="section-5.html"><a href="section-5.html#-idf--get_idf"><i class="fa fa-check"></i><b>5.0.6</b> 生成 IDF 文件 get_idf()</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="section-6.html"><a href="section-6.html"><i class="fa fa-check"></i><b>6</b> 其他常用包</a><ul>
-<li class="chapter" data-level="6.0.1" data-path="section-6.html"><a href="section-6.html#cidian"><i class="fa fa-check"></i><b>6.0.1</b> cidian</a></li>
-<li class="chapter" data-level="6.0.2" data-path="section-6.html"><a href="section-6.html#text2vec"><i class="fa fa-check"></i><b>6.0.2</b> text2vec</a></li>
-<li class="chapter" data-level="6.0.3" data-path="section-6.html"><a href="section-6.html#ropencc"><i class="fa fa-check"></i><b>6.0.3</b> ropencc</a></li>
-<li class="chapter" data-level="6.0.4" data-path="section-6.html"><a href="section-6.html#wordcloud2"><i class="fa fa-check"></i><b>6.0.4</b> wordcloud2</a></li>
-</ul></li>
+<li class="chapter" data-level="6" data-path="section-6.html"><a href="section-6.html"><i class="fa fa-check"></i><b>6</b> 其他常用包</a></li>
 <li class="chapter" data-level="7" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>7</b> 常见问题</a><ul>
 <li class="chapter" data-level="7.0.1" data-path="section-7.html"><a href="section-7.html#-tm-"><i class="fa fa-check"></i><b>7.0.1</b> 为什么 tm 包里词都连起来了？</a></li>
 <li class="chapter" data-level="7.0.2" data-path="section-7.html"><a href="section-7.html#section-7.0.2"><i class="fa fa-check"></i><b>7.0.2</b> 空行警告</a></li>
@@ -202,13 +197,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">3</span> 分词</h1>
 <div id="section-3.0.1" class="section level3">
 <h3><span class="header-section-number">3.0.1</span> 对文本分词</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器 =<span class="st"> </span><span class="kw">worker</span>() 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器 =<span class="st"> </span><span class="kw">worker</span>()
 <span class="kw">segment</span>(<span class="st">&quot;这是一段测试文本！&quot;</span>, 分词器)
 <span class="co">#&gt; [1] &quot;这是&quot; &quot;一段&quot; &quot;测试&quot; &quot;文本&quot;</span></code></pre></div>
 </div>
 <div id="-bylines" class="section level3">
 <h3><span class="header-section-number">3.0.2</span> 分行输出 $bylines</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器 =<span class="st"> </span><span class="kw">worker</span>() 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器 =<span class="st"> </span><span class="kw">worker</span>()
 分词器$bylines =<span class="st"> </span><span class="ot">TRUE</span>
 
 <span class="kw">segment</span>(<span class="kw">c</span>(<span class="st">&quot;这是第一行文本。&quot;</span>,<span class="st">&quot;这是第二行文本。&quot;</span>), 分词器)
@@ -218,7 +213,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt; [[2]]</span>
 <span class="co">#&gt; [1] &quot;这是&quot;   &quot;第二行&quot; &quot;文本&quot;</span></code></pre></div>
 <p>在新建 worker 时设置 bylines</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器 =<span class="st"> </span><span class="kw">worker</span>(<span class="dt">bylines =</span> <span class="ot">TRUE</span>) 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器 =<span class="st"> </span><span class="kw">worker</span>(<span class="dt">bylines =</span> <span class="ot">TRUE</span>)
 
 <span class="kw">segment</span>(<span class="kw">c</span>(<span class="st">&quot;这是第一行文本。&quot;</span>,<span class="st">&quot;这是第二行文本。&quot;</span>), 分词器)
 <span class="co">#&gt; [[1]]</span>
@@ -227,20 +222,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt; [[2]]</span>
 <span class="co">#&gt; [1] &quot;这是&quot;   &quot;第二行&quot; &quot;文本&quot;</span></code></pre></div>
 <p>下面是不分行输出的结果</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器 =<span class="st"> </span><span class="kw">worker</span>() 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器 =<span class="st"> </span><span class="kw">worker</span>()
 
 <span class="kw">segment</span>(<span class="kw">c</span>(<span class="st">&quot;这是第一行文本。&quot;</span>,<span class="st">&quot;这是第二行文本。&quot;</span>), 分词器)
 <span class="co">#&gt; [1] &quot;这是&quot;   &quot;第一行&quot; &quot;文本&quot;   &quot;这是&quot;   &quot;第二行&quot; &quot;文本&quot;</span></code></pre></div>
 </div>
 <div id="-symbol" class="section level3">
 <h3><span class="header-section-number">3.0.3</span> 保留符号 $symbol</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器 =<span class="st"> </span><span class="kw">worker</span>() 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器 =<span class="st"> </span><span class="kw">worker</span>()
 分词器$symbol =<span class="st"> </span><span class="ot">TRUE</span>
 
 <span class="kw">segment</span>(<span class="kw">c</span>(<span class="st">&quot;Hi，这是第一行文本。&quot;</span>), 分词器)
 <span class="co">#&gt; [1] &quot;Hi&quot;     &quot;，&quot;     &quot;这是&quot;   &quot;第一行&quot; &quot;文本&quot;   &quot;。&quot;</span></code></pre></div>
 <p>重设为不保留符号</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器$symbol =<span class="st"> </span><span class="ot">FALSE</span> 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">分词器$symbol =<span class="st"> </span><span class="ot">FALSE</span>
 <span class="kw">segment</span>(<span class="kw">c</span>(<span class="st">&quot;Hi，这是第一行文本。&quot;</span>), 分词器)
 <span class="co">#&gt; [1] &quot;Hi&quot;     &quot;这是&quot;   &quot;第一行&quot; &quot;文本&quot;</span></code></pre></div>
 <p>在新建 worker 时设置 symbol</p>
@@ -263,7 +258,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt; [1] &quot;这是&quot; &quot;一个&quot; &quot;新词&quot;</span>
 
 <span class="co"># 第三个参数 &quot;n&quot; 代表新词的词性标记</span>
-<span class="kw">new_user_word</span>(分词器, <span class="st">&quot;这是一个新词&quot;</span>, <span class="st">&quot;n&quot;</span>) 
+<span class="kw">new_user_word</span>(分词器, <span class="st">&quot;这是一个新词&quot;</span>, <span class="st">&quot;n&quot;</span>)
 <span class="co">#&gt; [1] TRUE</span>
 <span class="kw">segment</span>(<span class="st">&quot;这是一个新词&quot;</span>, 分词器)
 <span class="co">#&gt; [1] &quot;这是一个新词&quot;</span></code></pre></div>
