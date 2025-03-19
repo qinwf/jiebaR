@@ -15,11 +15,11 @@ using namespace std;
 
 // [[Rcpp::export]]
 IntegerVector words_freq(const CharacterVector& x) {
-  RCPP_UNORDERED_MAP< string, unsigned int > m;
+  std::unordered_map< string, unsigned int > m;
   CharacterVector::const_iterator it = x.begin();
   for(;it != x.end();it++){
     string r = as<string>(*it);
-    RCPP_UNORDERED_MAP< string, unsigned int >::iterator m_it = m.find(r);
+    std::unordered_map< string, unsigned int >::iterator m_it = m.find(r);
     if(m_it==m.end()){
       m[r]=1;
     }else{

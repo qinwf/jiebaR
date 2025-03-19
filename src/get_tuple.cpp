@@ -22,11 +22,11 @@ string get_string(CharacterVector::iterator begin,CharacterVector::iterator end)
   return s;
 }
 
-void get_tuple_void(CharacterVector& x,unsigned int step,RCPP_UNORDERED_MAP< string, unsigned int >& m) {
+void get_tuple_void(CharacterVector& x,unsigned int step,std::unordered_map< string, unsigned int >& m) {
   
   for(CharacterVector::iterator it = x.begin();it+step-1 != x.end();it++){
     string r = get_string(it,it+step);
-    RCPP_UNORDERED_MAP< string, unsigned int >::iterator m_it = m.find(r);
+    std::unordered_map< string, unsigned int >::iterator m_it = m.find(r);
     if(m_it==m.end()){
       m[r]=1;
     }else{
@@ -38,7 +38,7 @@ void get_tuple_void(CharacterVector& x,unsigned int step,RCPP_UNORDERED_MAP< str
 
 // [[Rcpp::export]]
 List get_tuple_list(ListOf<CharacterVector> x,R_xlen_t step) {
-  RCPP_UNORDERED_MAP< string, unsigned int > res;
+  std::unordered_map< string, unsigned int > res;
   for(ListOf<CharacterVector>::iterator it = x.begin();it != x.end();it++){
     for(R_xlen_t cnt=2;cnt<=step;cnt++){
       CharacterVector tmp = as<CharacterVector>(*it);
@@ -51,7 +51,7 @@ List get_tuple_list(ListOf<CharacterVector> x,R_xlen_t step) {
 
 // [[Rcpp::export]]
 List get_tuple_vector(CharacterVector& x,R_xlen_t step) {
-  RCPP_UNORDERED_MAP< string, unsigned int > res;
+  std::unordered_map< string, unsigned int > res;
   for(R_xlen_t cnt=2;cnt<=step;cnt++){
     get_tuple_void(x,cnt,res);
   }

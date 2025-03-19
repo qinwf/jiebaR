@@ -3,7 +3,7 @@
 
 using namespace Rcpp;
 using namespace std;
-typedef RCPP_UNORDERED_MAP< string, pair<unsigned int,unsigned int > > IDFmap;
+typedef std::unordered_map< string, pair<unsigned int,unsigned int > > IDFmap;
 
 void inner_find(CharacterVector& y,IDFmap& m,unsigned int dis){
   for(CharacterVector::iterator it = y.begin();it!=y.end();it++){
